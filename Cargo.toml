@@ -1,0 +1,83 @@
+[workspace]
+resolver = "3"
+members = [
+    "crates/core",
+    "crates/engines",
+    "crates/hwprobe",
+    "crates/api-gateway",
+    "apps/desktop/src-tauri",
+    "apps/mobile/src-tauri",
+    "tools/catalog-sync",
+]
+
+[workspace.package]
+version = "0.2.1"
+edition = "2024"
+license = "MIT"
+authors = ["Łukasz Poźniak, AI Transformation"]
+homepage = "https://aitransformation.pl"
+publish = false
+
+[workspace.dependencies]
+lokalsi-core = { path = "crates/core" }
+lokalsi-engines = { path = "crates/engines" }
+lokalsi-hwprobe = { path = "crates/hwprobe" }
+lokalsi-api-gateway = { path = "crates/api-gateway", default-features = false }
+
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.154"
+thiserror = "2.0.21"
+tracing = "0.1.44"
+tracing-subscriber = { version = "0.3.23", features = ["env-filter"] }
+tracing-appender = "0.2.5"
+regex = "1"
+dirs = "7.0.0"
+zip = { version = "9.5.1", default-features = false, features = ["deflate"] }
+tempfile = "3"
+rusqlite = { version = "0.42.0", features = ["bundled"] }
+# native-tls (SChannel / Security.framework): no C toolchain extras such as aws-lc.
+reqwest = { version = "0.13.5", default-features = false, features = ["native-tls", "http2", "charset", "system-proxy", "stream", "json"] }
+tokio = { version = "1.54.1", features = ["rt-multi-thread", "macros", "sync", "time", "fs", "io-util", "net", "process"] }
+tokio-util = "0.7.20"
+futures-util = "0.3.34"
+sha2 = "0.11.1"
+hex = "0.4.3"
+sysinfo = { version = "0.40.1", default-features = false, features = ["system", "disk", "gpu"] }
+nvml-wrapper = "0.13.0"
+keyring = "4.2.0"
+clap = { version = "4.6.7", features = ["derive"] }
+tar = "0.4.46"
+flate2 = "1.1.11"
+getrandom = "0.4.3"
+rmcp = { version = "3.9.0", default-features = false, features = ["client", "transport-child-process", "transport-streamable-http-client-reqwest", "reqwest-native-tls"] }
+http = "1"
+symphonia = { version = "0.6.1", default-features = false }
+crc32fast = "1.5.5"
+libc = "0.2.191"
+# Local API gateway (M5, ADR 0020): TLS with the `ring` provider only (no aws-lc toolchain).
+axum = { version = "0.8.9", default-features = false, features = ["http1", "json", "tokio", "query", "multipart"] }
+hyper = { version = "1.12.0", features = ["http1", "server", "client"] }
+hyper-util = { version = "0.1.21", features = ["tokio", "service", "server", "http1"] }
+http-body-util = "0.1"
+rustls = { version = "0.23.46", default-features = false, features = ["ring", "std", "tls12"] }
+tokio-rustls = { version = "0.26.6", default-features = false, features = ["ring", "tls12"] }
+rcgen = { version = "0.14.10", default-features = false, features = ["crypto", "ring"] }
+ring = "0.17.14"
+qrcode = { version = "0.14.1", default-features = false }
+# Gallery thumbnails for the phone (PNG in, JPEG out).
+image = { version = "0.25.10", default-features = false, features = ["png", "jpeg"] }
+base64 = "0.23.1"
+
+# Debug info is most of a dev build on disk: keep line numbers (backtraces,
+# panics) for our crates and drop it for dependencies.
+[profile.dev]
+debug = "line-tables-only"
+
+[profile.dev.package."*"]
+debug = false
+
+[profile.release]
+codegen-units = 1
+lto = true
+opt-level = "s"
+strip = true

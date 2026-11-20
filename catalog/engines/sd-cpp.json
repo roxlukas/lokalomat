@@ -1,0 +1,136 @@
+{
+  "id": "sd-cpp",
+  "name": "stable-diffusion.cpp",
+  "capabilities": [
+    "image"
+  ],
+  "kind": "native",
+  "version": "master-1088-32d516c",
+  "license": {
+    "name": "MIT",
+    "url": "https://github.com/leejet/stable-diffusion.cpp/blob/master/LICENSE"
+  },
+  "install": {
+    "source": "github-release",
+    "repo": "leejet/stable-diffusion.cpp",
+    "tag": "master-1088-32d516c"
+  },
+  "builds": [
+    {
+      "id": "win-cuda12",
+      "platform": "windows-x64",
+      "backend": "cuda",
+      "min_driver": 528,
+      "files": [
+        {
+          "name": "sd-master-32d516c-bin-win-cuda12-x64.zip",
+          "size": 367188642,
+          "sha256": "e76d90e0ad0aedb3bcd9e24e7ecb20e7c3e0be9700a7e9e94fbd26226e67f597"
+        },
+        {
+          "name": "cudart-sd-bin-win-cu12-x64.zip",
+          "size": 563452046,
+          "sha256": "fe20366827d357c00797eebb58244dddab7fd9a348d70090c3871004c320f38d"
+        }
+      ]
+    },
+    {
+      "id": "win-vulkan",
+      "platform": "windows-x64",
+      "backend": "vulkan",
+      "files": [
+        {
+          "name": "sd-master-32d516c-bin-win-vulkan-x64.zip",
+          "size": 30031373,
+          "sha256": "956853799eb2af71a02c8088ac88ad96978cda902277de75feef8dcf918e7dfc"
+        }
+      ]
+    },
+    {
+      "id": "win-cpu",
+      "platform": "windows-x64",
+      "backend": "cpu",
+      "files": [
+        {
+          "name": "sd-master-32d516c-bin-win-cpu-x64.zip",
+          "size": 18260702,
+          "sha256": "f53571cf4fcc2b1b546478eaf0c8fb6055d7df34478904c753a6d564db756383"
+        }
+      ]
+    },
+    {
+      "id": "macos-metal",
+      "platform": "macos-arm64",
+      "backend": "metal",
+      "min_macos": 26,
+      "files": [
+        {
+          "name": "sd-master-32d516c-bin-Darwin-macOS-26.7.2-arm64.zip",
+          "size": 38105745,
+          "sha256": "b6588e81e788d9f2f24498831ba398d7523152e7ec280ff282f39c2009465b77"
+        }
+      ]
+    },
+    {
+      "id": "macos-x64-cpu",
+      "platform": "macos-x64",
+      "backend": "cpu",
+      "min_macos": 26,
+      "files": [
+        {
+          "name": "sd-master-32d516c-bin-Darwin-macOS-26.7.2-arm64.zip",
+          "size": 38105745,
+          "sha256": "b6588e81e788d9f2f24498831ba398d7523152e7ec280ff282f39c2009465b77"
+        }
+      ]
+    },
+    {
+      "id": "linux-vulkan",
+      "platform": "linux-x64",
+      "backend": "vulkan",
+      "min_glibc": "2.43",
+      "files": [
+        {
+          "name": "sd-master-32d516c-bin-Linux-Ubuntu-26.04-x86_64-vulkan.zip",
+          "size": 41907665,
+          "sha256": "1063fe0a55d81265b8f332c7c5b9aba78598d23313a520ec82763b2d536beb11"
+        }
+      ]
+    },
+    {
+      "id": "linux-cpu",
+      "platform": "linux-x64",
+      "backend": "cpu",
+      "min_glibc": "2.43",
+      "files": [
+        {
+          "name": "sd-master-32d516c-bin-Linux-Ubuntu-26.04-x86_64.zip",
+          "size": 29033492,
+          "sha256": "b8b160ebe5dcc0fb701428a04896fe5d25ff834609f4fd5429cc7bc21b5edfc0"
+        }
+      ]
+    }
+  ],
+  "launch": {
+    "cmd": "sd-cli",
+    "args": [
+      "--diffusion-model",
+      "{model_path}",
+      "-p",
+      "{prompt}",
+      "-W",
+      "{width}",
+      "-H",
+      "{height}",
+      "-s",
+      "{seed}",
+      "-b",
+      "{count}",
+      "-o",
+      "{output}"
+    ]
+  },
+  "health": {
+    "path": ""
+  }
+}

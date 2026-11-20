@@ -1,0 +1,1029 @@
+{
+  "app": {
+    "name": "Lokalomat AI Studio",
+    "skipToContent": "Skip to content",
+    "crash": {
+      "title": "Something went wrong in this view.",
+      "body": "Your data is safe. Please try again.",
+      "retry": "Try again"
+    }
+  },
+  "common": {
+    "close": "Close",
+    "cancel": "Cancel"
+  },
+  "nav": {
+    "label": "Main navigation",
+    "workshop": "Workshop",
+    "models": "Models",
+    "engines": "Engines",
+    "server": "Server",
+    "settings": "Settings",
+    "expand": "Expand sidebar",
+    "collapse": "Collapse sidebar"
+  },
+  "header": {
+    "palette": "Search or type a command…",
+    "memory": "Memory",
+    "jobs": "Jobs and downloads: {count}",
+    "trayTitle": "Activity",
+    "trayEmpty": "Nothing is downloading right now.",
+    "memoryTitle": "Memory for models: {used} of {budget} ({kind})",
+    "memoryUnknown": "Detecting hardware…",
+    "memoryEmpty": "No model is loaded right now.",
+    "release": "Release",
+    "mode": {
+      "label": "Interface mode",
+      "basic": "Basic",
+      "expert": "Expert",
+      "basicHint": "Only the essential options.",
+      "expertHint": "All options, including technical ones."
+    },
+    "cpuOnly": "processor",
+    "working": "working",
+    "kept": "kept"
+  },
+  "inspector": {
+    "title": "Inspector",
+    "open": "Show inspector",
+    "close": "Hide inspector",
+    "empty": "Settings for the chosen mode will appear here."
+  },
+  "palette": {
+    "label": "Command palette",
+    "placeholder": "Where to go or what to do?",
+    "empty": "No matches.",
+    "goto": "Go to: {view}",
+    "toggleTheme": "Toggle light / dark theme",
+    "switchLanguage": "Przełącz język na polski",
+    "hint": "↑↓ select · Enter run · Esc close"
+  },
+  "views": {
+    "milestone": "Planned for milestone {milestone}",
+    "workshop": {
+      "title": "Workshop",
+      "body": "Chat, images, transcription and voice in one place."
+    },
+    "gallery": {
+      "body": "All your results in one place."
+    },
+    "models": {
+      "title": "Models",
+      "body": "Models you can download to this computer."
+    },
+    "server": {
+      "title": "Server",
+      "body": "Agents and programs can use the models on this computer, like with Ollama."
+    },
+    "engines": {
+      "title": "Engines",
+      "body": "Engines run AI models on your computer."
+    },
+    "tools": {
+      "body": "Tools the model can use in chat, e.g. Grafana."
+    }
+  },
+  "workshop": {
+    "modes": {
+      "label": "Mode",
+      "chat": "Chat",
+      "image": "Image",
+      "stt": "Transcription",
+      "tts": "Voice",
+      "pipeline": "Pipeline",
+      "music": "Music",
+      "decision": "Decisions"
+    },
+    "inputLabel": "Prompt",
+    "inputPlaceholder": "Type a prompt or drop a file…",
+    "send": "Send",
+    "examplesTitle": "For example",
+    "examples": {
+      "chat": "Summarise this text in three bullet points",
+      "image": "Watercolour: a lighthouse at dawn",
+      "stt": "Turn a meeting recording into SRT subtitles",
+      "tts": "Hello! This is how reading text aloud sounds on your computer.",
+      "music": "Upbeat pop about summer by the sea, guitar and drums"
+    },
+    "unavailableMode": "This mode is coming soon.",
+    "engineUnavailable": "This mode does not work on this computer yet.",
+    "preparingEngine": "Getting this mode ready… {percent}%",
+    "image": {
+      "aspect": "Aspect ratio",
+      "placeholder": "Describe the image, e.g. a cat in a hat with mountains behind…",
+      "generate": "Generate",
+      "needModel": "Images need a model."
+    },
+    "stt": {
+      "language": "Spoken language",
+      "languages": {
+        "auto": "Detect",
+        "pl": "Polish",
+        "en": "English",
+        "de": "German",
+        "uk": "Ukrainian",
+        "fr": "French",
+        "es": "Spanish"
+      },
+      "needModel": "Transcription needs a model."
+    },
+    "partialModel": "Some model files are missing. Download them in the Models view.",
+    "tts": {
+      "voice": "Voice",
+      "modelVoice": "Model's voice",
+      "needModel": "Reading text aloud needs a voice model.",
+      "placeholder": "Type the text to read aloud…",
+      "speak": "Read aloud"
+    },
+    "music": {
+      "placeholder": "Describe the style: genre, mood, instruments…",
+      "lyrics": "Lyrics (leave empty for music without words)",
+      "lyricsPlaceholder": "[verse]\nFirst line…\n\n[chorus]\nChorus words…",
+      "duration": "Length",
+      "durationAuto": "Any",
+      "seconds": "{count} s",
+      "minutes": "{count} min",
+      "compose": "Create song",
+      "language": "Lyrics language",
+      "languages": {
+        "pl": "Polish",
+        "en": "English",
+        "de": "German",
+        "fr": "French",
+        "es": "Spanish",
+        "it": "Italian",
+        "uk": "Ukrainian"
+      },
+      "needModel": "Creating songs needs a music model.",
+      "note": "Songs are made on your computer. You are responsible for how you use them."
+    },
+    "decision": {
+      "placeholder": "Paste the text to judge, e.g. a customer message",
+      "ask": "Ask",
+      "note": "The model picks an answer and shows how sure it is.",
+      "needModel": "Decisions need a decision model."
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "general": "General",
+    "language": "Interface language",
+    "languages": {
+      "pl": "Polski",
+      "en": "English"
+    },
+    "theme": "Theme",
+    "themes": {
+      "system": "Follow system",
+      "light": "Light",
+      "dark": "Dark"
+    },
+    "saveFailed": "Could not save settings: {error}",
+    "advanced": "Advanced",
+    "logging": {
+      "title": "Diagnostics and logs",
+      "description": "Logs help find the cause of a problem. They stay on your computer.",
+      "mode": "Log level",
+      "normal": "Normal",
+      "normalHint": "Recommended for everyday use.",
+      "verbose": "Verbose",
+      "verboseHint": "Turn on when something does not work.",
+      "overridden": "The mode was set when the app started. A change applies after a restart.",
+      "prompts": "Write prompt and result contents to logs",
+      "promptsHint": "Your conversations will go into the logs. Turn off after diagnosis.",
+      "openFolder": "Open log folder",
+      "export": "Export diagnostics bundle",
+      "exporting": "Creating bundle…",
+      "exported": "Bundle saved: {path} ({size})",
+      "exportFailed": "Could not create the bundle: {error}",
+      "exportHint": "A ZIP file to send with a problem report. Passwords are hidden.",
+      "preview": "Latest entries",
+      "refresh": "Refresh",
+      "previewEmpty": "No entries.",
+      "location": "Log folder"
+    },
+    "about": "About",
+    "aboutInfo": {
+      "author": "Author",
+      "company": "Company",
+      "website": "Website",
+      "license": "Licence",
+      "licenseNote": "You may use, change and share the app, also commercially."
+    },
+    "version": "Version",
+    "desktopOnly": "Available in the desktop app only.",
+    "data": {
+      "title": "Data folder",
+      "hint": "Downloaded models are saved here.",
+      "none": "Not chosen",
+      "change": "Change…",
+      "open": "Open",
+      "rerunWizard": "Run the wizard again",
+      "note": "Models already downloaded stay in the old place.",
+      "changed": "Data folder changed."
+    },
+    "hardware": {
+      "title": "Hardware and memory",
+      "refresh": "Detect again",
+      "probing": "Detecting…",
+      "driver": "driver {version}",
+      "features": "CPU instructions",
+      "backends": "Available acceleration",
+      "budget": "Budget for models",
+      "offload": "+ {offload} RAM for offloading",
+      "unified": "RAM share for graphics: {percent}%",
+      "unifiedHint": "Applies to Macs with Apple chips.",
+      "context": "Chat memory (context window)",
+      "contextAuto": "Automatic (recommended)",
+      "contextTokens": "{count}k tokens",
+      "contextHint": "A larger window uses more graphics card memory. Auto fits it to your card.",
+      "keepLlm": "Keep the chat model in memory",
+      "keepLlmHint": "Chat answers at once, but images may take longer."
+    },
+    "downloads": {
+      "title": "Downloads",
+      "token": "Hugging Face token",
+      "tokenHint": "Only needed for some models. Stored safely by your system.",
+      "tokenSet": "Token saved",
+      "tokenNone": "No token",
+      "tokenSave": "Save token",
+      "tokenRemove": "Remove token",
+      "tokenSaved": "Token saved.",
+      "tokenRemoved": "Token removed.",
+      "limit": "Limit download speed",
+      "limitHint": "Useful on a slow connection.",
+      "limitValue": "Limit (MB/s)"
+    },
+    "basicNote": "More settings are available in Expert mode (switch in the top-right corner)."
+  },
+  "modality": {
+    "llm": "Chat",
+    "image": "Image",
+    "stt": "Transcription",
+    "tts": "Voice",
+    "music": "Music",
+    "decision": "Decisions"
+  },
+  "engines": {
+    "llama-cpp": "llama.cpp",
+    "sd-cpp": "stable-diffusion.cpp",
+    "whisper-cpp": "whisper.cpp",
+    "piper": "Piper",
+    "chatterbox": "Chatterbox (Python)",
+    "ace-step": "ACE-Step (Python)",
+    "intro": "Engines run AI models on your computer.",
+    "capabilities": {
+      "chat": "Chat",
+      "stt": "Transcription",
+      "image": "Images",
+      "tts": "Voice",
+      "voice_cloning": "Voice cloning",
+      "music": "Music"
+    },
+    "state": {
+      "not_installed": "not installed",
+      "installing": "installing",
+      "stopped": "ready",
+      "starting": "starting",
+      "running": "running",
+      "crashed": "error"
+    },
+    "backend": "Acceleration",
+    "installedVersion": "Installed version",
+    "updateAvailable": "{version} available",
+    "loaded": "Loaded model",
+    "lastError": "Last error: {error}",
+    "installing": "Installing {name}",
+    "chooseBuild": "Engine build",
+    "recommended": "recommended",
+    "install": "Install",
+    "update": "Update",
+    "restart": "Restart",
+    "uninstall": "Uninstall",
+    "confirmUninstall": "Uninstall for sure?",
+    "logs": "Show logs",
+    "installHint": "Download: {size}.",
+    "upcoming": "In later milestones",
+    "unavailable": "This engine does not work on this computer yet.",
+    "diskSize": "On disk",
+    "stage": {
+      "uv": "Downloading the installer",
+      "python": "Preparing Python",
+      "packages": "Downloading packages",
+      "verify": "Checking the installation"
+    },
+    "repair": "Repair environment",
+    "confirmRepair": "Rebuild the environment from scratch?",
+    "repairHint": "Removes the environment and installs it again."
+  },
+  "fit": {
+    "fits": "Fits",
+    "tight": "Tight",
+    "offload": "With offload",
+    "wont_run": "Won't run",
+    "unknown": "Unknown",
+    "unknownHint": "Checking your computer…",
+    "numbers": "Needs about {estimate}, {budget} available ({kind})",
+    "headroom": "{headroom} headroom",
+    "offloadNumbers": "plus {offload} RAM for offloading",
+    "hint": {
+      "fits": "Will run smoothly.",
+      "tight": "Fits, but may slow down.",
+      "offload": "Will run slower.",
+      "wont_run": "Not enough memory on this computer."
+    },
+    "budgetKind": {
+      "gpu": "GPU memory",
+      "unified": "unified memory",
+      "cpu": "RAM"
+    }
+  },
+  "license": {
+    "commercial": {
+      "yes": "Commercial OK",
+      "conditions": "Conditions",
+      "no": "Non-commercial"
+    },
+    "gated": "Requires a Hugging Face account",
+    "euBlocked": "Not allowed in the EU",
+    "unknown": "Unknown licence",
+    "open": "View licence"
+  },
+  "models": {
+    "search": "Search models…",
+    "filters": {
+      "modality": "Mode",
+      "label": "Filters",
+      "all": "All",
+      "fits": "Fits my hardware",
+      "commercial": "Commercial use",
+      "eu": "Allowed in the EU",
+      "polish": "Polish",
+      "installed": "Installed",
+      "notInstalled": "Not installed",
+      "reset": "Clear filters"
+    },
+    "tabs": {
+      "catalog": "Catalogue",
+      "custom": "Custom models"
+    },
+    "noDataDir": "Choose a folder for models.",
+    "chooseFolder": "Choose folder",
+    "probing": "Checking your computer…",
+    "noHardware": "Hardware has not been detected yet.",
+    "count": "Models: {count} of {total}",
+    "empty": "No model matches the filters.",
+    "enqueued": "Downloading ({size}).",
+    "alreadyInstalled": "The model is ready.",
+    "removed": "Removed: {name}",
+    "row": {
+      "download": "Download",
+      "delete": "Delete",
+      "deleteVariant": "Delete {variant}",
+      "confirmDelete": "Delete for sure?",
+      "setDefault": "Set as default",
+      "isDefault": "Default",
+      "installed": "Installed",
+      "queued": "Queued",
+      "downloading": "Downloading {percent}",
+      "paused": "Paused",
+      "failed": "Download failed",
+      "notSupported": "Not available on this system",
+      "recommended": "recommended",
+      "progressLabel": "Download progress: {name}",
+      "partial": "Some files are missing",
+      "downloadMissing": "Download missing"
+    },
+    "details": {
+      "languages": "Languages",
+      "engine": "Engine",
+      "engineState": "{engine} – installs itself when needed",
+      "license": "Licence",
+      "variants": "Variants of {name}",
+      "variant": "Variant",
+      "size": "Size",
+      "memory": "Memory",
+      "fit": "Fit",
+      "actions": "Actions",
+      "files": "{count} files",
+      "speed": "Speed"
+    },
+    "custom": {
+      "source": {
+        "disk": "File on disk"
+      },
+      "license": "Check the model licence with its author.",
+      "description": "Add your own chat model (GGUF file) from disk or from Hugging Face.",
+      "fromDiskTitle": "File on disk",
+      "fromDiskHint": "The file stays where it is.",
+      "fromDisk": "Choose GGUF file…",
+      "fromHf": "From Hugging Face",
+      "repo": "Repository",
+      "path": ".gguf file in the repository",
+      "pasteHint": "You can paste a file link from huggingface.co.",
+      "add": "Add and download",
+      "adding": "Checking the file…",
+      "empty": "You have no custom models yet.",
+      "added": "Added: {name}",
+      "fileFilter": "GGUF models"
+    },
+    "sort": {
+      "label": "Sort by",
+      "default": "Catalogue order",
+      "overall": "Overall score (benchmark)",
+      "overallShort": "Overall",
+      "speed": "Speed (tok/s)",
+      "categories": "Benchmark category",
+      "prompts": "{count} prompts",
+      "note": "Scores 1–5 from AI Transformation tests ({date}). Models without a score are last.",
+      "source": "Source: aitransformation.pl ({license})"
+    },
+    "bench": {
+      "title": "AI Transformation benchmark",
+      "summary": "overall {overall}/5 ({quant}), {speed} tok/s",
+      "tooltip": "Score of “{name}” ({quant}) in the AI Transformation local-LLM benchmark",
+      "noScore": "not benchmarked"
+    }
+  },
+  "errors": {
+    "insufficient_space": "Not enough disk space: {needed} needed, {available} free.",
+    "no_data_dir": "Choose a data folder first.",
+    "not_gguf": "This is not a GGUF file.",
+    "hf_not_found": "No such file on Hugging Face.",
+    "hf_auth": "This model needs a Hugging Face account. Add a token in Settings → Downloads.",
+    "hf_invalid": "Invalid repository or file name.",
+    "network": "No internet connection.",
+    "not_writable": "Cannot write to this folder.",
+    "invalid_path": "Enter the full folder path.",
+    "secret_store": "The system credential store is unavailable.",
+    "generic": "Something went wrong: {error}",
+    "engine_missing": "Getting chat ready. Try again in a moment.",
+    "no_model": "Download a chat model in the Models view first.",
+    "model_not_installed": "The chosen model is not downloaded: {needed}",
+    "engine_start_failed": "Could not start the engine.",
+    "engine_missing_library": "A system component is missing. Run in a terminal: sudo apt install {package}",
+    "empty": "Type a prompt.",
+    "mcp_invalid": "Fill in the form fields correctly.",
+    "mcp_connect": "Could not connect to the server.",
+    "no_media_model": "Download a model for this mode in the Models view first.",
+    "consent_required": "Tick the consent statement.",
+    "no_name": "Give the voice a name.",
+    "sample_too_short": "The sample is too short. Keep at least 3 seconds.",
+    "invalid_voice": "This is not a Lokalomat AI Studio voice file.",
+    "audio_unsupported": "I can't read this audio file.",
+    "no_cloning_model": "First download a voice cloning model in Models.",
+    "voice_unsupported": "This model can't speak in another voice.",
+    "text_too_long": "The text is too long. Split it into parts.",
+    "pipeline_invalid": "Fix the pipeline – one of the steps does not fit.",
+    "pipeline_missing_input": "Add the input first: a recording or text.",
+    "lan_disabled": "Turn on sharing in the local network first.",
+    "decision_invalid": "Fill in the text and the questions.",
+    "agent_install_failed": "The agent could not be installed. Check the internet.",
+    "agent_not_installed": "Install the agent first.",
+    "agent_setup_failed": "The agent could not be set up. Details are in the logs.",
+    "agent_start_failed": "The agent could not start.",
+    "no_terminal": "No terminal program found.",
+    "agent_context_small": "This agent needs a stronger graphics card or a smaller model.",
+    "server_off": "The server did not start. Check the port in the Server tab.",
+    "update_offline": "Could not check for updates. Check the internet.",
+    "update_failed": "The update failed. Details are in the logs.",
+    "update_manual": "Download the new version from the releases page.",
+    "update_unavailable": "Updates are not switched on in this version yet.",
+    "key_not_stored": "This key is not in the system store. Create a new key.",
+    "claude_missing": "Claude Code was not found on this computer.",
+    "bridge_missing": "The bridge is not in this version. Use the HTTP connection.",
+    "claude_failed": "Claude Code did not add Lokalomat. Copy the command and paste it in a terminal."
+  },
+  "downloads": {
+    "status": {
+      "queued": "Queued",
+      "downloading": "Downloading",
+      "verifying": "Checking the file…",
+      "paused": "Paused",
+      "completed": "Done",
+      "failed": "Error"
+    },
+    "errors": {
+      "checksum_mismatch": "The file was damaged, so we removed it.",
+      "auth_required": "This model needs a Hugging Face account.",
+      "not_found": "The file is no longer on the server.",
+      "network": "The connection was interrupted.",
+      "disk": "Disk write error.",
+      "http": "The server returned an error."
+    },
+    "progress": "{done} of {total}",
+    "eta": "about {time} left",
+    "pause": "Pause",
+    "resume": "Resume",
+    "retry": "Try again",
+    "cancel": "Cancel",
+    "moveUp": "Move up the queue",
+    "moveDown": "Move down the queue",
+    "clear": "Clear",
+    "sectionActive": "Downloads in progress",
+    "sectionDone": "Completed",
+    "retryingChecksum": "The file was damaged – downloading it again.",
+    "engine": "Engine: {name}",
+    "cancelModel": "Cancel download: {name}"
+  },
+  "wizard": {
+    "title": "First run",
+    "stepOf": "Step {step} of {total}",
+    "steps": {
+      "welcome": "Welcome",
+      "hardware": "Hardware",
+      "folder": "Data folder",
+      "pack": "Starter pack",
+      "start": "Start"
+    },
+    "welcome": {
+      "title": "Welcome to Lokalomat AI Studio",
+      "body": "AI on your computer. Your data stays with you.",
+      "language": "Choose your language"
+    },
+    "hardware": {
+      "title": "Checking your computer",
+      "probing": "Detecting graphics card, memory and processor…",
+      "gpu": "Graphics card",
+      "noGpu": "No graphics card – models will run slower.",
+      "unified": "unified memory {ram}",
+      "ram": "RAM",
+      "cpu": "Processor",
+      "cores": "{count} threads",
+      "budget": "For models: {budget}.",
+      "summary": "Your computer can handle:",
+      "retry": "Detect again",
+      "speedNote": "The colour shows how fast it will run on this computer.",
+      "weak": "This computer is weak for AI. We'll suggest smaller, faster models.",
+      "gpuDetails": "{units} units · {tflops} TFLOPS · {bandwidth} GB/s",
+      "cpuHybrid": "{performance} performance + {efficiency} efficiency cores"
+    },
+    "cap": {
+      "chat": "Chat",
+      "image": "Images",
+      "stt": "Transcription",
+      "tts": "Narration",
+      "cloning": "Voice cloning",
+      "music": "Songs"
+    },
+    "capLevel": {
+      "fast": "fast",
+      "usable": "OK",
+      "slow": "slow",
+      "too_slow": "too slow",
+      "needs_gpu": "needs a graphics card",
+      "wont_run": "won't run"
+    },
+    "folder": {
+      "title": "Where should models live?",
+      "body": "Models are large. Pick a disk with plenty of free space.",
+      "free": "{free} free of {total}",
+      "ssd": "SSD",
+      "hdd": "HDD",
+      "custom": "Other folder…",
+      "chosen": "Chosen folder",
+      "pickTitle": "Choose the data folder"
+    },
+    "pack": {
+      "title": "Starter pack",
+      "body": "We picked models that suit your computer.",
+      "total": "Total: {size}",
+      "free": "free on the chosen disk: {free}",
+      "notEnough": "Not enough space. Untick some models or pick another disk.",
+      "none": "No suggestions – the hardware was not detected.",
+      "installed": "already downloaded"
+    },
+    "start": {
+      "title": "Ready to go",
+      "body": "We will download {count} model(s) ({size}). You can use the app meanwhile.",
+      "nothing": "You can download models later in the Models view.",
+      "go": "Start downloading",
+      "skip": "Skip downloading",
+      "finish": "Finish",
+      "error": "Could not add to the queue: {error}"
+    },
+    "back": "Back",
+    "next": "Next",
+    "skipWizard": "Skip the wizard"
+  },
+  "footer": {
+    "author": "Łukasz Poźniak",
+    "site": "AI Transformation",
+    "linkLabel": "Łukasz Poźniak, AI Transformation – author website"
+  },
+  "chat": {
+    "you": "You",
+    "assistant": "Model answer",
+    "status": {
+      "queued": "queued",
+      "preparing": "preparing",
+      "loading_model": "loading model",
+      "running": "writing…",
+      "done": "done",
+      "failed": "error",
+      "cancelled": "stopped"
+    },
+    "waiting": {
+      "queued": "Waiting for the previous answer…",
+      "preparing": "Getting chat ready – only the first time.",
+      "loading_model": "Loading the model…",
+      "running": "The model is thinking…"
+    },
+    "speed": "{tps} tok/s · {tokens} tokens",
+    "reasoning": "Model reasoning",
+    "stop": "Stop",
+    "copy": "Copy",
+    "copied": "Copied",
+    "copyCode": "Copy",
+    "model": "Chat model",
+    "defaultModel": "Default model",
+    "needModel": "Download a chat model to start.",
+    "goModels": "Go to Models",
+    "errors": {
+      "engine_missing": "Getting chat ready. Try again in a moment.",
+      "engine_start_failed": "Could not start the model.",
+      "engine_missing_library": "A system component is missing. Run in a terminal: sudo apt install {package}",
+      "engine_crashed": "Something interrupted the answer. Send the message again.",
+      "model_files_missing": "The model file is missing. Download it again.",
+      "engine_error": "An error occurred. Details are in the logs.",
+      "context_full": "The chat and tools don't fit in the model's memory. Turn off some tools.",
+      "interrupted": "The answer stopped because the app closed.",
+      "engine_install_failed": "Could not get chat ready. Check the internet and try again."
+    },
+    "sessions": {
+      "title": "Sessions",
+      "new": "New chat",
+      "search": "Search conversations…",
+      "noResults": "Nothing found.",
+      "empty": "Your conversations will appear here.",
+      "pinned": "Pinned",
+      "untitled": "Untitled",
+      "confirmDelete": "Delete?",
+      "pin": "Pin",
+      "unpin": "Unpin",
+      "rename": "Rename",
+      "delete": "Delete conversation",
+      "toggle": "Show or hide the session list"
+    },
+    "preparingEngine": "Getting chat ready… {percent}%"
+  },
+  "mcp": {
+    "templates": {
+      "grafana-local": "Grafana (local)",
+      "grafana-remote": "Grafana (remote)",
+      "custom-local": "Custom local",
+      "custom-remote": "Custom remote"
+    }
+  },
+  "jobs": {
+    "status": {
+      "queued": "Queued",
+      "preparing": "Preparing",
+      "loading_model": "Loading model",
+      "running": "Working",
+      "done": "Done",
+      "failed": "Failed",
+      "cancelled": "Cancelled"
+    },
+    "errors": {
+      "engine_missing": "The engine is missing. Try again.",
+      "engine_install_failed": "Could not get this mode ready. Check your internet connection.",
+      "engine_start_failed": "Could not start the engine.",
+      "engine_missing_library": "A system component is missing. Run in a terminal: sudo apt install {package}",
+      "engine_crashed": "The engine stopped. Details are in the logs.",
+      "model_files_missing": "A model file is missing. Download it again.",
+      "engine_error": "Something went wrong. Details are in the logs.",
+      "interrupted": "The job was interrupted.",
+      "engine_unavailable": "This mode does not work on this computer yet.",
+      "audio_unsupported": "Cannot read this audio file.",
+      "out_of_memory": "Not enough memory. Close other apps or pick a smaller model.",
+      "no_result": "The engine returned no result.",
+      "voice_missing": "The recording of this voice is missing. Add it again.",
+      "voice_unsupported": "This model can't speak in another voice.",
+      "context_full": "The text does not fit in the model's memory. Make it shorter.",
+      "no_model": "First download a chat model in Models.",
+      "no_media_model": "First download a model for this step in Models.",
+      "model_not_installed": "The chosen model is not downloaded.",
+      "no_cloning_model": "First download a voice cloning model.",
+      "pipeline_missing_input": "The input is missing.",
+      "empty": "The previous step returned no text.",
+      "text_too_long": "The text is too long to read aloud.",
+      "not_found": "The file or voice was not found.",
+      "decision_invalid": "Fill in the text and the questions.",
+      "not_decision_model": "This model cannot make decisions. Pick a decision model."
+    },
+    "saved": "Saved.",
+    "copied": "Copied.",
+    "delete": "Delete",
+    "confirmDelete": "Delete for sure?",
+    "imageOf": "Image",
+    "more": "Show all text",
+    "less": "Show less",
+    "songFile": "song"
+  },
+  "speed": {
+    "fast": "Fast",
+    "usable": "OK",
+    "slow": "Slow",
+    "too_slow": "Too slow",
+    "needs_gpu": "Needs a graphics card",
+    "wont_run": "Won't run",
+    "hint": {
+      "fast": "Runs fast on this computer.",
+      "usable": "Runs well enough on this computer.",
+      "slow": "Works, but you will wait.",
+      "too_slow": "Too slow on this computer.",
+      "needs_gpu": "This model needs a graphics card.",
+      "wont_run": "Not enough memory on this computer."
+    },
+    "estimate": "Estimate: {numbers} ({device}).",
+    "numbers": {
+      "tokens_per_second": "about {value} tokens/s, reading {prompt} tokens/s",
+      "realtime": "about {value}× real time",
+      "seconds_per_image": "about {value} s per 1024×1024 image"
+    },
+    "short": {
+      "tokens_per_second": "{value} tok/s",
+      "realtime": "{value}×",
+      "seconds_per_image": "{value} s"
+    },
+    "device": {
+      "gpu": "graphics card",
+      "cpu": "processor",
+      "mixed": "graphics card and RAM"
+    }
+  },
+  "network": {
+    "title": "Network",
+    "body": "Connect your phone to use this computer's models.",
+    "enable": "Share in the local network",
+    "port": "Port",
+    "portTip": "Port of the encrypted connection with the phone (TLS). Change it if it is busy.",
+    "running": "Your phone will connect to {address}.",
+    "addressTip": "Local network address. The connection is encrypted and works only with a paired phone.",
+    "pair": "Connect phone",
+    "qrLabel": "QR code to pair a phone",
+    "scan": "Scan this code with the Lokalomat app on your phone.",
+    "expires": "The code expires in {time}.",
+    "copyLink": "Copy link",
+    "copyLinkTip": "The link inside the QR code – paste it in the phone app if scanning does not work.",
+    "compare": "Phone “{device}” wants to connect. Does it show the same code?",
+    "codeLabel": "Code to compare",
+    "compareHint": "If the codes differ, someone may be pretending to be your phone.",
+    "match": "They match",
+    "noMatch": "They differ",
+    "outcome": {
+      "paired": "Phone connected.",
+      "rejected": "Pairing stopped.",
+      "expired": "The code expired. Try again.",
+      "cancelled": "Pairing cancelled."
+    },
+    "devices": "Paired devices",
+    "noDevices": "No phone is connected yet.",
+    "pairedAt": "paired {date}",
+    "lastSeen": "last seen {date}",
+    "never": "not yet",
+    "unpair": "Disconnect",
+    "unpairConfirm": "Yes, disconnect",
+    "errors": {
+      "port_busy": "Another program uses this port. Change the port in Expert mode.",
+      "error": "Sharing could not be turned on. Details are in the logs."
+    }
+  },
+  "mobile": {
+    "loading": "Loading…",
+    "forget": "Forget this computer",
+    "modes": "Modes",
+    "modeMissing": "This mode is not ready on the computer. Download a model in Models.",
+    "working": "The computer is working…",
+    "send": "Send",
+    "save": "Save on phone",
+    "image": {
+      "file": "image"
+    },
+    "jobs": {
+      "failed": "The computer could not finish this. Try again.",
+      "stop": "Stop",
+      "queued": "Waiting in line on the computer.",
+      "preparing": "The computer is getting the engine. The first time takes a few minutes."
+    },
+    "tabs": {
+      "chat": "Chat",
+      "record": "Record",
+      "voice": "Voice",
+      "image": "Image",
+      "music": "Music",
+      "decision": "Decisions",
+      "gallery": "Gallery"
+    },
+    "chat": {
+      "placeholder": "Write a message…"
+    },
+    "record": {
+      "start": "Record",
+      "stop": "Stop and send",
+      "file": "Or pick a recording",
+      "noMic": "No access to the microphone."
+    },
+    "gallery": {
+      "empty": "No results on the computer yet.",
+      "kinds": {
+        "image": "Image",
+        "stt": "Transcription",
+        "tts": "Voice",
+        "music": "Song"
+      },
+      "refresh": "Refresh",
+      "more": "Show more",
+      "prev": "Previous",
+      "next": "Next"
+    },
+    "pair": {
+      "title": "Connect to your computer",
+      "body": "On the computer open Settings → Network and click “Connect phone”.",
+      "defaultName": "My phone",
+      "name": "Phone name",
+      "scan": "Scan the QR code",
+      "noCamera": "Without the camera I cannot scan. Paste the link instead.",
+      "scanFailed": "The code could not be scanned.",
+      "manual": "Paste a link instead",
+      "link": "Link from the computer",
+      "connect": "Connect",
+      "compare": "Check that {computer} shows the same code:",
+      "computer": "the computer",
+      "codeLabel": "Code to compare",
+      "confirmOnComputer": "Confirm on the computer that the codes match."
+    },
+    "errors": {
+      "unreachable": "I cannot see the computer. Check that you are on the same network.",
+      "local_network": "Allow Lokalomat to access devices on your local network in the phone settings.",
+      "tls": "This is not your computer or its certificate changed. Connect again.",
+      "timeout": "The computer did not answer in time.",
+      "connection": "The connection was interrupted.",
+      "unauthorized": "The computer disconnected this phone. Connect again.",
+      "pairing_rejected": "The codes did not match. Pairing stopped.",
+      "pairing_expired": "The code expired. Show a new code on the computer.",
+      "pairing_busy": "The computer is pairing another phone.",
+      "bad_token": "This code is out of date. Show a new code on the computer.",
+      "bad_link": "This is not a Lokalomat code.",
+      "not_paired": "Connect the phone to a computer first.",
+      "no_model": "The computer has no chat model.",
+      "no_media_model": "The computer has no model for this mode.",
+      "no_cloning_model": "The computer has no voice cloning model.",
+      "audio_unsupported": "The computer cannot read this recording.",
+      "not_in_app": "Works only in the Lokalomat app.",
+      "expert_only": "Decisions work when the computer is in Expert mode.",
+      "empty": "Type something first.",
+      "text_too_long": "The text is too long.",
+      "decision_invalid": "Fill in the text and the questions.",
+      "save_failed": "Could not save the file.",
+      "generic": "Something went wrong. Try again."
+    },
+    "model": {
+      "label": "Model",
+      "default": "Computer default ({name})",
+      "auto": "Computer default",
+      "only": "Model: {name}"
+    },
+    "link": {
+      "online": "Connected to the computer",
+      "offline": "No connection",
+      "offlineHint": "The computer cannot be reached. Check that it is on and on the same network."
+    },
+    "forgetConfirm": {
+      "title": "Disconnect from {name}?",
+      "body": "To use it again you will have to pair the phone again.",
+      "confirm": "Disconnect"
+    }
+  },
+  "decisions": {
+    "type": "Question type",
+    "types": {
+      "choice": "Choice",
+      "yes_no": "Yes / no",
+      "score": "Score"
+    },
+    "typeHints": {
+      "choice": "The model picks one of the answers.",
+      "yes_no": "The model says yes or no.",
+      "score": "The model rates on a scale, from the lowest level."
+    },
+    "question": "Question",
+    "questionN": "Question {n}",
+    "placeholders": {
+      "choice": "E.g. Which team should handle this?",
+      "yes_no": "E.g. Is this spam?",
+      "score": "E.g. How urgent is this?"
+    },
+    "options": "Answers",
+    "levels": "Levels, lowest first",
+    "optionN": "Answer {n}",
+    "levelN": "Level {n}",
+    "lowest": "lowest",
+    "highest": "highest",
+    "addOption": "Add answer",
+    "addLevel": "Add level",
+    "removeItem": "Remove",
+    "addQuestion": "Add question",
+    "removeQuestion": "Remove question",
+    "issues": {
+      "no_question": "Type a question.",
+      "options": "Give at least two answers.",
+      "duplicate": "Answers must not repeat.",
+      "too_long": "The text is too long."
+    },
+    "yes": "Yes",
+    "no": "No",
+    "result": "Decision",
+    "confidence": "{percent}% sure",
+    "confidenceHint": "0% – all answers equally likely, 100% – the model is sure.",
+    "score": "score {value} of {max}",
+    "scoreHint": "Average of the levels weighted by probability.",
+    "reuse": "Ask again",
+    "copy": "Copy JSON",
+    "copyHint": "Text, questions and answers with probabilities.",
+    "copied": "Copied.",
+    "copyFailed": "Could not copy.",
+    "preparing": "Preparing the engine…",
+    "loading": "Loading the decision model…"
+  },
+  "server": {
+    "enable": "Turn on the server",
+    "copy": "Copy",
+    "copyFailed": "Could not copy.",
+    "autoload": "The model loads by itself on the first request.",
+    "lan": "Share in the local network",
+    "lanTip": "The server listens on 0.0.0.0, not only on 127.0.0.1.",
+    "lanWarn": "Other computers in the network can use the models if they know a key.",
+    "lanAddress": "Network address: {address}",
+    "port": "Port",
+    "errors": {
+      "port_busy": "This port is taken. Choose another one.",
+      "error": "The server could not start. Details are in the logs."
+    },
+    "keys": "Access keys",
+    "keysBody": "Every program needs its own key.",
+    "keyName": "Key name",
+    "keyNamePlaceholder": "E.g. my script",
+    "newKey": "Create key",
+    "freshTitle": "New key. Copy it into the program.",
+    "hide": "Hide",
+    "noKeys": "No keys yet.",
+    "keyMeta": "Created {created} · last used {used} · requests: {count}",
+    "never": "never",
+    "copyKeyTip": "The key is kept in the system vault.",
+    "revoke": "Delete key",
+    "confirmRevoke": "Delete – the program loses access",
+    "howTo": "How to connect a program",
+    "snippets": {
+      "curl": "curl",
+      "python": "Python",
+      "env": "Variables"
+    },
+    "snippetHint": "Put your key in place of TWOJ_KLUCZ.",
+    "log": "Recent requests",
+    "noLog": "Requests from programs show up here.",
+    "logNote": "We do not store the content of requests or answers.",
+    "defaultModel": "default",
+    "cols": {
+      "time": "Time",
+      "key": "Program",
+      "path": "Address",
+      "model": "Model",
+      "status": "Result",
+      "duration": "Took"
+    },
+    "tabs": {
+      "server": "Server"
+    }
+  },
+  "pro": {
+    "banner": {
+      "text": "Lokalomat Pro adds images, music, speech and automation.",
+      "action": "See Lokalomat Pro",
+      "close": "Close"
+    }
+  },
+  "updates": {
+    "available": "Version {version} is available.",
+    "install": "Install and restart",
+    "download": "Download the new version",
+    "later": "Later",
+    "installing": "Downloading the update…",
+    "auto": "Check for new versions at startup",
+    "checkNow": "Check now",
+    "checking": "Checking…",
+    "upToDate": "You have the latest version."
+  },
+  "report": {
+    "title": "Report a problem",
+    "intro": "Describe what went wrong. The message opens in your mail program.",
+    "what": "What happened?",
+    "placeholder": "E.g. the chat freezes after I press Send.",
+    "reply": "Your email (optional)",
+    "attach": "Include the app version and system",
+    "send": "Prepare message",
+    "note": "Nothing is sent without your approval. Address: {email}",
+    "truncated": "The text was too long and was shortened. Add the rest in your mail program."
+  }
+}

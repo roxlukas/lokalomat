@@ -1,0 +1,87 @@
+{
+  "id": "mcp-grafana",
+  "name": "Grafana MCP",
+  "capabilities": [
+    "tools"
+  ],
+  "kind": "native",
+  "version": "v2.3.0",
+  "license": {
+    "name": "Apache-2.0",
+    "url": "https://github.com/grafana/mcp-grafana/blob/main/LICENSE"
+  },
+  "install": {
+    "source": "github-release",
+    "repo": "grafana/mcp-grafana",
+    "tag": "v2.3.0"
+  },
+  "builds": [
+    {
+      "id": "win-x64",
+      "platform": "windows-x64",
+      "backend": "cpu",
+      "files": [
+        {
+          "name": "mcp-grafana_Windows_x86_64.zip",
+          "size": 19363789,
+          "sha256": "13049249ff4e5251ee60ba38ea47e6aba96c20939fbf133915b482a93827edfe"
+        }
+      ]
+    },
+    {
+      "id": "win-arm64",
+      "platform": "windows-arm64",
+      "backend": "cpu",
+      "files": [
+        {
+          "name": "mcp-grafana_Windows_arm64.zip",
+          "size": 17158544,
+          "sha256": "ae003c1fe75b707d4a53d4ddbb3cc0593747c22db4b27332e3d6c7a463fcc492"
+        }
+      ]
+    },
+    {
+      "id": "macos-arm64",
+      "platform": "macos-arm64",
+      "backend": "cpu",
+      "files": [
+        {
+          "name": "mcp-grafana_Darwin_arm64.tar.gz",
+          "size": 17967010,
+          "sha256": "f62f4ab218c1778b5e34aa6bd135c8e28be95571c3404c959844bc310100e584"
+        }
+      ]
+    },
+    {
+      "id": "macos-x64",
+      "platform": "macos-x64",
+      "backend": "cpu",
+      "files": [
+        {
+          "name": "mcp-grafana_Darwin_x86_64.tar.gz",
+          "size": 19333804,
+          "sha256": "544d082c37e3c43154951131119a75a73a700faf2a4244fbc7a129d4a689aeb1"
+        }
+      ]
+    },
+    {
+      "id": "linux-x64",
+      "platform": "linux-x64",
+      "backend": "cpu",
+      "files": [
+        {
+          "name": "mcp-grafana_Linux_x86_64.tar.gz",
+          "size": 18877691,
+          "sha256": "f808ea13d236e549a9fffa14b28398d30b5393623141307c916e26f5e7746671"
+        }
+      ]
+    }
+  ],
+  "launch": {
+    "cmd": "mcp-grafana",
+    "args": []
+  },
+  "health": {
+    "path": ""
+  }
+}

@@ -1,0 +1,1029 @@
+{
+  "app": {
+    "name": "Lokalomat AI Studio",
+    "skipToContent": "Przejdź do treści",
+    "crash": {
+      "title": "Coś poszło nie tak w tym widoku.",
+      "body": "Twoje dane są bezpieczne. Spróbuj jeszcze raz.",
+      "retry": "Spróbuj ponownie"
+    }
+  },
+  "common": {
+    "close": "Zamknij",
+    "cancel": "Anuluj"
+  },
+  "nav": {
+    "label": "Nawigacja główna",
+    "workshop": "Warsztat",
+    "models": "Modele",
+    "engines": "Silniki",
+    "server": "Serwer",
+    "settings": "Ustawienia",
+    "expand": "Rozwiń pasek",
+    "collapse": "Zwiń pasek"
+  },
+  "header": {
+    "palette": "Szukaj lub wpisz polecenie…",
+    "memory": "Pamięć",
+    "jobs": "Zadania i pobrania: {count}",
+    "trayTitle": "Aktywność",
+    "trayEmpty": "Nic się teraz nie pobiera.",
+    "memoryTitle": "Pamięć dla modeli: {used} z {budget} ({kind})",
+    "memoryUnknown": "Wykrywanie sprzętu…",
+    "memoryEmpty": "Żaden model nie jest teraz załadowany.",
+    "release": "Zwolnij",
+    "mode": {
+      "label": "Tryb interfejsu",
+      "basic": "Basic",
+      "expert": "Expert",
+      "basicHint": "Tylko najważniejsze opcje.",
+      "expertHint": "Wszystkie opcje, także techniczne."
+    },
+    "cpuOnly": "procesor",
+    "working": "pracuje",
+    "kept": "trzymany"
+  },
+  "inspector": {
+    "title": "Inspektor",
+    "open": "Pokaż inspektor",
+    "close": "Ukryj inspektor",
+    "empty": "Tu pojawią się ustawienia wybranego trybu."
+  },
+  "palette": {
+    "label": "Paleta poleceń",
+    "placeholder": "Dokąd przejść albo co zrobić?",
+    "empty": "Nic nie pasuje.",
+    "goto": "Przejdź: {view}",
+    "toggleTheme": "Przełącz motyw jasny / ciemny",
+    "switchLanguage": "Switch language to English",
+    "hint": "↑↓ wybór · Enter wykonaj · Esc zamknij"
+  },
+  "views": {
+    "milestone": "Planowane w etapie {milestone}",
+    "workshop": {
+      "title": "Warsztat",
+      "body": "Czat, obrazy, transkrypcja i głos w jednym miejscu."
+    },
+    "gallery": {
+      "body": "Wszystkie Twoje wyniki w jednym miejscu."
+    },
+    "models": {
+      "title": "Modele",
+      "body": "Modele, które możesz pobrać na ten komputer."
+    },
+    "server": {
+      "title": "Serwer",
+      "body": "Agenci i programy mogą korzystać z modeli na tym komputerze, jak w Ollama."
+    },
+    "engines": {
+      "title": "Silniki",
+      "body": "Silniki uruchamiają modele sztucznej inteligencji na Twoim komputerze."
+    },
+    "tools": {
+      "body": "Narzędzia, z których model może korzystać w czacie, np. Grafana."
+    }
+  },
+  "workshop": {
+    "modes": {
+      "label": "Tryb pracy",
+      "chat": "Czat",
+      "image": "Obraz",
+      "stt": "Transkrypcja",
+      "tts": "Głos",
+      "pipeline": "Łańcuch",
+      "music": "Muzyka",
+      "decision": "Decyzje"
+    },
+    "inputLabel": "Polecenie",
+    "inputPlaceholder": "Napisz polecenie lub upuść plik…",
+    "send": "Wyślij",
+    "examplesTitle": "Na przykład",
+    "examples": {
+      "chat": "Streść ten tekst w trzech punktach",
+      "image": "Akwarela: latarnia morska o świcie",
+      "stt": "Zamień nagranie ze spotkania na napisy SRT",
+      "tts": "Dzień dobry! Tak brzmi czytanie tekstu na Twoim komputerze.",
+      "music": "Radosny pop o lecie nad morzem, gitara i perkusja"
+    },
+    "unavailableMode": "Ten tryb pojawi się wkrótce.",
+    "engineUnavailable": "Ten tryb nie działa jeszcze na tym komputerze.",
+    "preparingEngine": "Przygotowuję tryb… {percent}%",
+    "image": {
+      "aspect": "Proporcje obrazu",
+      "placeholder": "Opisz obraz, np. kot w kapeluszu na tle gór…",
+      "generate": "Generuj",
+      "needModel": "Do obrazów potrzebny jest model."
+    },
+    "stt": {
+      "language": "Język nagrania",
+      "languages": {
+        "auto": "Wykryj sam",
+        "pl": "Polski",
+        "en": "Angielski",
+        "de": "Niemiecki",
+        "uk": "Ukraiński",
+        "fr": "Francuski",
+        "es": "Hiszpański"
+      },
+      "needModel": "Do transkrypcji potrzebny jest model."
+    },
+    "partialModel": "Brakuje części plików modelu. Pobierz brakujące w widoku Modele.",
+    "tts": {
+      "voice": "Głos",
+      "modelVoice": "Głos modelu",
+      "needModel": "Do czytania tekstu potrzebny jest model głosu.",
+      "placeholder": "Wpisz tekst do przeczytania…",
+      "speak": "Przeczytaj"
+    },
+    "music": {
+      "placeholder": "Opisz styl: gatunek, nastrój, instrumenty…",
+      "lyrics": "Tekst piosenki (zostaw puste, jeśli ma być bez słów)",
+      "lyricsPlaceholder": "[zwrotka]\nPierwsza linijka…\n\n[refren]\nSłowa refrenu…",
+      "duration": "Długość",
+      "durationAuto": "Dowolna",
+      "seconds": "{count} s",
+      "minutes": "{count} min",
+      "compose": "Stwórz piosenkę",
+      "language": "Język tekstu",
+      "languages": {
+        "pl": "Polski",
+        "en": "Angielski",
+        "de": "Niemiecki",
+        "fr": "Francuski",
+        "es": "Hiszpański",
+        "it": "Włoski",
+        "uk": "Ukraiński"
+      },
+      "needModel": "Do tworzenia piosenek potrzebny jest model muzyki.",
+      "note": "Piosenki powstają na Twoim komputerze. Za to, jak ich użyjesz, odpowiadasz Ty."
+    },
+    "decision": {
+      "placeholder": "Wklej tekst do oceny, np. wiadomość od klienta",
+      "ask": "Zapytaj",
+      "note": "Model wybiera odpowiedź i pokazuje, jak jest pewny.",
+      "needModel": "Do decyzji potrzebny jest model decyzyjny."
+    }
+  },
+  "settings": {
+    "title": "Ustawienia",
+    "general": "Ogólne",
+    "language": "Język interfejsu",
+    "languages": {
+      "pl": "Polski",
+      "en": "English"
+    },
+    "theme": "Motyw",
+    "themes": {
+      "system": "Jak w systemie",
+      "light": "Jasny",
+      "dark": "Ciemny"
+    },
+    "saveFailed": "Nie udało się zapisać ustawień: {error}",
+    "advanced": "Zaawansowane",
+    "logging": {
+      "title": "Diagnostyka i logi",
+      "description": "Logi pomagają znaleźć przyczynę problemu. Zostają na Twoim komputerze.",
+      "mode": "Poziom logowania",
+      "normal": "Normalny",
+      "normalHint": "Zalecany na co dzień.",
+      "verbose": "Szczegółowy (verbose)",
+      "verboseHint": "Włącz, gdy coś nie działa.",
+      "overridden": "Tryb ustawiono przy starcie aplikacji. Zmiana zadziała po ponownym uruchomieniu.",
+      "prompts": "Zapisuj w logach treść poleceń i wyników",
+      "promptsHint": "Treść rozmów trafi do logów. Wyłącz po diagnozie.",
+      "openFolder": "Otwórz folder logów",
+      "export": "Eksportuj paczkę diagnostyczną",
+      "exporting": "Tworzenie paczki…",
+      "exported": "Zapisano paczkę: {path} ({size})",
+      "exportFailed": "Nie udało się utworzyć paczki: {error}",
+      "exportHint": "Plik ZIP do wysłania przy zgłoszeniu problemu. Hasła są ukryte.",
+      "preview": "Ostatnie wpisy",
+      "refresh": "Odśwież",
+      "previewEmpty": "Brak wpisów.",
+      "location": "Folder logów"
+    },
+    "about": "O aplikacji",
+    "aboutInfo": {
+      "author": "Autor",
+      "company": "Firma",
+      "website": "Strona",
+      "license": "Licencja",
+      "licenseNote": "Możesz używać, zmieniać i rozpowszechniać aplikację, także komercyjnie."
+    },
+    "version": "Wersja",
+    "desktopOnly": "Dostępne tylko w aplikacji desktopowej.",
+    "data": {
+      "title": "Folder danych",
+      "hint": "Tu zapisujemy pobrane modele.",
+      "none": "Nie wybrano",
+      "change": "Zmień…",
+      "open": "Otwórz",
+      "rerunWizard": "Uruchom kreator ponownie",
+      "note": "Już pobrane modele zostaną w starym miejscu.",
+      "changed": "Folder danych zmieniony."
+    },
+    "hardware": {
+      "title": "Sprzęt i pamięć",
+      "refresh": "Wykryj ponownie",
+      "probing": "Wykrywanie…",
+      "driver": "sterownik {version}",
+      "features": "Instrukcje procesora",
+      "backends": "Dostępne akceleracje",
+      "budget": "Budżet dla modeli",
+      "offload": "+ {offload} RAM do odciążenia",
+      "unified": "Udział RAM dla grafiki: {percent}%",
+      "unifiedHint": "Dotyczy komputerów Mac z procesorem Apple.",
+      "context": "Pamięć rozmowy (okno kontekstu)",
+      "contextAuto": "Automatycznie (zalecane)",
+      "contextTokens": "{count} tys. tokenów",
+      "contextHint": "Większe okno zajmuje więcej pamięci karty graficznej. Auto dobiera je do Twojej karty.",
+      "keepLlm": "Trzymaj model czatu w pamięci",
+      "keepLlmHint": "Czat odpowie od razu, ale obrazy mogą powstawać wolniej."
+    },
+    "downloads": {
+      "title": "Pobieranie",
+      "token": "Token Hugging Face",
+      "tokenHint": "Potrzebny tylko do niektórych modeli. Zapisujemy go bezpiecznie w systemie.",
+      "tokenSet": "Token zapisany",
+      "tokenNone": "Brak tokenu",
+      "tokenSave": "Zapisz token",
+      "tokenRemove": "Usuń token",
+      "tokenSaved": "Token zapisany.",
+      "tokenRemoved": "Token usunięty.",
+      "limit": "Ogranicz prędkość pobierania",
+      "limitHint": "Przydatne przy wolnym internecie.",
+      "limitValue": "Limit (MB/s)"
+    },
+    "basicNote": "Więcej ustawień zobaczysz w trybie Expert (przełącznik w prawym górnym rogu)."
+  },
+  "modality": {
+    "llm": "Czat",
+    "image": "Obraz",
+    "stt": "Transkrypcja",
+    "tts": "Głos",
+    "music": "Muzyka",
+    "decision": "Decyzje"
+  },
+  "engines": {
+    "llama-cpp": "llama.cpp",
+    "sd-cpp": "stable-diffusion.cpp",
+    "whisper-cpp": "whisper.cpp",
+    "piper": "Piper",
+    "chatterbox": "Chatterbox (Python)",
+    "ace-step": "ACE-Step (Python)",
+    "intro": "Silniki uruchamiają modele sztucznej inteligencji na Twoim komputerze.",
+    "capabilities": {
+      "chat": "Czat",
+      "stt": "Transkrypcja",
+      "image": "Obrazy",
+      "tts": "Głos",
+      "voice_cloning": "Klonowanie głosu",
+      "music": "Muzyka"
+    },
+    "state": {
+      "not_installed": "nie zainstalowany",
+      "installing": "instalacja",
+      "stopped": "gotowy",
+      "starting": "uruchamianie",
+      "running": "uruchomiony",
+      "crashed": "błąd"
+    },
+    "backend": "Akceleracja",
+    "installedVersion": "Zainstalowana wersja",
+    "updateAvailable": "dostępna {version}",
+    "loaded": "Załadowany model",
+    "lastError": "Ostatni błąd: {error}",
+    "installing": "Instalacja {name}",
+    "chooseBuild": "Wariant silnika",
+    "recommended": "zalecany",
+    "install": "Zainstaluj",
+    "update": "Aktualizuj",
+    "restart": "Uruchom ponownie",
+    "uninstall": "Odinstaluj",
+    "confirmUninstall": "Na pewno odinstalować?",
+    "logs": "Pokaż logi",
+    "installHint": "Do pobrania: {size}.",
+    "upcoming": "W kolejnych etapach",
+    "unavailable": "Ten silnik nie działa jeszcze na tym komputerze.",
+    "diskSize": "Na dysku",
+    "stage": {
+      "uv": "Pobieram instalator",
+      "python": "Przygotowuję Pythona",
+      "packages": "Pobieram pakiety",
+      "verify": "Sprawdzam instalację"
+    },
+    "repair": "Napraw środowisko",
+    "confirmRepair": "Zbudować środowisko od nowa?",
+    "repairHint": "Usuwa środowisko i instaluje je od nowa."
+  },
+  "fit": {
+    "fits": "Pasuje",
+    "tight": "Na granicy",
+    "offload": "Z odciążeniem",
+    "wont_run": "Nie zadziała",
+    "unknown": "Nieznane",
+    "unknownHint": "Sprawdzam Twój komputer…",
+    "numbers": "Potrzebuje ok. {estimate}, dostępne {budget} ({kind})",
+    "headroom": "zapas {headroom}",
+    "offloadNumbers": "plus {offload} RAM do odciążenia",
+    "hint": {
+      "fits": "Będzie działać płynnie.",
+      "tight": "Zmieści się, ale może zwolnić.",
+      "offload": "Będzie działać wolniej.",
+      "wont_run": "Za mało pamięci na tym komputerze."
+    },
+    "budgetKind": {
+      "gpu": "pamięć karty graficznej",
+      "unified": "pamięć zunifikowana",
+      "cpu": "pamięć RAM"
+    }
+  },
+  "license": {
+    "commercial": {
+      "yes": "Komercyjnie OK",
+      "conditions": "Warunki",
+      "no": "Niekomercyjnie"
+    },
+    "gated": "Wymaga konta na Hugging Face",
+    "euBlocked": "Niedozwolone w UE",
+    "unknown": "Licencja nieznana",
+    "open": "Pokaż licencję"
+  },
+  "models": {
+    "search": "Szukaj modelu…",
+    "filters": {
+      "modality": "Tryb",
+      "label": "Filtry",
+      "all": "Wszystkie",
+      "fits": "Pasuje do sprzętu",
+      "commercial": "Do użytku komercyjnego",
+      "eu": "Dozwolone w UE",
+      "polish": "Po polsku",
+      "installed": "Zainstalowane",
+      "notInstalled": "Niezainstalowane",
+      "reset": "Wyczyść filtry"
+    },
+    "tabs": {
+      "catalog": "Katalog",
+      "custom": "Własne modele"
+    },
+    "noDataDir": "Wybierz folder na modele.",
+    "chooseFolder": "Wybierz folder",
+    "probing": "Sprawdzam Twój komputer…",
+    "noHardware": "Sprzęt nie został jeszcze wykryty.",
+    "count": "Modele: {count} z {total}",
+    "empty": "Żaden model nie pasuje do filtrów.",
+    "enqueued": "Pobieram ({size}).",
+    "alreadyInstalled": "Model jest już gotowy.",
+    "removed": "Usunięto: {name}",
+    "row": {
+      "download": "Pobierz",
+      "delete": "Usuń",
+      "deleteVariant": "Usuń {variant}",
+      "confirmDelete": "Na pewno usunąć?",
+      "setDefault": "Ustaw jako domyślny",
+      "isDefault": "Domyślny",
+      "installed": "Zainstalowany",
+      "queued": "W kolejce",
+      "downloading": "Pobieranie {percent}",
+      "paused": "Wstrzymane",
+      "failed": "Błąd pobierania",
+      "notSupported": "Niedostępny na tym systemie",
+      "recommended": "zalecany",
+      "progressLabel": "Postęp pobierania: {name}",
+      "partial": "Brakuje części plików",
+      "downloadMissing": "Pobierz brakujące"
+    },
+    "details": {
+      "languages": "Języki",
+      "engine": "Silnik",
+      "engineState": "{engine} – instaluje się sam, gdy będzie potrzebny",
+      "license": "Licencja",
+      "variants": "Warianty modelu {name}",
+      "variant": "Wariant",
+      "size": "Rozmiar",
+      "memory": "Pamięć",
+      "fit": "Dopasowanie",
+      "actions": "Akcje",
+      "files": "{count} pliki",
+      "speed": "Szybkość"
+    },
+    "custom": {
+      "source": {
+        "disk": "Plik na dysku"
+      },
+      "license": "Sprawdź licencję modelu u jego autora.",
+      "description": "Dodaj własny model czatu (plik GGUF) z dysku albo z Hugging Face.",
+      "fromDiskTitle": "Plik z dysku",
+      "fromDiskHint": "Plik zostanie tam, gdzie jest.",
+      "fromDisk": "Wybierz plik GGUF…",
+      "fromHf": "Z Hugging Face",
+      "repo": "Repozytorium",
+      "path": "Plik .gguf w repozytorium",
+      "pasteHint": "Możesz wkleić link do pliku z huggingface.co.",
+      "add": "Dodaj i pobierz",
+      "adding": "Sprawdzam plik…",
+      "empty": "Nie masz jeszcze własnych modeli.",
+      "added": "Dodano: {name}",
+      "fileFilter": "Modele GGUF"
+    },
+    "sort": {
+      "label": "Sortuj wg",
+      "default": "Kolejność katalogu",
+      "overall": "Ocena ogólna (benchmark)",
+      "overallShort": "Ogólnie",
+      "speed": "Szybkość (tok/s)",
+      "categories": "Kategoria benchmarku",
+      "prompts": "{count} pyt.",
+      "note": "Oceny 1–5 z testów AI Transformation ({date}). Modele bez oceny są na końcu.",
+      "source": "Źródło: aitransformation.pl ({license})"
+    },
+    "bench": {
+      "title": "Benchmark AI Transformation",
+      "summary": "ogólnie {overall}/5 ({quant}), {speed} tok/s",
+      "tooltip": "Wynik modelu „{name}” ({quant}) w benchmarku lokalnych LLM AI Transformation",
+      "noScore": "brak w benchmarku"
+    }
+  },
+  "errors": {
+    "insufficient_space": "Za mało miejsca na dysku: potrzeba {needed}, wolne {available}.",
+    "no_data_dir": "Najpierw wybierz folder danych.",
+    "not_gguf": "To nie jest plik GGUF.",
+    "hf_not_found": "Nie znaleziono takiego pliku na Hugging Face.",
+    "hf_auth": "Ten model wymaga konta na Hugging Face. Dodaj token w Ustawieniach → Pobieranie.",
+    "hf_invalid": "Niepoprawna nazwa repozytorium lub pliku.",
+    "network": "Brak połączenia z internetem.",
+    "not_writable": "Nie można zapisywać w tym folderze.",
+    "invalid_path": "Podaj pełną ścieżkę folderu.",
+    "secret_store": "Systemowy magazyn haseł jest niedostępny.",
+    "generic": "Coś poszło nie tak: {error}",
+    "engine_missing": "Przygotowuję czat. Spróbuj za chwilę.",
+    "no_model": "Najpierw pobierz model czatu w widoku Modele.",
+    "model_not_installed": "Wybrany model nie jest pobrany: {needed}",
+    "engine_start_failed": "Nie udało się uruchomić silnika.",
+    "engine_missing_library": "Brakuje składnika systemu. Wpisz w terminalu: sudo apt install {package}",
+    "empty": "Wpisz polecenie.",
+    "mcp_invalid": "Uzupełnij poprawnie pola formularza.",
+    "mcp_connect": "Nie udało się połączyć z serwerem.",
+    "no_media_model": "Najpierw pobierz model dla tego trybu w widoku Modele.",
+    "consent_required": "Zaznacz oświadczenie o zgodzie.",
+    "no_name": "Nadaj głosowi nazwę.",
+    "sample_too_short": "Próbka jest za krótka. Zostaw co najmniej 3 sekundy.",
+    "invalid_voice": "To nie jest plik z głosem z Lokalomatu.",
+    "audio_unsupported": "Nie umiem odczytać tego pliku audio.",
+    "no_cloning_model": "Najpierw pobierz model z klonowaniem głosu w widoku Modele.",
+    "voice_unsupported": "Ten model nie umie mówić cudzym głosem.",
+    "text_too_long": "Tekst jest za długi. Podziel go na części.",
+    "pipeline_invalid": "Popraw łańcuch – któryś krok się nie zgadza.",
+    "pipeline_missing_input": "Dodaj dane na start: nagranie albo tekst.",
+    "lan_disabled": "Najpierw włącz udostępnianie w sieci lokalnej.",
+    "decision_invalid": "Uzupełnij tekst i pytania.",
+    "agent_install_failed": "Nie udało się zainstalować agenta. Sprawdź internet.",
+    "agent_not_installed": "Najpierw zainstaluj agenta.",
+    "agent_setup_failed": "Nie udało się przygotować agenta. Szczegóły są w logach.",
+    "agent_start_failed": "Nie udało się uruchomić agenta.",
+    "no_terminal": "Nie znaleziono programu terminala.",
+    "agent_context_small": "Ten agent potrzebuje mocniejszej karty graficznej albo mniejszego modelu.",
+    "server_off": "Serwer nie wystartował. Sprawdź port w zakładce Serwer.",
+    "update_offline": "Nie udało się sprawdzić aktualizacji. Sprawdź internet.",
+    "update_failed": "Aktualizacja się nie udała. Szczegóły są w logach.",
+    "update_manual": "Pobierz nową wersję ze strony wydań.",
+    "update_unavailable": "Aktualizacje nie są jeszcze włączone w tej wersji.",
+    "key_not_stored": "Tego klucza nie ma w magazynie systemu. Utwórz nowy klucz.",
+    "claude_missing": "Nie znaleziono Claude Code na tym komputerze.",
+    "bridge_missing": "Mostu nie ma w tej wersji. Użyj połączenia HTTP.",
+    "claude_failed": "Claude Code nie dodał Lokalomat. Skopiuj polecenie i wklej je w terminalu."
+  },
+  "downloads": {
+    "status": {
+      "queued": "W kolejce",
+      "downloading": "Pobieranie",
+      "verifying": "Sprawdzanie pliku…",
+      "paused": "Wstrzymane",
+      "completed": "Gotowe",
+      "failed": "Błąd"
+    },
+    "errors": {
+      "checksum_mismatch": "Plik był uszkodzony, więc go usunęliśmy.",
+      "auth_required": "Ten model wymaga konta na Hugging Face.",
+      "not_found": "Pliku nie ma już na serwerze.",
+      "network": "Połączenie zostało przerwane.",
+      "disk": "Błąd zapisu na dysku.",
+      "http": "Serwer zwrócił błąd."
+    },
+    "progress": "{done} z {total}",
+    "eta": "zostało ok. {time}",
+    "pause": "Wstrzymaj",
+    "resume": "Wznów",
+    "retry": "Spróbuj ponownie",
+    "cancel": "Anuluj",
+    "moveUp": "Wyżej w kolejce",
+    "moveDown": "Niżej w kolejce",
+    "clear": "Wyczyść",
+    "sectionActive": "Pobieranie w toku",
+    "sectionDone": "Ukończone",
+    "retryingChecksum": "Plik był uszkodzony – pobieram go jeszcze raz.",
+    "engine": "Silnik: {name}",
+    "cancelModel": "Anuluj pobieranie: {name}"
+  },
+  "wizard": {
+    "title": "Pierwsze uruchomienie",
+    "stepOf": "Krok {step} z {total}",
+    "steps": {
+      "welcome": "Powitanie",
+      "hardware": "Sprzęt",
+      "folder": "Folder danych",
+      "pack": "Pakiet startowy",
+      "start": "Start"
+    },
+    "welcome": {
+      "title": "Witaj w Lokalomat AI Studio",
+      "body": "Sztuczna inteligencja na Twoim komputerze. Twoje dane zostają u Ciebie.",
+      "language": "Wybierz język"
+    },
+    "hardware": {
+      "title": "Sprawdzam Twój komputer",
+      "probing": "Wykrywam kartę graficzną, pamięć i procesor…",
+      "gpu": "Karta graficzna",
+      "noGpu": "Nie ma karty graficznej – modele będą działać wolniej.",
+      "unified": "pamięć zunifikowana {ram}",
+      "ram": "Pamięć RAM",
+      "cpu": "Procesor",
+      "cores": "{count} wątków",
+      "budget": "Na modele: {budget}.",
+      "summary": "Twój komputer poradzi sobie z:",
+      "retry": "Wykryj ponownie",
+      "speedNote": "Kolor mówi, jak szybko to zadziała na tym komputerze.",
+      "weak": "Ten komputer jest słaby do AI. Polecimy mniejsze, szybsze modele.",
+      "gpuDetails": "{units} jednostek · {tflops} TFLOPS · {bandwidth} GB/s",
+      "cpuHybrid": "{performance} rdzeni wydajnych + {efficiency} oszczędnych"
+    },
+    "cap": {
+      "chat": "Czat",
+      "image": "Obrazy",
+      "stt": "Transkrypcja",
+      "tts": "Lektor",
+      "cloning": "Klonowanie głosu",
+      "music": "Piosenki"
+    },
+    "capLevel": {
+      "fast": "szybko",
+      "usable": "w porządku",
+      "slow": "wolno",
+      "too_slow": "za wolno",
+      "needs_gpu": "potrzebna karta graficzna",
+      "wont_run": "nie zadziała"
+    },
+    "folder": {
+      "title": "Gdzie trzymać modele?",
+      "body": "Modele są duże. Wybierz dysk z dużą ilością wolnego miejsca.",
+      "free": "{free} wolne z {total}",
+      "ssd": "SSD",
+      "hdd": "HDD",
+      "custom": "Inny folder…",
+      "chosen": "Wybrany folder",
+      "pickTitle": "Wybierz folder danych"
+    },
+    "pack": {
+      "title": "Pakiet startowy",
+      "body": "Wybraliśmy modele pasujące do Twojego komputera.",
+      "total": "Razem: {size}",
+      "free": "wolne na wybranym dysku: {free}",
+      "notEnough": "Za mało miejsca. Odznacz część modeli albo wybierz inny dysk.",
+      "none": "Brak propozycji – sprzęt nie został wykryty.",
+      "installed": "już pobrany"
+    },
+    "start": {
+      "title": "Gotowe do startu",
+      "body": "Pobierzemy {count} model(e) ({size}). W tym czasie możesz korzystać z aplikacji.",
+      "nothing": "Modele możesz pobrać później w widoku Modele.",
+      "go": "Zacznij pobieranie",
+      "skip": "Pomiń pobieranie",
+      "finish": "Zakończ",
+      "error": "Nie udało się dodać do kolejki: {error}"
+    },
+    "back": "Wstecz",
+    "next": "Dalej",
+    "skipWizard": "Pomiń kreator"
+  },
+  "footer": {
+    "author": "Łukasz Poźniak",
+    "site": "AI Transformation",
+    "linkLabel": "Łukasz Poźniak, AI Transformation – strona autora"
+  },
+  "chat": {
+    "you": "Ty",
+    "assistant": "Odpowiedź modelu",
+    "status": {
+      "queued": "w kolejce",
+      "preparing": "przygotowanie",
+      "loading_model": "ładowanie modelu",
+      "running": "pisze…",
+      "done": "gotowe",
+      "failed": "błąd",
+      "cancelled": "zatrzymane"
+    },
+    "waiting": {
+      "queued": "Czekam na poprzednią odpowiedź…",
+      "preparing": "Przygotowuję czat – tylko za pierwszym razem.",
+      "loading_model": "Wczytuję model…",
+      "running": "Model myśli…"
+    },
+    "speed": "{tps} tok/s · {tokens} tokenów",
+    "reasoning": "Rozumowanie modelu",
+    "stop": "Zatrzymaj",
+    "copy": "Kopiuj",
+    "copied": "Skopiowano",
+    "copyCode": "Kopiuj",
+    "model": "Model czatu",
+    "defaultModel": "Model domyślny",
+    "needModel": "Pobierz model czatu, żeby zacząć.",
+    "goModels": "Przejdź do Modeli",
+    "errors": {
+      "engine_missing": "Przygotowuję czat. Spróbuj za chwilę.",
+      "engine_start_failed": "Nie udało się uruchomić modelu.",
+      "engine_missing_library": "Brakuje składnika systemu. Wpisz w terminalu: sudo apt install {package}",
+      "engine_crashed": "Coś przerwało odpowiedź. Wyślij wiadomość jeszcze raz.",
+      "model_files_missing": "Brakuje pliku modelu. Pobierz go ponownie.",
+      "engine_error": "Wystąpił błąd. Szczegóły są w logach.",
+      "context_full": "Rozmowa i narzędzia nie mieszczą się w pamięci modelu. Wyłącz część narzędzi.",
+      "interrupted": "Odpowiedź przerwało zamknięcie aplikacji.",
+      "engine_install_failed": "Nie udało się przygotować czatu. Sprawdź internet i spróbuj ponownie."
+    },
+    "sessions": {
+      "title": "Sesje",
+      "new": "Nowa rozmowa",
+      "search": "Szukaj w rozmowach…",
+      "noResults": "Nic nie znaleziono.",
+      "empty": "Tu pojawią się Twoje rozmowy.",
+      "pinned": "Przypięta",
+      "untitled": "Bez tytułu",
+      "confirmDelete": "Usunąć?",
+      "pin": "Przypnij",
+      "unpin": "Odepnij",
+      "rename": "Zmień nazwę",
+      "delete": "Usuń rozmowę",
+      "toggle": "Pokaż lub ukryj listę sesji"
+    },
+    "preparingEngine": "Przygotowuję czat… {percent}%"
+  },
+  "mcp": {
+    "templates": {
+      "grafana-local": "Grafana (lokalnie)",
+      "grafana-remote": "Grafana (zdalnie)",
+      "custom-local": "Własny lokalny",
+      "custom-remote": "Własny zdalny"
+    }
+  },
+  "jobs": {
+    "status": {
+      "queued": "W kolejce",
+      "preparing": "Przygotowanie",
+      "loading_model": "Ładowanie modelu",
+      "running": "W toku",
+      "done": "Gotowe",
+      "failed": "Błąd",
+      "cancelled": "Anulowano"
+    },
+    "errors": {
+      "engine_missing": "Brakuje silnika. Spróbuj jeszcze raz.",
+      "engine_install_failed": "Nie udało się przygotować trybu. Sprawdź internet.",
+      "engine_start_failed": "Nie udało się uruchomić silnika.",
+      "engine_missing_library": "Brakuje składnika systemu. Wpisz w terminalu: sudo apt install {package}",
+      "engine_crashed": "Silnik przerwał pracę. Szczegóły są w logach.",
+      "model_files_missing": "Brakuje pliku modelu. Pobierz go ponownie.",
+      "engine_error": "Wystąpił błąd. Szczegóły są w logach.",
+      "interrupted": "Zadanie przerwano.",
+      "engine_unavailable": "Ten tryb nie działa jeszcze na tym komputerze.",
+      "audio_unsupported": "Nie umiem odczytać tego pliku audio.",
+      "out_of_memory": "Za mało pamięci. Zamknij inne programy lub wybierz mniejszy model.",
+      "no_result": "Silnik nie zwrócił wyniku.",
+      "voice_missing": "Brakuje nagrania tego głosu. Dodaj go ponownie.",
+      "voice_unsupported": "Ten model nie umie mówić cudzym głosem.",
+      "context_full": "Tekst nie mieści się w pamięci modelu. Skróć go.",
+      "no_model": "Najpierw pobierz model czatu w widoku Modele.",
+      "no_media_model": "Najpierw pobierz model dla tego kroku w widoku Modele.",
+      "model_not_installed": "Wybrany model nie jest pobrany.",
+      "no_cloning_model": "Najpierw pobierz model z klonowaniem głosu.",
+      "pipeline_missing_input": "Brakuje danych na start.",
+      "empty": "Poprzedni krok nie zwrócił tekstu.",
+      "text_too_long": "Tekst jest za długi do przeczytania.",
+      "not_found": "Nie znaleziono pliku lub głosu.",
+      "decision_invalid": "Uzupełnij tekst i pytania.",
+      "not_decision_model": "Ten model nie podejmuje decyzji. Wybierz model decyzyjny."
+    },
+    "saved": "Zapisano.",
+    "copied": "Skopiowano.",
+    "delete": "Usuń",
+    "confirmDelete": "Na pewno usunąć?",
+    "imageOf": "Obraz",
+    "more": "Pokaż cały tekst",
+    "less": "Zwiń tekst",
+    "songFile": "piosenka"
+  },
+  "speed": {
+    "fast": "Szybko",
+    "usable": "W porządku",
+    "slow": "Wolno",
+    "too_slow": "Za wolno",
+    "needs_gpu": "Potrzebna karta graficzna",
+    "wont_run": "Nie zadziała",
+    "hint": {
+      "fast": "Na tym komputerze działa szybko.",
+      "usable": "Na tym komputerze działa w porządku.",
+      "slow": "Działa, ale trzeba poczekać.",
+      "too_slow": "Na tym komputerze działa za wolno.",
+      "needs_gpu": "Ten model potrzebuje karty graficznej.",
+      "wont_run": "Za mało pamięci na tym komputerze."
+    },
+    "estimate": "Szacunek: {numbers} ({device}).",
+    "numbers": {
+      "tokens_per_second": "ok. {value} tokenów/s, czytanie {prompt} tokenów/s",
+      "realtime": "ok. {value}× czasu nagrania",
+      "seconds_per_image": "ok. {value} s na obraz 1024×1024"
+    },
+    "short": {
+      "tokens_per_second": "{value} tok/s",
+      "realtime": "{value}×",
+      "seconds_per_image": "{value} s"
+    },
+    "device": {
+      "gpu": "karta graficzna",
+      "cpu": "procesor",
+      "mixed": "karta graficzna i RAM"
+    }
+  },
+  "network": {
+    "title": "Sieć",
+    "body": "Połącz telefon, żeby korzystać z modeli tego komputera.",
+    "enable": "Udostępniaj w sieci lokalnej",
+    "port": "Port",
+    "portTip": "Port szyfrowanego połączenia z telefonem (TLS). Zmień go, jeśli jest zajęty.",
+    "running": "Telefon połączy się z adresem {address}.",
+    "addressTip": "Adres w sieci lokalnej. Połączenie jest szyfrowane i działa tylko ze sparowanym telefonem.",
+    "pair": "Połącz telefon",
+    "qrLabel": "Kod QR do sparowania telefonu",
+    "scan": "Zeskanuj ten kod w aplikacji Lokalomat na telefonie.",
+    "expires": "Kod wygaśnie za {time}.",
+    "copyLink": "Kopiuj link",
+    "copyLinkTip": "Link z kodu QR – do wklejenia w aplikacji na telefonie, gdy nie da się zeskanować kodu.",
+    "compare": "Telefon „{device}” chce się połączyć. Czy pokazuje ten sam kod?",
+    "codeLabel": "Kod do porównania",
+    "compareHint": "Jeśli kody się różnią, ktoś może się podszywać pod Twój telefon.",
+    "match": "Zgadza się",
+    "noMatch": "Nie zgadza się",
+    "outcome": {
+      "paired": "Telefon połączony.",
+      "rejected": "Parowanie przerwane.",
+      "expired": "Kod wygasł. Spróbuj jeszcze raz.",
+      "cancelled": "Parowanie anulowane."
+    },
+    "devices": "Sparowane urządzenia",
+    "noDevices": "Żaden telefon nie jest jeszcze połączony.",
+    "pairedAt": "połączony {date}",
+    "lastSeen": "ostatnio {date}",
+    "never": "jeszcze nie",
+    "unpair": "Odłącz",
+    "unpairConfirm": "Tak, odłącz",
+    "errors": {
+      "port_busy": "Ten port jest zajęty przez inny program. Zmień port w trybie Expert.",
+      "error": "Nie udało się włączyć udostępniania. Szczegóły są w logach."
+    }
+  },
+  "mobile": {
+    "loading": "Ładowanie…",
+    "forget": "Zapomnij ten komputer",
+    "modes": "Tryby",
+    "modeMissing": "Ten tryb nie jest gotowy na komputerze. Pobierz model w widoku Modele.",
+    "working": "Komputer pracuje…",
+    "send": "Wyślij",
+    "save": "Zapisz w telefonie",
+    "image": {
+      "file": "obraz"
+    },
+    "jobs": {
+      "failed": "Komputer nie dokończył zadania. Spróbuj jeszcze raz.",
+      "stop": "Zatrzymaj",
+      "queued": "Czeka w kolejce na komputerze.",
+      "preparing": "Komputer pobiera silnik. Za pierwszym razem to potrwa kilka minut."
+    },
+    "tabs": {
+      "chat": "Czat",
+      "record": "Nagranie",
+      "voice": "Głos",
+      "image": "Obraz",
+      "music": "Muzyka",
+      "decision": "Decyzje",
+      "gallery": "Galeria"
+    },
+    "chat": {
+      "placeholder": "Napisz wiadomość…"
+    },
+    "record": {
+      "start": "Nagrywaj",
+      "stop": "Zatrzymaj i wyślij",
+      "file": "Albo wybierz plik z nagraniem",
+      "noMic": "Brak dostępu do mikrofonu."
+    },
+    "gallery": {
+      "empty": "Na komputerze nie ma jeszcze wyników.",
+      "kinds": {
+        "image": "Obraz",
+        "stt": "Transkrypcja",
+        "tts": "Głos",
+        "music": "Piosenka"
+      },
+      "refresh": "Odśwież",
+      "more": "Pokaż więcej",
+      "prev": "Poprzedni",
+      "next": "Następny"
+    },
+    "pair": {
+      "title": "Połącz z komputerem",
+      "body": "Na komputerze otwórz Ustawienia → Sieć i kliknij „Połącz telefon”.",
+      "defaultName": "Mój telefon",
+      "name": "Nazwa telefonu",
+      "scan": "Zeskanuj kod QR",
+      "noCamera": "Bez aparatu nie zeskanuję kodu. Wklej link ręcznie.",
+      "scanFailed": "Nie udało się zeskanować kodu.",
+      "manual": "Wklej link zamiast skanowania",
+      "link": "Link z komputera",
+      "connect": "Połącz",
+      "compare": "Sprawdź, czy {computer} pokazuje ten sam kod:",
+      "computer": "komputer",
+      "codeLabel": "Kod do porównania",
+      "confirmOnComputer": "Potwierdź na komputerze, że kody są takie same."
+    },
+    "errors": {
+      "unreachable": "Nie widzę komputera. Sprawdź, czy jesteście w tej samej sieci.",
+      "local_network": "Zezwól Lokalomatowi na dostęp do urządzeń w sieci lokalnej w ustawieniach telefonu.",
+      "tls": "To nie jest Twój komputer albo zmienił się jego certyfikat. Połącz ponownie.",
+      "timeout": "Komputer nie odpowiedział na czas.",
+      "connection": "Połączenie zostało przerwane.",
+      "unauthorized": "Komputer odłączył ten telefon. Połącz ponownie.",
+      "pairing_rejected": "Kody się nie zgadzały. Parowanie przerwane.",
+      "pairing_expired": "Kod wygasł. Pokaż nowy kod na komputerze.",
+      "pairing_busy": "Komputer paruje już inny telefon.",
+      "bad_token": "Ten kod jest nieaktualny. Pokaż nowy kod na komputerze.",
+      "bad_link": "To nie jest kod Lokalomatu.",
+      "not_paired": "Najpierw połącz telefon z komputerem.",
+      "no_model": "Na komputerze brakuje modelu czatu.",
+      "no_media_model": "Na komputerze brakuje modelu dla tego trybu.",
+      "no_cloning_model": "Na komputerze brakuje modelu z klonowaniem głosu.",
+      "audio_unsupported": "Komputer nie umie odczytać tego nagrania.",
+      "not_in_app": "Działa tylko w aplikacji Lokalomat.",
+      "expert_only": "Decyzje działają, gdy komputer jest w trybie Expert.",
+      "empty": "Najpierw coś wpisz.",
+      "text_too_long": "Tekst jest za długi.",
+      "decision_invalid": "Uzupełnij tekst i pytania.",
+      "save_failed": "Nie udało się zapisać pliku.",
+      "generic": "Coś poszło nie tak. Spróbuj jeszcze raz."
+    },
+    "model": {
+      "label": "Model",
+      "default": "Domyślny na komputerze ({name})",
+      "auto": "Domyślny na komputerze",
+      "only": "Model: {name}"
+    },
+    "link": {
+      "online": "Połączono z komputerem",
+      "offline": "Brak połączenia",
+      "offlineHint": "Komputer jest niedostępny. Sprawdź, czy jest włączony i w tej samej sieci."
+    },
+    "forgetConfirm": {
+      "title": "Odłączyć od komputera {name}?",
+      "body": "Żeby znów z niego korzystać, trzeba będzie sparować telefon od nowa.",
+      "confirm": "Odłącz"
+    }
+  },
+  "decisions": {
+    "type": "Rodzaj pytania",
+    "types": {
+      "choice": "Wybór",
+      "yes_no": "Tak / nie",
+      "score": "Ocena"
+    },
+    "typeHints": {
+      "choice": "Model wybiera jedną z odpowiedzi.",
+      "yes_no": "Model mówi tak albo nie.",
+      "score": "Model ocenia w skali, od najniższego poziomu."
+    },
+    "question": "Pytanie",
+    "questionN": "Pytanie {n}",
+    "placeholders": {
+      "choice": "Np. Który dział powinien się tym zająć?",
+      "yes_no": "Np. Czy to spam?",
+      "score": "Np. Jak pilna jest sprawa?"
+    },
+    "options": "Odpowiedzi",
+    "levels": "Poziomy, od najniższego",
+    "optionN": "Odpowiedź {n}",
+    "levelN": "Poziom {n}",
+    "lowest": "najniższy",
+    "highest": "najwyższy",
+    "addOption": "Dodaj odpowiedź",
+    "addLevel": "Dodaj poziom",
+    "removeItem": "Usuń",
+    "addQuestion": "Dodaj pytanie",
+    "removeQuestion": "Usuń pytanie",
+    "issues": {
+      "no_question": "Wpisz pytanie.",
+      "options": "Podaj co najmniej dwie odpowiedzi.",
+      "duplicate": "Odpowiedzi nie mogą się powtarzać.",
+      "too_long": "Tekst jest za długi."
+    },
+    "yes": "Tak",
+    "no": "Nie",
+    "result": "Decyzja",
+    "confidence": "pewność {percent}%",
+    "confidenceHint": "0% – wszystkie odpowiedzi równie możliwe, 100% – model jest pewny.",
+    "score": "ocena {value} z {max}",
+    "scoreHint": "Średnia z poziomów ważona prawdopodobieństwem.",
+    "reuse": "Zapytaj ponownie",
+    "copy": "Kopiuj JSON",
+    "copyHint": "Tekst, pytania i odpowiedzi z prawdopodobieństwami.",
+    "copied": "Skopiowano.",
+    "copyFailed": "Nie udało się skopiować.",
+    "preparing": "Przygotowuję silnik…",
+    "loading": "Wczytuję model decyzyjny…"
+  },
+  "server": {
+    "enable": "Włącz serwer",
+    "copy": "Kopiuj",
+    "copyFailed": "Nie udało się skopiować.",
+    "autoload": "Model wczytuje się sam przy pierwszym zapytaniu.",
+    "lan": "Udostępnij w sieci lokalnej",
+    "lanTip": "Serwer słucha na 0.0.0.0, a nie tylko na 127.0.0.1.",
+    "lanWarn": "Inne komputery w sieci mogą korzystać z modeli, jeśli znają klucz.",
+    "lanAddress": "Adres w sieci: {address}",
+    "port": "Port",
+    "errors": {
+      "port_busy": "Ten port jest zajęty. Wybierz inny.",
+      "error": "Nie udało się uruchomić serwera. Szczegóły są w logach."
+    },
+    "keys": "Klucze dostępu",
+    "keysBody": "Każdy program potrzebuje własnego klucza.",
+    "keyName": "Nazwa klucza",
+    "keyNamePlaceholder": "Np. mój skrypt",
+    "newKey": "Utwórz klucz",
+    "freshTitle": "Nowy klucz. Skopiuj go do programu.",
+    "hide": "Ukryj",
+    "noKeys": "Nie ma jeszcze kluczy.",
+    "keyMeta": "Utworzony {created} · ostatnio {used} · zapytań: {count}",
+    "never": "nigdy",
+    "copyKeyTip": "Klucz jest zapisany w sejfie systemu.",
+    "revoke": "Usuń klucz",
+    "confirmRevoke": "Usuń – program straci dostęp",
+    "howTo": "Jak połączyć program",
+    "snippets": {
+      "curl": "curl",
+      "python": "Python",
+      "env": "Zmienne"
+    },
+    "snippetHint": "Wstaw swój klucz w miejsce TWOJ_KLUCZ.",
+    "log": "Ostatnie zapytania",
+    "noLog": "Tu pojawią się zapytania od programów.",
+    "logNote": "Nie zapisujemy treści zapytań ani odpowiedzi.",
+    "defaultModel": "domyślny",
+    "cols": {
+      "time": "Czas",
+      "key": "Program",
+      "path": "Adres",
+      "model": "Model",
+      "status": "Wynik",
+      "duration": "Trwało"
+    },
+    "tabs": {
+      "server": "Serwer"
+    }
+  },
+  "pro": {
+    "banner": {
+      "text": "Lokalomat Pro dodaje obrazy, muzykę, mowę i automatyzacje.",
+      "action": "Poznaj wersję Pro",
+      "close": "Zamknij"
+    }
+  },
+  "updates": {
+    "available": "Jest nowa wersja {version}.",
+    "install": "Zainstaluj i uruchom ponownie",
+    "download": "Pobierz nową wersję",
+    "later": "Później",
+    "installing": "Pobieram aktualizację…",
+    "auto": "Sprawdzaj nowe wersje przy starcie",
+    "checkNow": "Sprawdź teraz",
+    "checking": "Sprawdzam…",
+    "upToDate": "Masz najnowszą wersję."
+  },
+  "report": {
+    "title": "Zgłoś problem",
+    "intro": "Opisz, co poszło nie tak. Wiadomość otworzy się w Twoim programie pocztowym.",
+    "what": "Co się stało?",
+    "placeholder": "Np. po kliknięciu „Wyślij” czat się zawiesza.",
+    "reply": "Twój e-mail (opcjonalnie)",
+    "attach": "Dołącz wersję programu i system",
+    "send": "Przygotuj wiadomość",
+    "note": "Nic nie wyślemy bez Twojej zgody. Adres: {email}",
+    "truncated": "Opis był za długi i został skrócony. Dopisz resztę w programie pocztowym."
+  }
+}

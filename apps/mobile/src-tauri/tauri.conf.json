@@ -1,0 +1,46 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Lokalomat",
+  "version": "0.2.1",
+  "identifier": "pl.lokalsi.mobile",
+  "build": {
+    "beforeDevCommand": "npm run dev -w @lokalsi/ui",
+    "devUrl": "http://localhost:5173",
+    "beforeBuildCommand": "npm run build -w @lokalsi/ui",
+    "frontendDist": "../../../ui/dist"
+  },
+  "app": {
+    "windows": [
+      {
+        "label": "main",
+        "title": "Lokalomat",
+        "url": "mobile.html",
+        "width": 420,
+        "height": 820,
+        "minWidth": 320,
+        "minHeight": 520
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; img-src 'self' data: blob:; media-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; connect-src ipc: http://ipc.localhost"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "publisher": "AI Transformation Łukasz Poźniak",
+    "copyright": "© 2026 Łukasz Poźniak. MIT License.",
+    "license": "MIT",
+    "homepage": "https://aitransformation.pl",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "android": {
+      "minSdkVersion": 26
+    }
+  }
+}

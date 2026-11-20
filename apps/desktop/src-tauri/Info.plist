@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!-- Merged by Tauri into the macOS app bundle: the voice library (V6) records samples. -->
+<plist version="1.0">
+<dict>
+  <key>NSMicrophoneUsageDescription</key>
+  <string>Lokalomat AI Studio nagrywa próbkę głosu do biblioteki głosów. / Lokalomat AI Studio records a voice sample for the voice library.</string>
+</dict>
+</plist>

@@ -1,0 +1,73 @@
+{
+  "id": "opencode",
+  "name": "OpenCode",
+  "capabilities": [],
+  "kind": "native",
+  "version": "1.19.6",
+  "license": {
+    "name": "MIT",
+    "url": "https://github.com/anomalyco/opencode/blob/dev/LICENSE"
+  },
+  "install": {
+    "source": "github-release",
+    "repo": "anomalyco/opencode",
+    "tag": "v1.19.6"
+  },
+  "builds": [
+    {
+      "id": "win-x64",
+      "platform": "windows-x64",
+      "backend": "cpu",
+      "files": [
+        {
+          "name": "opencode-windows-x64.zip",
+          "size": 81943749,
+          "sha256": "fa31c9ec0bac7611ab12699ef8e2fc4c173fb95ac977b09b189b255b8f559bcc"
+        }
+      ]
+    },
+    {
+      "id": "linux-x64",
+      "platform": "linux-x64",
+      "backend": "cpu",
+      "files": [
+        {
+          "name": "opencode-linux-x64.tar.gz",
+          "size": 79862500,
+          "sha256": "47734e08968b30cc22a0bffb6d9feeed76ad4aa743213a12122040392d09a057"
+        }
+      ]
+    },
+    {
+      "id": "macos-arm64",
+      "platform": "macos-arm64",
+      "backend": "cpu",
+      "files": [
+        {
+          "name": "opencode-darwin-arm64.zip",
+          "size": 64493115,
+          "sha256": "c0be3f34dde2fdcb31b25120f303c6ed5b69b828f16e5e0fbecff21a882adda1"
+        }
+      ]
+    },
+    {
+      "id": "macos-x64",
+      "platform": "macos-x64",
+      "backend": "cpu",
+      "files": [
+        {
+          "name": "opencode-darwin-x64.zip",
+          "size": 69315249,
+          "sha256": "39aabb10005059f80f007a119a33405dcd46325300993eb6cbcc961c7243dd31"
+        }
+      ]
+    }
+  ],
+  "launch": {
+    "cmd": "opencode",
+    "args": []
+  },
+  "health": {
+    "path": ""
+  }
+}

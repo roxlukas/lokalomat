@@ -1,0 +1,6 @@
+/* Phone app only (ui/mobile.html). Android draws the app under the status bar
+   and the camera cut-out, and the WebView reports no safe-area inset there, so
+   keep at least 32px clear at the top. */
+body {
+  padding-top: max(var(--space-8), env(safe-area-inset-top, 0px));
+}

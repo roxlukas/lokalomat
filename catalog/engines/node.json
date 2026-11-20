@@ -1,0 +1,74 @@
+{
+  "id": "node",
+  "name": "Node.js",
+  "capabilities": [],
+  "kind": "native",
+  "version": "26.13.1",
+  "license": {
+    "name": "MIT",
+    "url": "https://github.com/nodejs/node/blob/main/LICENSE"
+  },
+  "install": {
+    "source": "url",
+    "repo": "",
+    "tag": "v26.13.1",
+    "base_url": "https://nodejs.org/dist/v26.13.1/"
+  },
+  "builds": [
+    {
+      "id": "win-x64",
+      "platform": "windows-x64",
+      "backend": "cpu",
+      "files": [
+        {
+          "name": "node-v26.13.1-win-x64.zip",
+          "size": 41166246,
+          "sha256": "e2edda75bfb089654705cf65a13b58933bfd5f57148e8ebda916f58a2474f1f7"
+        }
+      ]
+    },
+    {
+      "id": "linux-x64",
+      "platform": "linux-x64",
+      "backend": "cpu",
+      "files": [
+        {
+          "name": "node-v26.13.1-linux-x64.tar.gz",
+          "size": 62904977,
+          "sha256": "518674de2b621728a5e4486f5fb3b7d2900bb3cc4aa97969edaa463db99f9778"
+        }
+      ]
+    },
+    {
+      "id": "macos-arm64",
+      "platform": "macos-arm64",
+      "backend": "cpu",
+      "files": [
+        {
+          "name": "node-v26.13.1-darwin-arm64.tar.gz",
+          "size": 58340590,
+          "sha256": "aec2514ea1ceb2ba52455e9ec65986f6749a06dd759e5db2a72e6889668c9735"
+        }
+      ]
+    },
+    {
+      "id": "macos-x64",
+      "platform": "macos-x64",
+      "backend": "cpu",
+      "files": [
+        {
+          "name": "node-v26.13.1-darwin-x64.tar.gz",
+          "size": 59799324,
+          "sha256": "82bb96078a24ca50b9c9a38f2379e6be6d87171fcd400fc14c8934b3bce96e2f"
+        }
+      ]
+    }
+  ],
+  "launch": {
+    "cmd": "node",
+    "args": []
+  },
+  "health": {
+    "path": ""
+  }
+}

@@ -1,0 +1,4 @@
+# Shell scripts and git hooks must keep LF endings, also on Windows checkouts
+# (Git for Windows `sh` fails on `\r` at line ends).
+*.sh text eol=lf
+.githooks/* text eol=lf

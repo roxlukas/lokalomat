@@ -1,0 +1,185 @@
+{
+  "id": "llama-cpp",
+  "name": "llama.cpp",
+  "capabilities": [
+    "chat"
+  ],
+  "kind": "native",
+  "version": "v0.9.0",
+  "license": {
+    "name": "MIT",
+    "url": "https://github.com/ggml-org/llama.cpp/blob/master/LICENSE"
+  },
+  "install": {
+    "source": "github-release",
+    "repo": "ggml-org/llama.cpp",
+    "tag": "b12110"
+  },
+  "builds": [
+    {
+      "id": "win-cuda13",
+      "platform": "windows-x64",
+      "backend": "cuda",
+      "min_driver": 580,
+      "files": [
+        {
+          "name": "llama-b12110-bin-win-cuda-13.4-x64.zip",
+          "size": 169175655,
+          "sha256": "dc910a969190b5d42e189afd73117f6bbdd8dd8ed6586342c5e0b82cab62c673"
+        },
+        {
+          "name": "cudart-llama-bin-win-cuda-13.4-x64.zip",
+          "size": 423535356,
+          "sha256": "738f8c251ac22b70c3ae6f83a10cf222725df0395246a2cf58f32bdb85fbe668"
+        }
+      ]
+    },
+    {
+      "id": "win-cuda12",
+      "platform": "windows-x64",
+      "backend": "cuda",
+      "files": [
+        {
+          "name": "llama-b12110-bin-win-cuda-12.4-x64.zip",
+          "size": 287014657,
+          "sha256": "1ce755bc3a061889234048f88e33328e17971eaad73c4666cfeb26026b317fee"
+        },
+        {
+          "name": "cudart-llama-bin-win-cuda-12.4-x64.zip",
+          "size": 391443627,
+          "sha256": "8c79a9b226de4b3cacfd1f83d24f962d0773be79f1e7b75c6af4ded7e32ae1d6"
+        }
+      ]
+    },
+    {
+      "id": "win-vulkan",
+      "platform": "windows-x64",
+      "backend": "vulkan",
+      "files": [
+        {
+          "name": "llama-b12110-bin-win-vulkan-x64.zip",
+          "size": 37661146,
+          "sha256": "9732a5e48887ca54d0bfe4af4324dc85fd56cd8cda19b52df3542fa6ebe6874f"
+        }
+      ]
+    },
+    {
+      "id": "win-cpu",
+      "platform": "windows-x64",
+      "backend": "cpu",
+      "files": [
+        {
+          "name": "llama-b12110-bin-win-cpu-x64.zip",
+          "size": 24708445,
+          "sha256": "98901e327c252875accaf2d1bf364e10e868843b0b63468baad1aa945cdc5da2"
+        }
+      ]
+    },
+    {
+      "id": "macos-metal",
+      "platform": "macos-arm64",
+      "backend": "metal",
+      "files": [
+        {
+          "name": "llama-b12110-bin-macos-arm64.tar.gz",
+          "size": 16650691,
+          "sha256": "4f5b8de12e0b9516658ca6a5764c6ffb3d7c659c3dd538556b1413c7b4050662"
+        }
+      ]
+    },
+    {
+      "id": "macos-x64-cpu",
+      "platform": "macos-x64",
+      "backend": "cpu",
+      "files": [
+        {
+          "name": "llama-b12110-bin-macos-x64.tar.gz",
+          "size": 12388601,
+          "sha256": "c8094268b6bf62f4998f0e45656fd9f5e2d4afb6b1cd0044d761db64be1dd47d"
+        }
+      ]
+    },
+    {
+      "id": "linux-cuda13",
+      "platform": "linux-x64",
+      "backend": "cuda",
+      "min_driver": 580,
+      "files": [
+        {
+          "name": "llama-b12110-bin-ubuntu-cuda-13.4-x64.tar.gz",
+          "size": 168275993,
+          "sha256": "2afd2ca540da119570b1dac36b5a2c862bb03a3b789c46661dfa55e600f5b19b"
+        },
+        {
+          "name": "cudart-llama-b12110-bin-ubuntu-cuda-13.4-x64.tar.gz",
+          "size": 440232657,
+          "sha256": "9b1110161943882ec85c8e9ae641075ee8c962a50f8f1e36534ee65ea1e56ed9"
+        }
+      ]
+    },
+    {
+      "id": "linux-cuda12",
+      "platform": "linux-x64",
+      "backend": "cuda",
+      "files": [
+        {
+          "name": "llama-b12110-bin-ubuntu-cuda-12.8-x64.tar.gz",
+          "size": 187314621,
+          "sha256": "4af1e1da23661db4a5b84b29aae16ebc053df689c5b8b1427c4670f2c6406d8c"
+        },
+        {
+          "name": "cudart-llama-b12110-bin-ubuntu-cuda-12.8-x64.tar.gz",
+          "size": 594371477,
+          "sha256": "6f1d562086d84ae85df880d3711079ec225602b51d530608e5001600625067dd"
+        }
+      ]
+    },
+    {
+      "id": "linux-vulkan",
+      "platform": "linux-x64",
+      "backend": "vulkan",
+      "files": [
+        {
+          "name": "llama-b12110-bin-ubuntu-vulkan-x64.tar.gz",
+          "size": 35858360,
+          "sha256": "a5d741940956ec62e8783aee7e5a4c7c761af867d6f027c3277a51e1a3ac59b0"
+        }
+      ]
+    },
+    {
+      "id": "linux-cpu",
+      "platform": "linux-x64",
+      "backend": "cpu",
+      "files": [
+        {
+          "name": "llama-b12110-bin-ubuntu-x64.tar.gz",
+          "size": 23051958,
+          "sha256": "368227edcc229be5f9bed16a2223d79b5e41d0ac2e19bcf5825e82291c060e55"
+        }
+      ]
+    }
+  ],
+  "launch": {
+    "cmd": "llama-server",
+    "args": [
+      "-m",
+      "{model_path}",
+      "--host",
+      "127.0.0.1",
+      "--port",
+      "{port}",
+      "--api-key",
+      "{token}",
+      "-c",
+      "{ctx}",
+      "-np",
+      "1",
+      "--no-webui",
+      "--reasoning-format",
+      "deepseek"
+    ]
+  },
+  "health": {
+    "path": "/health"
+  }
+}

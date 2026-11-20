@@ -1,0 +1,90 @@
+{
+  "id": "whisper-cpp",
+  "name": "whisper.cpp",
+  "capabilities": [
+    "stt"
+  ],
+  "kind": "native",
+  "version": "v1.9.5",
+  "license": {
+    "name": "MIT",
+    "url": "https://github.com/ggml-org/whisper.cpp/blob/master/LICENSE"
+  },
+  "install": {
+    "source": "github-release",
+    "repo": "ggml-org/whisper.cpp",
+    "tag": "b5454"
+  },
+  "builds": [
+    {
+      "id": "win-cuda12",
+      "platform": "windows-x64",
+      "backend": "cuda",
+      "min_driver": 528,
+      "files": [
+        {
+          "name": "whisper-bin-win-cuda-12.4.0-x64.zip",
+          "size": 684913404,
+          "sha256": "afef0b881c500958921c3f5523b50e59ee2ec9b6f5cbd25b324c51ed308a957a"
+        }
+      ]
+    },
+    {
+      "id": "win-cuda11",
+      "platform": "windows-x64",
+      "backend": "cuda",
+      "files": [
+        {
+          "name": "whisper-bin-win-cuda-11.8.0-x64.zip",
+          "size": 284761231,
+          "sha256": "e81c86c542be6e3d7b7245392d4e1c52ab6e5c61dbe38721754bc0ab59d4d027"
+        }
+      ]
+    },
+    {
+      "id": "win-cpu",
+      "platform": "windows-x64",
+      "backend": "cpu",
+      "files": [
+        {
+          "name": "whisper-bin-x64.zip",
+          "size": 8928640,
+          "sha256": "6ba69e3482d7826214f90a6a9c84ca07782aec1e1d0c6a7c30c994fd5d816ccb"
+        }
+      ]
+    },
+    {
+      "id": "linux-cpu",
+      "platform": "linux-x64",
+      "backend": "cpu",
+      "min_glibc": "2.34",
+      "files": [
+        {
+          "name": "whisper-bin-ubuntu-x64.tar.gz",
+          "size": 10364195,
+          "sha256": "a72becf15d7917f990f6313867a52638b82b7f9ef237fb0c980dac56a135781c"
+        }
+      ]
+    }
+  ],
+  "launch": {
+    "cmd": "whisper-cli",
+    "args": [
+      "-m",
+      "{model_path}",
+      "-f",
+      "{input}",
+      "-of",
+      "{output}",
+      "-l",
+      "{language}",
+      "-oj",
+      "-pp",
+      "-t",
+      "{threads}"
+    ]
+  },
+  "health": {
+    "path": ""
+  }
+}

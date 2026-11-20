@@ -1,0 +1,18 @@
+[package]
+name = "lokalsi-hwprobe"
+description = "Lokalomat AI Studio hardware probe: GPU/VRAM, RAM, CPU features, disks, model fit"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+tracing.workspace = true
+sysinfo.workspace = true
+nvml-wrapper.workspace = true
+
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.61.2", features = ["Win32_System_SystemInformation"] }

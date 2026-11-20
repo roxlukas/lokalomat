@@ -1,0 +1,4 @@
+#!/bin/sh
+# Hook Gita uruchamiany przy każdym commicie. Opis: docs/quality-gate.md
+# Włączenie (raz po sklonowaniu): sh scripts/enable-hooks.sh
+exec sh "$(git rev-parse --show-toplevel)/scripts/quality-gate.sh" commit

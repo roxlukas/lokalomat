@@ -1,0 +1,87 @@
+{
+  "id": "droid",
+  "name": "Droid",
+  "capabilities": [],
+  "kind": "native",
+  "version": "1.13.0",
+  "license": {
+    "name": "Proprietary (Factory)",
+    "url": "https://factory.ai/legal"
+  },
+  "install": {
+    "source": "url",
+    "repo": "",
+    "tag": "1.13.0",
+    "base_url": "https://downloads.factory.ai/factory-cli/releases/1.13.0/",
+    "checksums": "per-file"
+  },
+  "builds": [
+    {
+      "id": "win-x64",
+      "platform": "windows-x64",
+      "backend": "cpu",
+      "files": [
+        {
+          "name": "windows/x64/droid.exe",
+          "size": 361721568,
+          "sha256": "a4161542b6b74e30f585436aa01527d8e3d238d035179a301cda667ea84e9b0c"
+        }
+      ]
+    },
+    {
+      "id": "linux-x64",
+      "platform": "linux-x64",
+      "backend": "cpu",
+      "files": [
+        {
+          "name": "linux/x64/droid",
+          "size": 347465904,
+          "sha256": "f0686e6360b772bdc9b6b04ddba918e6033a009236642453a9eed39d35cd095b"
+        }
+      ]
+    },
+    {
+      "id": "linux-arm64",
+      "platform": "linux-arm64",
+      "backend": "cpu",
+      "files": [
+        {
+          "name": "linux/arm64/droid",
+          "size": 339332088,
+          "sha256": "1cc05c10dfabfca84dfe53c6a316531000d0fc2ef56ad28b6e3e1642cd1a0c41"
+        }
+      ]
+    },
+    {
+      "id": "macos-arm64",
+      "platform": "macos-arm64",
+      "backend": "cpu",
+      "files": [
+        {
+          "name": "darwin/arm64/droid",
+          "size": 317655728,
+          "sha256": "ae552d8cdb515728f899558747207b950f4332762ea3495894d70cc680ba611d"
+        }
+      ]
+    },
+    {
+      "id": "macos-x64",
+      "platform": "macos-x64",
+      "backend": "cpu",
+      "files": [
+        {
+          "name": "darwin/x64/droid",
+          "size": 333563312,
+          "sha256": "d7061e43508fcf89d667174f2510cbad349868083cb433aafc5ece37e81bf5a0"
+        }
+      ]
+    }
+  ],
+  "launch": {
+    "cmd": "droid",
+    "args": []
+  },
+  "health": {
+    "path": ""
+  }
+}

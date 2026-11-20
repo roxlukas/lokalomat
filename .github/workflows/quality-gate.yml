@@ -1,0 +1,36 @@
+# Bramka jakości po stronie GitHuba — opis w docs/quality-gate.md.
+# Sprawdza każdy pull request, także zmiany zrobione bez lokalnego hooka.
+name: Bramka jakości
+
+on:
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  quality-gate:
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+
+      - uses: Swatinem/rust-cache@v2
+
+      - run: npm ci
+
+      - run: sh scripts/quality-gate.sh pr

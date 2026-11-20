@@ -1,0 +1,378 @@
+<script lang="ts">
+  import { onDestroy, onMount } from 'svelte';
+  import AudioLines from '@lucide/svelte/icons/audio-lines';
+  import ChevronLeft from '@lucide/svelte/icons/chevron-left';
+  import ChevronRight from '@lucide/svelte/icons/chevron-right';
+  import FileText from '@lucide/svelte/icons/file-text';
+  import Music from '@lucide/svelte/icons/music';
+  import RefreshCw from '@lucide/svelte/icons/refresh-cw';
+  import X from '@lucide/svelte/icons/x';
+  import { getLocale, t } from '../lib/i18n/index.svelte';
+  import { api, describe, fileUrl, type GalleryItem } from './api';
+
+  /**
+   * Gallery (V9) like the desktop one: a grid of thumbnails, newest first.
+   * Thumbnails and files come through the phone's Rust side (device key,
+   * pinned TLS) and are shown as object URLs that live only in this screen.
+   */
+  const PAGE = 60;
+  const MAX = 100;
+  const PARALLEL = 3;
+
+  let items = $state<GalleryItem[]>([]);
+  let limit = $state(PAGE);
+  let loading = $state(false);
+  let error = $state('');
+  let thumbs = $state<Record<string, string>>({});
+  let failed = $state<Record<string, true>>({});
+  let viewer = $state<{ item: GalleryItem; index: number; url: string | null; loading: boolean } | null>(null);
+
+  const urls: string[] = [];
+  const queue: (() => Promise<void>)[] = [];
+  let running = 0;
+
+  onMount(() => void load());
+  onDestroy(() => urls.forEach((u) => URL.revokeObjectURL(u)));
+
+  async function load() {
+    loading = true;
+    error = '';
+    try {
+      items = await api.gallery(limit);
+    } catch (e) {
+      error = describe(e);
+    } finally {
+      loading = false;
+    }
+  }
+
+  function more() {
+    limit = Math.min(MAX, limit + PAGE);
+    void load();
+  }
+
+  function keep(url: string): string {
+    urls.push(url);
+    return url;
+  }
+
+  function pump() {
+    while (running < PARALLEL && queue.length > 0) {
+      const job = queue.shift()!;
+      running += 1;
+      void job().finally(() => {
+        running -= 1;
+        pump();
+      });
+    }
+  }
+
+  function thumbKey(item: GalleryItem) {
+    return `${item.job_id}:0`;
+  }
+
+  /** Loads a tile's thumbnail once it scrolls into view. */
+  function lazyThumb(node: HTMLElement, item: GalleryItem) {
+    const key = thumbKey(item);
+    if (item.kind !== 'image' || item.files === 0 || thumbs[key]) return {};
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((e) => e.isIntersecting)) return;
+        observer.disconnect();
+        queue.push(async () => {
+          try {
+            thumbs[key] = keep(fileUrl(await api.galleryThumb(item.job_id, 0)));
+          } catch {
+            failed[key] = true;
+          }
+        });
+        pump();
+      },
+      { rootMargin: '200px' },
+    );
+    observer.observe(node);
+    return { destroy: () => observer.disconnect() };
+  }
+
+  async function open(item: GalleryItem, index = 0) {
+    viewer = { item, index, url: null, loading: item.files > 0 };
+    if (item.files === 0) return;
+    try {
+      const url = keep(fileUrl(await api.galleryFile(item.job_id, index)));
+      if (viewer?.item.job_id === item.job_id && viewer.index === index) viewer.url = url;
+    } catch (e) {
+      error = describe(e);
+      viewer = null;
+    } finally {
+      if (viewer) viewer.loading = false;
+    }
+  }
+
+  function step(delta: number) {
+    if (!viewer) return;
+    const next = viewer.index + delta;
+    if (next >= 0 && next < viewer.item.files) void open(viewer.item, next);
+  }
+
+  function when(secs: number): string {
+    return new Date(secs * 1000).toLocaleString(getLocale(), { dateStyle: 'short', timeStyle: 'short' });
+  }
+</script>
+
+<div class="gallery-view">
+  <div class="top">
+    <h2>{t('mobile.tabs.gallery')}</h2>
+    <button type="button" class="icon-btn" aria-label={t('mobile.gallery.refresh')} title={t('mobile.gallery.refresh')} onclick={load} disabled={loading}>
+      <RefreshCw size={18} aria-hidden="true" />
+    </button>
+  </div>
+
+  {#if error}<p class="note note-error" role="alert">{error}</p>{/if}
+  {#if items.length === 0}
+    <p class="muted">{loading ? t('mobile.loading') : t('mobile.gallery.empty')}</p>
+  {/if}
+
+  <ul class="grid" aria-label={t('mobile.tabs.gallery')}>
+    {#each items as item (item.job_id)}
+      {@const key = thumbKey(item)}
+      <li>
+        <!-- A song has its WAV and MP3: open the last file, the smaller MP3. -->
+        <button type="button" class="tile" onclick={() => open(item, item.kind === 'music' ? Math.max(0, item.files - 1) : 0)}>
+          {#if item.kind === 'image'}
+            <span class="frame" use:lazyThumb={item}>
+              {#if thumbs[key]}
+                <img src={thumbs[key]} alt={item.text} />
+              {:else if !failed[key]}
+                <span class="skeleton" aria-hidden="true"></span>
+              {/if}
+            </span>
+            {#if item.files > 1}<span class="count">+{item.files - 1}</span>{/if}
+          {:else}
+            <span class="frame text-tile">
+              {#if item.kind === 'tts'}<AudioLines size={20} aria-hidden="true" />{:else if item.kind === 'music'}<Music size={20} aria-hidden="true" />{:else}<FileText size={20} aria-hidden="true" />{/if}
+              <span class="excerpt">{item.text}</span>
+            </span>
+          {/if}
+          <span class="caption">
+            <span>{t(`mobile.gallery.kinds.${item.kind}`)}</span>
+            <span class="muted">{when(item.created_at)}</span>
+          </span>
+        </button>
+      </li>
+    {/each}
+  </ul>
+
+  {#if items.length >= limit && limit < MAX}
+    <button type="button" class="btn more" onclick={more} disabled={loading}>{t('mobile.gallery.more')}</button>
+  {/if}
+</div>
+
+{#if viewer}
+  {@const v = viewer}
+  <div class="viewer" role="dialog" aria-modal="true" aria-label={t(`mobile.gallery.kinds.${v.item.kind}`)}>
+    <div class="viewer-top">
+      <span class="small">{t(`mobile.gallery.kinds.${v.item.kind}`)} · {when(v.item.created_at)}</span>
+      <button type="button" class="icon-btn" aria-label={t('common.close')} onclick={() => (viewer = null)}>
+        <X size={20} aria-hidden="true" />
+      </button>
+    </div>
+    <div class="stage">
+      {#if v.loading}
+        <span class="skeleton big" aria-hidden="true"></span>
+      {:else if v.item.kind === 'image' && v.url}
+        <img src={v.url} alt={v.item.text} />
+      {:else if (v.item.kind === 'tts' || v.item.kind === 'music') && v.url}
+        <audio controls src={v.url}></audio>
+      {/if}
+      {#if v.item.files > 1 && v.item.kind !== 'music'}
+        <div class="pager">
+          <button type="button" class="icon-btn" aria-label={t('mobile.gallery.prev')} onclick={() => step(-1)} disabled={v.index === 0}>
+            <ChevronLeft size={22} aria-hidden="true" />
+          </button>
+          <span class="small">{v.index + 1} / {v.item.files}</span>
+          <button type="button" class="icon-btn" aria-label={t('mobile.gallery.next')} onclick={() => step(1)} disabled={v.index >= v.item.files - 1}>
+            <ChevronRight size={22} aria-hidden="true" />
+          </button>
+        </div>
+      {/if}
+    </div>
+    {#if v.item.text}<p class="prompt">{v.item.text}</p>{/if}
+    <p class="small muted">{v.item.model}</p>
+  </div>
+{/if}
+
+<style>
+  .gallery-view {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  h2 {
+    font-size: var(--text-l);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: var(--space-3);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    position: relative;
+  }
+
+  .tile {
+    display: grid;
+    width: 100%;
+    padding: 0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-m);
+    background: var(--surface);
+    color: inherit;
+    overflow: hidden;
+    text-align: left;
+  }
+
+  .tile:active {
+    border-color: var(--accent);
+  }
+
+  .frame {
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    background: var(--surface-2);
+  }
+
+  .frame img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .text-tile {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-3);
+    color: var(--text-muted);
+  }
+
+  .excerpt {
+    display: -webkit-box;
+    overflow: hidden;
+    color: var(--text);
+    font-size: var(--text-s);
+    -webkit-line-clamp: 5;
+    line-clamp: 5;
+    -webkit-box-orient: vertical;
+  }
+
+  .skeleton {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--surface-2), var(--surface-3), var(--surface-2));
+    background-size: 200% 100%;
+    animation: shimmer 1.4s ease-in-out infinite;
+  }
+
+  .skeleton.big {
+    aspect-ratio: 1;
+    border-radius: var(--radius-m);
+  }
+
+  @keyframes shimmer {
+    from {
+      background-position: 100% 0;
+    }
+    to {
+      background-position: -100% 0;
+    }
+  }
+
+  .count {
+    position: absolute;
+    top: var(--space-2);
+    right: var(--space-2);
+    padding: 0 6px;
+    border-radius: var(--radius-pill);
+    background: var(--surface);
+    font-size: var(--text-xs);
+  }
+
+  .caption {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--space-2);
+    padding: var(--space-2);
+    font-size: var(--text-xs);
+  }
+
+  .more {
+    justify-self: center;
+  }
+
+  .viewer {
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: max(var(--space-8), env(safe-area-inset-top, 0px)) var(--space-4) var(--space-6);
+    background: var(--bg);
+    overflow-y: auto;
+  }
+
+  .viewer-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .stage {
+    display: grid;
+    gap: var(--space-2);
+    justify-items: center;
+  }
+
+  .stage img {
+    max-width: 100%;
+    max-height: 70dvh;
+    border-radius: var(--radius-m);
+    object-fit: contain;
+  }
+
+  .stage audio {
+    width: 100%;
+  }
+
+  .pager {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+  }
+
+  .prompt {
+    white-space: pre-wrap;
+  }
+
+  .small {
+    font-size: var(--text-s);
+  }
+
+  .muted {
+    color: var(--text-muted);
+  }
+</style>

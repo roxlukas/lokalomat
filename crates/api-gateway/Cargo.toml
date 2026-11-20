@@ -1,0 +1,51 @@
+[package]
+name = "lokalsi-api-gateway"
+description = "Lokalomat AI Studio local API: LAN gateway for the Android client with QR pairing (M5)"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+publish.workspace = true
+
+[features]
+default = ["server", "client"]
+# The gateway inside the desktop app.
+server = [
+    "dep:axum",
+    "dep:lokalsi-core",
+    "dep:lokalsi-engines",
+    "dep:rcgen",
+    "dep:qrcode",
+    "dep:tokio-util",
+    "dep:reqwest",
+    "dep:futures-util",
+]
+# The paired phone (apps/mobile) and tests.
+client = []
+
+[dependencies]
+serde.workspace = true
+serde_json.workspace = true
+thiserror.workspace = true
+tracing.workspace = true
+tokio.workspace = true
+hyper.workspace = true
+hyper-util.workspace = true
+http-body-util.workspace = true
+rustls.workspace = true
+tokio-rustls.workspace = true
+ring.workspace = true
+base64.workspace = true
+getrandom.workspace = true
+axum = { workspace = true, optional = true }
+rcgen = { workspace = true, optional = true }
+qrcode = { workspace = true, optional = true }
+tokio-util = { workspace = true, optional = true }
+reqwest = { workspace = true, optional = true }
+futures-util = { workspace = true, optional = true }
+lokalsi-core = { workspace = true, optional = true }
+lokalsi-engines = { workspace = true, optional = true }
+
+[dev-dependencies]
+lokalsi-hwprobe.workspace = true
+tempfile.workspace = true
+tokio.workspace = true

@@ -1,0 +1,5746 @@
+{
+  "version": 1,
+  "models": [
+    {
+      "id": "qwen3.5-4b",
+      "name": "Qwen3.5 4B",
+      "publisher": "Qwen (Alibaba)",
+      "modality": "llm",
+      "engine": "llama-cpp",
+      "params_b": 4.0,
+      "description_pl": "Mały, szybki model ogólnego przeznaczenia. Dobry wybór na laptopy i słabsze karty graficzne.",
+      "description_en": "Small, fast general-purpose model. A good choice for laptops and modest GPUs.",
+      "languages": [
+        "en",
+        "pl",
+        "de",
+        "fr",
+        "es",
+        "zh"
+      ],
+      "features": [
+        "chat",
+        "tools"
+      ],
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://www.apache.org/licenses/LICENSE-2.0",
+        "commercial": "yes",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "q4_k_m",
+          "label": "Q4_K_M",
+          "files": [
+            {
+              "repo": "unsloth/Qwen3.5-4B-GGUF",
+              "path": "Qwen3.5-4B-Q4_K_M.gguf",
+              "revision": "e87f176479d0855a907a41277aca2f8ee7a09523",
+              "size": 2740937888,
+              "sha256": "00fe7986ff5f6b463e62455821146049db6f9313603938a70800d1fb69ef11a4",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 3900,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64",
+            "android-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "q8_0",
+          "label": "Q8_0",
+          "files": [
+            {
+              "repo": "unsloth/Qwen3.5-4B-GGUF",
+              "path": "Qwen3.5-4B-Q8_0.gguf",
+              "revision": "e87f176479d0855a907a41277aca2f8ee7a09523",
+              "size": 4482403488,
+              "sha256": "10cc391b403021dd11c614679d2fd92f611c3681d29e29651b717316965d61e1",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 5727,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": [
+        "szybki"
+      ],
+      "benchmark": [
+        "qwen3.5:4b"
+      ]
+    },
+    {
+      "id": "bielik-4.5b-v3",
+      "name": "Bielik 4.5B v3.0 Instruct",
+      "publisher": "SpeakLeash",
+      "modality": "llm",
+      "engine": "llama-cpp",
+      "params_b": 4.5,
+      "description_pl": "Polski model językowy od SpeakLeash, trenowany na polskich tekstach. Lekki i dobry w naturalnej polszczyźnie.",
+      "description_en": "Polish language model by SpeakLeash, trained on Polish text. Lightweight and fluent in Polish.",
+      "languages": [
+        "pl",
+        "en"
+      ],
+      "features": [
+        "chat"
+      ],
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://www.apache.org/licenses/LICENSE-2.0",
+        "commercial": "yes",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "q8_0",
+          "label": "Q8_0",
+          "files": [
+            {
+              "repo": "speakleash/Bielik-4.5B-v3.0-Instruct-GGUF",
+              "path": "Bielik-4.5B-v3.0-Instruct.Q8_0.gguf",
+              "revision": "c80ffe0e154fab9f7af170993a16d6f8acc83903",
+              "size": 5061215424,
+              "sha256": "562f2291de257890adf2b4a914da8b194affe6a7a838a6b7ef3d342f306c1b7f",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 6334,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        }
+      ],
+      "tags": [
+        "polski",
+        "szybki"
+      ],
+      "benchmark": [
+        "hf.co/speakleash/Bielik-4.5B-v3.0-Instruct-GGUF:Q8_0"
+      ]
+    },
+    {
+      "id": "qwen3.5-9b",
+      "name": "Qwen3.5 9B",
+      "publisher": "Qwen (Alibaba)",
+      "modality": "llm",
+      "engine": "llama-cpp",
+      "params_b": 9.0,
+      "description_pl": "Wszechstronny model średniej wielkości: rozmowa, streszczenia, kod i wywoływanie narzędzi.",
+      "description_en": "Versatile mid-size model: conversation, summaries, code and tool calling.",
+      "languages": [
+        "en",
+        "pl",
+        "de",
+        "fr",
+        "es",
+        "zh"
+      ],
+      "features": [
+        "chat",
+        "tools"
+      ],
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://www.apache.org/licenses/LICENSE-2.0",
+        "commercial": "yes",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "q4_k_m",
+          "label": "Q4_K_M",
+          "files": [
+            {
+              "repo": "unsloth/Qwen3.5-9B-GGUF",
+              "path": "Qwen3.5-9B-Q4_K_M.gguf",
+              "revision": "3885219b6810b007914f3a7950a8d1b469d598a5",
+              "size": 5680522464,
+              "sha256": "03b74727a860a56338e042c4420bb3f04b2fec5734175f4cb9fa853daf52b7e8",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 6984,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "q6_k",
+          "label": "Q6_K",
+          "files": [
+            {
+              "repo": "unsloth/Qwen3.5-9B-GGUF",
+              "path": "Qwen3.5-9B-Q6_K.gguf",
+              "revision": "3885219b6810b007914f3a7950a8d1b469d598a5",
+              "size": 7458301152,
+              "sha256": "91898433cf5ce0a8f45516a4cc3e9343b6e01d052d01f684309098c66a326c59",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 8849,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": [],
+      "benchmark": [
+        "qwen3.5:9b"
+      ]
+    },
+    {
+      "id": "qwen3.6-35b-a3b",
+      "name": "Qwen3.6 35B-A3B",
+      "publisher": "Qwen (Alibaba)",
+      "modality": "llm",
+      "engine": "llama-cpp",
+      "params_b": 35.0,
+      "active_params_b": 3.0,
+      "description_pl": "Duży model MoE, który działa szybko także bez karty graficznej. Potrzebuje dużo RAM.",
+      "description_en": "A large MoE model that runs fast even without a graphics card. Needs plenty of RAM.",
+      "languages": [
+        "en",
+        "pl",
+        "de",
+        "fr",
+        "es",
+        "zh"
+      ],
+      "features": [
+        "chat",
+        "tools"
+      ],
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://www.apache.org/licenses/LICENSE-2.0",
+        "commercial": "yes",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "ud_q4_k_m",
+          "label": "Q4_K_M",
+          "files": [
+            {
+              "repo": "unsloth/Qwen3.6-35B-A3B-GGUF",
+              "path": "Qwen3.6-35B-A3B-UD-Q4_K_M.gguf",
+              "revision": "a483e9e6cbd595906af30beda3187c2663a1118c",
+              "size": 22134528992,
+              "sha256": "ac0e2c1189e055faa36eff361580e79c5bd6f8e76bffb4ce547f167d53e31a61",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 24245,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "ud_q3_k_m",
+          "label": "Q3_K_M",
+          "files": [
+            {
+              "repo": "unsloth/Qwen3.6-35B-A3B-GGUF",
+              "path": "Qwen3.6-35B-A3B-UD-Q3_K_M.gguf",
+              "revision": "a483e9e6cbd595906af30beda3187c2663a1118c",
+              "size": 16600710112,
+              "sha256": "1b715841683f960bd9a49f008181bd910ee169b78d4cf465b6fde7f4d929ff99",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 18439,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": [
+        "moe"
+      ],
+      "benchmark": [
+        "qwen3.6:35b"
+      ]
+    },
+    {
+      "id": "lfm3-1.7b",
+      "name": "LFM3 1.7B",
+      "publisher": "Liquid AI",
+      "modality": "llm",
+      "engine": "llama-cpp",
+      "params_b": 1.7,
+      "description_pl": "Mały i bardzo szybki model, dobry na komputery bez karty graficznej.",
+      "description_en": "A small, very fast model, good for computers without a graphics card.",
+      "languages": [
+        "en",
+        "pl",
+        "de",
+        "fr",
+        "es",
+        "zh"
+      ],
+      "features": [
+        "chat",
+        "tools"
+      ],
+      "license": {
+        "name": "LFM Open License 1.0",
+        "url": "https://huggingface.co/LiquidAI/LFM3-1.7B-GGUF/blob/main/LICENSE",
+        "commercial": "conditions",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "q4_k_m",
+          "label": "Q4_K_M",
+          "files": [
+            {
+              "repo": "LiquidAI/LFM3-1.7B-GGUF",
+              "path": "LFM3-1.7B-Q4_K_M.gguf",
+              "revision": "cd0c74c575b5c416f3011b5b4c298077f26ca8c2",
+              "size": 1099627808,
+              "sha256": "3793e1e6e2266919d6e015287221b41100175a98eddaba92e111aed3b05c93c4",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 2178,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "q8_0",
+          "label": "Q8_0",
+          "files": [
+            {
+              "repo": "LiquidAI/LFM3-1.7B-GGUF",
+              "path": "LFM3-1.7B-Q8_0.gguf",
+              "revision": "cd0c74c575b5c416f3011b5b4c298077f26ca8c2",
+              "size": 1846238496,
+              "sha256": "8f6b24182258205e9e01e21f1f24a1f208c1e8115578825d202ce39976af20b6",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 2961,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": []
+    },
+    {
+      "id": "bielik-11b-v3.1",
+      "name": "Bielik 11B v3.1 Instruct",
+      "publisher": "SpeakLeash",
+      "modality": "llm",
+      "engine": "llama-cpp",
+      "params_b": 11.0,
+      "description_pl": "Najmocniejszy polski Bielik do pracy lokalnej: pisanie, redakcja i odpowiedzi w dobrej polszczyźnie.",
+      "description_en": "The strongest Polish Bielik for local use: writing, editing and answers in fluent Polish.",
+      "languages": [
+        "pl",
+        "en"
+      ],
+      "features": [
+        "chat",
+        "tools"
+      ],
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://www.apache.org/licenses/LICENSE-2.0",
+        "commercial": "yes",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "q4_k_m",
+          "label": "Q4_K_M",
+          "files": [
+            {
+              "repo": "speakleash/Bielik-11B-v3.1-Instruct-GGUF",
+              "path": "Bielik-11B-v3.1-Instruct.Q4_K_M.gguf",
+              "revision": "84799dfb90cb5f827ecc35f32166d0a139ceb59f",
+              "size": 6724115232,
+              "sha256": "2b417a21c0e3dacf7e6e64c0aed4d18f43482f00a7f08e85915a9852b4d21d2a",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 8078,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        },
+        {
+          "id": "q6_k",
+          "label": "Q6_K",
+          "files": [
+            {
+              "repo": "speakleash/Bielik-11B-v3.1-Instruct-GGUF",
+              "path": "Bielik-11B-v3.1-Instruct.Q6_K.gguf",
+              "revision": "84799dfb90cb5f827ecc35f32166d0a139ceb59f",
+              "size": 9164032800,
+              "sha256": "292bab01830655ea8ac2416eb6bd84485df0e917e40d01d985574ba53f2d84a1",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 10638,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "q8_0",
+          "label": "Q8_0",
+          "files": [
+            {
+              "repo": "speakleash/Bielik-11B-v3.1-Instruct-GGUF",
+              "path": "Bielik-11B-v3.1-Instruct.Q8_0.gguf",
+              "revision": "84799dfb90cb5f827ecc35f32166d0a139ceb59f",
+              "size": 11868875552,
+              "sha256": "05872343e783322fa2b0fa92461ebef1031251c7372931059f478c761cc92dfc",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 13475,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": [
+        "polski"
+      ]
+    },
+    {
+      "id": "qwen3.8-27b",
+      "name": "Qwen3.8 27B",
+      "publisher": "Qwen (Alibaba)",
+      "modality": "llm",
+      "engine": "llama-cpp",
+      "params_b": 27.0,
+      "description_pl": "Duży model do trudniejszych zadań: analiza, rozumowanie, dłuższe teksty. Wymaga mocnej karty graficznej.",
+      "description_en": "Large model for harder tasks: analysis, reasoning, long-form writing. Needs a strong GPU.",
+      "languages": [
+        "en",
+        "pl",
+        "de",
+        "fr",
+        "es",
+        "zh"
+      ],
+      "features": [
+        "chat",
+        "tools"
+      ],
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://www.apache.org/licenses/LICENSE-2.0",
+        "commercial": "yes",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "ud-iq3_xxs",
+          "label": "IQ3_XXS",
+          "files": [
+            {
+              "repo": "unsloth/Qwen3.8-27B-GGUF",
+              "path": "Qwen3.8-27B-UD-IQ3_XXS.gguf",
+              "revision": "acb953b129cc8c4f412388eef58489503e5eabe8",
+              "size": 10934860704,
+              "sha256": "c0b7c3038681ed2e3040456c1dd45f9858b6c2290bed172c70388a94874f3eee",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 12496,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        },
+        {
+          "id": "ud-q4_k_m",
+          "label": "Q4_K_M",
+          "files": [
+            {
+              "repo": "unsloth/Qwen3.8-27B-GGUF",
+              "path": "Qwen3.8-27B-UD-Q4_K_M.gguf",
+              "revision": "acb953b129cc8c4f412388eef58489503e5eabe8",
+              "size": 16564259744,
+              "sha256": "1bce504dfecd84153666928a41d8a66706f0158d3a317bc5196b72819d7dc529",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 18401,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "q8_0",
+          "label": "Q8_0",
+          "files": [
+            {
+              "repo": "unsloth/Qwen3.8-27B-GGUF",
+              "path": "Qwen3.8-27B-Q8_0.gguf",
+              "revision": "acb953b129cc8c4f412388eef58489503e5eabe8",
+              "size": 29047086048,
+              "sha256": "a680f44a06920e5d689774823782006aa3acc8db95750323373b24139b67e348",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 31496,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": [],
+      "benchmark": [
+        "qwen3.8:27b"
+      ]
+    },
+    {
+      "id": "gemma4-e2b",
+      "name": "Gemma 4 E2B",
+      "publisher": "Google DeepMind",
+      "modality": "llm",
+      "engine": "llama-cpp",
+      "params_b": 5.1,
+      "active_params_b": 2.0,
+      "description_pl": "Mały i szybki model, dobry na komputery bez karty graficznej.",
+      "description_en": "A small, fast model, good for computers without a graphics card.",
+      "languages": [
+        "en",
+        "pl",
+        "de",
+        "fr",
+        "es",
+        "zh"
+      ],
+      "features": [
+        "chat",
+        "tools"
+      ],
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://ai.google.dev/gemma/docs/gemma_4_license",
+        "commercial": "yes",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "q4_k_m",
+          "label": "Q4_K_M",
+          "files": [
+            {
+              "repo": "unsloth/gemma-4-E2B-it-GGUF",
+              "path": "gemma-4-E2B-it-Q4_K_M.gguf",
+              "revision": "0314792d7f1f7e229411f620751375812bb9faf2",
+              "size": 3106738272,
+              "sha256": "740185b21d22ceb83a11c3aa62ad5842ef32c70f6096d756bbee85a1e4ec34b8",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 4284,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "q8_0",
+          "label": "Q8_0",
+          "files": [
+            {
+              "repo": "unsloth/gemma-4-E2B-it-GGUF",
+              "path": "gemma-4-E2B-it-Q8_0.gguf",
+              "revision": "0314792d7f1f7e229411f620751375812bb9faf2",
+              "size": 5048352864,
+              "sha256": "605d3c2647d7c58c1e4b5375ccb5702acf94c2611b4c8d4877812f8fdd32d053",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 6320,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": [],
+      "benchmark": [
+        "gemma4:e2b"
+      ]
+    },
+    {
+      "id": "gemma4-e4b",
+      "name": "Gemma 4 E4B",
+      "publisher": "Google DeepMind",
+      "modality": "llm",
+      "engine": "llama-cpp",
+      "params_b": 8.0,
+      "active_params_b": 4.0,
+      "description_pl": "Szybki model do codziennych zadań, działa też bez karty graficznej.",
+      "description_en": "A fast model for everyday tasks that also runs without a graphics card.",
+      "languages": [
+        "en",
+        "pl",
+        "de",
+        "fr",
+        "es",
+        "zh"
+      ],
+      "features": [
+        "chat",
+        "tools"
+      ],
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://ai.google.dev/gemma/docs/gemma_4_license",
+        "commercial": "yes",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "q4_k_m",
+          "label": "Q4_K_M",
+          "files": [
+            {
+              "repo": "unsloth/gemma-4-E4B-it-GGUF",
+              "path": "gemma-4-E4B-it-Q4_K_M.gguf",
+              "revision": "bfc15c382204943c3a8fff0c750b94ae2364d7a3",
+              "size": 4977171584,
+              "sha256": "85a896a047553e842f25297ee5b031d64ff30147d9c4af17b1e4b394cd1fab87",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 6246,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "q8_0",
+          "label": "Q8_0",
+          "files": [
+            {
+              "repo": "unsloth/gemma-4-E4B-it-GGUF",
+              "path": "gemma-4-E4B-it-Q8_0.gguf",
+              "revision": "bfc15c382204943c3a8fff0c750b94ae2364d7a3",
+              "size": 8192953472,
+              "sha256": "f8854aa4480df62585a279e7ca0a881554fc18a41c59c4f62642d16a2ae47012",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 9619,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": [],
+      "benchmark": [
+        "gemma4:e4b"
+      ]
+    },
+    {
+      "id": "gemma4-12b",
+      "name": "Gemma 4 12B",
+      "publisher": "Google DeepMind",
+      "modality": "llm",
+      "engine": "llama-cpp",
+      "params_b": 11.9,
+      "description_pl": "Dobry model średniej wielkości, mocny w języku polskim.",
+      "description_en": "A good mid-size model, strong in Polish.",
+      "languages": [
+        "en",
+        "pl",
+        "de",
+        "fr",
+        "es",
+        "zh"
+      ],
+      "features": [
+        "chat",
+        "tools"
+      ],
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://ai.google.dev/gemma/docs/gemma_4_license",
+        "commercial": "yes",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "q4_k_m",
+          "label": "Q4_K_M",
+          "files": [
+            {
+              "repo": "unsloth/gemma-4-12b-it-GGUF",
+              "path": "gemma-4-12b-it-Q4_K_M.gguf",
+              "revision": "fc034cfff751157913579611efad8462ac1be606",
+              "size": 7121861440,
+              "sha256": "0a270ec9fe6b34f4a0d33992b6135117b484ebc4766ab76b51d4ae8c457e4c42",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 8496,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "iq4_xs",
+          "label": "IQ4_XS",
+          "files": [
+            {
+              "repo": "unsloth/gemma-4-12b-it-GGUF",
+              "path": "gemma-4-12b-it-IQ4_XS.gguf",
+              "revision": "fc034cfff751157913579611efad8462ac1be606",
+              "size": 6375734080,
+              "sha256": "b0037d0e0de0290177045ca214b2a0fb1079d18bde57842b3ca32f5b0cd76774",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 7713,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        },
+        {
+          "id": "q6_k",
+          "label": "Q6_K",
+          "files": [
+            {
+              "repo": "unsloth/gemma-4-12b-it-GGUF",
+              "path": "gemma-4-12b-it-Q6_K.gguf",
+              "revision": "fc034cfff751157913579611efad8462ac1be606",
+              "size": 9786022720,
+              "sha256": "6f394336500bb5409bd68c31aa9d75097b5e6104f6cf30c82a09a7b64df41faf",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 11290,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        },
+        {
+          "id": "q8_0",
+          "label": "Q8_0",
+          "files": [
+            {
+              "repo": "unsloth/gemma-4-12b-it-GGUF",
+              "path": "gemma-4-12b-it-Q8_0.gguf",
+              "revision": "fc034cfff751157913579611efad8462ac1be606",
+              "size": 12669647680,
+              "sha256": "f20e7ff1be28c283eeeb18fc895733791c56a5851d5cd3fe9691b7f7d12afa72",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 14315,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": [],
+      "benchmark": [
+        "gemma4:12b"
+      ]
+    },
+    {
+      "id": "gemma4-26b-a4b",
+      "name": "Gemma 4 26B-A4B",
+      "publisher": "Google DeepMind",
+      "modality": "llm",
+      "engine": "llama-cpp",
+      "params_b": 25.8,
+      "active_params_b": 4.0,
+      "description_pl": "Duży model MoE, który odpowiada szybko.",
+      "description_en": "A large MoE model that answers quickly.",
+      "languages": [
+        "en",
+        "pl",
+        "de",
+        "fr",
+        "es",
+        "zh"
+      ],
+      "features": [
+        "chat",
+        "tools"
+      ],
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://ai.google.dev/gemma/docs/gemma_4_license",
+        "commercial": "yes",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "ud_q4_k_m",
+          "label": "Q4_K_M",
+          "files": [
+            {
+              "repo": "unsloth/gemma-4-26B-A4B-it-GGUF",
+              "path": "gemma-4-26B-A4B-it-UD-Q4_K_M.gguf",
+              "revision": "c099eb48e663fd284577b04978a94ffccb261841",
+              "size": 16947541728,
+              "sha256": "f2c28b3dc4776931ac6f879e11f203dec637ea0f14267a86ec8f6165f63f293f",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 18803,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "ud_q3_k_m",
+          "label": "Q3_K_M",
+          "files": [
+            {
+              "repo": "unsloth/gemma-4-26B-A4B-it-GGUF",
+              "path": "gemma-4-26B-A4B-it-UD-Q3_K_M.gguf",
+              "revision": "c099eb48e663fd284577b04978a94ffccb261841",
+              "size": 12728497888,
+              "sha256": "811882f6df81c8ea204a5d382f196d6bd601245091786912d4c70df41cdfa052",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 14377,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": [
+        "moe"
+      ],
+      "benchmark": [
+        "gemma4:26b"
+      ]
+    },
+    {
+      "id": "gemma4-31b",
+      "name": "Gemma 4 31B",
+      "publisher": "Google DeepMind",
+      "modality": "llm",
+      "engine": "llama-cpp",
+      "params_b": 31.3,
+      "description_pl": "Najmocniejsza Gemma, potrzebuje karty z dużą pamięcią.",
+      "description_en": "The strongest Gemma; needs a graphics card with plenty of memory.",
+      "languages": [
+        "en",
+        "pl",
+        "de",
+        "fr",
+        "es",
+        "zh"
+      ],
+      "features": [
+        "chat",
+        "tools"
+      ],
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://ai.google.dev/gemma/docs/gemma_4_license",
+        "commercial": "yes",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "ud_iq3_xxs",
+          "label": "IQ3_XXS",
+          "files": [
+            {
+              "repo": "unsloth/gemma-4-31B-it-GGUF",
+              "path": "gemma-4-31B-it-UD-IQ3_XXS.gguf",
+              "revision": "c1ac76e99d5513b141e8adde7288b85c3f9c32ec",
+              "size": 11837782976,
+              "sha256": "beb8b6e69da5d3778d781664d376f94962528c84982e1bf5aa7453d9b2d739b8",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 13443,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        },
+        {
+          "id": "q4_k_m",
+          "label": "Q4_K_M",
+          "files": [
+            {
+              "repo": "unsloth/gemma-4-31B-it-GGUF",
+              "path": "gemma-4-31B-it-Q4_K_M.gguf",
+              "revision": "c1ac76e99d5513b141e8adde7288b85c3f9c32ec",
+              "size": 18323733440,
+              "sha256": "38bd64c852c4b460434cc7162fa9bdcf242faf86502581a754cb72956bb17f84",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 20247,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "q8_0",
+          "label": "Q8_0",
+          "files": [
+            {
+              "repo": "unsloth/gemma-4-31B-it-GGUF",
+              "path": "gemma-4-31B-it-Q8_0.gguf",
+              "revision": "c1ac76e99d5513b141e8adde7288b85c3f9c32ec",
+              "size": 32635677632,
+              "sha256": "d5808e5874e660a85ab45b2da00c9e3b4a003621249a333772232d1a703e4d67",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 35261,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": [],
+      "benchmark": [
+        "gemma4:31b"
+      ]
+    },
+    {
+      "id": "muse-glimmer-30b",
+      "name": "Muse Glimmer 30B",
+      "publisher": "Meta",
+      "modality": "llm",
+      "engine": "llama-cpp",
+      "params_b": 27.9,
+      "description_pl": "Najlepszy model w naszym teście, dobrze używa narzędzi.",
+      "description_en": "The top model in our benchmark, good at using tools.",
+      "languages": [
+        "en",
+        "pl",
+        "de",
+        "fr",
+        "es",
+        "zh"
+      ],
+      "features": [
+        "chat",
+        "tools"
+      ],
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://huggingface.co/meta-models/Muse-Glimmer-30B",
+        "commercial": "yes",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "iq3_xxs",
+          "label": "IQ3_XXS",
+          "files": [
+            {
+              "repo": "unsloth/Muse-Glimmer-30B-GGUF",
+              "path": "Muse-Glimmer-30B-UD-IQ3_XXS.gguf",
+              "revision": "faa5b025c584459c13febfa5c59883516710ae39",
+              "size": 13130658848,
+              "sha256": "97897bb6d1d756339eb75fc4af5181ac9cf0b2e7ba1b6346ab82117d9e76800f",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 14799,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        },
+        {
+          "id": "q4_k_m",
+          "label": "Q4_K_M",
+          "files": [
+            {
+              "repo": "meta-models/Muse-Glimmer-30B-GGUF",
+              "path": "Muse-Glimmer-30B-KQuant-17GB-Q4_K_M.gguf",
+              "revision": "b44f1072cf75e918a1b82a3a17b45c4389b076e7",
+              "size": 16756683904,
+              "sha256": "4cc57c0f51040a226e5a72cc47b7613f7772950e460a665f7083de89f183f60e",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 18603,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "q8_0",
+          "label": "Q8_0",
+          "files": [
+            {
+              "repo": "unsloth/Muse-Glimmer-30B-GGUF",
+              "path": "Muse-Glimmer-30B-Q8_0.gguf",
+              "revision": "faa5b025c584459c13febfa5c59883516710ae39",
+              "size": 29612957984,
+              "sha256": "f2c087d694ca8242a4a436076df7c041703ab051ac4b72bb1bfe2698299b0e86",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 32090,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": [],
+      "benchmark": [
+        "muse-glimmer:30b-q4_K_M-dflash"
+      ]
+    },
+    {
+      "id": "ornith-1.5-35b-a3b",
+      "name": "Ornith 1.5 35B-A3B",
+      "publisher": "Ornith AI",
+      "modality": "llm",
+      "engine": "llama-cpp",
+      "params_b": 35.5,
+      "active_params_b": 3.0,
+      "description_pl": "Duży model MoE, który najpierw się zastanawia, a potem odpowiada.",
+      "description_en": "A large MoE model that thinks before it answers.",
+      "languages": [
+        "en",
+        "pl",
+        "de",
+        "fr",
+        "es",
+        "zh"
+      ],
+      "features": [
+        "chat",
+        "tools"
+      ],
+      "license": {
+        "name": "MIT",
+        "url": "https://huggingface.co/ornith-ai/Ornith-1.5-35B-A3B/blob/main/LICENSE",
+        "commercial": "yes",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "q4_k_m",
+          "label": "Q4_K_M",
+          "files": [
+            {
+              "repo": "ornith-ai/Ornith-1.5-35B-A3B-GGUF",
+              "path": "Ornith-1.5-35B-Q4_K_M.gguf",
+              "revision": "12393612fd4f730ff5aadc23e9b8f9648aa49ceb",
+              "size": 21713463040,
+              "sha256": "42739874cc2ccfdb8523b23fbe52e29b2a7555c8176737ca9ca0b5d59859d41f",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 23803,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "q6_k",
+          "label": "Q6_K",
+          "files": [
+            {
+              "repo": "ornith-ai/Ornith-1.5-35B-A3B-GGUF",
+              "path": "Ornith-1.5-35B-Q6_K.gguf",
+              "revision": "12393612fd4f730ff5aadc23e9b8f9648aa49ceb",
+              "size": 29208731392,
+              "sha256": "15d4658bbfc9c6034621729c15bbb50662c82b32a7ddd9624a1e545a74bdbb4b",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 31666,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": [
+        "moe"
+      ],
+      "benchmark": [
+        "ornith-1.5:35b"
+      ]
+    },
+    {
+      "id": "z-image-turbo",
+      "name": "Z-Image Turbo",
+      "publisher": "Tongyi-MAI (Alibaba)",
+      "modality": "image",
+      "engine": "sd-cpp",
+      "description_pl": "Szybki generator obrazów (8 kroków), działa nawet na kartach z 4–6 GB pamięci. Licencja pozwala na użytek komercyjny.",
+      "description_en": "Fast image generator (8 steps) that runs even on 4–6 GB GPUs. Licence allows commercial use.",
+      "languages": [
+        "en",
+        "zh"
+      ],
+      "features": [
+        "text_to_image"
+      ],
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://www.apache.org/licenses/LICENSE-2.0",
+        "commercial": "yes",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "q4_k",
+          "label": "Q4_K",
+          "files": [
+            {
+              "repo": "leejet/Z-Image-Turbo-GGUF",
+              "path": "z_image_turbo-Q4_K.gguf",
+              "revision": "c61c0e422dc8b541b7548cf33a4ef8302b0f8085",
+              "size": 3864250304,
+              "sha256": "14b375ab4f226bc5378f68f37e899ef3c2242b8541e61e2bc1aff40976086fbd",
+              "role": "diffusion_model"
+            },
+            {
+              "repo": "Comfy-Org/z_image_turbo",
+              "path": "split_files/vae/ae.safetensors",
+              "revision": "6fc90a3b1b653e935a0d175e260736de25b84df5",
+              "size": 335304388,
+              "sha256": "afc8e28272cd15db3919bacdb6918ce9c1ed22e96cb12c4d5ed0fba823529e38",
+              "role": "vae"
+            },
+            {
+              "repo": "unsloth/Qwen3-4B-Instruct-2507-GGUF",
+              "path": "Qwen3-4B-Instruct-2507-Q4_K_M.gguf",
+              "revision": "a06e946bb6b655725eafa393f4a9745d460374c9",
+              "size": 2497281120,
+              "sha256": "3605803b982cb64aead44f6c1b2ae36e3acdb41d8e46c8a94c6533bc4c67e597",
+              "role": "llm"
+            }
+          ],
+          "memory_estimate_mb": 8688,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "q8_0",
+          "label": "Q8_0",
+          "files": [
+            {
+              "repo": "leejet/Z-Image-Turbo-GGUF",
+              "path": "z_image_turbo-Q8_0.gguf",
+              "revision": "c61c0e422dc8b541b7548cf33a4ef8302b0f8085",
+              "size": 6577440704,
+              "sha256": "df1c5baa86d1398c979495a6072dbcee79444fdb884a2445582ba0769c44e9a1",
+              "role": "diffusion_model"
+            },
+            {
+              "repo": "Comfy-Org/z_image_turbo",
+              "path": "split_files/vae/ae.safetensors",
+              "revision": "6fc90a3b1b653e935a0d175e260736de25b84df5",
+              "size": 335304388,
+              "sha256": "afc8e28272cd15db3919bacdb6918ce9c1ed22e96cb12c4d5ed0fba823529e38",
+              "role": "vae"
+            },
+            {
+              "repo": "unsloth/Qwen3-4B-Instruct-2507-GGUF",
+              "path": "Qwen3-4B-Instruct-2507-Q8_0.gguf",
+              "revision": "a06e946bb6b655725eafa393f4a9745d460374c9",
+              "size": 4280405600,
+              "sha256": "391c1e410fd9f4cf2de2b510273b56a84c19ce18f4fa3bfb3774031dac4ef068",
+              "role": "llm"
+            }
+          ],
+          "memory_estimate_mb": 13834,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": [
+        "szybki"
+      ]
+    },
+    {
+      "id": "qwen-image-2.1",
+      "name": "Qwen Image 2.1",
+      "publisher": "Qwen (Alibaba)",
+      "modality": "image",
+      "engine": "sd-cpp",
+      "description_pl": "Generator obrazów wysokiej jakości, dobrze radzi sobie z tekstem na obrazie. Tylko do użytku niekomercyjnego.",
+      "description_en": "High-quality image generator that handles text in images well. Non-commercial use only.",
+      "languages": [
+        "en",
+        "zh"
+      ],
+      "features": [
+        "text_to_image",
+        "image_edit"
+      ],
+      "license": {
+        "name": "Qwen Research License",
+        "url": "https://huggingface.co/Qwen/Qwen-Image-2.1/blob/main/LICENSE",
+        "commercial": "no",
+        "conditions_pl": "Licencja badawcza: tylko do celów niekomercyjnych.",
+        "conditions_en": "Research licence: non-commercial use only.",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "q4_k",
+          "label": "Q4_K",
+          "files": [
+            {
+              "repo": "leejet/Qwen-Image-2.1-GGUF",
+              "path": "qwen_image_2.1-Q4_K.gguf",
+              "revision": "cc11433936a06e9765f7c0c0b1f0436cfd2b9856",
+              "size": 4197494816,
+              "sha256": "29f9c83c249ff0292fb2943fceddfa2319b446601866c82a4f8be062abea72c2",
+              "role": "diffusion_model"
+            },
+            {
+              "repo": "Comfy-Org/Qwen-Image-2.1",
+              "path": "vae/qwen_image_2.1_vae_bf16.safetensors",
+              "revision": "aacf31a6d48e707f352ecba714cee0680da3479b",
+              "size": 675509688,
+              "sha256": "bb21f7473051e1ac368515dd3f2e15cd44d7a11748ee8823e1ddca3e4876b7c9",
+              "role": "vae"
+            },
+            {
+              "repo": "Qwen/Qwen3-VL-8B-Instruct-GGUF",
+              "path": "Qwen3VL-8B-Instruct-Q4_K_M.gguf",
+              "revision": "f982a07559d4a2f6c8744d840bf6fccab30eea96",
+              "size": 5027784800,
+              "sha256": "67d1659bfe71b89d50b45a4ad1a9e5b997e5bb16ce5da66a6a6167abd569e9e2",
+              "role": "llm"
+            }
+          ],
+          "memory_estimate_mb": 12355,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "q8_0",
+          "label": "Q8_0",
+          "files": [
+            {
+              "repo": "leejet/Qwen-Image-2.1-GGUF",
+              "path": "qwen_image_2.1-Q8_0.gguf",
+              "revision": "cc11433936a06e9765f7c0c0b1f0436cfd2b9856",
+              "size": 7687155744,
+              "sha256": "f8b244b00937f0e444a40dbf7866460871b89b30142594973b6012d1b471dc0a",
+              "role": "diffusion_model"
+            },
+            {
+              "repo": "Comfy-Org/Qwen-Image-2.1",
+              "path": "vae/qwen_image_2.1_vae_bf16.safetensors",
+              "revision": "aacf31a6d48e707f352ecba714cee0680da3479b",
+              "size": 675509688,
+              "sha256": "bb21f7473051e1ac368515dd3f2e15cd44d7a11748ee8823e1ddca3e4876b7c9",
+              "role": "vae"
+            },
+            {
+              "repo": "Qwen/Qwen3-VL-8B-Instruct-GGUF",
+              "path": "Qwen3VL-8B-Instruct-Q8_0.gguf",
+              "revision": "f982a07559d4a2f6c8744d840bf6fccab30eea96",
+              "size": 8709519456,
+              "sha256": "0d264b3941185d00a74f75c4245521dae088ff1efc90ab8d1754e83f5844adb0",
+              "role": "llm"
+            }
+          ],
+          "memory_estimate_mb": 20562,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": []
+    },
+    {
+      "id": "flux3-image-klein",
+      "name": "FLUX.3 Image [klein]",
+      "publisher": "Black Forest Labs",
+      "modality": "image",
+      "engine": "sd-cpp",
+      "description_pl": "Najnowszy FLUX: ładne obrazy i edycja zdjęć na zwykłej karcie graficznej.",
+      "description_en": "The newest FLUX: good-looking images and photo editing on an ordinary graphics card.",
+      "languages": [
+        "en"
+      ],
+      "features": [
+        "text_to_image",
+        "image_edit"
+      ],
+      "license": {
+        "name": "FLUX Kommunity License v1.0",
+        "url": "https://huggingface.co/black-forest-labs/flux-3-image-klein/blob/main/LICENSE.md",
+        "commercial": "conditions",
+        "conditions_pl": "Obrazy komercyjnie tylko dla firm z przychodem do 5 mln USD rocznie. Wymaga akceptacji licencji na Hugging Face.",
+        "conditions_en": "Commercial use of images only for organisations under USD 5M annual revenue. Requires accepting the licence on Hugging Face.",
+        "eu_allowed": true,
+        "gated": true
+      },
+      "variants": [
+        {
+          "id": "q4_k",
+          "label": "Q4_K",
+          "files": [
+            {
+              "repo": "leejet/flux-3-image-klein-GGUF",
+              "path": "flux3-image-klein-Q4_K.gguf",
+              "revision": "1c2ad2f9b9247ccca6506a23bdb033fdb0873321",
+              "size": 3514023104,
+              "sha256": "19ddbfbed61da4bb16ebf169aaf48e9e5db43aba557be1ee537e9f00f586092e",
+              "role": "diffusion_model"
+            },
+            {
+              "repo": "black-forest-labs/flux-3-image-klein",
+              "path": "ae.safetensors",
+              "revision": "09561231f44e41381c461caf53d5452005a60ac9",
+              "size": 336211292,
+              "sha256": "868fe7b343cc8f3a19dbcfcafbc3d5f888802be3f89bd81b65b3621a066ce8f3",
+              "role": "vae"
+            },
+            {
+              "repo": "Qwen/Qwen3-VL-4B-Instruct-GGUF",
+              "path": "Qwen3VL-4B-Instruct-Q4_K_M.gguf",
+              "revision": "1cd86afb9a95c410a6038ab3b40d8b578c892266",
+              "size": 2497281664,
+              "sha256": "66358cb18bb6b3b1b6675aa412c7a88ef01d228f481184d13668e5201c730a0a",
+              "role": "llm"
+            }
+          ],
+          "memory_estimate_mb": 8289,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "q8_0",
+          "label": "Q8_0",
+          "files": [
+            {
+              "repo": "leejet/flux-3-image-klein-GGUF",
+              "path": "flux3-image-klein-Q8_0.gguf",
+              "revision": "1c2ad2f9b9247ccca6506a23bdb033fdb0873321",
+              "size": 6151716032,
+              "sha256": "8b71ffd749bcacbd50cc0acca4f2d31a044c94412743e1e780db99bf13f89752",
+              "role": "diffusion_model"
+            },
+            {
+              "repo": "black-forest-labs/flux-3-image-klein",
+              "path": "ae.safetensors",
+              "revision": "09561231f44e41381c461caf53d5452005a60ac9",
+              "size": 336211292,
+              "sha256": "868fe7b343cc8f3a19dbcfcafbc3d5f888802be3f89bd81b65b3621a066ce8f3",
+              "role": "vae"
+            },
+            {
+              "repo": "Qwen/Qwen3-VL-4B-Instruct-GGUF",
+              "path": "Qwen3VL-4B-Instruct-Q8_0.gguf",
+              "revision": "1cd86afb9a95c410a6038ab3b40d8b578c892266",
+              "size": 4280406144,
+              "sha256": "054721f478bc5fa6beffb7f38eae575d45298f88cbb8d2f83ef675a727863eb1",
+              "role": "llm"
+            }
+          ],
+          "memory_estimate_mb": 13348,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": [
+        "nowy"
+      ]
+    },
+    {
+      "id": "flux2-klein-4b",
+      "name": "FLUX.2 [klein] 4B",
+      "publisher": "Black Forest Labs",
+      "modality": "image",
+      "engine": "sd-cpp",
+      "description_pl": "Szybki FLUX.2 w 4 krokach na zwykłej karcie graficznej; jakość niższa niż [dev]. Użytek komercyjny dozwolony.",
+      "description_en": "Fast FLUX.2 in 4 steps on an ordinary graphics card; lower quality than [dev]. Commercial use allowed.",
+      "languages": [
+        "en"
+      ],
+      "features": [
+        "text_to_image",
+        "image_edit"
+      ],
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://huggingface.co/black-forest-labs/FLUX.2-klein-4B",
+        "commercial": "yes",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "q4_0",
+          "label": "Q4_0",
+          "files": [
+            {
+              "repo": "leejet/FLUX.2-klein-4B-GGUF",
+              "path": "flux-2-klein-4b-Q4_0.gguf",
+              "revision": "3b1f5a9dc3abb32238b053aeb3d823c30afdacbd",
+              "size": 2460378560,
+              "sha256": "d1023499ef3f2f82ff7c50e6778495195c1b6cc34835741778868428111f9ff4",
+              "role": "diffusion_model"
+            },
+            {
+              "repo": "Comfy-Org/Flux-2-Klein-4B",
+              "path": "split_files/vae/flux2-vae.safetensors",
+              "revision": "5b3abca5c0dc1ecd4eaf3340868d09063fc1c965",
+              "size": 336211292,
+              "sha256": "868fe7b343cc8f3a19dbcfcafbc3d5f888802be3f89bd81b65b3621a066ce8f3",
+              "role": "vae"
+            },
+            {
+              "repo": "unsloth/Qwen3-4B-GGUF",
+              "path": "Qwen3-4B-Q4_K_M.gguf",
+              "revision": "22c9fc8a8c7700b76a1789366280a6a5a1ad1120",
+              "size": 2497281312,
+              "sha256": "f6f851777709861056efcdad3af01da38b31223a3ba26e61a4f8bf3a2195813a",
+              "role": "llm"
+            }
+          ],
+          "memory_estimate_mb": 7083,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "q8_0",
+          "label": "Q8_0",
+          "files": [
+            {
+              "repo": "leejet/FLUX.2-klein-4B-GGUF",
+              "path": "flux-2-klein-4b-Q8_0.gguf",
+              "revision": "3b1f5a9dc3abb32238b053aeb3d823c30afdacbd",
+              "size": 4300629440,
+              "sha256": "0bba6951258ec8f92d51114a8fa13e66828297bfff58a738f52729b3ef66fa28",
+              "role": "diffusion_model"
+            },
+            {
+              "repo": "Comfy-Org/Flux-2-Klein-4B",
+              "path": "split_files/vae/flux2-vae.safetensors",
+              "revision": "5b3abca5c0dc1ecd4eaf3340868d09063fc1c965",
+              "size": 336211292,
+              "sha256": "868fe7b343cc8f3a19dbcfcafbc3d5f888802be3f89bd81b65b3621a066ce8f3",
+              "role": "vae"
+            },
+            {
+              "repo": "unsloth/Qwen3-4B-GGUF",
+              "path": "Qwen3-4B-Q8_0.gguf",
+              "revision": "22c9fc8a8c7700b76a1789366280a6a5a1ad1120",
+              "size": 4280405792,
+              "sha256": "eed555233267a33c7e8ee31682762cc7751b3f6d224039086e0e846f05fffa5d",
+              "role": "llm"
+            }
+          ],
+          "memory_estimate_mb": 11229,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": [
+        "szybki"
+      ]
+    },
+    {
+      "id": "flux2-klein-9b",
+      "name": "FLUX.2 [klein] 9B",
+      "publisher": "Black Forest Labs",
+      "modality": "image",
+      "engine": "sd-cpp",
+      "description_pl": "Szybki FLUX.2 (4 kroki) w większym rozmiarze: lepsze obrazy niż 4B. Tylko do użytku niekomercyjnego.",
+      "description_en": "Fast FLUX.2 (4 steps) in a larger size: better images than 4B. Non-commercial use only.",
+      "languages": [
+        "en"
+      ],
+      "features": [
+        "text_to_image",
+        "image_edit"
+      ],
+      "license": {
+        "name": "FLUX Non-Commercial License",
+        "url": "https://huggingface.co/black-forest-labs/FLUX.2-klein-9B/blob/main/LICENSE.md",
+        "commercial": "no",
+        "conditions_pl": "Tylko do celów niekomercyjnych. Wymaga akceptacji licencji na Hugging Face.",
+        "conditions_en": "Non-commercial use only. Requires accepting the licence on Hugging Face.",
+        "eu_allowed": true,
+        "gated": true
+      },
+      "variants": [
+        {
+          "id": "q4_0",
+          "label": "Q4_0",
+          "files": [
+            {
+              "repo": "leejet/FLUX.2-klein-9B-GGUF",
+              "path": "flux-2-klein-9b-Q4_0.gguf",
+              "revision": "cc588497a95ffc2937ebbd6b9b3916a11ada6e5b",
+              "size": 5616208032,
+              "sha256": "a7e77afa96871d16679ff7b949bd25f20c8179f219c4b662cac91e81ed99b944",
+              "role": "diffusion_model"
+            },
+            {
+              "repo": "Comfy-Org/Flux-2-Klein-9B",
+              "path": "split_files/vae/flux2-vae.safetensors",
+              "revision": "1138ce884c8e977cdacacbe779784fec4426bb3f",
+              "size": 336211292,
+              "sha256": "868fe7b343cc8f3a19dbcfcafbc3d5f888802be3f89bd81b65b3621a066ce8f3",
+              "role": "vae"
+            },
+            {
+              "repo": "unsloth/Qwen3-8B-GGUF",
+              "path": "Qwen3-8B-Q4_K_M.gguf",
+              "revision": "a6adef130ffb23ddaf1a62fec9dced968c9bc482",
+              "size": 5027784512,
+              "sha256": "120307ba529eb2439d6c430d94104dabd578497bc7bfe7e322b5d9933b449bd4",
+              "role": "llm"
+            }
+          ],
+          "memory_estimate_mb": 13590,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "q8_0",
+          "label": "Q8_0",
+          "files": [
+            {
+              "repo": "leejet/FLUX.2-klein-9B-GGUF",
+              "path": "flux-2-klein-9b-Q8_0.gguf",
+              "revision": "cc588497a95ffc2937ebbd6b9b3916a11ada6e5b",
+              "size": 9978284192,
+              "sha256": "67ca777c7aa2d6a0d63d4a7564f823c63af88e9688643df727e1867789062982",
+              "role": "diffusion_model"
+            },
+            {
+              "repo": "Comfy-Org/Flux-2-Klein-9B",
+              "path": "split_files/vae/flux2-vae.safetensors",
+              "revision": "1138ce884c8e977cdacacbe779784fec4426bb3f",
+              "size": 336211292,
+              "sha256": "868fe7b343cc8f3a19dbcfcafbc3d5f888802be3f89bd81b65b3621a066ce8f3",
+              "role": "vae"
+            },
+            {
+              "repo": "unsloth/Qwen3-8B-GGUF",
+              "path": "Qwen3-8B-Q8_0.gguf",
+              "revision": "a6adef130ffb23ddaf1a62fec9dced968c9bc482",
+              "size": 8709519168,
+              "sha256": "0cfbf745760f07a76ddeb358dd025a27f2e11d1ca9c9a4169a373d52990fe86e",
+              "role": "llm"
+            }
+          ],
+          "memory_estimate_mb": 22796,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": [
+        "szybki"
+      ]
+    },
+    {
+      "id": "flux2-dev",
+      "name": "FLUX.2 [dev]",
+      "publisher": "Black Forest Labs",
+      "modality": "image",
+      "engine": "sd-cpp",
+      "description_pl": "Bardzo dokładne obrazy i edycja zdjęć. Duży model: najlepiej na karcie z 24 GB. Tylko do użytku niekomercyjnego.",
+      "description_en": "Very detailed images and photo editing. A large model: best on a 24 GB card. Non-commercial use only.",
+      "languages": [
+        "en"
+      ],
+      "features": [
+        "text_to_image",
+        "image_edit"
+      ],
+      "license": {
+        "name": "FLUX [dev] Non-Commercial License",
+        "url": "https://huggingface.co/black-forest-labs/FLUX.2-dev/blob/main/LICENSE.txt",
+        "commercial": "no",
+        "conditions_pl": "Tylko do celów niekomercyjnych. Wymaga akceptacji licencji na Hugging Face.",
+        "conditions_en": "Non-commercial use only. Requires accepting the licence on Hugging Face.",
+        "eu_allowed": true,
+        "gated": true
+      },
+      "variants": [
+        {
+          "id": "q4_k_s",
+          "label": "Q4_K_S",
+          "files": [
+            {
+              "repo": "city96/FLUX.2-dev-gguf",
+              "path": "flux2-dev-Q4_K_S.gguf",
+              "revision": "ade5d688ddab0d9cf4a5b01bf4321e01c115020d",
+              "size": 19299128288,
+              "sha256": "b9c1c8295ed044f54c3a9894a800e003b4ecc94bfb0f63192b68bafc232c2b27",
+              "role": "diffusion_model"
+            },
+            {
+              "repo": "black-forest-labs/FLUX.2-dev",
+              "path": "ae.safetensors",
+              "revision": "26afe3a78bb242c0a8bb181dcc8937bb16e5c66c",
+              "size": 336211292,
+              "sha256": "868fe7b343cc8f3a19dbcfcafbc3d5f888802be3f89bd81b65b3621a066ce8f3",
+              "role": "vae"
+            },
+            {
+              "repo": "unsloth/Mistral-Small-3.2-24B-Instruct-2506-GGUF",
+              "path": "Mistral-Small-3.2-24B-Instruct-2506-Q4_K_M.gguf",
+              "revision": "b750ec2299225e492f1bd27cab88a0a595fa848f",
+              "size": 14333922848,
+              "sha256": "a3cc56310807ed0d145eaf9f018ccda9ae7ad8edb41ec870aa2454b0d4700b3c",
+              "role": "llm"
+            }
+          ],
+          "memory_estimate_mb": 39899,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        }
+      ],
+      "tags": []
+    },
+    {
+      "id": "sd3.5-medium",
+      "name": "Stable Diffusion 3.5 Medium",
+      "publisher": "Stability AI",
+      "modality": "image",
+      "engine": "sd-cpp",
+      "description_pl": "Wszechstronny generator obrazów średniej wielkości. Firmy do 1 mln USD przychodu mogą go używać komercyjnie.",
+      "description_en": "A versatile mid-size image generator. Companies under USD 1M revenue may use it commercially.",
+      "languages": [
+        "en"
+      ],
+      "features": [
+        "text_to_image"
+      ],
+      "license": {
+        "name": "Stability AI Community License",
+        "url": "https://huggingface.co/stabilityai/stable-diffusion-3.5-medium/blob/main/LICENSE.md",
+        "commercial": "conditions",
+        "conditions_pl": "Bezpłatnie dla firm z przychodem do 1 mln USD rocznie; powyżej potrzebna licencja Enterprise.",
+        "conditions_en": "Free for organisations with under USD 1M annual revenue; above that an Enterprise licence is needed.",
+        "eu_allowed": true,
+        "gated": true
+      },
+      "variants": [
+        {
+          "id": "fp8_t5",
+          "label": "FP16 + T5 FP8",
+          "files": [
+            {
+              "repo": "stabilityai/stable-diffusion-3.5-medium",
+              "path": "sd3.5_medium.safetensors",
+              "revision": "b940f670f0eda2d07fbb75229e779da1ad11eb80",
+              "size": 5107104286,
+              "sha256": "11fe06e22364b823dfeedc275912336b932b32a293a0b2f35ffac071990cc4de",
+              "role": "model"
+            },
+            {
+              "repo": "stabilityai/stable-diffusion-3.5-medium",
+              "path": "text_encoders/clip_l.safetensors",
+              "revision": "b940f670f0eda2d07fbb75229e779da1ad11eb80",
+              "size": 246144152,
+              "sha256": "660c6f5b1abae9dc498ac2d21e1347d2abdb0cf6c0c0c8576cd796491d9a6cdd",
+              "role": "clip_l"
+            },
+            {
+              "repo": "stabilityai/stable-diffusion-3.5-medium",
+              "path": "text_encoders/clip_g.safetensors",
+              "revision": "b940f670f0eda2d07fbb75229e779da1ad11eb80",
+              "size": 1389382176,
+              "sha256": "ec310df2af79c318e24d20511b601a591ca8cd4f1fce1d8dff822a356bcdb1f4",
+              "role": "clip_g"
+            },
+            {
+              "repo": "stabilityai/stable-diffusion-3.5-medium",
+              "path": "text_encoders/t5xxl_fp8_e4m3fn.safetensors",
+              "revision": "b940f670f0eda2d07fbb75229e779da1ad11eb80",
+              "size": 4893934904,
+              "sha256": "7d330da4816157540d6bb7838bf63a0f02f573fc48ca4d8de34bb0cbfd514f09",
+              "role": "t5xxl"
+            }
+          ],
+          "memory_estimate_mb": 14341,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        }
+      ],
+      "tags": []
+    },
+    {
+      "id": "sdxl-base-1.0",
+      "name": "Stable Diffusion XL 1.0",
+      "publisher": "Stability AI",
+      "modality": "image",
+      "engine": "sd-cpp",
+      "description_pl": "Sprawdzony, popularny generator obrazów 1024 px z ogromną liczbą stylów i dodatków.",
+      "description_en": "A proven, popular 1024 px image generator with a huge number of styles and add-ons.",
+      "languages": [
+        "en"
+      ],
+      "features": [
+        "text_to_image"
+      ],
+      "license": {
+        "name": "CreativeML Open RAIL++-M",
+        "url": "https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0/blob/main/LICENSE.md",
+        "commercial": "conditions",
+        "conditions_pl": "Użytek komercyjny dozwolony, ale licencja zakazuje niektórych zastosowań (np. szkodliwych treści).",
+        "conditions_en": "Commercial use allowed, but the licence forbids some uses (e.g. harmful content).",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "fp16",
+          "label": "FP16",
+          "files": [
+            {
+              "repo": "stabilityai/stable-diffusion-xl-base-1.0",
+              "path": "sd_xl_base_1.0.safetensors",
+              "revision": "462165984030d82259a11f4367a4eed129e94a7b",
+              "size": 6938078334,
+              "sha256": "31e35c80fc4829d14f90153f4c74cd59c90b779f6afe05a74cd6120b893f7e5b",
+              "role": "model"
+            },
+            {
+              "repo": "madebyollin/sdxl-vae-fp16-fix",
+              "path": "sdxl_vae.safetensors",
+              "revision": "207b116dae70ace3637169f1ddd2434b91b3a8cd",
+              "size": 334641162,
+              "sha256": "235745af8d86bf4a4c1b5b4f529868b37019a10f7c0b2e79ad0abca3a22bc6e1",
+              "role": "vae"
+            }
+          ],
+          "memory_estimate_mb": 9347,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        }
+      ],
+      "tags": []
+    },
+    {
+      "id": "whisper-tiny",
+      "name": "Whisper tiny",
+      "publisher": "OpenAI",
+      "modality": "stt",
+      "engine": "whisper-cpp",
+      "description_pl": "Najmniejszy Whisper – bardzo szybki, ale mniej dokładny. Dla słabych komputerów i telefonów.",
+      "description_en": "The smallest Whisper – very fast but less accurate. For low-end computers and phones.",
+      "languages": [
+        "pl",
+        "en",
+        "de",
+        "fr",
+        "es",
+        "uk"
+      ],
+      "features": [
+        "timestamps",
+        "srt"
+      ],
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/license/mit",
+        "commercial": "yes",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "q8_0",
+          "label": "Q8_0",
+          "files": [
+            {
+              "repo": "ggerganov/whisper.cpp",
+              "path": "ggml-tiny-q8_0.bin",
+              "revision": "5359861c739e955e79d9a303bcbc70fb988958b1",
+              "size": 43537433,
+              "sha256": "c2085835d3f50733e2ff6e4b41ae8a2b8d8110461e18821b09a15c40c42d1cca",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 363,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64",
+            "android-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "f16",
+          "label": "F16",
+          "files": [
+            {
+              "repo": "ggerganov/whisper.cpp",
+              "path": "ggml-tiny.bin",
+              "revision": "5359861c739e955e79d9a303bcbc70fb988958b1",
+              "size": 77691713,
+              "sha256": "be07e048e1e599ad46341c8d2a135645097a538221678b7acdd1b1919c6e1b21",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 412,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64",
+            "android-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": [
+        "szybki"
+      ]
+    },
+    {
+      "id": "whisper-base",
+      "name": "Whisper base",
+      "publisher": "OpenAI",
+      "modality": "stt",
+      "engine": "whisper-cpp",
+      "description_pl": "Mały Whisper – szybki, przyzwoita jakość dla wyraźnych nagrań.",
+      "description_en": "Small Whisper – fast, decent quality for clear recordings.",
+      "languages": [
+        "pl",
+        "en",
+        "de",
+        "fr",
+        "es",
+        "uk"
+      ],
+      "features": [
+        "timestamps",
+        "srt"
+      ],
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/license/mit",
+        "commercial": "yes",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "q8_0",
+          "label": "Q8_0",
+          "files": [
+            {
+              "repo": "ggerganov/whisper.cpp",
+              "path": "ggml-base-q8_0.bin",
+              "revision": "5359861c739e955e79d9a303bcbc70fb988958b1",
+              "size": 81768585,
+              "sha256": "c577b9a86e7e048a0b7eada054f4dd79a56bbfa911fbdacf900ac5b567cbb7d9",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 417,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64",
+            "android-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "f16",
+          "label": "F16",
+          "files": [
+            {
+              "repo": "ggerganov/whisper.cpp",
+              "path": "ggml-base.bin",
+              "revision": "5359861c739e955e79d9a303bcbc70fb988958b1",
+              "size": 147951465,
+              "sha256": "60ed5bc3dd14eea856493d334349b405782ddcaf0028d4b5df4088345fba2efe",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 512,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64",
+            "android-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": [
+        "szybki"
+      ]
+    },
+    {
+      "id": "whisper-small",
+      "name": "Whisper small",
+      "publisher": "OpenAI",
+      "modality": "stt",
+      "engine": "whisper-cpp",
+      "description_pl": "Kompromis między szybkością a dokładnością na komputerach bez mocnej karty graficznej.",
+      "description_en": "A balance of speed and accuracy for computers without a strong GPU.",
+      "languages": [
+        "pl",
+        "en",
+        "de",
+        "fr",
+        "es",
+        "uk"
+      ],
+      "features": [
+        "timestamps",
+        "srt"
+      ],
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/license/mit",
+        "commercial": "yes",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "q8_0",
+          "label": "Q8_0",
+          "files": [
+            {
+              "repo": "ggerganov/whisper.cpp",
+              "path": "ggml-small-q8_0.bin",
+              "revision": "5359861c739e955e79d9a303bcbc70fb988958b1",
+              "size": 264464607,
+              "sha256": "49c8fb02b65e6049d5fa6c04f81f53b867b5ec9540406812c643f177317f779f",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 679,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64",
+            "android-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "f16",
+          "label": "F16",
+          "files": [
+            {
+              "repo": "ggerganov/whisper.cpp",
+              "path": "ggml-small.bin",
+              "revision": "5359861c739e955e79d9a303bcbc70fb988958b1",
+              "size": 487601967,
+              "sha256": "1be3a9b2063867b937e64e2ec7483364a79917e157fa98c5d94b5c1fffea987b",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 998,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": []
+    },
+    {
+      "id": "whisper-large-v3-turbo",
+      "name": "Whisper large-v3-turbo",
+      "publisher": "OpenAI",
+      "modality": "stt",
+      "engine": "whisper-cpp",
+      "description_pl": "Domyślny model transkrypcji: wysoka dokładność po polsku przy dużej szybkości. Znaczniki czasu i napisy SRT.",
+      "description_en": "Default transcription model: high accuracy in Polish at high speed. Timestamps and SRT subtitles.",
+      "languages": [
+        "pl",
+        "en",
+        "de",
+        "fr",
+        "es",
+        "uk"
+      ],
+      "features": [
+        "timestamps",
+        "srt"
+      ],
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/license/mit",
+        "commercial": "yes",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "q5_0",
+          "label": "Q5_0",
+          "files": [
+            {
+              "repo": "ggerganov/whisper.cpp",
+              "path": "ggml-large-v3-turbo-q5_0.bin",
+              "revision": "5359861c739e955e79d9a303bcbc70fb988958b1",
+              "size": 574041195,
+              "sha256": "394221709cd5ad1f40c46e6031ca61bce88931e6e088c188294c6d5a55ffa7e2",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 1122,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "q8_0",
+          "label": "Q8_0",
+          "files": [
+            {
+              "repo": "ggerganov/whisper.cpp",
+              "path": "ggml-large-v3-turbo-q8_0.bin",
+              "revision": "5359861c739e955e79d9a303bcbc70fb988958b1",
+              "size": 874188075,
+              "sha256": "317eb69c11673c9de1e1f0d459b253999804ec71ac4c23c17ecf5fbe24e259a1",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 1551,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        },
+        {
+          "id": "f16",
+          "label": "F16",
+          "files": [
+            {
+              "repo": "ggerganov/whisper.cpp",
+              "path": "ggml-large-v3-turbo.bin",
+              "revision": "5359861c739e955e79d9a303bcbc70fb988958b1",
+              "size": 1624555275,
+              "sha256": "1fc70f774d38eb169993ac391eea357ef47c88757ef72ee5943879b7e8e2bc69",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 2624,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": [
+        "polski"
+      ]
+    },
+    {
+      "id": "piper-pl-darkman",
+      "name": "Piper – głos „darkman” (PL)",
+      "publisher": "Piper / OHF-Voice",
+      "modality": "tts",
+      "engine": "piper",
+      "description_pl": "Lekka synteza mowy po polsku (męski głos), działa płynnie na samym procesorze, także na telefonie. Bez klonowania głosu.",
+      "description_en": "Lightweight Polish speech synthesis (male voice); runs smoothly on CPU only, including phones. No voice cloning.",
+      "languages": [
+        "pl"
+      ],
+      "features": [
+        "polish_tts"
+      ],
+      "license": {
+        "name": "MIT (model), CC0 (dataset)",
+        "url": "https://huggingface.co/rhasspy/piper-voices/blob/main/pl/pl_PL/darkman/medium/MODEL_CARD",
+        "commercial": "yes",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "medium",
+          "label": "medium",
+          "files": [
+            {
+              "repo": "rhasspy/piper-voices",
+              "path": "pl/pl_PL/darkman/medium/pl_PL-darkman-medium.onnx",
+              "revision": "cf910fb59f1d79ab3b625a63993a108751c6c25d",
+              "size": 63221984,
+              "sha256": "cf757ee307e3a7c23d5d8f69934deab51683d01c1c6be376d3e13146020f1530",
+              "role": "model"
+            },
+            {
+              "repo": "rhasspy/piper-voices",
+              "path": "pl/pl_PL/darkman/medium/pl_PL-darkman-medium.onnx.json",
+              "revision": "cf910fb59f1d79ab3b625a63993a108751c6c25d",
+              "size": 5457,
+              "sha256": "0d98a67829a1b7ffbce7faacf4ea7bb7a7ce2ebc1598ad0289c0f6c1f352dbd0",
+              "role": "config"
+            }
+          ],
+          "memory_estimate_mb": 579,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64",
+            "android-arm64"
+          ],
+          "recommended_backends": [
+            "cpu"
+          ],
+          "recommended": true
+        }
+      ],
+      "tags": [
+        "polski",
+        "szybki"
+      ]
+    },
+    {
+      "id": "chatterbox-multilingual",
+      "name": "Chatterbox Multilingual",
+      "publisher": "Resemble AI",
+      "modality": "tts",
+      "engine": "chatterbox",
+      "description_pl": "Synteza mowy w 23 językach, w tym po polsku, z klonowaniem głosu z krótkiej próbki (wymagana zgoda osoby nagranej).",
+      "description_en": "Speech synthesis in 23 languages including Polish, with voice cloning from a short sample (consent of the recorded person required).",
+      "languages": [
+        "pl",
+        "en",
+        "de",
+        "fr",
+        "es",
+        "it",
+        "pt",
+        "nl",
+        "sv",
+        "da",
+        "no",
+        "fi",
+        "ru",
+        "el",
+        "tr",
+        "ar",
+        "he",
+        "hi",
+        "ja",
+        "ko",
+        "ms",
+        "sw",
+        "zh"
+      ],
+      "features": [
+        "voice_cloning",
+        "polish_tts"
+      ],
+      "license": {
+        "name": "MIT",
+        "url": "https://huggingface.co/ResembleAI/chatterbox",
+        "commercial": "yes",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "v3",
+          "label": "multilingual v3",
+          "files": [
+            {
+              "repo": "ResembleAI/chatterbox",
+              "path": "t3_mtl23ls_v3.safetensors",
+              "revision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+              "size": 2143989928,
+              "sha256": "5abca8321ede76f8e61f1cc0d19aea6c946b28871017ce8726f8a69203f05953",
+              "role": "t3"
+            },
+            {
+              "repo": "ResembleAI/chatterbox",
+              "path": "s3gen.pt",
+              "revision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+              "size": 1057165844,
+              "sha256": "9b9ff07e60b20c136e2b1b3d7563a24604e8d2c4c267888d1ee929dd0151d2a3",
+              "role": "s3gen"
+            },
+            {
+              "repo": "ResembleAI/chatterbox",
+              "path": "ve.pt",
+              "revision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+              "size": 5698626,
+              "sha256": "4b16d836bc598509860f6fa068165a8bb5e9ac84f05582dfcf278a5a372879f1",
+              "role": "voice_encoder"
+            },
+            {
+              "repo": "ResembleAI/chatterbox",
+              "path": "conds.pt",
+              "revision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+              "size": 107374,
+              "sha256": "6552d70568833628ba019c6b03459e77fe71ca197d5c560cef9411bee9d87f4e",
+              "role": "conds"
+            },
+            {
+              "repo": "ResembleAI/chatterbox",
+              "path": "grapheme_mtl_merged_expanded_v1.json",
+              "revision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+              "size": 69989,
+              "sha256": "69632f47220a788a52ce2661d096453c5655e9bf25289d89a8d832c46ee07dbf",
+              "role": "tokenizer"
+            },
+            {
+              "repo": "ResembleAI/chatterbox",
+              "path": "Cangjie5_TC.json",
+              "revision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+              "size": 1920163,
+              "sha256": "7073fd9de919443ae88e0bd2449917a65fe54898a4413ed1edcc4b67f28bce8c",
+              "role": "tokenizer"
+            }
+          ],
+          "memory_estimate_mb": 4479,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "v2",
+          "label": "multilingual v2 (starsza)",
+          "files": [
+            {
+              "repo": "ResembleAI/chatterbox",
+              "path": "t3_mtl23ls_v2.safetensors",
+              "revision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+              "size": 2143989752,
+              "sha256": "b1237586127ce98e7800a68e49938eb5092846862aabcb6e17b2fda7889a6c75",
+              "role": "t3"
+            },
+            {
+              "repo": "ResembleAI/chatterbox",
+              "path": "s3gen.pt",
+              "revision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+              "size": 1057165844,
+              "sha256": "9b9ff07e60b20c136e2b1b3d7563a24604e8d2c4c267888d1ee929dd0151d2a3",
+              "role": "s3gen"
+            },
+            {
+              "repo": "ResembleAI/chatterbox",
+              "path": "ve.pt",
+              "revision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+              "size": 5698626,
+              "sha256": "4b16d836bc598509860f6fa068165a8bb5e9ac84f05582dfcf278a5a372879f1",
+              "role": "voice_encoder"
+            },
+            {
+              "repo": "ResembleAI/chatterbox",
+              "path": "conds.pt",
+              "revision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+              "size": 107374,
+              "sha256": "6552d70568833628ba019c6b03459e77fe71ca197d5c560cef9411bee9d87f4e",
+              "role": "conds"
+            },
+            {
+              "repo": "ResembleAI/chatterbox",
+              "path": "grapheme_mtl_merged_expanded_v1.json",
+              "revision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+              "size": 69989,
+              "sha256": "69632f47220a788a52ce2661d096453c5655e9bf25289d89a8d832c46ee07dbf",
+              "role": "tokenizer"
+            },
+            {
+              "repo": "ResembleAI/chatterbox",
+              "path": "Cangjie5_TC.json",
+              "revision": "5bb1f6ee58e50c3b8d408bc82a6d3740c2db6e18",
+              "size": 1920163,
+              "sha256": "7073fd9de919443ae88e0bd2449917a65fe54898a4413ed1edcc4b67f28bce8c",
+              "role": "tokenizer"
+            }
+          ],
+          "memory_estimate_mb": 4479,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": [
+        "polski"
+      ]
+    },
+    {
+      "id": "ace-step-1.5",
+      "name": "ACE-Step 1.5",
+      "publisher": "ACE Studio & StepFun",
+      "modality": "music",
+      "engine": "ace-step",
+      "description_pl": "Tworzy piosenki z wokalem albo muzykę bez słów z opisu stylu i Twojego tekstu, także po polsku.",
+      "description_en": "Creates songs with vocals or instrumental music from a style description and your lyrics, Polish included.",
+      "languages": [
+        "pl",
+        "en",
+        "de",
+        "fr",
+        "es",
+        "it",
+        "pt",
+        "nl",
+        "sv",
+        "da",
+        "no",
+        "fi",
+        "cs",
+        "sk",
+        "uk",
+        "ru",
+        "bg",
+        "hr",
+        "sr",
+        "hu",
+        "ro",
+        "lt",
+        "el",
+        "tr",
+        "ar",
+        "he",
+        "fa",
+        "hi",
+        "bn",
+        "pa",
+        "ne",
+        "ur",
+        "ta",
+        "te",
+        "sa",
+        "ja",
+        "ko",
+        "zh",
+        "yue",
+        "th",
+        "vi",
+        "id",
+        "ms",
+        "tl",
+        "sw",
+        "az",
+        "ca",
+        "is",
+        "la",
+        "ht"
+      ],
+      "features": [
+        "lyrics",
+        "instrumental"
+      ],
+      "license": {
+        "name": "MIT",
+        "url": "https://huggingface.co/ACE-Step/Ace-Step1.5",
+        "commercial": "yes",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "turbo-lm1.7b",
+          "label": "turbo + LM 1.7B",
+          "files": [
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "Qwen3-Embedding-0.6B/added_tokens.json",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 707,
+              "sha256": "c0284b582e14987fbd3d5a2cb2bd139084371ed9acbae488829a1c900833c680",
+              "local": "Qwen3-Embedding-0.6B/added_tokens.json"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "Qwen3-Embedding-0.6B/chat_template.jinja",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 4116,
+              "sha256": "87a2728cb8dc9fe424d624542f6060ec05a1d285ebbec578bb078900e33396b5",
+              "local": "Qwen3-Embedding-0.6B/chat_template.jinja"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "Qwen3-Embedding-0.6B/config.json",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 1359,
+              "sha256": "bb23c1607cfe059a58d8f0196cf1cebb52082b1056b8e358a579da80a5759420",
+              "local": "Qwen3-Embedding-0.6B/config.json"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "Qwen3-Embedding-0.6B/merges.txt",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 1671853,
+              "sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+              "local": "Qwen3-Embedding-0.6B/merges.txt"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "Qwen3-Embedding-0.6B/model.safetensors",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 1191586416,
+              "sha256": "0437e45c94563b09e13cb7a64478fc406947a93cb34a7e05870fc8dcd48e23fd",
+              "role": "text_encoder",
+              "local": "Qwen3-Embedding-0.6B/model.safetensors"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "Qwen3-Embedding-0.6B/special_tokens_map.json",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 613,
+              "sha256": "76862e765266b85aa9459767e33cbaf13970f327a0e88d1c65846c2ddd3a1ecd",
+              "local": "Qwen3-Embedding-0.6B/special_tokens_map.json"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "Qwen3-Embedding-0.6B/tokenizer.json",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 11423705,
+              "sha256": "def76fb086971c7867b829c23a26261e38d9d74e02139253b38aeb9df8b4b50a",
+              "local": "Qwen3-Embedding-0.6B/tokenizer.json"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "Qwen3-Embedding-0.6B/tokenizer_config.json",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 5404,
+              "sha256": "443bfa629eb16387a12edbf92a76f6a6f10b2af3b53d87ba1550adfcf45f7fa0",
+              "local": "Qwen3-Embedding-0.6B/tokenizer_config.json"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "Qwen3-Embedding-0.6B/vocab.json",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 2776833,
+              "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+              "local": "Qwen3-Embedding-0.6B/vocab.json"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "vae/config.json",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 425,
+              "sha256": "14e019904df567f26df750317a70e2bd08f9f8f3c40ff4a24c97d1cd3f20ccd2",
+              "local": "vae/config.json"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "vae/diffusion_pytorch_model.safetensors",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 337431388,
+              "sha256": "da17edb604c40deaf09e9b24974e590d1ca83a374070e5d0884cfa4bed9a99b0",
+              "role": "vae",
+              "local": "vae/diffusion_pytorch_model.safetensors"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "acestep-v15-turbo/config.json",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 1968,
+              "sha256": "74745ff704ea49164c3d2d1c99fc0670f3fc635a869f0aec2d1311e6a52d400a",
+              "local": "acestep-v15-turbo/config.json"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "acestep-v15-turbo/model.safetensors",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 4787825604,
+              "sha256": "3f6e0797fad420a39bd33979eb6e840e30989e34a3794e843d23b60ec6e422d7",
+              "role": "dit",
+              "local": "acestep-v15-turbo/model.safetensors"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "acestep-v15-turbo/silence_latent.pt",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 3841215,
+              "sha256": "a778e9dd942f5e8b2c09c55370782d318834432b03dabbcdf70e6ed49ad6358b",
+              "local": "acestep-v15-turbo/silence_latent.pt"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "acestep-5Hz-lm-1.7B/added_tokens.json",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 2217787,
+              "sha256": "db08b66a515fb5d6acca0b3492d25bb44e0deda6241fc1113ac0679d40558c48",
+              "local": "acestep-5Hz-lm-1.7B/added_tokens.json"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "acestep-5Hz-lm-1.7B/chat_template.jinja",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 4168,
+              "sha256": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8",
+              "local": "acestep-5Hz-lm-1.7B/chat_template.jinja"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "acestep-5Hz-lm-1.7B/config.json",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 1385,
+              "sha256": "73515ca4bfd86a5b56f28bf680311d1911e159c85d7f7ceb2188e310007c9010",
+              "local": "acestep-5Hz-lm-1.7B/config.json"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "acestep-5Hz-lm-1.7B/merges.txt",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 1671853,
+              "sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+              "local": "acestep-5Hz-lm-1.7B/merges.txt"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "acestep-5Hz-lm-1.7B/model.safetensors",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 3708521528,
+              "sha256": "f161689da73e5ecefa28ff780d51c2d92a00f056d021d7933c779ed5c6cd7db8",
+              "role": "lm",
+              "local": "acestep-5Hz-lm-1.7B/model.safetensors"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "acestep-5Hz-lm-1.7B/special_tokens_map.json",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 1824199,
+              "sha256": "76e233bfc357b0b03d7b6e6ba8e799244f358552575a7cdadb78d3d19106b298",
+              "local": "acestep-5Hz-lm-1.7B/special_tokens_map.json"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "acestep-5Hz-lm-1.7B/tokenizer.json",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 24321939,
+              "sha256": "35af56c3f5cb3ea2cc578aa28a8937770981d504f183ac5c8c38baf4bbd4af4d",
+              "local": "acestep-5Hz-lm-1.7B/tokenizer.json"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "acestep-5Hz-lm-1.7B/tokenizer_config.json",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 14072925,
+              "sha256": "6cd70cdd89425971794f5235562edcc608b0629a6c4686ae51a8b8c8b8ba5e95",
+              "local": "acestep-5Hz-lm-1.7B/tokenizer_config.json"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "acestep-5Hz-lm-1.7B/vocab.json",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 2776833,
+              "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+              "local": "acestep-5Hz-lm-1.7B/vocab.json"
+            }
+          ],
+          "memory_estimate_mb": 14018,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "turbo-lm0.6b",
+          "label": "turbo + LM 0.6B (lżejszy)",
+          "files": [
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "Qwen3-Embedding-0.6B/added_tokens.json",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 707,
+              "sha256": "c0284b582e14987fbd3d5a2cb2bd139084371ed9acbae488829a1c900833c680",
+              "local": "Qwen3-Embedding-0.6B/added_tokens.json"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "Qwen3-Embedding-0.6B/chat_template.jinja",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 4116,
+              "sha256": "87a2728cb8dc9fe424d624542f6060ec05a1d285ebbec578bb078900e33396b5",
+              "local": "Qwen3-Embedding-0.6B/chat_template.jinja"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "Qwen3-Embedding-0.6B/config.json",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 1359,
+              "sha256": "bb23c1607cfe059a58d8f0196cf1cebb52082b1056b8e358a579da80a5759420",
+              "local": "Qwen3-Embedding-0.6B/config.json"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "Qwen3-Embedding-0.6B/merges.txt",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 1671853,
+              "sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+              "local": "Qwen3-Embedding-0.6B/merges.txt"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "Qwen3-Embedding-0.6B/model.safetensors",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 1191586416,
+              "sha256": "0437e45c94563b09e13cb7a64478fc406947a93cb34a7e05870fc8dcd48e23fd",
+              "role": "text_encoder",
+              "local": "Qwen3-Embedding-0.6B/model.safetensors"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "Qwen3-Embedding-0.6B/special_tokens_map.json",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 613,
+              "sha256": "76862e765266b85aa9459767e33cbaf13970f327a0e88d1c65846c2ddd3a1ecd",
+              "local": "Qwen3-Embedding-0.6B/special_tokens_map.json"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "Qwen3-Embedding-0.6B/tokenizer.json",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 11423705,
+              "sha256": "def76fb086971c7867b829c23a26261e38d9d74e02139253b38aeb9df8b4b50a",
+              "local": "Qwen3-Embedding-0.6B/tokenizer.json"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "Qwen3-Embedding-0.6B/tokenizer_config.json",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 5404,
+              "sha256": "443bfa629eb16387a12edbf92a76f6a6f10b2af3b53d87ba1550adfcf45f7fa0",
+              "local": "Qwen3-Embedding-0.6B/tokenizer_config.json"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "Qwen3-Embedding-0.6B/vocab.json",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 2776833,
+              "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+              "local": "Qwen3-Embedding-0.6B/vocab.json"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "vae/config.json",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 425,
+              "sha256": "14e019904df567f26df750317a70e2bd08f9f8f3c40ff4a24c97d1cd3f20ccd2",
+              "local": "vae/config.json"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "vae/diffusion_pytorch_model.safetensors",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 337431388,
+              "sha256": "da17edb604c40deaf09e9b24974e590d1ca83a374070e5d0884cfa4bed9a99b0",
+              "role": "vae",
+              "local": "vae/diffusion_pytorch_model.safetensors"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "acestep-v15-turbo/config.json",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 1968,
+              "sha256": "74745ff704ea49164c3d2d1c99fc0670f3fc635a869f0aec2d1311e6a52d400a",
+              "local": "acestep-v15-turbo/config.json"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "acestep-v15-turbo/model.safetensors",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 4787825604,
+              "sha256": "3f6e0797fad420a39bd33979eb6e840e30989e34a3794e843d23b60ec6e422d7",
+              "role": "dit",
+              "local": "acestep-v15-turbo/model.safetensors"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "acestep-v15-turbo/silence_latent.pt",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 3841215,
+              "sha256": "a778e9dd942f5e8b2c09c55370782d318834432b03dabbcdf70e6ed49ad6358b",
+              "local": "acestep-v15-turbo/silence_latent.pt"
+            },
+            {
+              "repo": "ACE-Step/acestep-5Hz-lm-0.6B",
+              "path": "added_tokens.json",
+              "revision": "148d8ea0225bdab342ee1ae3a354275ccd60ca80",
+              "size": 2217787,
+              "sha256": "db08b66a515fb5d6acca0b3492d25bb44e0deda6241fc1113ac0679d40558c48",
+              "local": "acestep-5Hz-lm-0.6B/added_tokens.json"
+            },
+            {
+              "repo": "ACE-Step/acestep-5Hz-lm-0.6B",
+              "path": "chat_template.jinja",
+              "revision": "148d8ea0225bdab342ee1ae3a354275ccd60ca80",
+              "size": 4168,
+              "sha256": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8",
+              "local": "acestep-5Hz-lm-0.6B/chat_template.jinja"
+            },
+            {
+              "repo": "ACE-Step/acestep-5Hz-lm-0.6B",
+              "path": "config.json",
+              "revision": "148d8ea0225bdab342ee1ae3a354275ccd60ca80",
+              "size": 1386,
+              "sha256": "873ca63808b74e1e008ab950114765553b898b489b9e077e80db83348a118384",
+              "local": "acestep-5Hz-lm-0.6B/config.json"
+            },
+            {
+              "repo": "ACE-Step/acestep-5Hz-lm-0.6B",
+              "path": "merges.txt",
+              "revision": "148d8ea0225bdab342ee1ae3a354275ccd60ca80",
+              "size": 1671853,
+              "sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+              "local": "acestep-5Hz-lm-0.6B/merges.txt"
+            },
+            {
+              "repo": "ACE-Step/acestep-5Hz-lm-0.6B",
+              "path": "model.safetensors",
+              "revision": "148d8ea0225bdab342ee1ae3a354275ccd60ca80",
+              "size": 1325804024,
+              "sha256": "5d92a60806e2e88c04de58ddc6dde93f2bc8f1336162b3ad5853886c9bcc6b82",
+              "role": "lm",
+              "local": "acestep-5Hz-lm-0.6B/model.safetensors"
+            },
+            {
+              "repo": "ACE-Step/acestep-5Hz-lm-0.6B",
+              "path": "special_tokens_map.json",
+              "revision": "148d8ea0225bdab342ee1ae3a354275ccd60ca80",
+              "size": 1824199,
+              "sha256": "76e233bfc357b0b03d7b6e6ba8e799244f358552575a7cdadb78d3d19106b298",
+              "local": "acestep-5Hz-lm-0.6B/special_tokens_map.json"
+            },
+            {
+              "repo": "ACE-Step/acestep-5Hz-lm-0.6B",
+              "path": "tokenizer.json",
+              "revision": "148d8ea0225bdab342ee1ae3a354275ccd60ca80",
+              "size": 24321939,
+              "sha256": "35af56c3f5cb3ea2cc578aa28a8937770981d504f183ac5c8c38baf4bbd4af4d",
+              "local": "acestep-5Hz-lm-0.6B/tokenizer.json"
+            },
+            {
+              "repo": "ACE-Step/acestep-5Hz-lm-0.6B",
+              "path": "tokenizer_config.json",
+              "revision": "148d8ea0225bdab342ee1ae3a354275ccd60ca80",
+              "size": 14072925,
+              "sha256": "6cd70cdd89425971794f5235562edcc608b0629a6c4686ae51a8b8c8b8ba5e95",
+              "local": "acestep-5Hz-lm-0.6B/tokenizer_config.json"
+            },
+            {
+              "repo": "ACE-Step/acestep-5Hz-lm-0.6B",
+              "path": "vocab.json",
+              "revision": "148d8ea0225bdab342ee1ae3a354275ccd60ca80",
+              "size": 2776833,
+              "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+              "local": "acestep-5Hz-lm-0.6B/vocab.json"
+            }
+          ],
+          "memory_estimate_mb": 10950,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "cpu"
+          ]
+        },
+        {
+          "id": "turbo",
+          "label": "turbo bez LM (najlżejszy)",
+          "files": [
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "Qwen3-Embedding-0.6B/added_tokens.json",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 707,
+              "sha256": "c0284b582e14987fbd3d5a2cb2bd139084371ed9acbae488829a1c900833c680",
+              "local": "Qwen3-Embedding-0.6B/added_tokens.json"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "Qwen3-Embedding-0.6B/chat_template.jinja",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 4116,
+              "sha256": "87a2728cb8dc9fe424d624542f6060ec05a1d285ebbec578bb078900e33396b5",
+              "local": "Qwen3-Embedding-0.6B/chat_template.jinja"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "Qwen3-Embedding-0.6B/config.json",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 1359,
+              "sha256": "bb23c1607cfe059a58d8f0196cf1cebb52082b1056b8e358a579da80a5759420",
+              "local": "Qwen3-Embedding-0.6B/config.json"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "Qwen3-Embedding-0.6B/merges.txt",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 1671853,
+              "sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+              "local": "Qwen3-Embedding-0.6B/merges.txt"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "Qwen3-Embedding-0.6B/model.safetensors",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 1191586416,
+              "sha256": "0437e45c94563b09e13cb7a64478fc406947a93cb34a7e05870fc8dcd48e23fd",
+              "role": "text_encoder",
+              "local": "Qwen3-Embedding-0.6B/model.safetensors"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "Qwen3-Embedding-0.6B/special_tokens_map.json",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 613,
+              "sha256": "76862e765266b85aa9459767e33cbaf13970f327a0e88d1c65846c2ddd3a1ecd",
+              "local": "Qwen3-Embedding-0.6B/special_tokens_map.json"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "Qwen3-Embedding-0.6B/tokenizer.json",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 11423705,
+              "sha256": "def76fb086971c7867b829c23a26261e38d9d74e02139253b38aeb9df8b4b50a",
+              "local": "Qwen3-Embedding-0.6B/tokenizer.json"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "Qwen3-Embedding-0.6B/tokenizer_config.json",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 5404,
+              "sha256": "443bfa629eb16387a12edbf92a76f6a6f10b2af3b53d87ba1550adfcf45f7fa0",
+              "local": "Qwen3-Embedding-0.6B/tokenizer_config.json"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "Qwen3-Embedding-0.6B/vocab.json",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 2776833,
+              "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+              "local": "Qwen3-Embedding-0.6B/vocab.json"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "vae/config.json",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 425,
+              "sha256": "14e019904df567f26df750317a70e2bd08f9f8f3c40ff4a24c97d1cd3f20ccd2",
+              "local": "vae/config.json"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "vae/diffusion_pytorch_model.safetensors",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 337431388,
+              "sha256": "da17edb604c40deaf09e9b24974e590d1ca83a374070e5d0884cfa4bed9a99b0",
+              "role": "vae",
+              "local": "vae/diffusion_pytorch_model.safetensors"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "acestep-v15-turbo/config.json",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 1968,
+              "sha256": "74745ff704ea49164c3d2d1c99fc0670f3fc635a869f0aec2d1311e6a52d400a",
+              "local": "acestep-v15-turbo/config.json"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "acestep-v15-turbo/model.safetensors",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 4787825604,
+              "sha256": "3f6e0797fad420a39bd33979eb6e840e30989e34a3794e843d23b60ec6e422d7",
+              "role": "dit",
+              "local": "acestep-v15-turbo/model.safetensors"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "acestep-v15-turbo/silence_latent.pt",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 3841215,
+              "sha256": "a778e9dd942f5e8b2c09c55370782d318834432b03dabbcdf70e6ed49ad6358b",
+              "local": "acestep-v15-turbo/silence_latent.pt"
+            }
+          ],
+          "memory_estimate_mb": 9183,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "cpu"
+          ]
+        },
+        {
+          "id": "xl-turbo-lm1.7b",
+          "label": "XL turbo + LM 1.7B (najlepszy, 20 GB)",
+          "files": [
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "Qwen3-Embedding-0.6B/added_tokens.json",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 707,
+              "sha256": "c0284b582e14987fbd3d5a2cb2bd139084371ed9acbae488829a1c900833c680",
+              "local": "Qwen3-Embedding-0.6B/added_tokens.json"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "Qwen3-Embedding-0.6B/chat_template.jinja",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 4116,
+              "sha256": "87a2728cb8dc9fe424d624542f6060ec05a1d285ebbec578bb078900e33396b5",
+              "local": "Qwen3-Embedding-0.6B/chat_template.jinja"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "Qwen3-Embedding-0.6B/config.json",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 1359,
+              "sha256": "bb23c1607cfe059a58d8f0196cf1cebb52082b1056b8e358a579da80a5759420",
+              "local": "Qwen3-Embedding-0.6B/config.json"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "Qwen3-Embedding-0.6B/merges.txt",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 1671853,
+              "sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+              "local": "Qwen3-Embedding-0.6B/merges.txt"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "Qwen3-Embedding-0.6B/model.safetensors",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 1191586416,
+              "sha256": "0437e45c94563b09e13cb7a64478fc406947a93cb34a7e05870fc8dcd48e23fd",
+              "role": "text_encoder",
+              "local": "Qwen3-Embedding-0.6B/model.safetensors"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "Qwen3-Embedding-0.6B/special_tokens_map.json",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 613,
+              "sha256": "76862e765266b85aa9459767e33cbaf13970f327a0e88d1c65846c2ddd3a1ecd",
+              "local": "Qwen3-Embedding-0.6B/special_tokens_map.json"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "Qwen3-Embedding-0.6B/tokenizer.json",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 11423705,
+              "sha256": "def76fb086971c7867b829c23a26261e38d9d74e02139253b38aeb9df8b4b50a",
+              "local": "Qwen3-Embedding-0.6B/tokenizer.json"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "Qwen3-Embedding-0.6B/tokenizer_config.json",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 5404,
+              "sha256": "443bfa629eb16387a12edbf92a76f6a6f10b2af3b53d87ba1550adfcf45f7fa0",
+              "local": "Qwen3-Embedding-0.6B/tokenizer_config.json"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "Qwen3-Embedding-0.6B/vocab.json",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 2776833,
+              "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+              "local": "Qwen3-Embedding-0.6B/vocab.json"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "vae/config.json",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 425,
+              "sha256": "14e019904df567f26df750317a70e2bd08f9f8f3c40ff4a24c97d1cd3f20ccd2",
+              "local": "vae/config.json"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "vae/diffusion_pytorch_model.safetensors",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 337431388,
+              "sha256": "da17edb604c40deaf09e9b24974e590d1ca83a374070e5d0884cfa4bed9a99b0",
+              "role": "vae",
+              "local": "vae/diffusion_pytorch_model.safetensors"
+            },
+            {
+              "repo": "ACE-Step/acestep-v15-xl-turbo",
+              "path": "config.json",
+              "revision": "d4a0b288b83ebb7e25a8c0b32c573c22e134e8ee",
+              "size": 2407,
+              "sha256": "e3665376d46477cbd3e76203cd4e241f11a6a6bb5f88464c49f3c6aae51a918b",
+              "local": "acestep-v15-xl-turbo/config.json"
+            },
+            {
+              "repo": "ACE-Step/acestep-v15-xl-turbo",
+              "path": "model-00001-of-00004.safetensors",
+              "revision": "d4a0b288b83ebb7e25a8c0b32c573c22e134e8ee",
+              "size": 4986971456,
+              "sha256": "e54a8413c981797312f53d512dec9944023d03f42f0740cbe86f62582cc27bdc",
+              "local": "acestep-v15-xl-turbo/model-00001-of-00004.safetensors"
+            },
+            {
+              "repo": "ACE-Step/acestep-v15-xl-turbo",
+              "path": "model-00002-of-00004.safetensors",
+              "revision": "d4a0b288b83ebb7e25a8c0b32c573c22e134e8ee",
+              "size": 4986942776,
+              "sha256": "b45f788b6dc9f15957cfa3d9b403f25f3f64c5211ecaf18dda45b67ea6470664",
+              "local": "acestep-v15-xl-turbo/model-00002-of-00004.safetensors"
+            },
+            {
+              "repo": "ACE-Step/acestep-v15-xl-turbo",
+              "path": "model-00003-of-00004.safetensors",
+              "revision": "d4a0b288b83ebb7e25a8c0b32c573c22e134e8ee",
+              "size": 4986942808,
+              "sha256": "a4f6bd572eab79cf5f3e4678796f904c6d6c33680a3e6ed09034d6de7cabea4d",
+              "local": "acestep-v15-xl-turbo/model-00003-of-00004.safetensors"
+            },
+            {
+              "repo": "ACE-Step/acestep-v15-xl-turbo",
+              "path": "model-00004-of-00004.safetensors",
+              "revision": "d4a0b288b83ebb7e25a8c0b32c573c22e134e8ee",
+              "size": 4988483464,
+              "sha256": "a868b05493c73808408f58b33a903371bb2846b53c8b19bd7476991bc8837259",
+              "local": "acestep-v15-xl-turbo/model-00004-of-00004.safetensors"
+            },
+            {
+              "repo": "ACE-Step/acestep-v15-xl-turbo",
+              "path": "model.safetensors.index.json",
+              "revision": "d4a0b288b83ebb7e25a8c0b32c573c22e134e8ee",
+              "size": 71471,
+              "sha256": "0a0c7e153a7bb6f6061b155739e9502cf83977bb959186d4df688595302a9474",
+              "role": "dit",
+              "local": "acestep-v15-xl-turbo/model.safetensors.index.json"
+            },
+            {
+              "repo": "ACE-Step/acestep-v15-xl-turbo",
+              "path": "silence_latent.pt",
+              "revision": "d4a0b288b83ebb7e25a8c0b32c573c22e134e8ee",
+              "size": 3841215,
+              "sha256": "a778e9dd942f5e8b2c09c55370782d318834432b03dabbcdf70e6ed49ad6358b",
+              "local": "acestep-v15-xl-turbo/silence_latent.pt"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "acestep-5Hz-lm-1.7B/added_tokens.json",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 2217787,
+              "sha256": "db08b66a515fb5d6acca0b3492d25bb44e0deda6241fc1113ac0679d40558c48",
+              "local": "acestep-5Hz-lm-1.7B/added_tokens.json"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "acestep-5Hz-lm-1.7B/chat_template.jinja",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 4168,
+              "sha256": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8",
+              "local": "acestep-5Hz-lm-1.7B/chat_template.jinja"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "acestep-5Hz-lm-1.7B/config.json",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 1385,
+              "sha256": "73515ca4bfd86a5b56f28bf680311d1911e159c85d7f7ceb2188e310007c9010",
+              "local": "acestep-5Hz-lm-1.7B/config.json"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "acestep-5Hz-lm-1.7B/merges.txt",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 1671853,
+              "sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+              "local": "acestep-5Hz-lm-1.7B/merges.txt"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "acestep-5Hz-lm-1.7B/model.safetensors",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 3708521528,
+              "sha256": "f161689da73e5ecefa28ff780d51c2d92a00f056d021d7933c779ed5c6cd7db8",
+              "role": "lm",
+              "local": "acestep-5Hz-lm-1.7B/model.safetensors"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "acestep-5Hz-lm-1.7B/special_tokens_map.json",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 1824199,
+              "sha256": "76e233bfc357b0b03d7b6e6ba8e799244f358552575a7cdadb78d3d19106b298",
+              "local": "acestep-5Hz-lm-1.7B/special_tokens_map.json"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "acestep-5Hz-lm-1.7B/tokenizer.json",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 24321939,
+              "sha256": "35af56c3f5cb3ea2cc578aa28a8937770981d504f183ac5c8c38baf4bbd4af4d",
+              "local": "acestep-5Hz-lm-1.7B/tokenizer.json"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "acestep-5Hz-lm-1.7B/tokenizer_config.json",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 14072925,
+              "sha256": "6cd70cdd89425971794f5235562edcc608b0629a6c4686ae51a8b8c8b8ba5e95",
+              "local": "acestep-5Hz-lm-1.7B/tokenizer_config.json"
+            },
+            {
+              "repo": "ACE-Step/Ace-Step1.5",
+              "path": "acestep-5Hz-lm-1.7B/vocab.json",
+              "revision": "19671f406d603126926c1b7e2adc169acbcade22",
+              "size": 2776833,
+              "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+              "local": "acestep-5Hz-lm-1.7B/vocab.json"
+            }
+          ],
+          "memory_estimate_mb": 33537,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": [
+        "polski"
+      ]
+    },
+    {
+      "id": "basal-2.0-mini",
+      "name": "Basal 2.0 mini",
+      "publisher": "Remek (basal)",
+      "modality": "decision",
+      "engine": "llama-cpp",
+      "params_b": 1.5,
+      "description_pl": "Mały model decyzyjny: wybiera odpowiedź i podaje, jak jest pewny. Szybki także bez karty graficznej.",
+      "description_en": "Small decision model: picks an answer and says how sure it is. Fast even without a graphics card.",
+      "languages": [
+        "pl",
+        "en"
+      ],
+      "features": [
+        "decision"
+      ],
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://www.apache.org/licenses/LICENSE-2.0",
+        "commercial": "yes",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "q8_0",
+          "label": "Q8_0",
+          "files": [
+            {
+              "repo": "Remek/basal-2.0-mini-GGUF",
+              "path": "basal-2.0-mini-Q8_0-decision.gguf",
+              "revision": "b6b79ac00da308d93b39c6ca500792ce2ee83a6f",
+              "size": 1699570624,
+              "sha256": "1d7750a7fc77fb08082236623fce4f999f28f0e8c726a05b84bf82ba7993103c",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 2807,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "q5_k_m",
+          "label": "Q5_K_M",
+          "files": [
+            {
+              "repo": "Remek/basal-2.0-mini-GGUF",
+              "path": "basal-2.0-mini-Q5_K_M-decision.gguf",
+              "revision": "b6b79ac00da308d93b39c6ca500792ce2ee83a6f",
+              "size": 1168139424,
+              "sha256": "8a8e399bbcfa865d12354c4e3e063cbd80982b355c8ecc8e42cd8ae54e99fdef",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 2250,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": [
+        "polski",
+        "szybki"
+      ]
+    },
+    {
+      "id": "basal-2.0-4.5b",
+      "name": "Basal 2.0 4.5B",
+      "publisher": "Remek (basal)",
+      "modality": "decision",
+      "engine": "llama-cpp",
+      "params_b": 4.5,
+      "description_pl": "Model decyzyjny: wybiera odpowiedź, mówi tak lub nie albo ocenia w skali, z prawdopodobieństwami.",
+      "description_en": "Decision model: picks an answer, says yes or no or rates on a scale, with probabilities.",
+      "languages": [
+        "pl",
+        "en"
+      ],
+      "features": [
+        "decision"
+      ],
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://www.apache.org/licenses/LICENSE-2.0",
+        "commercial": "yes",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "q8_0",
+          "label": "Q8_0",
+          "files": [
+            {
+              "repo": "Remek/basal-2.0-4.5B-GGUF",
+              "path": "basal-2.0-4.5B-Q8_0-decision.gguf",
+              "revision": "c8996b389cd7adb6064dd3a8a39de40b88ad73e5",
+              "size": 5061217760,
+              "sha256": "f91aafab12df1b5fbe6e30651552873c86b19b212fd34a8a43b208931dfa705c",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 6334,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "q5_k_m",
+          "label": "Q5_K_M",
+          "files": [
+            {
+              "repo": "Remek/basal-2.0-4.5B-GGUF",
+              "path": "basal-2.0-4.5B-Q5_K_M-decision.gguf",
+              "revision": "c8996b389cd7adb6064dd3a8a39de40b88ad73e5",
+              "size": 3419049632,
+              "sha256": "e3d69e03fa0eb0acd4ea82f2b55dc4df32b1779d68a51af710435f51de284554",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 4611,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": [
+        "polski"
+      ]
+    },
+    {
+      "id": "basal-2.0-max",
+      "name": "Basal 2.0 max",
+      "publisher": "Remek (basal)",
+      "modality": "decision",
+      "engine": "llama-cpp",
+      "params_b": 11.0,
+      "description_pl": "Największy model decyzyjny Basal: najdokładniejsze odpowiedzi, potrzebuje mocnej karty graficznej.",
+      "description_en": "Largest Basal decision model: the most accurate answers, needs a strong graphics card.",
+      "languages": [
+        "pl",
+        "en"
+      ],
+      "features": [
+        "decision"
+      ],
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://www.apache.org/licenses/LICENSE-2.0",
+        "commercial": "yes",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "q8_0",
+          "label": "Q8_0",
+          "files": [
+            {
+              "repo": "Remek/basal-2.0-max-GGUF",
+              "path": "basal-2.0-max-Q8_0-decision.gguf",
+              "revision": "fb93d69b752827f7ac837e8a76dbc729566bcd01",
+              "size": 11867768000,
+              "sha256": "cbf97a2f03c804e66ac2b6c01e6cccc595fbaf745c8292ed06abe9d71071d16b",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 13474,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "q5_k_m",
+          "label": "Q5_K_M",
+          "files": [
+            {
+              "repo": "Remek/basal-2.0-max-GGUF",
+              "path": "basal-2.0-max-Q5_K_M-decision.gguf",
+              "revision": "fb93d69b752827f7ac837e8a76dbc729566bcd01",
+              "size": 7987217824,
+              "sha256": "d35e620d3386855d945b6082a1aab7afc566a15dae66a593739c0953fb1d7576",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 9403,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": [
+        "polski"
+      ]
+    },
+    {
+      "id": "qwen3.6-27b",
+      "name": "Qwen3.6 27B",
+      "publisher": "Alibaba Qwen",
+      "modality": "llm",
+      "engine": "llama-cpp",
+      "params_b": 27.8,
+      "description_pl": "Duży model do trudniejszych zadań; w naszym teście jeden z najlepszych.",
+      "description_en": "A large model for harder tasks; one of the best in our benchmark.",
+      "languages": [
+        "en",
+        "pl",
+        "de",
+        "fr",
+        "es",
+        "zh"
+      ],
+      "features": [
+        "chat",
+        "tools"
+      ],
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://huggingface.co/Qwen/Qwen3.6-27B/blob/main/LICENSE",
+        "commercial": "yes",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "q4_k_m",
+          "label": "Q4_K_M",
+          "files": [
+            {
+              "repo": "unsloth/Qwen3.6-27B-GGUF",
+              "path": "Qwen3.6-27B-Q4_K_M.gguf",
+              "revision": "82d411acf4a06cfb8d9b073a5211bf410bfc29bf",
+              "size": 16817244384,
+              "sha256": "5ed60d0af4650a854b1755bd392f9aef4872643dc25a254bc68043fa638392a0",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 18666,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "q6_k",
+          "label": "Q6_K",
+          "files": [
+            {
+              "repo": "unsloth/Qwen3.6-27B-GGUF",
+              "path": "Qwen3.6-27B-Q6_K.gguf",
+              "revision": "82d411acf4a06cfb8d9b073a5211bf410bfc29bf",
+              "size": 22523238624,
+              "sha256": "ec1805fe87e6519c461c1ed2d179865464a875ed241032ead65a354f979cfe14",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 24652,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        },
+        {
+          "id": "q8_0",
+          "label": "Q8_0",
+          "files": [
+            {
+              "repo": "unsloth/Qwen3.6-27B-GGUF",
+              "path": "Qwen3.6-27B-Q8_0.gguf",
+              "revision": "82d411acf4a06cfb8d9b073a5211bf410bfc29bf",
+              "size": 28595763424,
+              "sha256": "f93f517f38e696d35a1a7df2c0e3155a64f4c4dcd662107a146ae263f7fb14ce",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 31023,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": [],
+      "benchmark": [
+        "qwen3.6:27b"
+      ]
+    },
+    {
+      "id": "qwen3.5-27b",
+      "name": "Qwen3.5 27B",
+      "publisher": "Alibaba Qwen",
+      "modality": "llm",
+      "engine": "llama-cpp",
+      "params_b": 27.8,
+      "description_pl": "Duży, dokładny model do analiz i pisania.",
+      "description_en": "A large, accurate model for analysis and writing.",
+      "languages": [
+        "en",
+        "pl",
+        "de",
+        "fr",
+        "es",
+        "zh"
+      ],
+      "features": [
+        "chat",
+        "tools"
+      ],
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://huggingface.co/Qwen/Qwen3.5-27B/blob/main/LICENSE",
+        "commercial": "yes",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "q4_k_m",
+          "label": "Q4_K_M",
+          "files": [
+            {
+              "repo": "unsloth/Qwen3.5-27B-GGUF",
+              "path": "Qwen3.5-27B-Q4_K_M.gguf",
+              "revision": "3221f178a6b842d04f1fb42f1c413534adcc0a6a",
+              "size": 16740812704,
+              "sha256": "84b5f7f112156d63836a01a69dc3f11a6ba63b10a23b8ca7a7efaf52d5a2d806",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 18586,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "q6_k",
+          "label": "Q6_K",
+          "files": [
+            {
+              "repo": "unsloth/Qwen3.5-27B-GGUF",
+              "path": "Qwen3.5-27B-Q6_K.gguf",
+              "revision": "3221f178a6b842d04f1fb42f1c413534adcc0a6a",
+              "size": 22453933984,
+              "sha256": "69e0f8527e0d937097cbcd486b51e2effaed963f49ef7962c9ef3eab45164ff8",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 24580,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        },
+        {
+          "id": "q8_0",
+          "label": "Q8_0",
+          "files": [
+            {
+              "repo": "unsloth/Qwen3.5-27B-GGUF",
+              "path": "Qwen3.5-27B-Q8_0.gguf",
+              "revision": "3221f178a6b842d04f1fb42f1c413534adcc0a6a",
+              "size": 28595763104,
+              "sha256": "6b0a101b0a86697fe11eabcc1a7db72699a9f3d4b18b6a1ac75ea3fb2c26c450",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 31023,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": [],
+      "benchmark": [
+        "qwen3.5:27b"
+      ]
+    },
+    {
+      "id": "qwen3.5-35b-a3b",
+      "name": "Qwen3.5 35B A3B",
+      "publisher": "Alibaba Qwen",
+      "modality": "llm",
+      "engine": "llama-cpp",
+      "params_b": 36.0,
+      "description_pl": "Duży model MoE, który odpowiada szybko nawet bez mocnej karty graficznej.",
+      "description_en": "A large MoE model that answers quickly even without a strong graphics card.",
+      "languages": [
+        "en",
+        "pl",
+        "de",
+        "fr",
+        "es",
+        "zh"
+      ],
+      "features": [
+        "chat",
+        "tools"
+      ],
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://huggingface.co/Qwen/Qwen3.5-35B-A3B/blob/main/LICENSE",
+        "commercial": "yes",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "q4_k_m",
+          "label": "Q4_K_M",
+          "files": [
+            {
+              "repo": "unsloth/Qwen3.5-35B-A3B-GGUF",
+              "path": "Qwen3.5-35B-A3B-Q4_K_M.gguf",
+              "revision": "bc014a17be43adabd7066b7a86075ff935c6a4e2",
+              "size": 22016023168,
+              "sha256": "3b46d1066bc91cc2d613e3bc22ce691dd77e6f0d33c9060690d24ce6de494375",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 24120,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "q6_k",
+          "label": "Q6_K",
+          "files": [
+            {
+              "repo": "unsloth/Qwen3.5-35B-A3B-GGUF",
+              "path": "Qwen3.5-35B-A3B-Q6_K.gguf",
+              "revision": "bc014a17be43adabd7066b7a86075ff935c6a4e2",
+              "size": 28852861568,
+              "sha256": "56ddab06cc049b66fee8cff294c0b0e5e848f3381ed0da1a3a16a7bd80e8280a",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 31292,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": [
+        "moe"
+      ],
+      "benchmark": [
+        "qwen3.5:35b"
+      ]
+    },
+    {
+      "id": "qwen3-32b",
+      "name": "Qwen3 32B",
+      "publisher": "Alibaba Qwen",
+      "modality": "llm",
+      "engine": "llama-cpp",
+      "params_b": 32.8,
+      "description_pl": "Sprawdzony duży model do trudnych zadań i rozumowania.",
+      "description_en": "A proven large model for hard tasks and reasoning.",
+      "languages": [
+        "en",
+        "pl",
+        "de",
+        "fr",
+        "es",
+        "zh"
+      ],
+      "features": [
+        "chat",
+        "tools"
+      ],
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://huggingface.co/Qwen/Qwen3-32B/blob/main/LICENSE",
+        "commercial": "yes",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "q4_k_m",
+          "label": "Q4_K_M",
+          "files": [
+            {
+              "repo": "Qwen/Qwen3-32B-GGUF",
+              "path": "Qwen3-32B-Q4_K_M.gguf",
+              "revision": "938a7432affaec9157f883a87164e2646ae17555",
+              "size": 19762149024,
+              "sha256": "efd971561896866f0e910cce52761ca77b1b138090c7f15fe284676d57d1f689",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 21756,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "q6_k",
+          "label": "Q6_K",
+          "files": [
+            {
+              "repo": "Qwen/Qwen3-32B-GGUF",
+              "path": "Qwen3-32B-Q6_K.gguf",
+              "revision": "938a7432affaec9157f883a87164e2646ae17555",
+              "size": 26883306112,
+              "sha256": "c4c7c3cb6da260df1fe1d3cfd090a32dc7cc348f1278158be18e301f390d6f6e",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 29226,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        },
+        {
+          "id": "q8_0",
+          "label": "Q8_0",
+          "files": [
+            {
+              "repo": "Qwen/Qwen3-32B-GGUF",
+              "path": "Qwen3-32B-Q8_0.gguf",
+              "revision": "938a7432affaec9157f883a87164e2646ae17555",
+              "size": 34817718912,
+              "sha256": "2c50eb8aad05047dbf24fa014eb621adf552e14176cabe0c5db4ef38c91e2169",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 37550,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": [],
+      "benchmark": [
+        "qwen3:32b"
+      ]
+    },
+    {
+      "id": "qwen3-30b-a3b",
+      "name": "Qwen3 30B A3B",
+      "publisher": "Alibaba Qwen",
+      "modality": "llm",
+      "engine": "llama-cpp",
+      "params_b": 30.5,
+      "description_pl": "Szybki model MoE do codziennej pracy.",
+      "description_en": "A fast MoE model for everyday work.",
+      "languages": [
+        "en",
+        "pl",
+        "de",
+        "fr",
+        "es",
+        "zh"
+      ],
+      "features": [
+        "chat",
+        "tools"
+      ],
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://huggingface.co/Qwen/Qwen3-30B-A3B-Instruct-2507/blob/main/LICENSE",
+        "commercial": "yes",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "q4_k_m",
+          "label": "Q4_K_M",
+          "files": [
+            {
+              "repo": "unsloth/Qwen3-30B-A3B-Instruct-2507-GGUF",
+              "path": "Qwen3-30B-A3B-Instruct-2507-Q4_K_M.gguf",
+              "revision": "eea7b2be5805a5f151f8847ede8e5f9a9284bf77",
+              "size": 18556686752,
+              "sha256": "6c997b8af17debdfb01d890214400ccbab00db6acc0ba8da5de1cc906c4774d0",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 20491,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "q6_k",
+          "label": "Q6_K",
+          "files": [
+            {
+              "repo": "unsloth/Qwen3-30B-A3B-Instruct-2507-GGUF",
+              "path": "Qwen3-30B-A3B-Instruct-2507-Q6_K.gguf",
+              "revision": "eea7b2be5805a5f151f8847ede8e5f9a9284bf77",
+              "size": 25092532640,
+              "sha256": "b1a3ed3bc584d58d25253c408cbbf894f974dffa2df74e016469289e686ef701",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 27348,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": [
+        "moe"
+      ],
+      "benchmark": [
+        "qwen3:30b"
+      ]
+    },
+    {
+      "id": "qwen3-14b",
+      "name": "Qwen3 14B",
+      "publisher": "Alibaba Qwen",
+      "modality": "llm",
+      "engine": "llama-cpp",
+      "params_b": 14.8,
+      "description_pl": "Dobry model średniej wielkości do rozmowy, streszczeń i kodu.",
+      "description_en": "A good mid-size model for conversation, summaries and code.",
+      "languages": [
+        "en",
+        "pl",
+        "de",
+        "fr",
+        "es",
+        "zh"
+      ],
+      "features": [
+        "chat",
+        "tools"
+      ],
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://huggingface.co/Qwen/Qwen3-14B/blob/main/LICENSE",
+        "commercial": "yes",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "q4_k_m",
+          "label": "Q4_K_M",
+          "files": [
+            {
+              "repo": "Qwen/Qwen3-14B-GGUF",
+              "path": "Qwen3-14B-Q4_K_M.gguf",
+              "revision": "530227a7d994db8eca5ab5ced2fb692b614357fd",
+              "size": 9001752960,
+              "sha256": "500a8806e85ee9c83f3ae08420295592451379b4f8cf2d0f41c15dffeb6b81f0",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 10468,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "q6_k",
+          "label": "Q6_K",
+          "files": [
+            {
+              "repo": "Qwen/Qwen3-14B-GGUF",
+              "path": "Qwen3-14B-Q6_K.gguf",
+              "revision": "530227a7d994db8eca5ab5ced2fb692b614357fd",
+              "size": 12121937248,
+              "sha256": "ec1f1d1421d7636a23e17645cac6fda39ee4b5f1f11e42eb09238089705ef699",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 13741,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        },
+        {
+          "id": "q8_0",
+          "label": "Q8_0",
+          "files": [
+            {
+              "repo": "Qwen/Qwen3-14B-GGUF",
+              "path": "Qwen3-14B-Q8_0.gguf",
+              "revision": "530227a7d994db8eca5ab5ced2fb692b614357fd",
+              "size": 15698533728,
+              "sha256": "a0dfe649137410b7d82f06a209240508e218f32f5b6fd81b69d6932160cfcd9d",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 17493,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": [],
+      "benchmark": [
+        "qwen3:14b"
+      ]
+    },
+    {
+      "id": "qwen3-coder-30b-a3b",
+      "name": "Qwen3 Coder 30B A3B",
+      "publisher": "Alibaba Qwen",
+      "modality": "llm",
+      "engine": "llama-cpp",
+      "params_b": 30.5,
+      "description_pl": "Model do programowania: pisze i poprawia kod.",
+      "description_en": "A model for programming: writes and fixes code.",
+      "languages": [
+        "en",
+        "zh"
+      ],
+      "features": [
+        "chat",
+        "tools"
+      ],
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://huggingface.co/Qwen/Qwen3-Coder-30B-A3B-Instruct/blob/main/LICENSE",
+        "commercial": "yes",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "q4_k_m",
+          "label": "Q4_K_M",
+          "files": [
+            {
+              "repo": "unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF",
+              "path": "Qwen3-Coder-30B-A3B-Instruct-Q4_K_M.gguf",
+              "revision": "b17cb02dd882d5b6ab62fc777ad2995f19668350",
+              "size": 18556689568,
+              "sha256": "fadc3e5f8d42bf7e894a785b05082e47daee4df26680389817e2093056f088ad",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 20491,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "q6_k",
+          "label": "Q6_K",
+          "files": [
+            {
+              "repo": "unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF",
+              "path": "Qwen3-Coder-30B-A3B-Instruct-Q6_K.gguf",
+              "revision": "b17cb02dd882d5b6ab62fc777ad2995f19668350",
+              "size": 25092535456,
+              "sha256": "100b5121d09553fb1af3b873b21fb3ec3da5c306fc5cb09bd338c48e21b10875",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 27348,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": [
+        "moe"
+      ],
+      "benchmark": [
+        "qwen3-coder:latest",
+        "qwen3-coder:30b"
+      ]
+    },
+    {
+      "id": "qwen2.5-coder-32b",
+      "name": "Qwen2.5 Coder 32B",
+      "publisher": "Alibaba Qwen",
+      "modality": "llm",
+      "engine": "llama-cpp",
+      "params_b": 32.8,
+      "description_pl": "Duży model do programowania.",
+      "description_en": "A large model for programming.",
+      "languages": [
+        "en",
+        "zh"
+      ],
+      "features": [
+        "chat",
+        "tools"
+      ],
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://huggingface.co/Qwen/Qwen2.5-Coder-32B-Instruct/blob/main/LICENSE",
+        "commercial": "yes",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "q4_k_m",
+          "label": "Q4_K_M",
+          "files": [
+            {
+              "repo": "bartowski/Qwen2.5-Coder-32B-Instruct-GGUF",
+              "path": "Qwen2.5-Coder-32B-Instruct-Q4_K_M.gguf",
+              "revision": "40b525506a4f98ed425882fa6dfc90cc8139065e",
+              "size": 19851336672,
+              "sha256": "8e2fd78ff55e7cdf577fda257bac2776feb7d73d922613caf35468073807e815",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 21849,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "q6_k",
+          "label": "Q6_K",
+          "files": [
+            {
+              "repo": "bartowski/Qwen2.5-Coder-32B-Instruct-GGUF",
+              "path": "Qwen2.5-Coder-32B-Instruct-Q6_K.gguf",
+              "revision": "40b525506a4f98ed425882fa6dfc90cc8139065e",
+              "size": 26886155232,
+              "sha256": "99c4f668b96cd9e2f0d1c5af811124f59559d8d13da65892993eaa8bca14dc13",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 29229,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": [],
+      "benchmark": [
+        "qwen2.5-coder:32b"
+      ]
+    },
+    {
+      "id": "gpt-oss-20b",
+      "name": "gpt-oss 20B",
+      "publisher": "OpenAI",
+      "modality": "llm",
+      "engine": "llama-cpp",
+      "params_b": 20.9,
+      "description_pl": "Otwarty model OpenAI, który myśli przed odpowiedzią.",
+      "description_en": "An open OpenAI model that thinks before it answers.",
+      "languages": [
+        "en",
+        "pl",
+        "de",
+        "fr",
+        "es"
+      ],
+      "features": [
+        "chat",
+        "tools"
+      ],
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://huggingface.co/openai/gpt-oss-20b/blob/main/LICENSE",
+        "commercial": "yes",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "q4_k_m",
+          "label": "Q4_K_M",
+          "files": [
+            {
+              "repo": "unsloth/gpt-oss-20b-GGUF",
+              "path": "gpt-oss-20b-Q4_K_M.gguf",
+              "revision": "d449b42d93e1c2c7bda5312f5c25c8fb91dfa9b4",
+              "size": 11624759488,
+              "sha256": "c27536640e410032865dc68781d80a08b98f8db5e93575919af8ccc0568aeb4f",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 13219,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "q8_0",
+          "label": "Q8_0",
+          "files": [
+            {
+              "repo": "unsloth/gpt-oss-20b-GGUF",
+              "path": "gpt-oss-20b-Q8_0.gguf",
+              "revision": "d449b42d93e1c2c7bda5312f5c25c8fb91dfa9b4",
+              "size": 12109567168,
+              "sha256": "bcd455d4034ec02f71a875b46cb17df44a97911d7258291973be4d21f98329f3",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 13728,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": [],
+      "benchmark": [
+        "gpt-oss:20b"
+      ]
+    },
+    {
+      "id": "glm-4.7-flash",
+      "name": "GLM 4.7 Flash",
+      "publisher": "Z.ai",
+      "modality": "llm",
+      "engine": "llama-cpp",
+      "params_b": 29.9,
+      "description_pl": "Duży model MoE do rozmowy i narzędzi, odpowiada szybko.",
+      "description_en": "A large MoE model for chat and tools that answers quickly.",
+      "languages": [
+        "en",
+        "zh",
+        "pl",
+        "de",
+        "fr",
+        "es"
+      ],
+      "features": [
+        "chat",
+        "tools"
+      ],
+      "license": {
+        "name": "MIT",
+        "url": "https://huggingface.co/zai-org/GLM-4.7-Flash/blob/main/LICENSE",
+        "commercial": "yes",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "q4_k_m",
+          "label": "Q4_K_M",
+          "files": [
+            {
+              "repo": "unsloth/GLM-4.7-Flash-GGUF",
+              "path": "GLM-4.7-Flash-Q4_K_M.gguf",
+              "revision": "0d32489ecb9db6d2a4fc93bd27ef01519f95474d",
+              "size": 18312339808,
+              "sha256": "29837ed2c0fc5f51981adf8ac8083fcf80743c598381f13e9f06cbad0498b174",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 20235,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "q6_k",
+          "label": "Q6_K",
+          "files": [
+            {
+              "repo": "unsloth/GLM-4.7-Flash-GGUF",
+              "path": "GLM-4.7-Flash-Q6_K.gguf",
+              "revision": "0d32489ecb9db6d2a4fc93bd27ef01519f95474d",
+              "size": 24693098848,
+              "sha256": "f5bdc431802d7a3dab3be5a50ad0848a5569fd45c98c5e2ad83412c87cd887dc",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 26929,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": [
+        "moe"
+      ],
+      "benchmark": [
+        "glm-4.7-flash:Q4_K_M"
+      ]
+    },
+    {
+      "id": "gemma3-27b",
+      "name": "Gemma 3 27B",
+      "publisher": "Google DeepMind",
+      "modality": "llm",
+      "engine": "llama-cpp",
+      "params_b": 27.4,
+      "description_pl": "Duży model Google, dobry w wielu językach.",
+      "description_en": "A large Google model, good in many languages.",
+      "languages": [
+        "en",
+        "pl",
+        "de",
+        "fr",
+        "es",
+        "zh"
+      ],
+      "features": [
+        "chat",
+        "tools"
+      ],
+      "license": {
+        "name": "Gemma Terms of Use",
+        "url": "https://ai.google.dev/gemma/terms",
+        "commercial": "conditions",
+        "conditions_pl": "Użycie komercyjne dozwolone po zaakceptowaniu warunków Google; obowiązują zasady dopuszczalnego użycia.",
+        "conditions_en": "Commercial use is allowed after accepting Google's terms; the prohibited use policy applies.",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "q4_k_m",
+          "label": "Q4_K_M",
+          "files": [
+            {
+              "repo": "unsloth/gemma-3-27b-it-GGUF",
+              "path": "gemma-3-27b-it-Q4_K_M.gguf",
+              "revision": "7cd0121f2530b00e42c4df952d4cad4418c0b3c1",
+              "size": 16546688736,
+              "sha256": "f1b699659942c777bd3ec0bcb527d6ebf34ae14ca76e3af103d58d0c9cbdadee",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 18383,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "q6_k",
+          "label": "Q6_K",
+          "files": [
+            {
+              "repo": "unsloth/gemma-3-27b-it-GGUF",
+              "path": "gemma-3-27b-it-Q6_K.gguf",
+              "revision": "7cd0121f2530b00e42c4df952d4cad4418c0b3c1",
+              "size": 22166974176,
+              "sha256": "844f0142c76a14a035fa38b802525c4eef447e25efb66eeabc9212a8d019900b",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 24279,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": [],
+      "benchmark": [
+        "gemma3:27b"
+      ]
+    },
+    {
+      "id": "gemma3-12b",
+      "name": "Gemma 3 12B",
+      "publisher": "Google DeepMind",
+      "modality": "llm",
+      "engine": "llama-cpp",
+      "params_b": 12.2,
+      "description_pl": "Dobry model średniej wielkości od Google.",
+      "description_en": "A good mid-size model from Google.",
+      "languages": [
+        "en",
+        "pl",
+        "de",
+        "fr",
+        "es",
+        "zh"
+      ],
+      "features": [
+        "chat",
+        "tools"
+      ],
+      "license": {
+        "name": "Gemma Terms of Use",
+        "url": "https://ai.google.dev/gemma/terms",
+        "commercial": "conditions",
+        "conditions_pl": "Użycie komercyjne dozwolone po zaakceptowaniu warunków Google; obowiązują zasady dopuszczalnego użycia.",
+        "conditions_en": "Commercial use is allowed after accepting Google's terms; the prohibited use policy applies.",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "q4_k_m",
+          "label": "Q4_K_M",
+          "files": [
+            {
+              "repo": "unsloth/gemma-3-12b-it-GGUF",
+              "path": "gemma-3-12b-it-Q4_K_M.gguf",
+              "revision": "d15e4c7dc21dc55d56bf8549db57a71ad8a2a35d",
+              "size": 7300778336,
+              "sha256": "15b8fd9d8672cd4240c178c217ca781409291f34e353d2e913b29c7602ceb3ff",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 8683,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "q6_k",
+          "label": "Q6_K",
+          "files": [
+            {
+              "repo": "unsloth/gemma-3-12b-it-GGUF",
+              "path": "gemma-3-12b-it-Q6_K.gguf",
+              "revision": "d15e4c7dc21dc55d56bf8549db57a71ad8a2a35d",
+              "size": 9660811616,
+              "sha256": "5a99903816f50b6b7d63fe96e1ed51d6e03c795051e99146719f3e066a863069",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 11159,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        },
+        {
+          "id": "q8_0",
+          "label": "Q8_0",
+          "files": [
+            {
+              "repo": "unsloth/gemma-3-12b-it-GGUF",
+              "path": "gemma-3-12b-it-Q8_0.gguf",
+              "revision": "d15e4c7dc21dc55d56bf8549db57a71ad8a2a35d",
+              "size": 12510212576,
+              "sha256": "a774cd9c6f289a6159f4a3f92a7ebca887e15073f92016d53c3593cb440a5982",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 14148,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": [],
+      "benchmark": [
+        "gemma3:12b"
+      ]
+    },
+    {
+      "id": "ministral-3-14b",
+      "name": "Ministral 3 14B",
+      "publisher": "Mistral AI",
+      "modality": "llm",
+      "engine": "llama-cpp",
+      "params_b": 13.9,
+      "description_pl": "Model Mistral średniej wielkości, dobry po francusku i angielsku.",
+      "description_en": "A mid-size Mistral model, good in French and English.",
+      "languages": [
+        "en",
+        "fr",
+        "de",
+        "es",
+        "pl"
+      ],
+      "features": [
+        "chat",
+        "tools"
+      ],
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://huggingface.co/mistralai/Ministral-3-14B-Instruct-2512/blob/main/LICENSE",
+        "commercial": "yes",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "q4_k_m",
+          "label": "Q4_K_M",
+          "files": [
+            {
+              "repo": "mistralai/Ministral-3-14B-Instruct-2512-GGUF",
+              "path": "Ministral-3-14B-Instruct-2512-Q4_K_M.gguf",
+              "revision": "74fac473c43357d7fb2671713608183cc72496d0",
+              "size": 8239593024,
+              "sha256": "824e0f3373e69b84f2cae46fdcb9bd1ebc6ab3bfc7acc125d818b7b8178cc613",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 9668,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "q8_0",
+          "label": "Q8_0",
+          "files": [
+            {
+              "repo": "mistralai/Ministral-3-14B-Instruct-2512-GGUF",
+              "path": "Ministral-3-14B-Instruct-2512-Q8_0.gguf",
+              "revision": "74fac473c43357d7fb2671713608183cc72496d0",
+              "size": 14359836224,
+              "sha256": "8122acc8df446039d41dd9650dabb024d3c6b8dae6eff336d28ac2bddd3bbc13",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 16089,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": [],
+      "benchmark": [
+        "ministral-3:14b"
+      ]
+    },
+    {
+      "id": "devstral-small-2-24b",
+      "name": "Devstral Small 2 24B",
+      "publisher": "Mistral AI",
+      "modality": "llm",
+      "engine": "llama-cpp",
+      "params_b": 24.0,
+      "description_pl": "Model do programowania i pracy z kodem.",
+      "description_en": "A model for programming and working with code.",
+      "languages": [
+        "en",
+        "fr",
+        "de",
+        "es",
+        "pl"
+      ],
+      "features": [
+        "chat",
+        "tools"
+      ],
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://huggingface.co/mistralai/Devstral-Small-2-24B-Instruct-2512/blob/main/LICENSE",
+        "commercial": "yes",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "q4_k_m",
+          "label": "Q4_K_M",
+          "files": [
+            {
+              "repo": "bartowski/mistralai_Devstral-Small-2-24B-Instruct-2512-GGUF",
+              "path": "mistralai_Devstral-Small-2-24B-Instruct-2512-Q4_K_M.gguf",
+              "revision": "027695770ae1de77c2f6fb19f8e1ba9d65fcd15d",
+              "size": 14334438272,
+              "sha256": "bfd11c8679c6b81eb43763505465d7dcfa72e460ab1c220ecc235a3efadd7f7f",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 16062,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "q6_k",
+          "label": "Q6_K",
+          "files": [
+            {
+              "repo": "bartowski/mistralai_Devstral-Small-2-24B-Instruct-2512-GGUF",
+              "path": "mistralai_Devstral-Small-2-24B-Instruct-2512-Q6_K.gguf",
+              "revision": "027695770ae1de77c2f6fb19f8e1ba9d65fcd15d",
+              "size": 19346467712,
+              "sha256": "a3e7b51f00baac8d9a840d1ae2277dab3c0aa7e91087548c40cfb1ccc18a923d",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 21320,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": [],
+      "benchmark": [
+        "devstral-small-2:24b"
+      ]
+    },
+    {
+      "id": "qwen3-1.7b",
+      "name": "Qwen3 1.7B",
+      "publisher": "Alibaba Qwen",
+      "modality": "llm",
+      "engine": "llama-cpp",
+      "params_b": 2.0,
+      "description_pl": "Maleńki model, działa nawet na słabym komputerze.",
+      "description_en": "A tiny model that runs even on a weak computer.",
+      "languages": [
+        "en",
+        "pl",
+        "de",
+        "fr",
+        "es",
+        "zh"
+      ],
+      "features": [
+        "chat",
+        "tools"
+      ],
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://huggingface.co/Qwen/Qwen3-1.7B/blob/main/LICENSE",
+        "commercial": "yes",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "q4_k_m",
+          "label": "Q4_K_M",
+          "files": [
+            {
+              "repo": "unsloth/Qwen3-1.7B-GGUF",
+              "path": "Qwen3-1.7B-Q4_K_M.gguf",
+              "revision": "d7f544eead698dbd1f15126ef60b45a1e1933222",
+              "size": 1107409472,
+              "sha256": "b139949c5bd74937ad8ed8c8cf3d9ffb1e99c866c823204dc42c0d91fa181897",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 2186,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "q8_0",
+          "label": "Q8_0",
+          "files": [
+            {
+              "repo": "unsloth/Qwen3-1.7B-GGUF",
+              "path": "Qwen3-1.7B-Q8_0.gguf",
+              "revision": "d7f544eead698dbd1f15126ef60b45a1e1933222",
+              "size": 1834426944,
+              "sha256": "0becaa825564295d82e9af4d008bca5f8b7f5f73bf1c6a0b58f7c53ef26b47fd",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 2949,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": [
+        "szybki"
+      ],
+      "benchmark": [
+        "qwen3:1.7b"
+      ]
+    },
+    {
+      "id": "qwen2.5-1.5b",
+      "name": "Qwen2.5 1.5B",
+      "publisher": "Alibaba Qwen",
+      "modality": "llm",
+      "engine": "llama-cpp",
+      "params_b": 1.5,
+      "description_pl": "Bardzo mały i szybki model do prostych zadań.",
+      "description_en": "A very small and fast model for simple tasks.",
+      "languages": [
+        "en",
+        "pl",
+        "de",
+        "fr",
+        "es",
+        "zh"
+      ],
+      "features": [
+        "chat",
+        "tools"
+      ],
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://huggingface.co/Qwen/Qwen2.5-1.5B-Instruct/blob/main/LICENSE",
+        "commercial": "yes",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "q4_k_m",
+          "label": "Q4_K_M",
+          "files": [
+            {
+              "repo": "Qwen/Qwen2.5-1.5B-Instruct-GGUF",
+              "path": "qwen2.5-1.5b-instruct-q4_k_m.gguf",
+              "revision": "91cad51170dc346986eccefdc2dd33a9da36ead9",
+              "size": 1117320736,
+              "sha256": "6a1a2eb6d15622bf3c96857206351ba97e1af16c30d7a74ee38970e434e9407e",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 2197,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "q8_0",
+          "label": "Q8_0",
+          "files": [
+            {
+              "repo": "Qwen/Qwen2.5-1.5B-Instruct-GGUF",
+              "path": "qwen2.5-1.5b-instruct-q8_0.gguf",
+              "revision": "91cad51170dc346986eccefdc2dd33a9da36ead9",
+              "size": 1894532128,
+              "sha256": "d7efb072e7724d25048a4fda0a3e10b04bdef5d06b1403a1c93bd9f1240a63c8",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 3012,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": [
+        "szybki"
+      ],
+      "benchmark": [
+        "qwen2.5:1.5b"
+      ]
+    },
+    {
+      "id": "gemma3-1b",
+      "name": "Gemma 3 1B",
+      "publisher": "Google DeepMind",
+      "modality": "llm",
+      "engine": "llama-cpp",
+      "params_b": 1.0,
+      "description_pl": "Najmniejszy Gemma, szybki na każdym komputerze.",
+      "description_en": "The smallest Gemma, fast on any computer.",
+      "languages": [
+        "en",
+        "pl",
+        "de",
+        "fr",
+        "es",
+        "zh"
+      ],
+      "features": [
+        "chat",
+        "tools"
+      ],
+      "license": {
+        "name": "Gemma Terms of Use",
+        "url": "https://ai.google.dev/gemma/terms",
+        "commercial": "conditions",
+        "conditions_pl": "Użycie komercyjne dozwolone po zaakceptowaniu warunków Google; obowiązują zasady dopuszczalnego użycia.",
+        "conditions_en": "Commercial use is allowed after accepting Google's terms; the prohibited use policy applies.",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "q4_k_m",
+          "label": "Q4_K_M",
+          "files": [
+            {
+              "repo": "unsloth/gemma-3-1b-it-GGUF",
+              "path": "gemma-3-1b-it-Q4_K_M.gguf",
+              "revision": "f0b45be0aac41bd6a100a4b5734cad5f67255bfb",
+              "size": 806058272,
+              "sha256": "8270790f3ab69fdfe860b7b64008d9a19986d8df7e407bb018184caa08798ebd",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 1870,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "q8_0",
+          "label": "Q8_0",
+          "files": [
+            {
+              "repo": "unsloth/gemma-3-1b-it-GGUF",
+              "path": "gemma-3-1b-it-Q8_0.gguf",
+              "revision": "f0b45be0aac41bd6a100a4b5734cad5f67255bfb",
+              "size": 1069306400,
+              "sha256": "616dfb049ad14288d971d96f5ca4953fdebbf1e3cd407ad159f3bfd47090201d",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 2146,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": [
+        "szybki"
+      ],
+      "benchmark": [
+        "gemma3:1b"
+      ]
+    },
+    {
+      "id": "gemma2-2b",
+      "name": "Gemma 2 2B",
+      "publisher": "Google DeepMind",
+      "modality": "llm",
+      "engine": "llama-cpp",
+      "params_b": 2.6,
+      "description_pl": "Mały model Google do prostych zadań.",
+      "description_en": "A small Google model for simple tasks.",
+      "languages": [
+        "en",
+        "de",
+        "fr",
+        "es"
+      ],
+      "features": [
+        "chat",
+        "tools"
+      ],
+      "license": {
+        "name": "Gemma Terms of Use",
+        "url": "https://ai.google.dev/gemma/terms",
+        "commercial": "conditions",
+        "conditions_pl": "Użycie komercyjne dozwolone po zaakceptowaniu warunków Google; obowiązują zasady dopuszczalnego użycia.",
+        "conditions_en": "Commercial use is allowed after accepting Google's terms; the prohibited use policy applies.",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "q4_k_m",
+          "label": "Q4_K_M",
+          "files": [
+            {
+              "repo": "bartowski/gemma-2-2b-it-GGUF",
+              "path": "gemma-2-2b-it-Q4_K_M.gguf",
+              "revision": "855f67caed130e1befc571b52bd181be2e858883",
+              "size": 1708582752,
+              "sha256": "e0aee85060f168f0f2d8473d7ea41ce2f3230c1bc1374847505ea599288a7787",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 2817,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "q8_0",
+          "label": "Q8_0",
+          "files": [
+            {
+              "repo": "bartowski/gemma-2-2b-it-GGUF",
+              "path": "gemma-2-2b-it-Q8_0.gguf",
+              "revision": "855f67caed130e1befc571b52bd181be2e858883",
+              "size": 2784495456,
+              "sha256": "2d448a9aab894b8e8e18168cf3f490cb9f65632222f29f93514ac9ecc754debe",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 3946,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": [
+        "szybki"
+      ],
+      "benchmark": [
+        "gemma2:2b"
+      ]
+    },
+    {
+      "id": "lfm2.5-1.2b-thinking",
+      "name": "LFM2.5 1.2B Thinking",
+      "publisher": "Liquid AI",
+      "modality": "llm",
+      "engine": "llama-cpp",
+      "params_b": 1.2,
+      "description_pl": "Maleńki model, który myśli przed odpowiedzią.",
+      "description_en": "A tiny model that thinks before it answers.",
+      "languages": [
+        "en",
+        "de",
+        "fr",
+        "es",
+        "zh"
+      ],
+      "features": [
+        "chat",
+        "tools"
+      ],
+      "license": {
+        "name": "LFM Open License 1.0",
+        "url": "https://huggingface.co/LiquidAI/LFM2.5-1.2B-Thinking/blob/main/LICENSE",
+        "commercial": "conditions",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "q4_k_m",
+          "label": "Q4_K_M",
+          "files": [
+            {
+              "repo": "LiquidAI/LFM2.5-1.2B-Thinking-GGUF",
+              "path": "LFM2.5-1.2B-Thinking-Q4_K_M.gguf",
+              "revision": "b71945805f7d4d87dabd73e26098d44bcad6c35f",
+              "size": 730899072,
+              "sha256": "4a1e1824f71091f368137b6966094461019f6af3a5aadd96033bee59fc9eaeea",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 1791,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "q8_0",
+          "label": "Q8_0",
+          "files": [
+            {
+              "repo": "LiquidAI/LFM2.5-1.2B-Thinking-GGUF",
+              "path": "LFM2.5-1.2B-Thinking-Q8_0.gguf",
+              "revision": "b71945805f7d4d87dabd73e26098d44bcad6c35f",
+              "size": 1246257792,
+              "sha256": "e346f3d63c9e44258019a044b7993d74a0952bc31873c8954f3b86a5caa97e46",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 2332,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": [
+        "szybki"
+      ],
+      "benchmark": [
+        "lfm2.5-thinking:1.2b"
+      ]
+    },
+    {
+      "id": "bielik-1.5b-v3",
+      "name": "Bielik 1.5B v3",
+      "publisher": "SpeakLeash",
+      "modality": "llm",
+      "engine": "llama-cpp",
+      "params_b": 1.6,
+      "description_pl": "Najmniejszy polski model Bielik, szybki na każdym komputerze.",
+      "description_en": "The smallest Polish Bielik, fast on any computer.",
+      "languages": [
+        "pl",
+        "en"
+      ],
+      "features": [
+        "chat",
+        "tools"
+      ],
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://huggingface.co/speakleash/Bielik-1.5B-v3.0-Instruct/blob/main/LICENSE",
+        "commercial": "yes",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "q8_0",
+          "label": "Q8_0",
+          "files": [
+            {
+              "repo": "speakleash/Bielik-1.5B-v3.0-Instruct-GGUF",
+              "path": "Bielik-1.5B-v3.0-Instruct.Q8_0.gguf",
+              "revision": "d3f43577b7b23c3e8a9671e1b35d26d74736277f",
+              "size": 1699568288,
+              "sha256": "014fc8a22eb85c557e395476071bacd14dd8c8a69dedb96e5dd17e8bb7cee9c3",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 2807,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        }
+      ],
+      "tags": [
+        "szybki"
+      ],
+      "benchmark": [
+        "hf.co/speakleash/Bielik-1.5B-v3.0-Instruct-GGUF:Q8_0"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "studio-lokalsi",
+  "private": true,
+  "version": "0.2.1",
+  "license": "MIT",
+  "author": "Łukasz Poźniak, AI Transformation (https://aitransformation.pl)",
+  "workspaces": [
+    "ui",
+    "apps/desktop",
+    "apps/mobile"
+  ],
+  "scripts": {
+    "tauri": "npm run tauri -w @lokalsi/desktop --",
+    "tauri:mobile": "npm run tauri -w @lokalsi/mobile --",
+    "dev:ui": "npm run dev -w @lokalsi/ui",
+    "build:ui": "npm run build -w @lokalsi/ui",
+    "check": "npm run check -w @lokalsi/ui",
+    "test": "npm run test -w @lokalsi/ui"
+  }
+}

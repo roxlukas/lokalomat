@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-24.04, ubuntu-26.04]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v5
+
+      # Tauri 2 system libraries (WebKitGTK 4.1 …), OpenSSL for native-tls,
+      # D-Bus for the Secret Service credential store.
+      - name: Linux – system packages
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            build-essential pkg-config file \
+            libwebkit2gtk-4.1-dev libxdo-dev libssl-dev \
+            libayatana-appindicator3-dev librsvg2-dev libdbus-1-dev
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+
+      - uses: Swatinem/rust-cache@v2
+
+      - name: Install npm dependencies
+        run: npm ci
+
+      - name: UI – type check
+        run: npm run check
+
+      - name: UI – unit tests
+        run: npm test
+
+      - name: Rust – format
+        run: cargo fmt --all --check
+
+      - name: Build UI (needed by tauri::generate_context!)
+        run: npm run build:ui
+
+      - name: Rust – clippy
+        run: cargo clippy --workspace --all-targets -- -D warnings
+
+      - name: Rust – tests
+        run: cargo test --workspace
+
+      - name: Tauri – build app (no installer yet, bundling arrives in M6)
+        run: npm run tauri -- build --no-bundle --ci

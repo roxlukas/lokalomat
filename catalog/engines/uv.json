@@ -1,0 +1,97 @@
+{
+  "id": "uv",
+  "name": "uv",
+  "capabilities": [],
+  "kind": "native",
+  "version": "0.13.7",
+  "license": {
+    "name": "MIT OR Apache-2.0",
+    "url": "https://github.com/astral-sh/uv/blob/main/LICENSE-MIT"
+  },
+  "install": {
+    "source": "github-release",
+    "repo": "astral-sh/uv",
+    "tag": "0.13.7"
+  },
+  "builds": [
+    {
+      "id": "win-x64",
+      "platform": "windows-x64",
+      "backend": "cpu",
+      "files": [
+        {
+          "name": "uv-x86_64-pc-windows-msvc.zip",
+          "size": 15236317,
+          "sha256": "0cdc5b38fe5a8168ed6a25814f5ba43c21d313dd3187314fccb37b7cec46e021"
+        }
+      ]
+    },
+    {
+      "id": "win-arm64",
+      "platform": "windows-arm64",
+      "backend": "cpu",
+      "files": [
+        {
+          "name": "uv-aarch64-pc-windows-msvc.zip",
+          "size": 15538425,
+          "sha256": "505d9e65e7692bac3ddf98c66754aa26c5050c409c184af30a881a0a72cc85e3"
+        }
+      ]
+    },
+    {
+      "id": "linux-x64",
+      "platform": "linux-x64",
+      "backend": "cpu",
+      "files": [
+        {
+          "name": "uv-x86_64-unknown-linux-gnu.tar.gz",
+          "size": 16671812,
+          "sha256": "c5221ff41b7892bfc223543883600125f6a47fe845093e0f5bdff4f359196d83"
+        }
+      ]
+    },
+    {
+      "id": "linux-arm64",
+      "platform": "linux-arm64",
+      "backend": "cpu",
+      "files": [
+        {
+          "name": "uv-aarch64-unknown-linux-gnu.tar.gz",
+          "size": 15896996,
+          "sha256": "71279f8d3c67241e807b9d8db872d1bf541579fb9f08b7d1eb1682196d1e57dc"
+        }
+      ]
+    },
+    {
+      "id": "macos-arm64",
+      "platform": "macos-arm64",
+      "backend": "cpu",
+      "files": [
+        {
+          "name": "uv-aarch64-apple-darwin.tar.gz",
+          "size": 14347867,
+          "sha256": "81b811b57e4624df7ed3aac148e0359100d9962f3d9dce00aec533dc2e086731"
+        }
+      ]
+    },
+    {
+      "id": "macos-x64",
+      "platform": "macos-x64",
+      "backend": "cpu",
+      "files": [
+        {
+          "name": "uv-x86_64-apple-darwin.tar.gz",
+          "size": 17026382,
+          "sha256": "20c47e4c1f630b8abaff8c291fa9b9aa300fef92c4fbff95adf198b55287cda7"
+        }
+      ]
+    }
+  ],
+  "launch": {
+    "cmd": "uv",
+    "args": []
+  },
+  "health": {
+    "path": ""
+  }
+}

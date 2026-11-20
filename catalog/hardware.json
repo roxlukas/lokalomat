@@ -1,0 +1,1598 @@
+{
+  "version": 1,
+  "description": "GPU catalogue for speed estimates (docs/adr/0016-speed-tiers.md). Matched by PCI vendor:device ID, then by lower-case name substring, first match wins. Unknown values stay null; never guess numbers.",
+  "sources": [
+    "Vendor specification pages: NVIDIA GeForce, AMD Radeon, Intel Arc/Iris/UHD, Apple tech specs",
+    "PCI IDs: read from the OS (NVML, /sys/class/drm, Windows PnP) on the machines named in ADR 0016"
+  ],
+  "fields": {
+    "compute_units": "NVIDIA SMs, AMD CUs, Intel EUs (Xe-cores on Arc), Apple GPU cores (base configuration)",
+    "shader_cores": "ALUs: CUDA cores, stream processors, EU x 8, Apple cores x 128",
+    "boost_mhz": "reference boost clock",
+    "bandwidth_gbs": "peak memory bandwidth; null for integrated graphics (they share system RAM)",
+    "relative speed": "not stored: FP32 TFLOPS = shader_cores x boost_mhz x 2 / 1e6 is derived in code",
+    "bandwidth_by_max_units": "smaller configurations of the same chip: up to N units -> bandwidth (Apple Max)"
+  },
+  "gpus": [
+    {
+      "patterns": [
+        "rtx 5090"
+      ],
+      "pci_ids": [],
+      "vendor": "nvidia",
+      "integrated": false,
+      "compute_units": 170,
+      "unit": "SM",
+      "shader_cores": 21760,
+      "boost_mhz": 2407,
+      "bandwidth_gbs": 1792.0
+    },
+    {
+      "patterns": [
+        "rtx 5080"
+      ],
+      "pci_ids": [],
+      "vendor": "nvidia",
+      "integrated": false,
+      "compute_units": 84,
+      "unit": "SM",
+      "shader_cores": 10752,
+      "boost_mhz": 2617,
+      "bandwidth_gbs": 960.0
+    },
+    {
+      "patterns": [
+        "rtx 5070 ti"
+      ],
+      "pci_ids": [],
+      "vendor": "nvidia",
+      "integrated": false,
+      "compute_units": 70,
+      "unit": "SM",
+      "shader_cores": 8960,
+      "boost_mhz": 2452,
+      "bandwidth_gbs": 896.0
+    },
+    {
+      "patterns": [
+        "rtx 5070"
+      ],
+      "pci_ids": [],
+      "vendor": "nvidia",
+      "integrated": false,
+      "compute_units": 48,
+      "unit": "SM",
+      "shader_cores": 6144,
+      "boost_mhz": 2512,
+      "bandwidth_gbs": 672.0
+    },
+    {
+      "patterns": [
+        "rtx 5060 ti"
+      ],
+      "pci_ids": [],
+      "vendor": "nvidia",
+      "integrated": false,
+      "compute_units": 36,
+      "unit": "SM",
+      "shader_cores": 4608,
+      "boost_mhz": 2572,
+      "bandwidth_gbs": 448.0
+    },
+    {
+      "patterns": [
+        "rtx 5060"
+      ],
+      "pci_ids": [],
+      "vendor": "nvidia",
+      "integrated": false,
+      "compute_units": 30,
+      "unit": "SM",
+      "shader_cores": 3840,
+      "boost_mhz": 2497,
+      "bandwidth_gbs": 448.0
+    },
+    {
+      "patterns": [
+        "rtx 4090"
+      ],
+      "pci_ids": [],
+      "vendor": "nvidia",
+      "integrated": false,
+      "compute_units": 128,
+      "unit": "SM",
+      "shader_cores": 16384,
+      "boost_mhz": 2520,
+      "bandwidth_gbs": 1008.0
+    },
+    {
+      "patterns": [
+        "rtx 4080 super"
+      ],
+      "pci_ids": [],
+      "vendor": "nvidia",
+      "integrated": false,
+      "compute_units": 80,
+      "unit": "SM",
+      "shader_cores": 10240,
+      "boost_mhz": 2550,
+      "bandwidth_gbs": 736.0
+    },
+    {
+      "patterns": [
+        "rtx 4080"
+      ],
+      "pci_ids": [],
+      "vendor": "nvidia",
+      "integrated": false,
+      "compute_units": 76,
+      "unit": "SM",
+      "shader_cores": 9728,
+      "boost_mhz": 2505,
+      "bandwidth_gbs": 717.0
+    },
+    {
+      "patterns": [
+        "rtx 4070 ti super"
+      ],
+      "pci_ids": [],
+      "vendor": "nvidia",
+      "integrated": false,
+      "compute_units": 66,
+      "unit": "SM",
+      "shader_cores": 8448,
+      "boost_mhz": 2610,
+      "bandwidth_gbs": 672.0
+    },
+    {
+      "patterns": [
+        "rtx 4070 ti"
+      ],
+      "pci_ids": [],
+      "vendor": "nvidia",
+      "integrated": false,
+      "compute_units": 60,
+      "unit": "SM",
+      "shader_cores": 7680,
+      "boost_mhz": 2610,
+      "bandwidth_gbs": 504.0
+    },
+    {
+      "patterns": [
+        "rtx 4070 super"
+      ],
+      "pci_ids": [],
+      "vendor": "nvidia",
+      "integrated": false,
+      "compute_units": 56,
+      "unit": "SM",
+      "shader_cores": 7168,
+      "boost_mhz": 2475,
+      "bandwidth_gbs": 504.0
+    },
+    {
+      "patterns": [
+        "rtx 4070"
+      ],
+      "pci_ids": [],
+      "vendor": "nvidia",
+      "integrated": false,
+      "compute_units": 46,
+      "unit": "SM",
+      "shader_cores": 5888,
+      "boost_mhz": 2475,
+      "bandwidth_gbs": 504.0
+    },
+    {
+      "patterns": [
+        "rtx 4060 ti"
+      ],
+      "pci_ids": [],
+      "vendor": "nvidia",
+      "integrated": false,
+      "compute_units": 34,
+      "unit": "SM",
+      "shader_cores": 4352,
+      "boost_mhz": 2535,
+      "bandwidth_gbs": 288.0
+    },
+    {
+      "patterns": [
+        "rtx 4060"
+      ],
+      "pci_ids": [],
+      "vendor": "nvidia",
+      "integrated": false,
+      "compute_units": 24,
+      "unit": "SM",
+      "shader_cores": 3072,
+      "boost_mhz": 2460,
+      "bandwidth_gbs": 272.0
+    },
+    {
+      "patterns": [
+        "rtx 3090 ti"
+      ],
+      "pci_ids": [],
+      "vendor": "nvidia",
+      "integrated": false,
+      "compute_units": 84,
+      "unit": "SM",
+      "shader_cores": 10752,
+      "boost_mhz": 1860,
+      "bandwidth_gbs": 1008.0
+    },
+    {
+      "patterns": [
+        "rtx 3090"
+      ],
+      "pci_ids": [
+        "10de:2204"
+      ],
+      "vendor": "nvidia",
+      "integrated": false,
+      "compute_units": 82,
+      "unit": "SM",
+      "shader_cores": 10496,
+      "boost_mhz": 1695,
+      "bandwidth_gbs": 936.0
+    },
+    {
+      "patterns": [
+        "rtx 3080 ti"
+      ],
+      "pci_ids": [],
+      "vendor": "nvidia",
+      "integrated": false,
+      "compute_units": 80,
+      "unit": "SM",
+      "shader_cores": 10240,
+      "boost_mhz": 1665,
+      "bandwidth_gbs": 912.0
+    },
+    {
+      "patterns": [
+        "rtx 3080"
+      ],
+      "pci_ids": [],
+      "vendor": "nvidia",
+      "integrated": false,
+      "compute_units": 68,
+      "unit": "SM",
+      "shader_cores": 8704,
+      "boost_mhz": 1710,
+      "bandwidth_gbs": 760.0
+    },
+    {
+      "patterns": [
+        "rtx 3070 ti"
+      ],
+      "pci_ids": [],
+      "vendor": "nvidia",
+      "integrated": false,
+      "compute_units": 48,
+      "unit": "SM",
+      "shader_cores": 6144,
+      "boost_mhz": 1770,
+      "bandwidth_gbs": 608.0
+    },
+    {
+      "patterns": [
+        "rtx 3070"
+      ],
+      "pci_ids": [],
+      "vendor": "nvidia",
+      "integrated": false,
+      "compute_units": 46,
+      "unit": "SM",
+      "shader_cores": 5888,
+      "boost_mhz": 1725,
+      "bandwidth_gbs": 448.0
+    },
+    {
+      "patterns": [
+        "rtx 3060 ti"
+      ],
+      "pci_ids": [],
+      "vendor": "nvidia",
+      "integrated": false,
+      "compute_units": 38,
+      "unit": "SM",
+      "shader_cores": 4864,
+      "boost_mhz": 1665,
+      "bandwidth_gbs": 448.0
+    },
+    {
+      "patterns": [
+        "rtx 3060"
+      ],
+      "pci_ids": [],
+      "vendor": "nvidia",
+      "integrated": false,
+      "compute_units": 28,
+      "unit": "SM",
+      "shader_cores": 3584,
+      "boost_mhz": 1777,
+      "bandwidth_gbs": 360.0
+    },
+    {
+      "patterns": [
+        "rtx 3050"
+      ],
+      "pci_ids": [],
+      "vendor": "nvidia",
+      "integrated": false,
+      "compute_units": 20,
+      "unit": "SM",
+      "shader_cores": 2560,
+      "boost_mhz": 1777,
+      "bandwidth_gbs": 224.0
+    },
+    {
+      "patterns": [
+        "rtx 2080 ti"
+      ],
+      "pci_ids": [],
+      "vendor": "nvidia",
+      "integrated": false,
+      "compute_units": 68,
+      "unit": "SM",
+      "shader_cores": 4352,
+      "boost_mhz": 1545,
+      "bandwidth_gbs": 616.0
+    },
+    {
+      "patterns": [
+        "rtx 2080 super"
+      ],
+      "pci_ids": [],
+      "vendor": "nvidia",
+      "integrated": false,
+      "compute_units": 48,
+      "unit": "SM",
+      "shader_cores": 3072,
+      "boost_mhz": 1815,
+      "bandwidth_gbs": 496.0
+    },
+    {
+      "patterns": [
+        "rtx 2080"
+      ],
+      "pci_ids": [],
+      "vendor": "nvidia",
+      "integrated": false,
+      "compute_units": 46,
+      "unit": "SM",
+      "shader_cores": 2944,
+      "boost_mhz": 1710,
+      "bandwidth_gbs": 448.0
+    },
+    {
+      "patterns": [
+        "rtx 2070 super"
+      ],
+      "pci_ids": [],
+      "vendor": "nvidia",
+      "integrated": false,
+      "compute_units": 40,
+      "unit": "SM",
+      "shader_cores": 2560,
+      "boost_mhz": 1770,
+      "bandwidth_gbs": 448.0
+    },
+    {
+      "patterns": [
+        "rtx 2070"
+      ],
+      "pci_ids": [],
+      "vendor": "nvidia",
+      "integrated": false,
+      "compute_units": 36,
+      "unit": "SM",
+      "shader_cores": 2304,
+      "boost_mhz": 1620,
+      "bandwidth_gbs": 448.0
+    },
+    {
+      "patterns": [
+        "rtx 2060 super"
+      ],
+      "pci_ids": [],
+      "vendor": "nvidia",
+      "integrated": false,
+      "compute_units": 34,
+      "unit": "SM",
+      "shader_cores": 2176,
+      "boost_mhz": 1650,
+      "bandwidth_gbs": 448.0
+    },
+    {
+      "patterns": [
+        "rtx 2060"
+      ],
+      "pci_ids": [],
+      "vendor": "nvidia",
+      "integrated": false,
+      "compute_units": 30,
+      "unit": "SM",
+      "shader_cores": 1920,
+      "boost_mhz": 1680,
+      "bandwidth_gbs": 336.0
+    },
+    {
+      "patterns": [
+        "gtx 1660 ti"
+      ],
+      "pci_ids": [],
+      "vendor": "nvidia",
+      "integrated": false,
+      "compute_units": 24,
+      "unit": "SM",
+      "shader_cores": 1536,
+      "boost_mhz": 1770,
+      "bandwidth_gbs": 288.0
+    },
+    {
+      "patterns": [
+        "gtx 1660 super"
+      ],
+      "pci_ids": [],
+      "vendor": "nvidia",
+      "integrated": false,
+      "compute_units": 22,
+      "unit": "SM",
+      "shader_cores": 1408,
+      "boost_mhz": 1785,
+      "bandwidth_gbs": 336.0
+    },
+    {
+      "patterns": [
+        "gtx 1660"
+      ],
+      "pci_ids": [],
+      "vendor": "nvidia",
+      "integrated": false,
+      "compute_units": 22,
+      "unit": "SM",
+      "shader_cores": 1408,
+      "boost_mhz": 1785,
+      "bandwidth_gbs": 192.0
+    },
+    {
+      "patterns": [
+        "gtx 1650"
+      ],
+      "pci_ids": [],
+      "vendor": "nvidia",
+      "integrated": false,
+      "compute_units": 14,
+      "unit": "SM",
+      "shader_cores": 896,
+      "boost_mhz": 1665,
+      "bandwidth_gbs": 128.0
+    },
+    {
+      "patterns": [
+        "gtx 1080 ti"
+      ],
+      "pci_ids": [],
+      "vendor": "nvidia",
+      "integrated": false,
+      "compute_units": 28,
+      "unit": "SM",
+      "shader_cores": 3584,
+      "boost_mhz": 1582,
+      "bandwidth_gbs": 484.0
+    },
+    {
+      "patterns": [
+        "gtx 1080"
+      ],
+      "pci_ids": [],
+      "vendor": "nvidia",
+      "integrated": false,
+      "compute_units": 20,
+      "unit": "SM",
+      "shader_cores": 2560,
+      "boost_mhz": 1733,
+      "bandwidth_gbs": 320.0
+    },
+    {
+      "patterns": [
+        "gtx 1070"
+      ],
+      "pci_ids": [],
+      "vendor": "nvidia",
+      "integrated": false,
+      "compute_units": 15,
+      "unit": "SM",
+      "shader_cores": 1920,
+      "boost_mhz": 1683,
+      "bandwidth_gbs": 256.0
+    },
+    {
+      "patterns": [
+        "gtx 1060"
+      ],
+      "pci_ids": [],
+      "vendor": "nvidia",
+      "integrated": false,
+      "compute_units": 10,
+      "unit": "SM",
+      "shader_cores": 1280,
+      "boost_mhz": 1708,
+      "bandwidth_gbs": 192.0
+    },
+    {
+      "patterns": [
+        "rx 9070 xt"
+      ],
+      "pci_ids": [],
+      "vendor": "amd",
+      "integrated": false,
+      "compute_units": 64,
+      "unit": "CU",
+      "shader_cores": 4096,
+      "boost_mhz": 2970,
+      "bandwidth_gbs": 640.0
+    },
+    {
+      "patterns": [
+        "rx 9070"
+      ],
+      "pci_ids": [],
+      "vendor": "amd",
+      "integrated": false,
+      "compute_units": 56,
+      "unit": "CU",
+      "shader_cores": 3584,
+      "boost_mhz": 2520,
+      "bandwidth_gbs": 640.0
+    },
+    {
+      "patterns": [
+        "rx 9060 xt"
+      ],
+      "pci_ids": [],
+      "vendor": "amd",
+      "integrated": false,
+      "compute_units": 32,
+      "unit": "CU",
+      "shader_cores": 2048,
+      "boost_mhz": 3130,
+      "bandwidth_gbs": 320.0
+    },
+    {
+      "patterns": [
+        "rx 7900 xtx"
+      ],
+      "pci_ids": [],
+      "vendor": "amd",
+      "integrated": false,
+      "compute_units": 96,
+      "unit": "CU",
+      "shader_cores": 6144,
+      "boost_mhz": 2500,
+      "bandwidth_gbs": 960.0
+    },
+    {
+      "patterns": [
+        "rx 7900 xt"
+      ],
+      "pci_ids": [],
+      "vendor": "amd",
+      "integrated": false,
+      "compute_units": 84,
+      "unit": "CU",
+      "shader_cores": 5376,
+      "boost_mhz": 2400,
+      "bandwidth_gbs": 800.0
+    },
+    {
+      "patterns": [
+        "rx 7900 gre"
+      ],
+      "pci_ids": [],
+      "vendor": "amd",
+      "integrated": false,
+      "compute_units": 80,
+      "unit": "CU",
+      "shader_cores": 5120,
+      "boost_mhz": 2245,
+      "bandwidth_gbs": 576.0
+    },
+    {
+      "patterns": [
+        "rx 7800 xt"
+      ],
+      "pci_ids": [],
+      "vendor": "amd",
+      "integrated": false,
+      "compute_units": 60,
+      "unit": "CU",
+      "shader_cores": 3840,
+      "boost_mhz": 2430,
+      "bandwidth_gbs": 624.0
+    },
+    {
+      "patterns": [
+        "rx 7700 xt"
+      ],
+      "pci_ids": [],
+      "vendor": "amd",
+      "integrated": false,
+      "compute_units": 54,
+      "unit": "CU",
+      "shader_cores": 3456,
+      "boost_mhz": 2544,
+      "bandwidth_gbs": 432.0
+    },
+    {
+      "patterns": [
+        "rx 7600"
+      ],
+      "pci_ids": [],
+      "vendor": "amd",
+      "integrated": false,
+      "compute_units": 32,
+      "unit": "CU",
+      "shader_cores": 2048,
+      "boost_mhz": 2755,
+      "bandwidth_gbs": 288.0
+    },
+    {
+      "patterns": [
+        "rx 6950 xt"
+      ],
+      "pci_ids": [],
+      "vendor": "amd",
+      "integrated": false,
+      "compute_units": 80,
+      "unit": "CU",
+      "shader_cores": 5120,
+      "boost_mhz": 2310,
+      "bandwidth_gbs": 576.0
+    },
+    {
+      "patterns": [
+        "rx 6900 xt"
+      ],
+      "pci_ids": [],
+      "vendor": "amd",
+      "integrated": false,
+      "compute_units": 80,
+      "unit": "CU",
+      "shader_cores": 5120,
+      "boost_mhz": 2250,
+      "bandwidth_gbs": 512.0
+    },
+    {
+      "patterns": [
+        "rx 6800 xt"
+      ],
+      "pci_ids": [],
+      "vendor": "amd",
+      "integrated": false,
+      "compute_units": 72,
+      "unit": "CU",
+      "shader_cores": 4608,
+      "boost_mhz": 2250,
+      "bandwidth_gbs": 512.0
+    },
+    {
+      "patterns": [
+        "rx 6800"
+      ],
+      "pci_ids": [],
+      "vendor": "amd",
+      "integrated": false,
+      "compute_units": 60,
+      "unit": "CU",
+      "shader_cores": 3840,
+      "boost_mhz": 2105,
+      "bandwidth_gbs": 512.0
+    },
+    {
+      "patterns": [
+        "rx 6750 xt"
+      ],
+      "pci_ids": [],
+      "vendor": "amd",
+      "integrated": false,
+      "compute_units": 40,
+      "unit": "CU",
+      "shader_cores": 2560,
+      "boost_mhz": 2600,
+      "bandwidth_gbs": 432.0
+    },
+    {
+      "patterns": [
+        "rx 6700 xt"
+      ],
+      "pci_ids": [],
+      "vendor": "amd",
+      "integrated": false,
+      "compute_units": 40,
+      "unit": "CU",
+      "shader_cores": 2560,
+      "boost_mhz": 2581,
+      "bandwidth_gbs": 384.0
+    },
+    {
+      "patterns": [
+        "rx 6700"
+      ],
+      "pci_ids": [],
+      "vendor": "amd",
+      "integrated": false,
+      "compute_units": 36,
+      "unit": "CU",
+      "shader_cores": 2304,
+      "boost_mhz": 2450,
+      "bandwidth_gbs": 320.0
+    },
+    {
+      "patterns": [
+        "rx 6650 xt"
+      ],
+      "pci_ids": [],
+      "vendor": "amd",
+      "integrated": false,
+      "compute_units": 32,
+      "unit": "CU",
+      "shader_cores": 2048,
+      "boost_mhz": 2635,
+      "bandwidth_gbs": 280.0
+    },
+    {
+      "patterns": [
+        "rx 6600 xt"
+      ],
+      "pci_ids": [],
+      "vendor": "amd",
+      "integrated": false,
+      "compute_units": 32,
+      "unit": "CU",
+      "shader_cores": 2048,
+      "boost_mhz": 2589,
+      "bandwidth_gbs": 256.0
+    },
+    {
+      "patterns": [
+        "rx 6600"
+      ],
+      "pci_ids": [],
+      "vendor": "amd",
+      "integrated": false,
+      "compute_units": 28,
+      "unit": "CU",
+      "shader_cores": 1792,
+      "boost_mhz": 2491,
+      "bandwidth_gbs": 224.0
+    },
+    {
+      "patterns": [
+        "rx 6500 xt"
+      ],
+      "pci_ids": [],
+      "vendor": "amd",
+      "integrated": false,
+      "compute_units": 16,
+      "unit": "CU",
+      "shader_cores": 1024,
+      "boost_mhz": 2815,
+      "bandwidth_gbs": 144.0
+    },
+    {
+      "patterns": [
+        "rx 5700 xt"
+      ],
+      "pci_ids": [],
+      "vendor": "amd",
+      "integrated": false,
+      "compute_units": 40,
+      "unit": "CU",
+      "shader_cores": 2560,
+      "boost_mhz": 1905,
+      "bandwidth_gbs": 448.0
+    },
+    {
+      "patterns": [
+        "rx 580"
+      ],
+      "pci_ids": [],
+      "vendor": "amd",
+      "integrated": false,
+      "compute_units": 36,
+      "unit": "CU",
+      "shader_cores": 2304,
+      "boost_mhz": 1340,
+      "bandwidth_gbs": 256.0
+    },
+    {
+      "patterns": [
+        "8060s"
+      ],
+      "pci_ids": [],
+      "vendor": "amd",
+      "integrated": true,
+      "compute_units": 40,
+      "unit": "CU",
+      "shader_cores": 2560,
+      "boost_mhz": 2900,
+      "bandwidth_gbs": null
+    },
+    {
+      "patterns": [
+        "890m"
+      ],
+      "pci_ids": [],
+      "vendor": "amd",
+      "integrated": true,
+      "compute_units": 16,
+      "unit": "CU",
+      "shader_cores": 1024,
+      "boost_mhz": 2900,
+      "bandwidth_gbs": null
+    },
+    {
+      "patterns": [
+        "880m"
+      ],
+      "pci_ids": [],
+      "vendor": "amd",
+      "integrated": true,
+      "compute_units": 12,
+      "unit": "CU",
+      "shader_cores": 768,
+      "boost_mhz": 2900,
+      "bandwidth_gbs": null
+    },
+    {
+      "patterns": [
+        "780m"
+      ],
+      "pci_ids": [],
+      "vendor": "amd",
+      "integrated": true,
+      "compute_units": 12,
+      "unit": "CU",
+      "shader_cores": 768,
+      "boost_mhz": 2700,
+      "bandwidth_gbs": null
+    },
+    {
+      "patterns": [
+        "760m"
+      ],
+      "pci_ids": [],
+      "vendor": "amd",
+      "integrated": true,
+      "compute_units": 8,
+      "unit": "CU",
+      "shader_cores": 512,
+      "boost_mhz": 2600,
+      "bandwidth_gbs": null
+    },
+    {
+      "patterns": [
+        "740m"
+      ],
+      "pci_ids": [],
+      "vendor": "amd",
+      "integrated": true,
+      "compute_units": 4,
+      "unit": "CU",
+      "shader_cores": 256,
+      "boost_mhz": 2500,
+      "bandwidth_gbs": null
+    },
+    {
+      "patterns": [
+        "680m"
+      ],
+      "pci_ids": [],
+      "vendor": "amd",
+      "integrated": true,
+      "compute_units": 12,
+      "unit": "CU",
+      "shader_cores": 768,
+      "boost_mhz": 2400,
+      "bandwidth_gbs": null
+    },
+    {
+      "patterns": [
+        "660m"
+      ],
+      "pci_ids": [],
+      "vendor": "amd",
+      "integrated": true,
+      "compute_units": 6,
+      "unit": "CU",
+      "shader_cores": 384,
+      "boost_mhz": 1900,
+      "bandwidth_gbs": null
+    },
+    {
+      "patterns": [
+        "vega 11"
+      ],
+      "pci_ids": [],
+      "vendor": "amd",
+      "integrated": true,
+      "compute_units": 11,
+      "unit": "CU",
+      "shader_cores": 704,
+      "boost_mhz": 1400,
+      "bandwidth_gbs": null
+    },
+    {
+      "patterns": [
+        "vega 10"
+      ],
+      "pci_ids": [],
+      "vendor": "amd",
+      "integrated": true,
+      "compute_units": 10,
+      "unit": "CU",
+      "shader_cores": 640,
+      "boost_mhz": 1300,
+      "bandwidth_gbs": null
+    },
+    {
+      "patterns": [
+        "vega 8"
+      ],
+      "pci_ids": [],
+      "vendor": "amd",
+      "integrated": true,
+      "compute_units": 8,
+      "unit": "CU",
+      "shader_cores": 512,
+      "boost_mhz": 2000,
+      "bandwidth_gbs": null
+    },
+    {
+      "patterns": [
+        "vega 7"
+      ],
+      "pci_ids": [],
+      "vendor": "amd",
+      "integrated": true,
+      "compute_units": 7,
+      "unit": "CU",
+      "shader_cores": 448,
+      "boost_mhz": 1900,
+      "bandwidth_gbs": null
+    },
+    {
+      "patterns": [
+        "vega 6"
+      ],
+      "pci_ids": [],
+      "vendor": "amd",
+      "integrated": true,
+      "compute_units": 6,
+      "unit": "CU",
+      "shader_cores": 384,
+      "boost_mhz": 1500,
+      "bandwidth_gbs": null
+    },
+    {
+      "patterns": [
+        "vega 3"
+      ],
+      "pci_ids": [],
+      "vendor": "amd",
+      "integrated": true,
+      "compute_units": 3,
+      "unit": "CU",
+      "shader_cores": 192,
+      "boost_mhz": 1200,
+      "bandwidth_gbs": null
+    },
+    {
+      "patterns": [
+        "arc(tm) b580",
+        "arc b580"
+      ],
+      "pci_ids": [],
+      "vendor": "intel",
+      "integrated": false,
+      "compute_units": 20,
+      "unit": "Xe-core",
+      "shader_cores": 2560,
+      "boost_mhz": 2670,
+      "bandwidth_gbs": 456.0
+    },
+    {
+      "patterns": [
+        "arc(tm) b570",
+        "arc b570"
+      ],
+      "pci_ids": [],
+      "vendor": "intel",
+      "integrated": false,
+      "compute_units": 18,
+      "unit": "Xe-core",
+      "shader_cores": 2304,
+      "boost_mhz": 2500,
+      "bandwidth_gbs": 380.0
+    },
+    {
+      "patterns": [
+        "arc(tm) a770",
+        "arc a770"
+      ],
+      "pci_ids": [],
+      "vendor": "intel",
+      "integrated": false,
+      "compute_units": 32,
+      "unit": "Xe-core",
+      "shader_cores": 4096,
+      "boost_mhz": 2400,
+      "bandwidth_gbs": 560.0
+    },
+    {
+      "patterns": [
+        "arc(tm) a750",
+        "arc a750"
+      ],
+      "pci_ids": [],
+      "vendor": "intel",
+      "integrated": false,
+      "compute_units": 28,
+      "unit": "Xe-core",
+      "shader_cores": 3584,
+      "boost_mhz": 2400,
+      "bandwidth_gbs": 512.0
+    },
+    {
+      "patterns": [
+        "arc(tm) a580",
+        "arc a580"
+      ],
+      "pci_ids": [],
+      "vendor": "intel",
+      "integrated": false,
+      "compute_units": 24,
+      "unit": "Xe-core",
+      "shader_cores": 3072,
+      "boost_mhz": 2000,
+      "bandwidth_gbs": 512.0
+    },
+    {
+      "patterns": [
+        "arc(tm) a380",
+        "arc a380"
+      ],
+      "pci_ids": [],
+      "vendor": "intel",
+      "integrated": false,
+      "compute_units": 8,
+      "unit": "Xe-core",
+      "shader_cores": 1024,
+      "boost_mhz": 2000,
+      "bandwidth_gbs": 186.0
+    },
+    {
+      "patterns": [
+        "arc(tm) 140v",
+        "arc 140v"
+      ],
+      "pci_ids": [],
+      "vendor": "intel",
+      "integrated": true,
+      "compute_units": 8,
+      "unit": "Xe-core",
+      "shader_cores": 1024,
+      "boost_mhz": 2050,
+      "bandwidth_gbs": null
+    },
+    {
+      "patterns": [
+        "arc(tm) 130v"
+      ],
+      "pci_ids": [],
+      "vendor": "intel",
+      "integrated": true,
+      "compute_units": 7,
+      "unit": "Xe-core",
+      "shader_cores": 896,
+      "boost_mhz": 1850,
+      "bandwidth_gbs": null
+    },
+    {
+      "patterns": [
+        "arc(tm) graphics"
+      ],
+      "pci_ids": [],
+      "vendor": "intel",
+      "integrated": true,
+      "compute_units": 8,
+      "unit": "Xe-core",
+      "shader_cores": 1024,
+      "boost_mhz": 2250,
+      "bandwidth_gbs": null
+    },
+    {
+      "patterns": [
+        "iris(r) xe"
+      ],
+      "pci_ids": [],
+      "vendor": "intel",
+      "integrated": true,
+      "compute_units": 96,
+      "unit": "EU",
+      "shader_cores": 768,
+      "boost_mhz": 1300,
+      "bandwidth_gbs": null
+    },
+    {
+      "patterns": [
+        "iris xe"
+      ],
+      "pci_ids": [],
+      "vendor": "intel",
+      "integrated": true,
+      "compute_units": 96,
+      "unit": "EU",
+      "shader_cores": 768,
+      "boost_mhz": 1300,
+      "bandwidth_gbs": null
+    },
+    {
+      "patterns": [
+        "iris(r) plus"
+      ],
+      "pci_ids": [],
+      "vendor": "intel",
+      "integrated": true,
+      "compute_units": 64,
+      "unit": "EU",
+      "shader_cores": 512,
+      "boost_mhz": 1100,
+      "bandwidth_gbs": null
+    },
+    {
+      "patterns": [
+        "iris plus"
+      ],
+      "pci_ids": [],
+      "vendor": "intel",
+      "integrated": true,
+      "compute_units": 64,
+      "unit": "EU",
+      "shader_cores": 512,
+      "boost_mhz": 1100,
+      "bandwidth_gbs": null
+    },
+    {
+      "patterns": [
+        "uhd graphics 770"
+      ],
+      "pci_ids": [],
+      "vendor": "intel",
+      "integrated": true,
+      "compute_units": 32,
+      "unit": "EU",
+      "shader_cores": 256,
+      "boost_mhz": 1550,
+      "bandwidth_gbs": null
+    },
+    {
+      "patterns": [
+        "uhd graphics 730"
+      ],
+      "pci_ids": [],
+      "vendor": "intel",
+      "integrated": true,
+      "compute_units": 24,
+      "unit": "EU",
+      "shader_cores": 192,
+      "boost_mhz": 1400,
+      "bandwidth_gbs": null
+    },
+    {
+      "patterns": [
+        "uhd graphics 7"
+      ],
+      "pci_ids": [],
+      "vendor": "intel",
+      "integrated": true,
+      "compute_units": 32,
+      "unit": "EU",
+      "shader_cores": 256,
+      "boost_mhz": 1450,
+      "bandwidth_gbs": null
+    },
+    {
+      "patterns": [
+        "uhd graphics 630"
+      ],
+      "pci_ids": [],
+      "vendor": "intel",
+      "integrated": true,
+      "compute_units": 24,
+      "unit": "EU",
+      "shader_cores": 192,
+      "boost_mhz": 1150,
+      "bandwidth_gbs": null
+    },
+    {
+      "patterns": [
+        "uhd graphics 620"
+      ],
+      "pci_ids": [],
+      "vendor": "intel",
+      "integrated": true,
+      "compute_units": 24,
+      "unit": "EU",
+      "shader_cores": 192,
+      "boost_mhz": 1150,
+      "bandwidth_gbs": null
+    },
+    {
+      "patterns": [
+        "uhd graphics 600"
+      ],
+      "pci_ids": [],
+      "vendor": "intel",
+      "integrated": true,
+      "compute_units": 12,
+      "unit": "EU",
+      "shader_cores": 96,
+      "boost_mhz": 700,
+      "bandwidth_gbs": null
+    },
+    {
+      "patterns": [
+        "uhd graphics 605"
+      ],
+      "pci_ids": [],
+      "vendor": "intel",
+      "integrated": true,
+      "compute_units": 18,
+      "unit": "EU",
+      "shader_cores": 144,
+      "boost_mhz": 750,
+      "bandwidth_gbs": null
+    },
+    {
+      "patterns": [
+        "hd graphics 630"
+      ],
+      "pci_ids": [],
+      "vendor": "intel",
+      "integrated": true,
+      "compute_units": 24,
+      "unit": "EU",
+      "shader_cores": 192,
+      "boost_mhz": 1100,
+      "bandwidth_gbs": null
+    },
+    {
+      "patterns": [
+        "hd graphics 620"
+      ],
+      "pci_ids": [
+        "8086:5916"
+      ],
+      "vendor": "intel",
+      "integrated": true,
+      "compute_units": 24,
+      "unit": "EU",
+      "shader_cores": 192,
+      "boost_mhz": 1050,
+      "bandwidth_gbs": null
+    },
+    {
+      "patterns": [
+        "hd graphics 530"
+      ],
+      "pci_ids": [],
+      "vendor": "intel",
+      "integrated": true,
+      "compute_units": 24,
+      "unit": "EU",
+      "shader_cores": 192,
+      "boost_mhz": 1050,
+      "bandwidth_gbs": null
+    },
+    {
+      "patterns": [
+        "hd graphics 520"
+      ],
+      "pci_ids": [],
+      "vendor": "intel",
+      "integrated": true,
+      "compute_units": 24,
+      "unit": "EU",
+      "shader_cores": 192,
+      "boost_mhz": 1050,
+      "bandwidth_gbs": null
+    },
+    {
+      "patterns": [
+        "hd graphics 500"
+      ],
+      "pci_ids": [],
+      "vendor": "intel",
+      "integrated": true,
+      "compute_units": 12,
+      "unit": "EU",
+      "shader_cores": 96,
+      "boost_mhz": 650,
+      "bandwidth_gbs": null
+    },
+    {
+      "patterns": [
+        "hd graphics 505"
+      ],
+      "pci_ids": [],
+      "vendor": "intel",
+      "integrated": true,
+      "compute_units": 18,
+      "unit": "EU",
+      "shader_cores": 144,
+      "boost_mhz": 750,
+      "bandwidth_gbs": null
+    },
+    {
+      "patterns": [
+        "uhd graphics"
+      ],
+      "pci_ids": [],
+      "vendor": "intel",
+      "integrated": true,
+      "compute_units": 24,
+      "unit": "EU",
+      "shader_cores": 192,
+      "boost_mhz": 1100,
+      "bandwidth_gbs": null
+    },
+    {
+      "patterns": [
+        "hd graphics"
+      ],
+      "pci_ids": [],
+      "vendor": "intel",
+      "integrated": true,
+      "compute_units": 24,
+      "unit": "EU",
+      "shader_cores": 192,
+      "boost_mhz": 1000,
+      "bandwidth_gbs": null
+    },
+    {
+      "patterns": [
+        "m1 ultra"
+      ],
+      "pci_ids": [],
+      "vendor": "apple",
+      "integrated": false,
+      "unified": true,
+      "compute_units": 64,
+      "unit": "GPU core",
+      "shader_cores": 8192,
+      "boost_mhz": 1278,
+      "bandwidth_gbs": 800.0
+    },
+    {
+      "patterns": [
+        "m1 max"
+      ],
+      "pci_ids": [],
+      "vendor": "apple",
+      "integrated": false,
+      "unified": true,
+      "compute_units": 32,
+      "unit": "GPU core",
+      "shader_cores": 4096,
+      "boost_mhz": 1278,
+      "bandwidth_gbs": 400.0
+    },
+    {
+      "patterns": [
+        "m1 pro"
+      ],
+      "pci_ids": [],
+      "vendor": "apple",
+      "integrated": false,
+      "unified": true,
+      "compute_units": 16,
+      "unit": "GPU core",
+      "shader_cores": 2048,
+      "boost_mhz": 1278,
+      "bandwidth_gbs": 200.0
+    },
+    {
+      "patterns": [
+        "m1"
+      ],
+      "pci_ids": [],
+      "vendor": "apple",
+      "integrated": false,
+      "unified": true,
+      "compute_units": 8,
+      "unit": "GPU core",
+      "shader_cores": 1024,
+      "boost_mhz": 1278,
+      "bandwidth_gbs": 68.0
+    },
+    {
+      "patterns": [
+        "m2 ultra"
+      ],
+      "pci_ids": [],
+      "vendor": "apple",
+      "integrated": false,
+      "unified": true,
+      "compute_units": 76,
+      "unit": "GPU core",
+      "shader_cores": 9728,
+      "boost_mhz": 1398,
+      "bandwidth_gbs": 800.0
+    },
+    {
+      "patterns": [
+        "m2 max"
+      ],
+      "pci_ids": [],
+      "vendor": "apple",
+      "integrated": false,
+      "unified": true,
+      "compute_units": 38,
+      "unit": "GPU core",
+      "shader_cores": 4864,
+      "boost_mhz": 1398,
+      "bandwidth_gbs": 400.0
+    },
+    {
+      "patterns": [
+        "m2 pro"
+      ],
+      "pci_ids": [],
+      "vendor": "apple",
+      "integrated": false,
+      "unified": true,
+      "compute_units": 19,
+      "unit": "GPU core",
+      "shader_cores": 2432,
+      "boost_mhz": 1398,
+      "bandwidth_gbs": 200.0
+    },
+    {
+      "patterns": [
+        "m2"
+      ],
+      "pci_ids": [],
+      "vendor": "apple",
+      "integrated": false,
+      "unified": true,
+      "compute_units": 10,
+      "unit": "GPU core",
+      "shader_cores": 1280,
+      "boost_mhz": 1398,
+      "bandwidth_gbs": 100.0
+    },
+    {
+      "patterns": [
+        "m3 ultra"
+      ],
+      "pci_ids": [],
+      "vendor": "apple",
+      "integrated": false,
+      "unified": true,
+      "compute_units": 80,
+      "unit": "GPU core",
+      "shader_cores": 10240,
+      "boost_mhz": 1400,
+      "bandwidth_gbs": 819.0
+    },
+    {
+      "patterns": [
+        "m3 max"
+      ],
+      "pci_ids": [],
+      "vendor": "apple",
+      "integrated": false,
+      "unified": true,
+      "compute_units": 40,
+      "unit": "GPU core",
+      "shader_cores": 5120,
+      "boost_mhz": 1400,
+      "bandwidth_gbs": 400.0,
+      "bandwidth_by_max_units": {
+        "30": 300.0
+      }
+    },
+    {
+      "patterns": [
+        "m3 pro"
+      ],
+      "pci_ids": [],
+      "vendor": "apple",
+      "integrated": false,
+      "unified": true,
+      "compute_units": 18,
+      "unit": "GPU core",
+      "shader_cores": 2304,
+      "boost_mhz": 1400,
+      "bandwidth_gbs": 150.0
+    },
+    {
+      "patterns": [
+        "m3"
+      ],
+      "pci_ids": [],
+      "vendor": "apple",
+      "integrated": false,
+      "unified": true,
+      "compute_units": 10,
+      "unit": "GPU core",
+      "shader_cores": 1280,
+      "boost_mhz": 1400,
+      "bandwidth_gbs": 100.0
+    },
+    {
+      "patterns": [
+        "m4 max"
+      ],
+      "pci_ids": [],
+      "vendor": "apple",
+      "integrated": false,
+      "unified": true,
+      "compute_units": 40,
+      "unit": "GPU core",
+      "shader_cores": 5120,
+      "boost_mhz": 1500,
+      "bandwidth_gbs": 546.0,
+      "bandwidth_by_max_units": {
+        "32": 410.0
+      }
+    },
+    {
+      "patterns": [
+        "m4 pro"
+      ],
+      "pci_ids": [],
+      "vendor": "apple",
+      "integrated": false,
+      "unified": true,
+      "compute_units": 20,
+      "unit": "GPU core",
+      "shader_cores": 2560,
+      "boost_mhz": 1500,
+      "bandwidth_gbs": 273.0
+    },
+    {
+      "patterns": [
+        "m4"
+      ],
+      "pci_ids": [],
+      "vendor": "apple",
+      "integrated": false,
+      "unified": true,
+      "compute_units": 10,
+      "unit": "GPU core",
+      "shader_cores": 1280,
+      "boost_mhz": 1500,
+      "bandwidth_gbs": 120.0
+    },
+    {
+      "patterns": [
+        "m5"
+      ],
+      "pci_ids": [],
+      "vendor": "apple",
+      "integrated": false,
+      "unified": true,
+      "compute_units": 10,
+      "unit": "GPU core",
+      "shader_cores": 1280,
+      "boost_mhz": 1600,
+      "bandwidth_gbs": 153.0
+    }
+  ]
+}

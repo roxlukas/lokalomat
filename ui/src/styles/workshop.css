@@ -1,0 +1,294 @@
+/* The Workshop (frame and mode panels). Global because the panels live in separate
+   components; every rule is under `.workshop` so nothing leaks (ADR 0035). */
+.workshop {
+  position: relative;
+  display: flex;
+  height: 100%;
+}
+
+.workshop .main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.workshop .stream {
+  flex: 1;
+  display: flex;
+  overflow-y: auto;
+}
+
+.workshop .messages {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: var(--space-5) var(--space-4);
+}
+
+.workshop .examples {
+  width: 100%;
+  margin-top: var(--space-4);
+}
+
+.workshop .examples-title {
+  margin-bottom: var(--space-2);
+  color: var(--text-faint);
+  font-size: var(--text-s);
+}
+
+.workshop .examples ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.workshop .example {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  width: 100%;
+  height: 100%;
+  padding: var(--space-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-m);
+  background: var(--surface);
+  text-align: left;
+}
+
+.workshop .example:hover {
+  border-color: var(--border-strong);
+}
+
+.workshop .example-mode {
+  color: var(--text-faint);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.workshop .command-bar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.workshop .command-bar .bar-top {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.workshop .command-bar .modes {
+  display: flex;
+  gap: var(--space-1);
+  overflow-x: auto;
+}
+
+.workshop .command-bar .mode {
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: var(--text-s);
+  white-space: nowrap;
+}
+
+.workshop .command-bar .mode:hover {
+  background: var(--surface-2);
+}
+
+.workshop .command-bar .mode.active {
+  border-color: var(--border-strong);
+  background: var(--surface-2);
+  color: var(--text);
+}
+
+.workshop .command-bar .model {
+  margin-left: auto;
+}
+
+.workshop .command-bar .tools-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+  padding: 3px var(--space-3);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-pill);
+  background: var(--accent-soft);
+  color: var(--text);
+  font-size: var(--text-s);
+  white-space: nowrap;
+}
+
+.workshop .command-bar .tools-chip.off {
+  border-color: var(--border-strong);
+  background: transparent;
+  color: var(--text-muted);
+}
+
+.workshop .command-bar .tools-chip + .model {
+  margin-left: 0;
+}
+
+.workshop .command-bar .model select {
+  max-width: 260px;
+  min-height: 30px;
+  font-size: var(--text-s);
+}
+
+.workshop .command-bar .setup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: center;
+}
+
+.workshop .command-bar .link {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--focus);
+  text-decoration: underline;
+}
+
+.workshop .command-bar .small-link {
+  font-size: var(--text-s);
+}
+
+.workshop .command-bar .advanced select {
+  min-height: 30px;
+}
+
+.workshop .command-bar .input-row {
+  display: flex;
+  gap: var(--space-2);
+  align-items: flex-end;
+}
+
+.workshop .command-bar .lyrics {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.workshop .command-bar textarea {
+  flex: 1;
+  min-height: 44px;
+  max-height: 200px;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-m);
+  background: var(--bg);
+  resize: vertical;
+}
+
+.workshop .command-bar .hint {
+  color: var(--text-faint);
+  font-size: var(--text-xs);
+}
+
+.workshop .command-bar .chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.workshop .command-bar .chip-group {
+  display: inline-flex;
+  gap: 2px;
+  padding: 2px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+}
+
+.workshop .command-bar .chip {
+  padding: 2px var(--space-3);
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--text-muted);
+  font-size: var(--text-s);
+  font-variant-numeric: tabular-nums;
+}
+
+.workshop .command-bar .chip.active,
+.workshop .command-bar .chip[aria-expanded='true'] {
+  background: var(--surface-2);
+  border-color: var(--border-strong);
+  color: var(--text);
+}
+
+.workshop .command-bar .chips .model {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-left: 0;
+  color: var(--text-muted);
+  font-size: var(--text-s);
+}
+
+.workshop .command-bar .advanced {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: var(--space-2);
+  font-size: var(--text-s);
+  color: var(--text-muted);
+}
+
+.workshop .command-bar .advanced label {
+  display: grid;
+  gap: 2px;
+}
+
+.workshop .command-bar .advanced .wide {
+  grid-column: 1 / -1;
+}
+
+.workshop .command-bar .advanced input {
+  min-height: 30px;
+}
+
+.workshop .command-bar .drop {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 56px;
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-m);
+  background: var(--bg);
+  color: var(--text);
+}
+
+.workshop .command-bar .drop:hover:not(:disabled),
+.workshop .command-bar .drop.active {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.workshop .command-bar .drop .small {
+  font-size: var(--text-xs);
+}
+
+@media (max-width: 720px) {
+  .workshop .drawer {
+    position: absolute;
+    inset: 0 auto 0 0;
+    z-index: 20;
+    box-shadow: var(--shadow);
+  }
+}
