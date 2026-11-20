@@ -66,7 +66,10 @@ function build() {
   checkVersions();
   if (!process.env.TAURI_SIGNING_PRIVATE_KEY) die('set TAURI_SIGNING_PRIVATE_KEY (path or content of the updater key)');
   if (CONF.plugins?.updater?.pubkey?.includes('PENDING')) die('the updater public key is not in tauri.conf.json yet');
-  const tauriConfig = JSON.stringify({ bundle: { createUpdaterArtifacts: true } });
+  // A file, not inline JSON: cmd.exe (npm.cmd) strips the quotes of an inline value.
+  mkdirSync(join(ROOT, 'target'), { recursive: true });
+  const tauriConfig = join(ROOT, 'target', 'release-config.json');
+  writeFileSync(tauriConfig, JSON.stringify({ bundle: { createUpdaterArtifacts: true } }));
   const npm = process.platform === 'win32' ? 'npm.cmd' : 'npm';
   execFileSync(npm, ['run', 'tauri', 'build', '--', '--config', tauriConfig], {
     cwd: ROOT,
