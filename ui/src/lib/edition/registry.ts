@@ -45,10 +45,10 @@ export interface ServerTab {
 export type MockHandler = (command: string, args?: Record<string, unknown>) => Promise<unknown>;
 
 /** Places where an edition can add components (rendered by `SlotHost`). */
-export type SlotName = 'overlay' | 'tool-call' | 'chat-bar';
+export type SlotName = 'overlay' | 'tool-call' | 'chat-bar' | 'about';
 
 const views: ViewDef[] = [];
-const slots: Record<SlotName, Loader[]> = { overlay: [], 'tool-call': [], 'chat-bar': [] };
+const slots: Record<SlotName, Loader[]> = { overlay: [], 'tool-call': [], 'chat-bar': [], about: [] };
 const workshopModes: WorkshopModeDef[] = [];
 const serverTabs: ServerTab[] = [];
 const startups: (() => Promise<void> | void)[] = [];
