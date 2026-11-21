@@ -14,6 +14,7 @@
   import { updates } from '../lib/updates.svelte';
   import NetworkSettings from './settings/NetworkSettings.svelte';
   import ReportProblem from './settings/ReportProblem.svelte';
+  import SlotHost from '../lib/components/SlotHost.svelte';
 
   const THEMES: Theme[] = ['system', 'light', 'dark'];
   const LOG_MODES: LogMode[] = ['normal', 'verbose'];
@@ -248,6 +249,8 @@
       {/if}
       {#if updates.error}<span class="note note-error small" role="alert">{updates.error}</span>{/if}
     </div>
+    <!-- What the edition adds about itself (Pro: its licence). -->
+    <SlotHost name="about" />
     <dl class="about">
       <div><dt>{t('settings.aboutInfo.author')}</dt><dd>Łukasz Poźniak</dd></div>
       <div><dt>{t('settings.aboutInfo.company')}</dt><dd>AI Transformation Łukasz Poźniak</dd></div>
