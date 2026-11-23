@@ -62,3 +62,48 @@ composer sends with Ctrl/⌘+Enter only (PRD V2).
 - ADR 0009's "fixed sampling" no longer holds once step 2 lands.
 - Parameters per model mean two conversations with the same model share them; a per-chat
   override can be added later without changing the table.
+
+## Acceptance on real hardware (2026-11-23)
+
+Example `crates/engines/examples/gpu_offload.rs` (`gpu_offload <work dir> <model.gguf> <estimate MB>`):
+for each GPU setting it reloads the model, prints GPU memory (nvidia-smi) and tok/s, then
+checks that temperature 0 repeats the answer, a high temperature does not, and top_k 1
+repeats again. Result: **0 checks failed** with LFM3 on an RTX 3090 and on the 8 GB card below.
+
+8 GB card: Windows 10, RTX 2070 8 GB, 16 GB RAM; llama.cpp `b12110-win-cuda12`
+(CUDA 12, chosen automatically and installed on the first start). Baseline GPU memory 145 MiB.
+
+LFM3-1.7B Q4_K_M (24 layers), `TOKENS=96`:
+
+| GPU setting | GPU MiB | tok/s |
+|---|---|---|
+| Auto | 1472 | 141.0 |
+| Processor only (0) | 302 | 4.1 |
+| Half (12 of 24) | 1210 | 6.9 |
+| All (999) | 1472 | 141.8 |
+
+Qwen3.5-9B Q4_K_M (32 layers, estimate 6984 MB, budget 7680 MB, `TOKENS=48`; the memory
+check only: that run came before the example read `reasoning`, so its answers were
+empty at that token limit):
+
+| GPU setting | GPU MiB | tok/s |
+|---|---|---|
+| Auto | 5428 | 50.3 |
+| Processor only (0) | 382 | 0.9 |
+| Half (16 of 32) | 3182 | 1.7 |
+| All (999) | 5428 | 53.3 |
+
+Findings:
+
+- `-ngl` reaches `llama-server`: GPU memory grows with the setting (302 < 1210 < 1472 MiB
+  for LFM3, 382 < 3182 < 5428 MiB for Qwen).
+- Auto equals "all layers" in memory and speed on both models: both fit in 8 GB.
+- Partial offload does not scale linearly: half the layers is close to processor only
+  (LFM3 6.9 vs 4.1 tok/s, Qwen 1.7 vs 0.9) and far below all layers (141.8 and 53.3).
+  Expert users should pick "all" or "processor only" unless the model does not fit.
+- LFM3 and Qwen3.5 are reasoning models: with `--reasoning-format deepseek` the text arrives
+  in `reasoning_content` and `content` stays empty until thinking ends. Checks that read
+  an answer must compare `reasoning` + `content`.
+- llama.cpp `b12110` no longer prints "offloaded N/M layers to GPU" at default verbosity,
+  so the example checks GPU memory instead of that log line (partial offload only leaves
+  `layer N is assigned to device CPU` as a warning).
