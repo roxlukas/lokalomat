@@ -33,6 +33,13 @@ export interface WorkshopModeDef {
   load: Loader;
 }
 
+/** A section of the Inspector for one Workshop mode (ADR 0036): the model's parameters. */
+export interface InspectorSectionDef {
+  /** The Workshop mode it belongs to (`chat`, `image`…). */
+  mode: string;
+  load: Loader;
+}
+
 /** A tab of the Server view added by an edition. */
 export interface ServerTab {
   id: string;
@@ -51,6 +58,7 @@ const views: ViewDef[] = [];
 const slots: Record<SlotName, Loader[]> = { overlay: [], 'tool-call': [], 'chat-bar': [], about: [] };
 const workshopModes: WorkshopModeDef[] = [];
 const serverTabs: ServerTab[] = [];
+const inspectorSections: InspectorSectionDef[] = [];
 const startups: (() => Promise<void> | void)[] = [];
 const blockers: (() => boolean)[] = [];
 const mocks: MockHandler[] = [];
@@ -79,6 +87,16 @@ export function registerWorkshopMode(def: WorkshopModeDef): void {
 
 export function registeredWorkshopModes(): readonly WorkshopModeDef[] {
   return workshopModes;
+}
+
+export function registerInspectorSection(def: InspectorSectionDef): void {
+  const i = inspectorSections.findIndex((s) => s.mode === def.mode);
+  if (i >= 0) inspectorSections.splice(i, 1);
+  inspectorSections.push(def);
+}
+
+export function inspectorSection(mode: string): InspectorSectionDef | undefined {
+  return inspectorSections.find((s) => s.mode === mode);
 }
 
 export function registerServerTab(tab: ServerTab): void {
@@ -139,5 +157,6 @@ export function resetRegistry(): void {
   mocks.length = 0;
   serverTabs.length = 0;
   workshopModes.length = 0;
+  inspectorSections.length = 0;
   for (const name of Object.keys(slots) as SlotName[]) slots[name].length = 0;
 }

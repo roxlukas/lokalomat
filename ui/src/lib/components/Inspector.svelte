@@ -1,11 +1,17 @@
 <script lang="ts">
   import PanelRightOpen from '@lucide/svelte/icons/panel-right-open';
   import PanelRightClose from '@lucide/svelte/icons/panel-right-close';
+  import { inspectorSection } from '../edition/registry';
   import { t } from '../i18n/index.svelte';
+  import { router } from '../router.svelte';
   import { readLocal, writeLocal } from '../storage';
+  import { workshop } from '../workshop.svelte';
+  import ViewHost from './ViewHost.svelte';
 
   const STORAGE_KEY = 'lokalsi.inspector-open';
   let open = $state(readLocal(STORAGE_KEY, false));
+  // The open Workshop mode's section, registered by the edition (ADR 0036).
+  const section = $derived(router.current === 'workshop' ? inspectorSection(workshop.mode) : undefined);
 
   function toggle() {
     open = !open;
@@ -27,7 +33,11 @@
   </button>
   <div id="inspector-body" class="body" hidden={!open}>
     <h2>{t('inspector.title')}</h2>
-    <p class="empty">{t('inspector.empty')}</p>
+    {#if section}
+      <ViewHost load={section.load} />
+    {:else}
+      <p class="empty">{t('inspector.empty')}</p>
+    {/if}
   </div>
 </aside>
 

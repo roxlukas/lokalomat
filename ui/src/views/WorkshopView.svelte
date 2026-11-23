@@ -13,6 +13,7 @@
   import { inTauri } from '../lib/ipc';
   import { isAudioPath } from '../lib/media';
   import { settings } from '../lib/settings.svelte';
+  import { isSendKey, sendKeyAria, sendKeyHint } from '../lib/sendKey';
   import { readLocal, writeLocal } from '../lib/storage';
   import { MODE_KEY, workshop } from '../lib/workshop.svelte';
   import '../styles/workshop.css';
@@ -115,8 +116,8 @@
   }
 
   function onInputKey(e: KeyboardEvent) {
-    // Ctrl/⌘+Enter sends (PRD V2); plain Enter adds a new line.
-    if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+    // Ctrl/⌘+Enter sends (PRD V2); Settings can make plain Enter send (ADR 0036).
+    if (isSendKey(e, settings.value.send_key)) {
       e.preventDefault();
       void send();
     }
@@ -203,14 +204,14 @@
             onkeydown={onInputKey}
             placeholder={view.placeholder}
             maxlength={view.maxlength}
-            aria-keyshortcuts="Control+Enter"
+            aria-keyshortcuts={sendKeyAria(settings.value.send_key)}
           ></textarea>
           {#if view.stop}
             <button type="button" class="btn" onclick={view.stop.run}>
               <Square size={14} aria-hidden="true" />{view.stop.label}
             </button>
           {:else}
-            <button type="submit" class="btn btn-primary" disabled={!view.canSend} title="Ctrl+Enter">
+            <button type="submit" class="btn btn-primary" disabled={!view.canSend} title={sendKeyHint(settings.value.send_key)}>
               <SubmitIcon size={16} aria-hidden="true" />{view.submitLabel}
             </button>
           {/if}

@@ -47,7 +47,32 @@
     "title": "Inspektor",
     "open": "Pokaż inspektor",
     "close": "Ukryj inspektor",
-    "empty": "Tu pojawią się ustawienia wybranego trybu."
+    "empty": "Tu pojawią się ustawienia wybranego trybu.",
+    "auto": "Auto",
+    "reset": "Przywróć Auto",
+    "chat": {
+      "style": "Styl odpowiedzi",
+      "styles": {
+        "precise": "Dokładny",
+        "balanced": "Zrównoważony",
+        "creative": "Twórczy"
+      },
+      "custom": "Ustawione ręcznie w trybie Expert.",
+      "scope": "Dotyczy tego modelu we wszystkich rozmowach.",
+      "noModel": "Pobierz model czatu, żeby go ustawić.",
+      "temperature": "Temperatura",
+      "temperatureTip": "temperature (0–2): wyżej = bardziej losowe odpowiedzi. Auto = wartość silnika.",
+      "top_p": "Top P",
+      "top_pTip": "top_p (0–1): losuje z najbardziej prawdopodobnych słów o łącznej szansie P. 1 wyłącza.",
+      "top_k": "Top K",
+      "top_kTip": "top_k (0–200): losuje tylko z K najbardziej prawdopodobnych słów. 0 wyłącza.",
+      "gpu": "Karta graficzna",
+      "gpuTip": "-ngl: warstwy modelu w pamięci karty graficznej. Reszta działa na procesorze.",
+      "gpuHint": "Więcej warstw na karcie to szybsze odpowiedzi. Zmiana wczyta model od nowa.",
+      "gpuAll": "Wszystkie warstwy",
+      "gpuNone": "Tylko procesor",
+      "gpuOf": "{n} z {total} warstw"
+    }
   },
   "palette": {
     "label": "Paleta poleceń",
@@ -177,6 +202,13 @@
       "system": "Jak w systemie",
       "light": "Jasny",
       "dark": "Ciemny"
+    },
+    "sendKey": {
+      "title": "Wysyłanie wiadomości",
+      "ctrl_enter": "Ctrl+Enter wysyła",
+      "ctrl_enterHint": "Enter dodaje nową linię.",
+      "enter": "Enter wysyła",
+      "enterHint": "Shift+Enter dodaje nową linię."
     },
     "saveFailed": "Nie udało się zapisać ustawień: {error}",
     "advanced": "Zaawansowane",
@@ -455,6 +487,7 @@
     "network": "Brak połączenia z internetem.",
     "not_writable": "Nie można zapisywać w tym folderze.",
     "invalid_path": "Podaj pełną ścieżkę folderu.",
+    "invalid_params": "Ta wartość jest poza zakresem.",
     "secret_store": "Systemowy magazyn haseł jest niedostępny.",
     "generic": "Coś poszło nie tak: {error}",
     "engine_missing": "Przygotowuję czat. Spróbuj za chwilę.",

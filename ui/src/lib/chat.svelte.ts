@@ -65,6 +65,23 @@ export function chatModelOptions(models: ModelView[]): (ChatModelChoice & { labe
     );
 }
 
+/**
+ * The model the next message goes to: the user's choice, else the default chat
+ * model, else the first installed one (as `resolve_model` in the desktop shell).
+ */
+export function effectiveChatModel(
+  models: ModelView[],
+  chosen: ChatModelChoice | null,
+): (ChatModelChoice & { label: string; tools: boolean }) | null {
+  const options = chatModelOptions(models);
+  const same = (c: ChatModelChoice) => (o: ChatModelChoice) => o.modelId === c.modelId && o.variantId === c.variantId;
+  const picked = chosen ? options.find(same(chosen)) : undefined;
+  if (picked) return picked;
+  const def = models.find((m) => m.modality === 'llm' && m.default_variant);
+  const fallback = def ? options.find(same({ modelId: def.id, variantId: def.default_variant ?? '' })) : undefined;
+  return fallback ?? options[0] ?? null;
+}
+
 class ChatStore {
   sessions = $state<Session[]>([]);
   query = $state('');

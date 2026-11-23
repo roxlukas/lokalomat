@@ -220,6 +220,16 @@ const MIGRATIONS: &[&str] = &[
         PRIMARY KEY (key_id, name)
     );
     "#,
+    // Default parameters of a chat model, set in the Inspector (ADR 0036)
+    r#"
+    CREATE TABLE model_settings (
+        model_id TEXT NOT NULL,
+        variant_id TEXT NOT NULL,
+        params TEXT NOT NULL,
+        updated_at INTEGER NOT NULL,
+        PRIMARY KEY (model_id, variant_id)
+    );
+    "#,
 ];
 
 #[derive(Debug, thiserror::Error)]

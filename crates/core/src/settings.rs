@@ -29,6 +29,17 @@ pub enum Theme {
     Dark,
 }
 
+/// Which key sends a chat prompt (ADR 0036).
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, Default)]
+#[serde(rename_all = "snake_case")]
+pub enum SendKey {
+    /// Enter adds a new line, Ctrl/⌘+Enter sends (PRD V2).
+    #[default]
+    CtrlEnter,
+    /// Enter sends, Shift+Enter adds a new line.
+    Enter,
+}
+
 /// Default port of the LAN gateway (`lokalsi_api_gateway::DEFAULT_LAN_PORT`).
 pub const DEFAULT_LAN_PORT: u16 = 47_821;
 /// Default port of the local OpenAI-compatible server (ADR 0025).
@@ -69,6 +80,8 @@ pub struct AppSettings {
     pub server_lan: bool,
     /// Check GitHub for a new version at startup (PRD §10: switchable; ADR 0029).
     pub update_check: bool,
+    /// Which key sends a chat prompt (ADR 0036).
+    pub send_key: SendKey,
 }
 
 impl Default for AppSettings {
@@ -91,6 +104,7 @@ impl Default for AppSettings {
             server_port: DEFAULT_SERVER_PORT,
             server_lan: false,
             update_check: true,
+            send_key: SendKey::default(),
         }
     }
 }
@@ -172,6 +186,7 @@ mod tests {
             server_port: 50_001,
             server_lan: true,
             update_check: false,
+            send_key: SendKey::Enter,
         };
         save(&path, &s).unwrap();
         assert_eq!(load(&path).settings, s);
@@ -200,5 +215,14 @@ mod tests {
             "M0 files get M1 defaults"
         );
         assert!(!loaded.settings.onboarded);
+        assert_eq!(loaded.settings.send_key, SendKey::CtrlEnter);
+    }
+
+    #[test]
+    fn send_key_uses_snake_case() {
+        let json = serde_json::to_value(SendKey::CtrlEnter).unwrap();
+        assert_eq!(json, "ctrl_enter");
+        let key: SendKey = serde_json::from_str(r#""enter""#).unwrap();
+        assert_eq!(key, SendKey::Enter);
     }
 }

@@ -11,6 +11,8 @@ export type Language = 'pl' | 'en';
 export type Theme = 'system' | 'light' | 'dark';
 export type LogMode = 'normal' | 'verbose';
 export type LogLevel = 'error' | 'warn' | 'info' | 'debug';
+/** Which key sends a chat prompt (ADR 0036). */
+export type SendKey = 'ctrl_enter' | 'enter';
 
 export interface AppSettings {
   language: Language;
@@ -36,7 +38,20 @@ export interface AppSettings {
   server_lan: boolean;
   /** Check for a new version at startup (ADR 0029). */
   update_check: boolean;
+  /** Which key sends a chat prompt (ADR 0036). */
+  send_key: SendKey;
 }
+
+/** Inspector defaults of a chat model variant (ADR 0036); null = Auto. */
+export interface ModelParams {
+  temperature: number | null;
+  top_p: number | null;
+  top_k: number | null;
+  /** Layers on the GPU (Expert): 0 = processor only, `GPU_LAYERS_ALL` = all. */
+  gpu_layers: number | null;
+}
+
+export const AUTO_MODEL_PARAMS: ModelParams = { temperature: null, top_p: null, top_k: null, gpu_layers: null };
 
 /** A newer version found by the updater (ADR 0029). */
 export interface UpdateInfo {
@@ -859,6 +874,7 @@ export const DEFAULT_SETTINGS: AppSettings = {
   server_port: 47822,
   server_lan: false,
   update_check: true,
+  send_key: 'ctrl_enter',
 };
 
 export const inTauri: boolean = typeof window !== 'undefined' && '__TAURI_INTERNALS__' in window;
@@ -953,6 +969,10 @@ export const ipc = {
   chatSend: (sessionId: number | null, text: string, model?: { modelId: string; variantId: string }) =>
     call<ChatSent>('chat_send', { sessionId, text, modelId: model?.modelId ?? null, variantId: model?.variantId ?? null }),
   chatCancel: (messageId: number) => call<boolean>('chat_cancel', { messageId }),
+  getModelParams: (modelId: string, variantId: string) => call<ModelParams>('get_model_params', { modelId, variantId }),
+  setModelParams: (modelId: string, variantId: string, params: ModelParams) =>
+    call<ModelParams>('set_model_params', { modelId, variantId, params }),
+  getModelLayers: (modelId: string, variantId: string) => call<number | null>('get_model_layers', { modelId, variantId }),
   setHfToken: (token: string) => call<boolean>('set_hf_token', { token }),
   getMemory: () => call<MemoryStatus>('get_memory'),
   releaseMemory: (key: string) => call<boolean>('release_memory', { key }),

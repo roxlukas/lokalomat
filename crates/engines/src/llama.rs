@@ -41,6 +41,8 @@ pub struct ServerConfig {
     pub ctx: u32,
     /// Flash attention and a q8_0 KV cache (ADR 0021).
     pub kv_compact: bool,
+    /// `-ngl`: layers on the GPU set in the Inspector (ADR 0036); `None` = the engine decides.
+    pub gpu_layers: Option<u32>,
     pub log_file: PathBuf,
     pub launch: Launch,
 }
@@ -140,6 +142,9 @@ fn launch_args(config: &ServerConfig, port: u16, token: &str) -> Vec<String> {
     if config.kv_compact {
         args.extend(KV_COMPACT_ARGS.iter().map(|a| (*a).to_owned()));
     }
+    if let Some(n) = config.gpu_layers {
+        args.extend(["-ngl".to_owned(), n.to_string()]);
+    }
     args
 }
 
@@ -184,7 +189,7 @@ pub async fn start(
         const CREATE_NO_WINDOW: u32 = 0x0800_0000;
         cmd.creation_flags(CREATE_NO_WINDOW);
     }
-    tracing::info!(binary = %config.binary.display(), model = %config.model_path.display(), port, ctx = config.ctx, kv_compact = config.kv_compact, "starting llama-server");
+    tracing::info!(binary = %config.binary.display(), model = %config.model_path.display(), port, ctx = config.ctx, kv_compact = config.kv_compact, gpu_layers = ?config.gpu_layers, "starting llama-server");
     tracing::debug!(args = ?lokalsi_core::redact::redact(&args.join(" ")), "llama-server arguments");
     let mut child = cmd.spawn()?;
     let pid = child.id();
@@ -329,7 +334,22 @@ pub struct ChatParams {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub temperature: Option<f32>,
     #[serde(skip_serializing_if = "Option::is_none")]
+    pub top_p: Option<f32>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub top_k: Option<u32>,
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub max_tokens: Option<u32>,
+}
+
+impl ChatParams {
+    /// Fills the fields this request leaves open with the model's defaults
+    /// from the Inspector (ADR 0036); values set by the caller win.
+    pub fn with_model_defaults(mut self, d: &lokalsi_core::model_params::ModelParams) -> Self {
+        self.temperature = self.temperature.or(d.temperature);
+        self.top_p = self.top_p.or(d.top_p);
+        self.top_k = self.top_k.or(d.top_k);
+        self
+    }
 }
 
 #[derive(Debug, Clone, Default, PartialEq)]
@@ -652,6 +672,30 @@ mod tests {
     use super::*;
 
     #[test]
+    fn model_defaults_fill_only_open_fields() {
+        let defaults = lokalsi_core::model_params::ModelParams {
+            temperature: Some(0.2),
+            top_p: Some(0.9),
+            top_k: Some(40),
+            gpu_layers: None,
+        };
+        let caller = ChatParams {
+            temperature: Some(1.0),
+            ..Default::default()
+        };
+        let p = caller.with_model_defaults(&defaults);
+        assert_eq!(p.temperature, Some(1.0), "the caller's value wins");
+        assert_eq!(p.top_p, Some(0.9));
+        assert_eq!(p.top_k, Some(40));
+        let auto = ChatParams::default().with_model_defaults(&Default::default());
+        assert_eq!(
+            serde_json::to_value(&auto).unwrap(),
+            serde_json::json!({}),
+            "Auto sends nothing"
+        );
+    }
+
+    #[test]
     fn parses_stream_events() {
         let d = parse_event(r#"{"choices":[{"delta":{"content":"Cześć"}}]}"#).unwrap();
         assert_eq!(d.content, "Cześć");
@@ -729,14 +773,22 @@ mod tests {
             model_path: PathBuf::from("/m/x.gguf"),
             ctx: 8192,
             kv_compact: false,
+            gpu_layers: None,
             log_file: PathBuf::from("log"),
             launch: crate::manifest::EngineManifest::llama_cpp().launch,
         };
         let plain = launch_args(&config, 1, "t");
         assert!(!plain.iter().any(|a| a == "-ctk"));
+        assert!(
+            !plain.iter().any(|a| a == "-ngl"),
+            "Auto leaves it to the engine"
+        );
         config.kv_compact = true;
         let compact = launch_args(&config, 1, "t");
         assert_eq!(compact[plain.len()..], KV_COMPACT_ARGS.map(String::from));
+        config.gpu_layers = Some(0);
+        let cpu = launch_args(&config, 1, "t");
+        assert_eq!(cpu[compact.len()..], ["-ngl", "0"]);
     }
 
     #[test]
