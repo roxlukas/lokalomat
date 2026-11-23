@@ -6,6 +6,7 @@ use std::sync::Arc;
 use lokalsi_core::catalog::Modality;
 use lokalsi_core::chats::{Chats, Message, MessageStatus, Role, Session, title_from};
 use lokalsi_core::library::Library;
+use lokalsi_core::model_params::{ModelParams, ModelParamsError, ModelSettings};
 use lokalsi_engines::llama::{self, ChatParams};
 use lokalsi_engines::service::{EngineService, EngineStatus, LoadRequest};
 use serde::Serialize;
@@ -348,6 +349,57 @@ pub fn chat_send(
         user,
         assistant,
     })
+}
+
+/// Inspector defaults of a chat model variant (ADR 0036); Auto when none are saved.
+#[tauri::command]
+pub fn get_model_params(
+    model_id: String,
+    variant_id: String,
+    state: State<'_, AppState>,
+) -> Res<ModelParams> {
+    tracing::debug!(command = "get_model_params", %model_id, %variant_id);
+    ModelSettings::new(&state.db)
+        .get(&model_id, &variant_id)
+        .map_err(db_err)
+}
+
+/// Saves the Inspector defaults of a chat model variant; all Auto clears them.
+#[tauri::command]
+pub fn set_model_params(
+    model_id: String,
+    variant_id: String,
+    params: ModelParams,
+    state: State<'_, AppState>,
+) -> Res<ModelParams> {
+    tracing::debug!(command = "set_model_params", %model_id, %variant_id, ?params);
+    let store = ModelSettings::new(&state.db);
+    store
+        .set(&model_id, &variant_id, &params)
+        .map_err(|e| match e {
+            ModelParamsError::OutOfRange(_) => CmdError::new("invalid_params", e.to_string()),
+            ModelParamsError::Db(e) => db_err(e),
+        })?;
+    store.get(&model_id, &variant_id).map_err(db_err)
+}
+
+/// Number of layers of an installed chat model (GGUF `block_count`), the top
+/// of the GPU offload slider (ADR 0036); `None` when the file does not say.
+#[tauri::command]
+pub fn get_model_layers(
+    model_id: String,
+    variant_id: String,
+    state: State<'_, AppState>,
+) -> Res<Option<u32>> {
+    let model = resolve_model(&state, Some((model_id, variant_id)))?;
+    let layers = lokalsi_core::gguf::block_count(&model.path)
+        .inspect_err(
+            |e| tracing::warn!(error = %e, path = %model.path.display(), "cannot read layer count"),
+        )
+        .ok()
+        .flatten();
+    tracing::debug!(command = "get_model_layers", model = %model.model_id, ?layers);
+    Ok(layers)
 }
 
 #[tauri::command]

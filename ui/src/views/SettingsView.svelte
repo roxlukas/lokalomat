@@ -5,7 +5,7 @@
   import Download from '@lucide/svelte/icons/download';
   import RefreshCw from '@lucide/svelte/icons/refresh-cw';
   import { getLocale, LOCALES, t, type Locale } from '../lib/i18n/index.svelte';
-  import { errorMessage, inTauri, ipc, type AppInfo, type AppSettings, type LogMode, type Theme } from '../lib/ipc';
+  import { errorMessage, inTauri, ipc, type AppInfo, type AppSettings, type LogMode, type SendKey, type Theme } from '../lib/ipc';
   import { settings } from '../lib/settings.svelte';
   import { diagnosticsFileName, formatBytes } from '../lib/format';
   import { logToApp } from '../lib/errors';
@@ -18,6 +18,7 @@
 
   const THEMES: Theme[] = ['system', 'light', 'dark'];
   const LOG_MODES: LogMode[] = ['normal', 'verbose'];
+  const SEND_KEYS: SendKey[] = ['ctrl_enter', 'enter'];
   const TAIL_LINES = 200;
   const SITE = 'https://aitransformation.pl';
   const LICENSE_URL = 'https://opensource.org/license/mit';
@@ -119,6 +120,27 @@
               onchange={() => change({ theme })}
             />
             {t(`settings.themes.${theme}`)}
+          </label>
+        {/each}
+      </div>
+    </fieldset>
+
+    <fieldset class="field">
+      <legend>{t('settings.sendKey.title')}</legend>
+      <div class="options">
+        {#each SEND_KEYS as key (key)}
+          <label class="option" class:checked={settings.value.send_key === key}>
+            <input
+              type="radio"
+              name="send_key"
+              value={key}
+              checked={settings.value.send_key === key}
+              onchange={() => change({ send_key: key })}
+            />
+            <span>
+              <strong>{t(`settings.sendKey.${key}`)}</strong>
+              <span class="muted">{t(`settings.sendKey.${key}Hint`)}</span>
+            </span>
           </label>
         {/each}
       </div>

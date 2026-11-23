@@ -13,6 +13,7 @@ use std::time::{Duration, Instant};
 
 use lokalsi_core::chats::{Chats, Message, MessageStatus, Role};
 use lokalsi_core::db::{Db, DbError, now_secs};
+use lokalsi_core::model_params::ModelSettings;
 use lokalsi_hwprobe::{ESTIMATE_CTX_TOKENS, kv_per_1k_mb};
 use rusqlite::{OptionalExtension, params};
 use serde::{Deserialize, Serialize};
@@ -317,6 +318,9 @@ struct Inner {
     install_cancel: Option<CancellationToken>,
     server: Option<RunningServer>,
     loaded: Option<LoadedModel>,
+    /// `-ngl` the loaded model was started with (not on `LoadedModel`, which
+    /// other crates build; ADR 0036).
+    loaded_gpu_layers: Option<u32>,
     error: Option<String>,
 }
 
@@ -379,6 +383,7 @@ impl EngineService {
                 install_cancel: None,
                 server: None,
                 loaded: None,
+                loaded_gpu_layers: None,
                 error: None,
             }),
             generation: Arc::new(tokio::sync::Mutex::new(())),
@@ -439,6 +444,7 @@ impl EngineService {
                 install_cancel: None,
                 server: None,
                 loaded: None,
+                loaded_gpu_layers: None,
                 error: None,
             }),
             generation: Arc::new(tokio::sync::Mutex::new(())),
@@ -859,11 +865,13 @@ impl EngineService {
             return Err((error_codes::MODEL_FILES, req.path.display().to_string()));
         }
         self.set_state(EngineState::Starting, None);
+        let gpu_layers = self.gpu_layers(req);
         let config = ServerConfig {
             binary,
             model_path: req.path.clone(),
             ctx,
             kv_compact: req.kv_compact,
+            gpu_layers,
             log_file: self.log_path.clone(),
             launch: self.manifest.launch.clone(),
         };
@@ -882,10 +890,11 @@ impl EngineService {
                         ctx,
                         kv_compact: req.kv_compact,
                     });
+                    inner.loaded_gpu_layers = gpu_layers;
                 }
                 self.set_state(EngineState::Running, None);
                 if let Some(s) = self.scheduler() {
-                    s.resident_loaded(&self.slot, &req.name, req.memory_estimate_mb);
+                    s.resident_loaded(&self.slot, &req.name, self.gpu_memory_mb(req, gpu_layers));
                 }
                 self.watch_crash(exited);
                 Ok(())
@@ -908,6 +917,7 @@ impl EngineService {
 
     /// True when `req` with context `ctx` needs a (re)start of the server.
     fn needs_load(&self, req: &LoadRequest, ctx: u32) -> bool {
+        let gpu_layers = self.gpu_layers(req);
         let inner = self.lock();
         !matches!(
             (&inner.server, &inner.loaded),
@@ -917,6 +927,7 @@ impl EngineService {
                     && loaded.variant_id == req.variant_id
                     && loaded.ctx >= ctx
                     && loaded.kv_compact == req.kv_compact
+                    && inner.loaded_gpu_layers == gpu_layers
         )
     }
 
@@ -992,6 +1003,7 @@ impl EngineService {
             .unwrap_or_else(|p| p.into_inner())
             .insert(message_id, cancel.clone());
         let started = Instant::now();
+        let params = self.with_model_defaults(&model, params);
         self.run_chat_inner(message_id, &model, &params, &cancel)
             .await;
         self.jobs
@@ -1003,6 +1015,49 @@ impl EngineService {
             elapsed_ms = started.elapsed().as_millis() as u64,
             "chat job finished"
         );
+    }
+
+    /// Layers on the GPU set in the Inspector for `req` (ADR 0036); `None` = Auto.
+    fn gpu_layers(&self, req: &LoadRequest) -> Option<u32> {
+        match ModelSettings::new(&self.db).get(&req.model_id, &req.variant_id) {
+            Ok(p) => p.gpu_layers,
+            Err(e) => {
+                tracing::warn!(error = %e, model = %req.model_id, "cannot read model parameters, GPU layers on Auto");
+                None
+            }
+        }
+    }
+
+    /// GPU memory `req` needs with `gpu_layers` on the card: the estimate
+    /// scaled by the share of layers (the rest stays in RAM).
+    fn gpu_memory_mb(&self, req: &LoadRequest, gpu_layers: Option<u32>) -> u64 {
+        let Some(n) = gpu_layers else {
+            return req.memory_estimate_mb;
+        };
+        let total = lokalsi_core::gguf::block_count(&req.path)
+            .inspect_err(|e| tracing::debug!(error = %e, path = %req.path.display(), "cannot read layer count"))
+            .ok()
+            .flatten();
+        gpu_share_mb(req.memory_estimate_mb, n, total)
+    }
+
+    /// `params` with the model's Inspector defaults filled in (ADR 0036).
+    fn with_model_defaults(&self, model: &LoadRequest, params: ChatParams) -> ChatParams {
+        let params = match ModelSettings::new(&self.db).get(&model.model_id, &model.variant_id) {
+            Ok(defaults) => params.with_model_defaults(&defaults),
+            Err(e) => {
+                tracing::warn!(error = %e, model = %model.model_id, "cannot read model parameters, using Auto");
+                params
+            }
+        };
+        tracing::debug!(
+            model = %model.model_id,
+            temperature = ?params.temperature,
+            top_p = ?params.top_p,
+            top_k = ?params.top_k,
+            "sampling parameters"
+        );
+        params
     }
 
     async fn run_chat_inner(
@@ -1090,7 +1145,12 @@ impl EngineService {
             // Chat never waits for running jobs; llama.cpp offloads if needed.
             if let Some(s) = self.scheduler() {
                 let room = s
-                    .make_room(model.memory_estimate_mb, &self.slot, false, cancel)
+                    .make_room(
+                        self.gpu_memory_mb(model, self.gpu_layers(model)),
+                        &self.slot,
+                        false,
+                        cancel,
+                    )
                     .await;
                 if room.is_none() {
                     self.update_message(message_id, MessageStatus::Cancelled, None);
@@ -1400,9 +1460,14 @@ impl EngineService {
         if self.needs_load(model, ctx) {
             on_status(MessageStatus::LoadingModel);
             if let Some(s) = self.scheduler() {
-                s.make_room(model.memory_estimate_mb, &self.slot, false, cancel)
-                    .await
-                    .ok_or_else(interrupted)?;
+                s.make_room(
+                    self.gpu_memory_mb(model, self.gpu_layers(model)),
+                    &self.slot,
+                    false,
+                    cancel,
+                )
+                .await
+                .ok_or_else(interrupted)?;
             }
         }
         self.ensure_loaded(model, ctx, cancel).await.map_err(|e| {
@@ -1473,7 +1538,7 @@ impl EngineService {
     ) -> Result<llama::ChatOutcome, (&'static str, String)> {
         let interrupted = || (error_codes::INTERRUPTED, "cancelled".to_owned());
         let (_guard, endpoint) = self.ready(model, cancel, on_status).await?;
-        let mut params = params.clone();
+        let mut params = self.with_model_defaults(model, params.clone());
         if params.max_tokens.is_none() {
             params.max_tokens = Some(default_answer_tokens(messages, model.context(&[])));
         }
@@ -1606,9 +1671,33 @@ async fn stream_with(
     res.map_err(|e| Box::new((partial, e)))
 }
 
+/// Share of `estimate_mb` on the GPU with `on_gpu` of `total` layers there.
+/// Unknown `total`: all of it, unless nothing is on the GPU.
+fn gpu_share_mb(estimate_mb: u64, on_gpu: u32, total: Option<u32>) -> u64 {
+    match total {
+        _ if on_gpu == 0 => 0,
+        Some(total) if total > 0 && on_gpu < total => {
+            estimate_mb * u64::from(on_gpu) / u64::from(total)
+        }
+        _ => estimate_mb,
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn gpu_share_scales_with_offloaded_layers() {
+        assert_eq!(gpu_share_mb(8000, 0, Some(32)), 0, "processor only");
+        assert_eq!(gpu_share_mb(8000, 16, Some(32)), 4000);
+        assert_eq!(gpu_share_mb(8000, 999, Some(32)), 8000, "all layers");
+        assert_eq!(
+            gpu_share_mb(8000, 16, None),
+            8000,
+            "unknown count keeps the estimate"
+        );
+    }
 
     struct NoEvents;
     impl EngineEvents for NoEvents {}

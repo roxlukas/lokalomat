@@ -4,7 +4,7 @@ import Boxes from '@lucide/svelte/icons/boxes';
 import Cpu from '@lucide/svelte/icons/cpu';
 import Server from '@lucide/svelte/icons/server';
 import Settings from '@lucide/svelte/icons/settings';
-import { registerView, registerWorkshopMode } from '../lib/edition/registry';
+import { registerInspectorSection, registerView, registerWorkshopMode } from '../lib/edition/registry';
 
 registerView({ id: 'workshop', labelKey: 'nav.workshop', icon: Hammer, order: 10, load: () => import('../views/WorkshopView.svelte') });
 registerView({ id: 'models', labelKey: 'nav.models', icon: Boxes, order: 50, load: () => import('../views/ModelsView.svelte') });
@@ -15,3 +15,6 @@ registerView({ id: 'settings', labelKey: 'nav.settings', icon: Settings, order: 
 // Workshop modes of the free edition: chat and (Expert) decisions.
 registerWorkshopMode({ id: 'chat', order: 10, example: true, load: () => import('../views/workshop/ChatPanel.svelte') });
 registerWorkshopMode({ id: 'decision', order: 60, expert: true, load: () => import('../views/workshop/DecisionPanel.svelte') });
+
+// Inspector sections (ADR 0036): the chat model's parameters.
+registerInspectorSection({ mode: 'chat', load: () => import('../views/workshop/ChatInspector.svelte') });

@@ -4,7 +4,7 @@
  */
 import catalog from '../../../catalog/models.json';
 import { registeredMocks } from './edition/registry';
-import { readLocal } from './storage';
+import { readLocal, writeLocal } from './storage';
 import type {
   DecisionAnswer,
   DecisionForm,
@@ -14,6 +14,7 @@ import type {
   FitReport,
   HardwareView,
   MemoryBudget,
+  ModelParams,
   ModelView,
   SpeedReport,
   StarterPick,
@@ -182,6 +183,12 @@ const storage: StorageOptions = {
   ],
 };
 
+const MODEL_PARAMS_KEY = 'lokalsi.mock-model-params';
+
+function mockModelParams(): Record<string, ModelParams> {
+  return readLocal<Record<string, ModelParams>>(MODEL_PARAMS_KEY, {});
+}
+
 export async function mockCall(command: string, args?: Record<string, unknown>): Promise<unknown> {
   // The edition's own commands (Pro) first.
   for (const handler of registeredMocks()) {
@@ -315,6 +322,16 @@ export async function mockCall(command: string, args?: Record<string, unknown>):
       return mockServer.running
         ? [{ at: Math.floor(Date.now() / 1000), key: 'Goose', method: 'POST', path: '/v1/chat/completions', model: 'qwen3.5-4b:q4_k_m', status: 200, duration_ms: 812, stream: true }]
         : [];
+    case 'get_model_params':
+      return mockModelParams()[`${String(args?.modelId)}/${String(args?.variantId)}`] ?? { temperature: null, top_p: null, top_k: null, gpu_layers: null };
+    case 'get_model_layers':
+      return 36;
+    case 'set_model_params': {
+      const all = mockModelParams();
+      all[`${String(args?.modelId)}/${String(args?.variantId)}`] = args?.params as ModelParams;
+      writeLocal(MODEL_PARAMS_KEY, all);
+      return args?.params;
+    }
     case 'get_network':
       return { enabled: false, port: 47821, running: false, address: null, error: null, devices: [], pairing: null };
     default:

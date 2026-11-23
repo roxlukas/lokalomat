@@ -12,6 +12,7 @@ const KNOWN_ERRORS = [
   'network',
   'not_writable',
   'invalid_path',
+  'invalid_params',
   'secret_store',
   'engine_missing',
   'no_model',

@@ -91,6 +91,7 @@ async fn main() {
             &ChatParams {
                 temperature: Some(0.2),
                 max_tokens: Some(2000),
+                ..Default::default()
             },
             &CancellationToken::new(),
             &mut |_| {},

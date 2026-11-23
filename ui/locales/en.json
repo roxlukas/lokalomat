@@ -47,7 +47,32 @@
     "title": "Inspector",
     "open": "Show inspector",
     "close": "Hide inspector",
-    "empty": "Settings for the chosen mode will appear here."
+    "empty": "Settings for the chosen mode will appear here.",
+    "auto": "Auto",
+    "reset": "Back to Auto",
+    "chat": {
+      "style": "Answer style",
+      "styles": {
+        "precise": "Precise",
+        "balanced": "Balanced",
+        "creative": "Creative"
+      },
+      "custom": "Set by hand in Expert mode.",
+      "scope": "Applies to this model in every chat.",
+      "noModel": "Download a chat model to set it up.",
+      "temperature": "Temperature",
+      "temperatureTip": "temperature (0–2): higher = more random answers. Auto = the engine default.",
+      "top_p": "Top P",
+      "top_pTip": "top_p (0–1): samples from the likeliest words with total chance P. 1 turns it off.",
+      "top_k": "Top K",
+      "top_kTip": "top_k (0–200): samples only from the K likeliest words. 0 turns it off.",
+      "gpu": "Graphics card",
+      "gpuTip": "-ngl: model layers kept in graphics card memory. The rest runs on the processor.",
+      "gpuHint": "More layers on the card means faster answers. A change reloads the model.",
+      "gpuAll": "All layers",
+      "gpuNone": "Processor only",
+      "gpuOf": "{n} of {total} layers"
+    }
   },
   "palette": {
     "label": "Command palette",
@@ -177,6 +202,13 @@
       "system": "Follow system",
       "light": "Light",
       "dark": "Dark"
+    },
+    "sendKey": {
+      "title": "Sending messages",
+      "ctrl_enter": "Ctrl+Enter sends",
+      "ctrl_enterHint": "Enter adds a new line.",
+      "enter": "Enter sends",
+      "enterHint": "Shift+Enter adds a new line."
     },
     "saveFailed": "Could not save settings: {error}",
     "advanced": "Advanced",
@@ -455,6 +487,7 @@
     "network": "No internet connection.",
     "not_writable": "Cannot write to this folder.",
     "invalid_path": "Enter the full folder path.",
+    "invalid_params": "This value is out of range.",
     "secret_store": "The system credential store is unavailable.",
     "generic": "Something went wrong: {error}",
     "engine_missing": "Getting chat ready. Try again in a moment.",
