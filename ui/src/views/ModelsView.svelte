@@ -32,7 +32,7 @@
   let expert = $derived(settings.value.expert);
   // Custom GGUF models are an Expert feature (PRD §15).
   let tab = $derived<Tab>(expert ? storedTab : 'catalog');
-  let filters = $state<ModelFilters>({ ...DEFAULT_FILTERS });
+  let filters = $state<ModelFilters>({ ...DEFAULT_FILTERS, modality: router.takeModelsModality() ?? 'all' });
   let message = $state<{ text: string; kind: 'ok' | 'error' | 'info' } | null>(null);
   let hfRepo = $state('');
   let hfPath = $state('');

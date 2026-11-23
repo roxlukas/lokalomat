@@ -2,6 +2,7 @@
   import { t } from '../i18n/index.svelte';
   import { router } from '../router.svelte';
   import { models } from '../stores.svelte';
+  import type { Modality } from '../ipc';
   import type { engineStatus } from '../workshop.svelte';
 
   /** The engine and model notes of a mode that needs a model (everything but chat). */
@@ -24,6 +25,6 @@
     {models.list.some((m) => m.modality === mode && m.variants.some((v) => v.state === 'partial'))
       ? t('workshop.partialModel')
       : t(`workshop.${mode}.needModel`)}
-    <button type="button" class="link" onclick={() => router.go('models')}>{t('chat.goModels')}</button>
+    <button type="button" class="link" onclick={() => router.goModels(mode as Modality)}>{t('chat.goModels')}</button>
   </p>
 {/if}

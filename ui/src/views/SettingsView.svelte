@@ -251,7 +251,7 @@
     <h2 id="s-about">{t('settings.about')}</h2>
     <p class="muted">
       {t('app.name')} · {t('settings.version')}
-      {info?.version ?? '0.2.1'}{#if info} · {info.os}/{info.arch} · CPU × {info.cpu_logical_cores}{/if}
+      {info?.version ?? ''}{#if info} · {info.os}/{info.arch} · CPU × {info.cpu_logical_cores}{/if}
     </p>
     <div class="updates">
       <label class="check">

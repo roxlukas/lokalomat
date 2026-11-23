@@ -100,7 +100,7 @@
   {#if options.length === 0}
     <p class="note note-info setup">
       {t('chat.needModel')}
-      <button type="button" class="link" onclick={() => router.go('models')}>{t('chat.goModels')}</button>
+      <button type="button" class="link" onclick={() => router.goModels('llm')}>{t('chat.goModels')}</button>
     </p>
   {/if}
 {/snippet}
