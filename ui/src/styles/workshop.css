@@ -27,6 +27,9 @@
   max-width: 900px;
   margin: 0 auto;
   padding: var(--space-5) var(--space-4);
+  /* The stretched flex item must not be shorter than its content, or the bottom
+     padding falls outside the scroll area and bubbles touch the command bar. */
+  min-height: min-content;
 }
 
 .workshop .examples {
