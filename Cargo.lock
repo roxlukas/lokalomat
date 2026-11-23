@@ -617,7 +617,7 @@ dependencies = [
 
 [[package]]
 name = "catalog-sync"
-version = "0.2.2"
+version = "0.2.3"
 dependencies = [
  "clap",
  "lokalsi-core",
@@ -2668,7 +2668,7 @@ checksum = "5d15f86d12da44cd8d4ec3c73984537eb7f4cadcb9776a575a0a8a05ca11005c"
 
 [[package]]
 name = "lokalomat-mobile"
-version = "0.2.2"
+version = "0.2.3"
 dependencies = [
  "base64 0.23.1",
  "jni 0.21.1",
@@ -2690,7 +2690,7 @@ dependencies = [
 
 [[package]]
 name = "lokalsi-api-gateway"
-version = "0.2.2"
+version = "0.2.3"
 dependencies = [
  "axum",
  "base64 0.23.1",
@@ -2719,7 +2719,7 @@ dependencies = [
 
 [[package]]
 name = "lokalsi-core"
-version = "0.2.2"
+version = "0.2.3"
 dependencies = [
  "dirs",
  "futures-util",
@@ -2745,7 +2745,7 @@ dependencies = [
 
 [[package]]
 name = "lokalsi-engines"
-version = "0.2.2"
+version = "0.2.3"
 dependencies = [
  "flate2",
  "futures-util",
@@ -2770,7 +2770,7 @@ dependencies = [
 
 [[package]]
 name = "lokalsi-hwprobe"
-version = "0.2.2"
+version = "0.2.3"
 dependencies = [
  "nvml-wrapper",
  "serde",
@@ -4735,7 +4735,7 @@ checksum = "7da8b5736845d9f2fcb837ea5d9e2628564b3b043a70948a3f0b778838c5fb4f"
 
 [[package]]
 name = "studio-lokalsi"
-version = "0.2.2"
+version = "0.2.3"
 dependencies = [
  "lokalsi-api-gateway",
  "lokalsi-core",
