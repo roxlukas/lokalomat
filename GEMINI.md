@@ -29,7 +29,7 @@ what to do when it fails: [docs/quality-gate.md](docs/quality-gate.md).
 - Android client (M5, ADR 0020): `apps/mobile`, UI entry `ui/mobile.html`. Build: set `JAVA_HOME` (Android Studio `jbr`), `ANDROID_HOME`, `NDK_HOME` (NDK 29), then in `apps/mobile`: `..\..
 ode_modules\.bin	auri android build --debug --apk --target aarch64` (npm in PowerShell drops the flags).
 - `cargo run --release -p lokalsi-engines --example kv_compact -- <dir> <model.gguf> <estimate MB>` – load a model with the plan for a small card (`BUDGET_MB`, default 7680 = 8 GB) and check the compact KV cache (ADR 0021).
-- `node scripts/release.mjs build` (on Windows and on Linux) then `node scripts/release.mjs publish <notes.md> <dirs>` – signed release builds and a draft GitHub release with `latest.json` for the updater (`TAURI_SIGNING_PRIVATE_KEY`, `_PASSWORD`; ADR 0029).
+- `node scripts/release.mjs build` (on Windows and on Linux) then `node scripts/release.mjs publish <notes.md> <dirs>` – signed release builds and a draft GitHub release with `latest.json` for the updater (`TAURI_SIGNING_PRIVATE_KEY`, `_PASSWORD`; ADR 0029). Step by step, with the checks: [docs/releasing.md](docs/releasing.md).
 - `cargo run -p catalog-sync` – fill sizes/sha256/revisions in `catalog/models.json` (HF API), sizes/sha256 of engine builds in `catalog/engines/*.json` (GitHub API digests) and check `benchmark` mappings (ADR 0008/0009); `-- --check` verifies offline
 - `cargo test -p lokalsi-core --test hf_live -- --ignored` – live download + sha256 check against huggingface.co (~42 MB)
 - `cargo run -p lokalsi-hwprobe --example probe` – print the detected hardware profile and budget
