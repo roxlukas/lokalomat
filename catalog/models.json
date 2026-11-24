@@ -2149,6 +2149,166 @@
       "tags": []
     },
     {
+      "id": "sd-1.5",
+      "name": "Stable Diffusion 1.5",
+      "publisher": "Stability AI",
+      "modality": "image",
+      "engine": "sd-cpp",
+      "description_pl": "Lekki, klasyczny generator obrazów 512 px dla starszych komputerów. Działa na kartach z 4 GB pamięci.",
+      "description_en": "A light, classic 512 px image generator for older computers. Runs on 4 GB GPUs.",
+      "languages": [
+        "en"
+      ],
+      "features": [
+        "text_to_image"
+      ],
+      "license": {
+        "name": "CreativeML Open RAIL-M",
+        "url": "https://huggingface.co/spaces/CompVis/stable-diffusion-license",
+        "commercial": "conditions",
+        "conditions_pl": "Użytek komercyjny dozwolony, ale licencja zakazuje niektórych zastosowań (np. szkodliwych treści).",
+        "conditions_en": "Commercial use allowed, but the licence forbids some uses (e.g. harmful content).",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "q8_0",
+          "label": "Q8_0",
+          "files": [
+            {
+              "repo": "gpustack/stable-diffusion-v1-5-GGUF",
+              "path": "stable-diffusion-v1-5-Q8_0.gguf",
+              "revision": "dcac270609fffc0ce7c7d41a3c0e752721859f7c",
+              "size": 1881241504,
+              "sha256": "a51037fac577d133fe3b83a4a0c2a7605615786f07bdec397378143fe0361f32",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 3177,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "q4_0",
+          "label": "Q4_0",
+          "files": [
+            {
+              "repo": "gpustack/stable-diffusion-v1-5-GGUF",
+              "path": "stable-diffusion-v1-5-Q4_0.gguf",
+              "revision": "dcac270609fffc0ce7c7d41a3c0e752721859f7c",
+              "size": 1747190784,
+              "sha256": "c2f6e92f9d08d69cc673a1003528ac8199274b3c0eaec88d5fbefe5af67bd42b",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 3024,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": []
+    },
+    {
+      "id": "sd-2.1",
+      "name": "Stable Diffusion 2.1",
+      "publisher": "Stability AI",
+      "modality": "image",
+      "engine": "sd-cpp",
+      "description_pl": "Lekki generator obrazów do 768 px dla starszych komputerów. Działa na kartach z 4 GB pamięci.",
+      "description_en": "A light image generator up to 768 px for older computers. Runs on 4 GB GPUs.",
+      "languages": [
+        "en"
+      ],
+      "features": [
+        "text_to_image"
+      ],
+      "license": {
+        "name": "CreativeML Open RAIL++-M",
+        "url": "https://huggingface.co/stabilityai/stable-diffusion-2-1/blob/main/LICENSE-MODEL",
+        "commercial": "conditions",
+        "conditions_pl": "Użytek komercyjny dozwolony, ale licencja zakazuje niektórych zastosowań (np. szkodliwych treści).",
+        "conditions_en": "Commercial use allowed, but the licence forbids some uses (e.g. harmful content).",
+        "eu_allowed": true,
+        "gated": false
+      },
+      "variants": [
+        {
+          "id": "q8_0",
+          "label": "Q8_0",
+          "files": [
+            {
+              "repo": "gpustack/stable-diffusion-v2-1-GGUF",
+              "path": "stable-diffusion-v2-1-Q8_0.gguf",
+              "revision": "ef8fa11863cc80ab078276f9a0bf81601e5ed904",
+              "size": 2322705024,
+              "sha256": "7b73fa47b4d1401bdf3a0898827fac94bced6633bf64ef7fe55492b6115cc74b",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 3683,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ],
+          "recommended": true
+        },
+        {
+          "id": "q4_0",
+          "label": "Q4_0",
+          "files": [
+            {
+              "repo": "gpustack/stable-diffusion-v2-1-GGUF",
+              "path": "stable-diffusion-v2-1-Q4_0.gguf",
+              "revision": "ef8fa11863cc80ab078276f9a0bf81601e5ed904",
+              "size": 2185459424,
+              "sha256": "3bc6163b7e7979aab49cc9dd76a98b99945f6a3cca8ba14411d730380c1a10e1",
+              "role": "model"
+            }
+          ],
+          "memory_estimate_mb": 3526,
+          "platforms": [
+            "windows-x64",
+            "linux-x64",
+            "macos-arm64"
+          ],
+          "recommended_backends": [
+            "cuda",
+            "metal",
+            "vulkan",
+            "cpu"
+          ]
+        }
+      ],
+      "tags": []
+    },
+    {
       "id": "whisper-tiny",
       "name": "Whisper tiny",
       "publisher": "OpenAI",

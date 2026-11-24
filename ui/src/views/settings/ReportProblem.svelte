@@ -18,7 +18,7 @@
       description,
       reply,
       edition: edition.isPro ? 'pro' : 'free',
-      version: info?.version ?? '0.2.1',
+      version: info?.version ?? '',
       system: info ? `${info.os}/${info.arch}` : undefined,
       attachSystem,
     }),
@@ -68,6 +68,53 @@
 </section>
 
 <style>
+  section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-5);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-l);
+    background: var(--surface);
+  }
+
+  h2 {
+    font-size: var(--text-l);
+  }
+
+  .muted {
+    color: var(--text-muted);
+  }
+
+  .small {
+    font-size: var(--text-s);
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .field > label {
+    margin-bottom: var(--space-1);
+    font-weight: 600;
+    font-size: var(--text-s);
+  }
+
+  .check {
+    display: inline-flex;
+    gap: var(--space-2);
+    align-items: center;
+  }
+
+  p {
+    margin: 0;
+  }
+
   a.disabled {
     opacity: 0.5;
     pointer-events: none;
