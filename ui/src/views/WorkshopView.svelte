@@ -181,6 +181,7 @@
               title={`Alt+${i + 1}`}
               onclick={() => (workshop.mode = m.id)}
             >
+              {#if m.icon}{@const ModeIcon = m.icon}<ModeIcon size={16} weight={workshop.mode === m.id ? 'fill' : 'regular'} aria-hidden="true" />{/if}
               {t(`workshop.modes.${m.id}`)}
             </button>
           {/each}
@@ -197,15 +198,18 @@
         {@const SubmitIcon = view.submitIcon}
         <div class="input-row">
           <label class="sr-only" for="workshop-input">{t('workshop.inputLabel')}</label>
-          <textarea
-            id="workshop-input"
-            rows="2"
-            bind:value={workshop.prompt}
-            onkeydown={onInputKey}
-            placeholder={view.placeholder}
-            maxlength={view.maxlength}
-            aria-keyshortcuts={sendKeyAria(settings.value.send_key)}
-          ></textarea>
+          <div class="prompts">
+            <textarea
+              id="workshop-input"
+              rows="2"
+              bind:value={workshop.prompt}
+              onkeydown={onInputKey}
+              placeholder={view.placeholder}
+              maxlength={view.maxlength}
+              aria-keyshortcuts={sendKeyAria(settings.value.send_key)}
+            ></textarea>
+            {#if view.belowPrompt}{@render view.belowPrompt()}{/if}
+          </div>
           {#if view.stop}
             <button type="button" class="btn" onclick={view.stop.run}>
               <Square size={14} aria-hidden="true" />{view.stop.label}
