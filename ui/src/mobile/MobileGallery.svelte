@@ -8,9 +8,21 @@
   import ArrowClockwise from 'phosphor-svelte/lib/ArrowClockwiseIcon';
   import X from 'phosphor-svelte/lib/XIcon';
   import DownloadSimple from 'phosphor-svelte/lib/DownloadSimpleIcon';
+  import ArrowCounterClockwise from 'phosphor-svelte/lib/ArrowCounterClockwiseIcon';
+  import Trash from 'phosphor-svelte/lib/TrashIcon';
   import { getLocale, t } from '../lib/i18n/index.svelte';
   import { api, describe, fileUrl, type GalleryItem } from './api';
   import { fileName } from './jobs';
+  import type { Reuse, ReuseKind } from './phone.svelte';
+
+  interface Props {
+    /** "Użyj ponownie": opens the mode's screen with the result's settings (ADR 0037). */
+    onReuse: (r: Reuse) => void;
+    /** The computer can run that mode now. */
+    canReuse: (kind: ReuseKind) => boolean;
+  }
+
+  let { onReuse, canReuse }: Props = $props();
 
   /**
    * Gallery (V9) like the desktop one: a grid of thumbnails, newest first.
@@ -29,6 +41,8 @@
   let failed = $state<Record<string, true>>({});
   let viewer = $state<{ item: GalleryItem; index: number; url: string | null; type: string; loading: boolean } | null>(null);
   let saved = $state('');
+  let confirmDelete = $state(false);
+  let deleting = $state(false);
 
   const urls: string[] = [];
   const queue: (() => Promise<void>)[] = [];
@@ -100,6 +114,7 @@
   async function open(item: GalleryItem, index = 0) {
     viewer = { item, index, url: null, type: '', loading: item.files > 0 };
     saved = '';
+    confirmDelete = false;
     if (item.files === 0) return;
     try {
       const file = await api.galleryFile(item.job_id, index);
@@ -133,6 +148,34 @@
     } catch (e) {
       // Shown in the viewer: the gallery's own error line is under it.
       saved = describe(e);
+    }
+  }
+
+  function reusable(item: GalleryItem): ReuseKind | null {
+    const kind = item.kind === 'image' || item.kind === 'tts' || item.kind === 'music' ? item.kind : null;
+    return kind && item.params && canReuse(kind) ? kind : null;
+  }
+
+  function reuse(item: GalleryItem) {
+    const kind = reusable(item);
+    if (!kind) return;
+    viewer = null;
+    onReuse({ kind, params: item.params ?? {} });
+  }
+
+  /** Deletes the result on the computer (after the user confirmed). */
+  async function remove(item: GalleryItem) {
+    deleting = true;
+    saved = '';
+    try {
+      await api.deleteGalleryItem(item.job_id);
+      items = items.filter((i) => i.job_id !== item.job_id);
+      viewer = null;
+    } catch (e) {
+      saved = describe(e);
+    } finally {
+      deleting = false;
+      confirmDelete = false;
     }
   }
 
@@ -218,10 +261,25 @@
         </div>
       {/if}
     </div>
-    {#if v.url}
-      <button type="button" class="btn" onclick={save}><DownloadSimple size={18} aria-hidden="true" />{t('mobile.save')}</button>
-      {#if saved}<p class="small" role="status">{saved}</p>{/if}
+    <div class="actions">
+      {#if v.url}
+        <button type="button" class="btn" onclick={save}><DownloadSimple size={18} aria-hidden="true" />{t('mobile.save')}</button>
+      {/if}
+      {#if reusable(v.item)}
+        <button type="button" class="btn" onclick={() => reuse(v.item)}><ArrowCounterClockwise size={18} aria-hidden="true" />{t('mobile.gallery.reuse')}</button>
+      {/if}
+      <button type="button" class="btn danger" onclick={() => (confirmDelete = true)} disabled={deleting}><Trash size={18} aria-hidden="true" />{t('mobile.gallery.delete')}</button>
+    </div>
+    {#if confirmDelete}
+      <div class="confirm" role="alertdialog" aria-labelledby="delete-question">
+        <p id="delete-question">{t('mobile.gallery.deleteConfirm')}</p>
+        <div class="actions">
+          <button type="button" class="btn" onclick={() => (confirmDelete = false)} disabled={deleting}>{t('common.cancel')}</button>
+          <button type="button" class="btn btn-danger" onclick={() => remove(v.item)} disabled={deleting}>{t('mobile.gallery.delete')}</button>
+        </div>
+      </div>
     {/if}
+    {#if saved}<p class="small" role="status">{saved}</p>{/if}
     {#if v.item.text}<p class="prompt">{v.item.text}</p>{/if}
     <p class="small muted">{v.item.model}</p>
   </div>
@@ -359,6 +417,32 @@
     padding: max(var(--space-8), env(safe-area-inset-top, 0px)) var(--space-4) var(--space-6);
     background: var(--bg);
     overflow-y: auto;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  .danger {
+    color: var(--error);
+  }
+
+  .btn-danger {
+    border-color: var(--error);
+    background: var(--error);
+    color: var(--bg);
+    font-weight: 700;
+  }
+
+  .confirm {
+    display: grid;
+    gap: var(--space-2);
+    padding: var(--space-3);
+    border: 1px solid var(--error);
+    border-radius: var(--radius-m);
+    background: var(--surface);
   }
 
   .viewer-top {

@@ -393,6 +393,12 @@ impl Connection {
             .await
     }
 
+    /// Starts speech as a job (ADR 0037), so a locked screen does not cancel long text.
+    pub async fn start_speech(&self, req: &SpeechRequest) -> Result<JobView, ClientError> {
+        self.json("POST", "/v1/jobs/speech", Some(req), CONNECT_TIMEOUT * 3)
+            .await
+    }
+
     /// Starts a decision job (ADR 0024; `403 expert_only` outside Expert mode).
     pub async fn start_decision(&self, req: &DecisionJobRequest) -> Result<JobView, ClientError> {
         self.json("POST", "/v1/jobs/decision", Some(req), CONNECT_TIMEOUT * 3)
@@ -445,6 +451,19 @@ impl Connection {
             Duration::from_secs(60),
         )
         .await
+    }
+
+    /// Deletes a result and its files on the computer (ADR 0037).
+    pub async fn delete_gallery_item(&self, job_id: i64) -> Result<(), ClientError> {
+        self.send(
+            "DELETE",
+            &format!("/v1/gallery/{job_id}"),
+            None,
+            Vec::new(),
+            CONNECT_TIMEOUT * 2,
+        )
+        .await
+        .map(|_| ())
     }
 
     pub async fn gallery_file(&self, job_id: i64, index: usize) -> Result<Reply, ClientError> {

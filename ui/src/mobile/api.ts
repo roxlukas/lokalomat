@@ -39,6 +39,37 @@ export interface GalleryItem {
   model: string;
   created_at: number;
   files: number;
+  /** The job's settings on the computer, for "Użyj ponownie" (ADR 0037). */
+  params?: Record<string, unknown>;
+}
+
+/** `POST /v1/jobs/image` – the gateway's shape (snake_case), ADR 0037. */
+export interface ImageJob {
+  prompt: string;
+  aspect: string;
+  model: string | null;
+  negative_prompt?: string;
+  count?: number;
+  seed?: number | null;
+  steps?: number | null;
+  cfg_scale?: number | null;
+}
+
+export interface MusicJob {
+  caption: string;
+  lyrics: string;
+  language: string | null;
+  duration: number | null;
+  model: string | null;
+  seed?: number | null;
+}
+
+export interface SpeechJob {
+  input: string;
+  voice_id: number | null;
+  language: string | null;
+  model: string | null;
+  speed?: number | null;
 }
 
 /** A model installed on the computer that the phone may pick for a mode. */
@@ -56,7 +87,7 @@ export type JobStatus = 'queued' | 'preparing' | 'loading_model' | 'running' | '
 /** A job the phone started on the computer (ADR 0027); poll it with `api.job`. */
 export interface JobView {
   job_id: number;
-  kind: 'image' | 'music' | 'decision';
+  kind: 'image' | 'music' | 'tts' | 'decision';
   status: JobStatus;
   /** 0–1 while running, when known. */
   progress: number | null;
@@ -97,7 +128,7 @@ export const api = {
   pairWait: () => call<MobileStatus>('pair_wait'),
   pairCancel: () => call<void>('pair_cancel'),
   forget: () => call<MobileStatus>('forget'),
-  info: () => call<{ computer_name: string; version: string; modes: string[] }>('info'),
+  info: () => call<{ computer_name: string; version: string; modes: string[]; expert?: boolean }>('info'),
   models: (mode: Mode) => call<ModelOption[]>('models', { mode }),
   chat: (messages: Turn[], model: string | null) => call<string>('chat', { messages, model }),
   transcribe: (audio: string, ext: string, language: string | null, model: string | null) =>
@@ -106,10 +137,9 @@ export const api = {
     call<string>('speak', { text, voiceId, language, model }),
   image: (prompt: string, aspect: string, model: string | null) =>
     call<string[]>('image', { prompt, aspect, model }),
-  startImage: (prompt: string, aspect: string, model: string | null) =>
-    call<JobView>('start_image', { prompt, aspect, model }),
-  startMusic: (caption: string, lyrics: string, language: string | null, duration: number | null, model: string | null) =>
-    call<JobView>('start_music', { caption, lyrics, language, duration, model }),
+  startImage: (req: ImageJob) => call<JobView>('start_image', { req }),
+  startMusic: (req: MusicJob) => call<JobView>('start_music', { req }),
+  startSpeech: (req: SpeechJob) => call<JobView>('start_speech', { req }),
   startDecision: (text: string, questions: DecisionQuestion[], model: string | null) =>
     call<JobView>('start_decision', { text, questions, model }),
   job: (jobId: number) => call<JobView>('job', { jobId }),
@@ -121,6 +151,7 @@ export const api = {
   gallery: (limit: number) => call<GalleryItem[]>('gallery', { limit }),
   galleryThumb: (jobId: number, index: number) => call<FileData>('gallery_thumb', { jobId, index }),
   galleryFile: (jobId: number, index: number) => call<FileData>('gallery_file', { jobId, index }),
+  deleteGalleryItem: (jobId: number) => call<void>('delete_gallery_item', { jobId }),
 };
 
 const KNOWN = [

@@ -16,11 +16,13 @@
   import { t } from '../lib/i18n/index.svelte';
   import { renderMarkdown } from '../lib/markdown';
   import { clock, encodeWav, toMono } from '../lib/media';
-  import { api, describe, isOffline, toBase64, type MobileStatus, type RemoteVoice, type Transcription, type Turn } from './api';
+  import { api, describe, isOffline, toBase64, type MobileStatus, type Transcription, type Turn } from './api';
   import MobileDecision from './MobileDecision.svelte';
   import MobileGallery from './MobileGallery.svelte';
   import MobileImage from './MobileImage.svelte';
   import MobileMusic from './MobileMusic.svelte';
+  import MobileVoice from './MobileVoice.svelte';
+  import { phone, type Reuse } from './phone.svelte';
   import ModelPicker from './ModelPicker.svelte';
   import PairScreen from './PairScreen.svelte';
 
@@ -31,7 +33,8 @@
   const EXPERT_TABS: Tab[] = ['decision'];
   /** The same lists as on the computer (transcription and the voice Inspector). */
   const STT_LANGUAGES = ['auto', 'pl', 'en', 'de', 'uk', 'fr', 'es'] as const;
-  const TTS_LANGUAGES = ['pl', 'en', 'de', 'fr', 'es', 'it', 'pt', 'nl', 'ru'] as const;
+  /** The tab of each kind the Gallery can "use again". */
+  const REUSE_TAB: Record<Reuse['kind'], Tab> = { image: 'image', tts: 'voice', music: 'music' };
 
   let status = $state<MobileStatus | null>(null);
   let tab = $state<Tab>('chat');
@@ -48,17 +51,9 @@
   let transcript = $state<Transcription | null>(null);
   let copied = $state(false);
   let language = $state('auto');
-  // voice
-  let voices = $state<RemoteVoice[]>([]);
-  let voiceId = $state<number | null>(null);
-  let speechText = $state('');
-  /** "" = the model's own language; a cloned voice keeps the language of its sample. */
-  let speechLanguage = $state('');
-  let speechUrl = $state<string | null>(null);
   // model chosen per mode ("" = the computer's default)
   let chatModel = $state('');
   let sttModel = $state('');
-  let ttsModel = $state('');
 
   // connection to the computer: null = not checked yet
   const CHECK_EVERY_MS = 15_000;
@@ -85,7 +80,9 @@
   /** Asks the computer for its info; updates the connection icon and modes. */
   async function check() {
     try {
-      modes = (await api.info()).modes;
+      const info = await api.info();
+      modes = info.modes;
+      phone.expert = info.expert === true;
       if (!visible(tab)) tab = 'chat';
       if (online === false) error = '';
       online = true;
@@ -214,22 +211,15 @@
       .catch(() => undefined);
   }
 
-  async function loadVoices() {
-    voices = await api.voices().catch(() => []);
-  }
-
-  async function speak() {
-    await run(async () => {
-      const wav = await api.speak(speechText, voiceId, voiceId === null ? speechLanguage || null : null, ttsModel || null);
-      if (speechUrl) URL.revokeObjectURL(speechUrl);
-      speechUrl = URL.createObjectURL(new Blob([Uint8Array.from(atob(wav), (c) => c.charCodeAt(0))], { type: 'audio/wav' }));
-    });
-  }
-
   function choose(next: Tab) {
     tab = next;
     error = '';
-    if (next === 'voice' && voices.length === 0) void loadVoices();
+  }
+
+  /** "Użyj ponownie" in the Gallery: the screen of that mode takes the settings. */
+  function reuse(r: Reuse) {
+    phone.reuse = r;
+    choose(REUSE_TAB[r.kind]);
   }
 
   function available(tab: Tab): boolean {
@@ -341,29 +331,7 @@
           {/if}
         </div>
       {:else if tab === 'voice'}
-        <div class="panel">
-          <ModelPicker mode="tts" bind:value={ttsModel} />
-          <label class="field">
-            <span class="small muted">{t('workshop.tts.voice')}</span>
-            <select value={voiceId ?? ''} onchange={(e) => (voiceId = e.currentTarget.value ? Number(e.currentTarget.value) : null)}>
-              <option value="">{t('workshop.tts.modelVoice')}</option>
-              {#each voices as v (v.id)}<option value={v.id}>{v.name}</option>{/each}
-            </select>
-          </label>
-          {#if voiceId === null}
-            <label class="field">
-              <span class="small muted">{t('mobile.voice.language')}</span>
-              <select bind:value={speechLanguage}>
-                <option value="">{t('mobile.voice.languageAuto')}</option>
-                {#each TTS_LANGUAGES as l (l)}<option value={l}>{t(`workshop.stt.languages.${l}`)}</option>{/each}
-              </select>
-            </label>
-          {/if}
-          <textarea rows="4" bind:value={speechText} placeholder={t('workshop.tts.placeholder')} aria-label={t('workshop.tts.placeholder')}></textarea>
-          <button type="button" class="btn btn-primary" onclick={speak} disabled={busy || !speechText.trim()}>{t('workshop.tts.speak')}</button>
-          {#if busy}<p class="muted small">{t('mobile.working')}</p>{/if}
-          {#if speechUrl}<audio controls src={speechUrl}></audio>{/if}
-        </div>
+        <MobileVoice />
       {:else if tab === 'image'}
         <MobileImage />
       {:else if tab === 'music'}
@@ -371,7 +339,7 @@
       {:else if tab === 'decision'}
         <MobileDecision />
       {:else}
-        <MobileGallery />
+        <MobileGallery onReuse={reuse} canReuse={(kind) => available(REUSE_TAB[kind])} />
       {/if}
     </main>
 
@@ -535,8 +503,7 @@
     align-items: flex-end;
   }
 
-  .bar textarea,
-  .panel textarea {
+  .bar textarea {
     flex: 1;
     width: 100%;
   }
@@ -590,10 +557,6 @@
     color: var(--text-muted);
     font-family: var(--font-mono);
     font-size: var(--text-s);
-  }
-
-  audio {
-    width: 100%;
   }
 
   nav {

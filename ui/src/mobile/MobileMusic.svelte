@@ -7,6 +7,7 @@
   import { download, fileName, pickFile, rememberJob, rememberedJob, watchJob, type Watch } from './jobs';
   import JobProgress from './JobProgress.svelte';
   import ModelPicker from './ModelPicker.svelte';
+  import { num, phone, str, wholeOrNull } from './phone.svelte';
 
   /** Music mode (ADR 0022): a song made on the computer, played and saved on the phone. */
   const SLOT = 'music';
@@ -23,6 +24,8 @@
   let language = $state(readLocal<string>('lokalsi.mobile.music.language', 'pl'));
   let length = $state(readLocal<number>('lokalsi.mobile.music.length', 60));
   let model = $state('');
+  /** Expert: the same seed gives the same song (ADR 0037). */
+  let seed = $state<number | null>(null);
   let job = $state<JobView | null>(null);
   let url = $state<string | null>(null);
   let error = $state('');
@@ -36,6 +39,20 @@
   $effect(() => writeLocal('lokalsi.mobile.music.lyrics', lyrics));
   $effect(() => writeLocal('lokalsi.mobile.music.language', language));
   $effect(() => writeLocal('lokalsi.mobile.music.length', length));
+
+  // "Użyj ponownie" in the Gallery.
+  $effect(() => {
+    const p = phone.reuse?.kind === 'music' ? phone.take('music') : null;
+    if (!p) return;
+    caption = str(p, 'caption');
+    lyrics = str(p, 'text');
+    if (LANGUAGES.includes(str(p, 'language'))) language = str(p, 'language');
+    const saved = (p['settings'] ?? {}) as Record<string, unknown>;
+    const d = num(saved, 'duration');
+    length = d !== null && LENGTHS.includes(d) ? d : 0;
+    seed = num(saved, 'seed');
+    if (str(p, 'model')) model = str(p, 'model');
+  });
 
   onMount(() => {
     const id = rememberedJob(SLOT);
@@ -80,7 +97,14 @@
     note = '';
     starting = true;
     try {
-      const started = await api.startMusic(caption.trim(), lyrics.trim(), language, length > 0 ? length : null, model || null);
+      const started = await api.startMusic({
+        caption: caption.trim(),
+        lyrics: lyrics.trim(),
+        language,
+        duration: length > 0 ? length : null,
+        model: model || null,
+        seed: phone.expert ? wholeOrNull(seed, 0, 16_777_215) : null,
+      });
       if (url) URL.revokeObjectURL(url);
       url = null;
       job = started;
@@ -144,6 +168,12 @@
       </div>
     </div>
   </div>
+  {#if phone.expert}
+    <label class="field">
+      <span class="small muted">{t('mobile.seed')}</span>
+      <input type="number" min="0" inputmode="numeric" bind:value={seed} placeholder={t('mobile.random')} />
+    </label>
+  {/if}
   <button type="button" class="btn btn-primary" onclick={compose} disabled={working || (!caption.trim() && !lyrics.trim())}>{t('workshop.music.compose')}</button>
   {#if job}<JobProgress {job} onCancel={cancel} />{/if}
   {#if url && job?.status === 'done'}

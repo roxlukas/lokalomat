@@ -222,6 +222,7 @@ async fn speak(
             voice_id,
             language,
             model,
+            ..Default::default()
         })
         .await?;
     Ok(STANDARD.encode(wav))
@@ -241,50 +242,37 @@ async fn image(
             prompt,
             aspect,
             model,
+            ..Default::default()
         })
         .await?)
 }
 
-/// Starts an image on the computer as a job (ADR 0027); poll it with `job`.
+/// Starts an image on the computer as a job (ADR 0027, settings ADR 0037); poll it with `job`.
 #[tauri::command]
-async fn start_image(
-    prompt: String,
-    aspect: Option<String>,
-    model: Option<String>,
-    state: State<'_, AppState>,
-) -> Res<JobView> {
-    tracing::debug!(chars = prompt.chars().count(), model = ?model, "start image");
-    Ok(state
-        .connection()?
-        .start_image(&ImageRequest {
-            prompt,
-            aspect,
-            model,
-        })
-        .await?)
+async fn start_image(req: ImageRequest, state: State<'_, AppState>) -> Res<JobView> {
+    tracing::debug!(chars = req.prompt.chars().count(), count = ?req.count, model = ?req.model, "start image");
+    Ok(state.connection()?.start_image(&req).await?)
 }
 
-/// Starts a song (style, lyrics, language, length in seconds).
+/// Starts a song (style, lyrics, language, length in seconds, seed).
 #[tauri::command]
-async fn start_music(
-    caption: String,
-    lyrics: String,
-    language: Option<String>,
-    duration: Option<f32>,
-    model: Option<String>,
-    state: State<'_, AppState>,
-) -> Res<JobView> {
-    tracing::debug!(caption_chars = caption.chars().count(), lyrics_chars = lyrics.chars().count(), ?duration, model = ?model, "start music");
-    Ok(state
-        .connection()?
-        .start_music(&MusicJobRequest {
-            caption,
-            lyrics,
-            language,
-            duration,
-            model,
-        })
-        .await?)
+async fn start_music(req: MusicJobRequest, state: State<'_, AppState>) -> Res<JobView> {
+    tracing::debug!(caption_chars = req.caption.chars().count(), lyrics_chars = req.lyrics.chars().count(), duration = ?req.duration, model = ?req.model, "start music");
+    Ok(state.connection()?.start_music(&req).await?)
+}
+
+/// Starts speech as a job (ADR 0037); the WAV comes with `gallery_file`.
+#[tauri::command]
+async fn start_speech(req: SpeechRequest, state: State<'_, AppState>) -> Res<JobView> {
+    tracing::debug!(chars = req.input.chars().count(), voice = ?req.voice_id, model = ?req.model, "start speech");
+    Ok(state.connection()?.start_speech(&req).await?)
+}
+
+/// Deletes a result and its files on the computer (ADR 0037).
+#[tauri::command]
+async fn delete_gallery_item(job_id: i64, state: State<'_, AppState>) -> Res<()> {
+    tracing::info!(job_id, "delete gallery item");
+    Ok(state.connection()?.delete_gallery_item(job_id).await?)
 }
 
 /// Asks typed questions about a text (Expert mode on the computer).
@@ -446,6 +434,8 @@ pub fn run() {
             image,
             start_image,
             start_music,
+            start_speech,
+            delete_gallery_item,
             start_decision,
             job,
             cancel_job,

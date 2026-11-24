@@ -209,6 +209,10 @@ impl Backend for ModesBackend {
         models_in(self.resolver.as_ref(), self.mode_list(), mode).unwrap_or_default()
     }
 
+    fn expert(&self) -> bool {
+        (self.expert)()
+    }
+
     fn chat(
         &self,
         messages: Vec<Turn>,

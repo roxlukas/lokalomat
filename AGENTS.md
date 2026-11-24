@@ -52,4 +52,4 @@ ode_modules\.bin	auri android build --debug --apk --target aarch64` (npm in Powe
 - New DB schema → append a migration to `MIGRATIONS` in `crates/core/src/db.rs`; never edit released entries (ADR 0003).
 - M1+ commands return `CmdError { code, message }`; the UI translates `code` via `errors.*` (`ui/src/lib/feedback.ts`).
 - Product name (ADR 0019): "Lokalomat AI Studio", short "Lokalomat" in UI texts; technical ids (`lokalsi-*`, app home `Studio Lokalsi`, keyring service) keep the old name.
-- Next free ADR number: 0037 (0036 model parameters and send key; 0035 free/Pro editions; 0023 used by the media converters branch; 0027 by phone parity; 0028 by M5c agents part 3).
+- Next free ADR number: 0038 (0037 phone parity part 2 – gateway settings; 0036 model parameters and send key; 0035 free/Pro editions; 0023 used by the media converters branch; 0027 by phone parity; 0028 by M5c agents part 3).

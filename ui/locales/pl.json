@@ -836,7 +836,11 @@
     "send": "Wyślij",
     "save": "Zapisz w telefonie",
     "image": {
-      "file": "obraz"
+      "file": "obraz",
+      "negative": "Czego unikać",
+      "count": "Ile obrazów",
+      "steps": "Kroki",
+      "cfg": "Siła opisu (CFG)"
     },
     "jobs": {
       "failed": "Komputer nie dokończył zadania. Spróbuj jeszcze raz.",
@@ -866,7 +870,8 @@
     },
     "voice": {
       "language": "Język",
-      "languageAuto": "Jak w modelu"
+      "languageAuto": "Jak w modelu",
+      "speed": "Tempo"
     },
     "gallery": {
       "empty": "Na komputerze nie ma jeszcze wyników.",
@@ -880,7 +885,10 @@
       "more": "Pokaż więcej",
       "prev": "Poprzedni",
       "next": "Następny",
-      "voiceFile": "glos"
+      "voiceFile": "glos",
+      "reuse": "Użyj ponownie",
+      "delete": "Usuń",
+      "deleteConfirm": "Usunąć ten wynik z komputera? Tego nie da się cofnąć."
     },
     "pair": {
       "title": "Połącz z komputerem",
@@ -938,7 +946,11 @@
       "title": "Odłączyć od komputera {name}?",
       "body": "Żeby znów z niego korzystać, trzeba będzie sparować telefon od nowa.",
       "confirm": "Odłącz"
-    }
+    },
+    "seed": "Ziarno",
+    "random": "losowe",
+    "auto": "auto",
+    "more": "Więcej ustawień"
   },
   "decisions": {
     "type": "Rodzaj pytania",
