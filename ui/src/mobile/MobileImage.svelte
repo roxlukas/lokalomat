@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onDestroy, onMount } from 'svelte';
-  import Download from '@lucide/svelte/icons/download';
+  import DownloadSimple from 'phosphor-svelte/lib/DownloadSimpleIcon';
   import { t } from '../lib/i18n/index.svelte';
   import { api, describe, fileUrl, finished, type JobView } from './api';
   import { download, fileName, pickFile, rememberJob, rememberedJob, watchJob, type Watch } from './jobs';
@@ -118,7 +118,7 @@
   {#if job}<JobProgress {job} onCancel={cancel} />{/if}
   {#if url && job?.status === 'done'}
     <img src={url} alt={prompt || t('jobs.imageOf')} />
-    <button type="button" class="btn" onclick={save}><Download size={18} aria-hidden="true" />{t('mobile.save')}</button>
+    <button type="button" class="btn" onclick={save}><DownloadSimple size={18} aria-hidden="true" />{t('mobile.save')}</button>
     {#if note}<p class="muted small" role="status">{note}</p>{/if}
   {/if}
 </div>

@@ -148,7 +148,11 @@
         "de": "Niemiecki",
         "uk": "Ukraiński",
         "fr": "Francuski",
-        "es": "Hiszpański"
+        "es": "Hiszpański",
+        "it": "Włoski",
+        "pt": "Portugalski",
+        "nl": "Niderlandzki",
+        "ru": "Rosyjski"
       },
       "needModel": "Do transkrypcji potrzebny jest model."
     },
@@ -856,7 +860,13 @@
       "start": "Nagrywaj",
       "stop": "Zatrzymaj i wyślij",
       "file": "Albo wybierz plik z nagraniem",
-      "noMic": "Brak dostępu do mikrofonu."
+      "noMic": "Brak dostępu do mikrofonu.",
+      "copy": "Kopiuj tekst",
+      "copied": "Skopiowano."
+    },
+    "voice": {
+      "language": "Język",
+      "languageAuto": "Jak w modelu"
     },
     "gallery": {
       "empty": "Na komputerze nie ma jeszcze wyników.",
@@ -869,7 +879,8 @@
       "refresh": "Odśwież",
       "more": "Pokaż więcej",
       "prev": "Poprzedni",
-      "next": "Następny"
+      "next": "Następny",
+      "voiceFile": "glos"
     },
     "pair": {
       "title": "Połącz z komputerem",

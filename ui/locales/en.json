@@ -148,7 +148,11 @@
         "de": "German",
         "uk": "Ukrainian",
         "fr": "French",
-        "es": "Spanish"
+        "es": "Spanish",
+        "it": "Italian",
+        "pt": "Portuguese",
+        "nl": "Dutch",
+        "ru": "Russian"
       },
       "needModel": "Transcription needs a model."
     },
@@ -856,7 +860,13 @@
       "start": "Record",
       "stop": "Stop and send",
       "file": "Or pick a recording",
-      "noMic": "No access to the microphone."
+      "noMic": "No access to the microphone.",
+      "copy": "Copy text",
+      "copied": "Copied."
+    },
+    "voice": {
+      "language": "Language",
+      "languageAuto": "Model default"
     },
     "gallery": {
       "empty": "No results on the computer yet.",
@@ -869,7 +879,8 @@
       "refresh": "Refresh",
       "more": "Show more",
       "prev": "Previous",
-      "next": "Next"
+      "next": "Next",
+      "voiceFile": "voice"
     },
     "pair": {
       "title": "Connect to your computer",

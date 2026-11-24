@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onDestroy, onMount } from 'svelte';
-  import Download from '@lucide/svelte/icons/download';
+  import DownloadSimple from 'phosphor-svelte/lib/DownloadSimpleIcon';
   import { t } from '../lib/i18n/index.svelte';
   import { readLocal, writeLocal } from '../lib/storage';
   import { api, describe, fileUrl, finished, type JobView } from './api';
@@ -12,7 +12,7 @@
   const SLOT = 'music';
   const LANGUAGES = ['pl', 'en', 'de', 'fr', 'es', 'it', 'uk'];
   /** Song lengths in seconds; 0 = the model decides. */
-  const LENGTHS = [0, 30, 60, 120];
+  const LENGTHS = [0, 30, 60, 120, 180];
   const MAX_CAPTION = 2000;
   const MAX_LYRICS = 10000;
   // The MP3 is smaller to send over Wi-Fi; the WAV is the fallback.
@@ -148,7 +148,7 @@
   {#if job}<JobProgress {job} onCancel={cancel} />{/if}
   {#if url && job?.status === 'done'}
     <audio controls src={url}></audio>
-    <button type="button" class="btn" onclick={save}><Download size={18} aria-hidden="true" />{t('mobile.save')}</button>
+    <button type="button" class="btn" onclick={save}><DownloadSimple size={18} aria-hidden="true" />{t('mobile.save')}</button>
     {#if note}<p class="muted small" role="status">{note}</p>{/if}
   {/if}
   <p class="muted small">{t('workshop.music.note')}</p>

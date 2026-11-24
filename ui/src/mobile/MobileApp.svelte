@@ -1,21 +1,22 @@
 <script lang="ts">
   import { onDestroy, onMount } from 'svelte';
-  import MessageSquare from '@lucide/svelte/icons/message-square';
-  import Mic from '@lucide/svelte/icons/mic';
-  import AudioLines from '@lucide/svelte/icons/audio-lines';
-  import ImageIcon from '@lucide/svelte/icons/image';
-  import Images from '@lucide/svelte/icons/images';
-  import Music from '@lucide/svelte/icons/music';
-  import Scale from '@lucide/svelte/icons/scale';
-  import Send from '@lucide/svelte/icons/send';
-  import Square from '@lucide/svelte/icons/square';
-  import Unlink from '@lucide/svelte/icons/unlink';
-  import Wifi from '@lucide/svelte/icons/wifi';
-  import WifiOff from '@lucide/svelte/icons/wifi-off';
+  import ChatCircle from 'phosphor-svelte/lib/ChatCircleIcon';
+  import Microphone from 'phosphor-svelte/lib/MicrophoneIcon';
+  import SpeakerHigh from 'phosphor-svelte/lib/SpeakerHighIcon';
+  import PaintBrush from 'phosphor-svelte/lib/PaintBrushIcon';
+  import SquaresFour from 'phosphor-svelte/lib/SquaresFourIcon';
+  import MusicNotes from 'phosphor-svelte/lib/MusicNotesIcon';
+  import Scales from 'phosphor-svelte/lib/ScalesIcon';
+  import PaperPlaneRight from 'phosphor-svelte/lib/PaperPlaneRightIcon';
+  import Stop from 'phosphor-svelte/lib/StopIcon';
+  import LinkBreak from 'phosphor-svelte/lib/LinkBreakIcon';
+  import WifiHigh from 'phosphor-svelte/lib/WifiHighIcon';
+  import WifiSlash from 'phosphor-svelte/lib/WifiSlashIcon';
+  import Copy from 'phosphor-svelte/lib/CopyIcon';
   import { t } from '../lib/i18n/index.svelte';
   import { renderMarkdown } from '../lib/markdown';
-  import { encodeWav, toMono } from '../lib/media';
-  import { api, describe, isOffline, toBase64, type MobileStatus, type RemoteVoice, type Turn } from './api';
+  import { clock, encodeWav, toMono } from '../lib/media';
+  import { api, describe, isOffline, toBase64, type MobileStatus, type RemoteVoice, type Transcription, type Turn } from './api';
   import MobileDecision from './MobileDecision.svelte';
   import MobileGallery from './MobileGallery.svelte';
   import MobileImage from './MobileImage.svelte';
@@ -25,9 +26,12 @@
 
   const TABS = ['chat', 'record', 'voice', 'image', 'music', 'decision', 'gallery'] as const;
   type Tab = (typeof TABS)[number];
-  const ICONS = { chat: MessageSquare, record: Mic, voice: AudioLines, image: ImageIcon, music: Music, decision: Scale, gallery: Images };
+  const ICONS = { chat: ChatCircle, record: Microphone, voice: SpeakerHigh, image: PaintBrush, music: MusicNotes, decision: Scales, gallery: SquaresFour };
   /** The computer offers these only in Expert mode (ADR 0027): the tab shows when it does. */
   const EXPERT_TABS: Tab[] = ['decision'];
+  /** The same lists as on the computer (transcription and the voice Inspector). */
+  const STT_LANGUAGES = ['auto', 'pl', 'en', 'de', 'uk', 'fr', 'es'] as const;
+  const TTS_LANGUAGES = ['pl', 'en', 'de', 'fr', 'es', 'it', 'pt', 'nl', 'ru'] as const;
 
   let status = $state<MobileStatus | null>(null);
   let tab = $state<Tab>('chat');
@@ -41,12 +45,15 @@
   // record
   let recorder: MediaRecorder | null = null;
   let recording = $state(false);
-  let transcript = $state('');
+  let transcript = $state<Transcription | null>(null);
+  let copied = $state(false);
   let language = $state('auto');
   // voice
   let voices = $state<RemoteVoice[]>([]);
   let voiceId = $state<number | null>(null);
   let speechText = $state('');
+  /** "" = the model's own language; a cloned voice keeps the language of its sample. */
+  let speechLanguage = $state('');
   let speechUrl = $state<string | null>(null);
   // model chosen per mode ("" = the computer's default)
   let chatModel = $state('');
@@ -190,12 +197,21 @@
   }
 
   async function sendAudio(blob: Blob, ext: string) {
-    transcript = '';
+    transcript = null;
+    copied = false;
     await run(async () => {
       const bytes = new Uint8Array(await blob.arrayBuffer());
       const result = await api.transcribe(toBase64(bytes), ext, language === 'auto' ? null : language, sttModel || null);
-      transcript = result.text;
+      transcript = result;
     });
+  }
+
+  async function copyTranscript() {
+    if (!transcript) return;
+    await navigator.clipboard
+      .writeText(transcript.text)
+      .then(() => (copied = true))
+      .catch(() => undefined);
   }
 
   async function loadVoices() {
@@ -204,7 +220,7 @@
 
   async function speak() {
     await run(async () => {
-      const wav = await api.speak(speechText, voiceId, null, ttsModel || null);
+      const wav = await api.speak(speechText, voiceId, voiceId === null ? speechLanguage || null : null, ttsModel || null);
       if (speechUrl) URL.revokeObjectURL(speechUrl);
       speechUrl = URL.createObjectURL(new Blob([Uint8Array.from(atob(wav), (c) => c.charCodeAt(0))], { type: 'audio/wav' }));
     });
@@ -242,16 +258,16 @@
       <div class="tools">
         {#if online === false}
           <span class="link offline" role="status" title={t('mobile.link.offlineHint')}>
-            <WifiOff size={18} aria-hidden="true" />
+            <WifiSlash size={18} aria-hidden="true" />
             <span class="small">{t('mobile.link.offline')}</span>
           </span>
         {:else if online}
           <span class="link online" role="status" aria-label={t('mobile.link.online')} title={t('mobile.link.online')}>
-            <Wifi size={18} aria-hidden="true" />
+            <WifiHigh size={18} aria-hidden="true" />
           </span>
         {/if}
         <button type="button" class="icon-btn danger" aria-label={t('mobile.forget')} title={t('mobile.forget')} onclick={() => (confirmForget = true)}>
-          <Unlink size={18} aria-hidden="true" />
+          <LinkBreak size={18} aria-hidden="true" />
         </button>
       </div>
     </header>
@@ -289,7 +305,7 @@
         <form class="bar" onsubmit={(e) => (e.preventDefault(), void send())}>
           <textarea rows="2" bind:value={input} placeholder={t('mobile.chat.placeholder')} aria-label={t('mobile.chat.placeholder')}></textarea>
           <button type="submit" class="btn btn-primary" disabled={busy || !input.trim()} aria-label={t('mobile.send')}>
-            <Send size={18} aria-hidden="true" />
+            <PaperPlaneRight size={18} aria-hidden="true" />
           </button>
         </form>
       {:else if tab === 'record'}
@@ -298,18 +314,31 @@
           <label class="field">
             <span class="small muted">{t('workshop.stt.language')}</span>
             <select bind:value={language}>
-              {#each ['auto', 'pl', 'en', 'de', 'uk'] as l (l)}<option value={l}>{t(`workshop.stt.languages.${l}`)}</option>{/each}
+              {#each STT_LANGUAGES as l (l)}<option value={l}>{t(`workshop.stt.languages.${l}`)}</option>{/each}
             </select>
           </label>
           <button type="button" class="btn btn-primary big" class:rec={recording} onclick={toggleRecording} disabled={busy}>
-            {#if recording}<Square size={20} aria-hidden="true" />{t('mobile.record.stop')}{:else}<Mic size={20} aria-hidden="true" />{t('mobile.record.start')}{/if}
+            {#if recording}<Stop size={20} aria-hidden="true" />{t('mobile.record.stop')}{:else}<Microphone size={20} aria-hidden="true" />{t('mobile.record.start')}{/if}
           </button>
           <label class="file">
             <span class="small">{t('mobile.record.file')}</span>
             <input type="file" accept="audio/*,video/mp4" onchange={pickFile} disabled={busy} />
           </label>
           {#if busy}<p class="muted small">{t('mobile.working')}</p>{/if}
-          {#if transcript}<p class="result">{transcript}</p>{/if}
+          {#if transcript}
+            {#if transcript.segments.length > 1}
+              <ol class="segments">
+                {#each transcript.segments as s, i (i)}
+                  <li><span class="time">{clock(s.start_ms)}</span>{s.text}</li>
+                {/each}
+              </ol>
+            {:else}
+              <p class="result">{transcript.text}</p>
+            {/if}
+            <button type="button" class="btn" onclick={copyTranscript} disabled={!transcript.text}>
+              <Copy size={18} aria-hidden="true" />{copied ? t('mobile.record.copied') : t('mobile.record.copy')}
+            </button>
+          {/if}
         </div>
       {:else if tab === 'voice'}
         <div class="panel">
@@ -321,6 +350,15 @@
               {#each voices as v (v.id)}<option value={v.id}>{v.name}</option>{/each}
             </select>
           </label>
+          {#if voiceId === null}
+            <label class="field">
+              <span class="small muted">{t('mobile.voice.language')}</span>
+              <select bind:value={speechLanguage}>
+                <option value="">{t('mobile.voice.languageAuto')}</option>
+                {#each TTS_LANGUAGES as l (l)}<option value={l}>{t(`workshop.stt.languages.${l}`)}</option>{/each}
+              </select>
+            </label>
+          {/if}
           <textarea rows="4" bind:value={speechText} placeholder={t('workshop.tts.placeholder')} aria-label={t('workshop.tts.placeholder')}></textarea>
           <button type="button" class="btn btn-primary" onclick={speak} disabled={busy || !speechText.trim()}>{t('workshop.tts.speak')}</button>
           {#if busy}<p class="muted small">{t('mobile.working')}</p>{/if}
@@ -341,7 +379,7 @@
       {#each tabs as id (id)}
         {@const Icon = ICONS[id]}
         <button type="button" class:active={tab === id} aria-current={tab === id ? 'page' : undefined} onclick={() => choose(id)}>
-          <Icon size={20} aria-hidden="true" />
+          <Icon size={20} weight={tab === id ? 'fill' : 'regular'} aria-hidden="true" />
           <span>{t(`mobile.tabs.${id}`)}</span>
         </button>
       {/each}
@@ -533,6 +571,25 @@
     border-radius: var(--radius-m);
     background: var(--surface);
     white-space: pre-wrap;
+  }
+
+  .segments {
+    display: grid;
+    gap: var(--space-2);
+    max-height: 50vh;
+    overflow-y: auto;
+    margin: 0;
+    padding: var(--space-3);
+    border-radius: var(--radius-m);
+    background: var(--surface);
+    list-style: none;
+  }
+
+  .segments .time {
+    margin-right: var(--space-2);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--text-s);
   }
 
   audio {
