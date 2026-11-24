@@ -1,14 +1,16 @@
 <script lang="ts">
   import { onDestroy, onMount } from 'svelte';
-  import AudioLines from '@lucide/svelte/icons/audio-lines';
-  import ChevronLeft from '@lucide/svelte/icons/chevron-left';
-  import ChevronRight from '@lucide/svelte/icons/chevron-right';
-  import FileText from '@lucide/svelte/icons/file-text';
-  import Music from '@lucide/svelte/icons/music';
-  import RefreshCw from '@lucide/svelte/icons/refresh-cw';
-  import X from '@lucide/svelte/icons/x';
+  import SpeakerHigh from 'phosphor-svelte/lib/SpeakerHighIcon';
+  import CaretLeft from 'phosphor-svelte/lib/CaretLeftIcon';
+  import CaretRight from 'phosphor-svelte/lib/CaretRightIcon';
+  import FileText from 'phosphor-svelte/lib/FileTextIcon';
+  import MusicNotes from 'phosphor-svelte/lib/MusicNotesIcon';
+  import ArrowClockwise from 'phosphor-svelte/lib/ArrowClockwiseIcon';
+  import X from 'phosphor-svelte/lib/XIcon';
+  import DownloadSimple from 'phosphor-svelte/lib/DownloadSimpleIcon';
   import { getLocale, t } from '../lib/i18n/index.svelte';
   import { api, describe, fileUrl, type GalleryItem } from './api';
+  import { fileName } from './jobs';
 
   /**
    * Gallery (V9) like the desktop one: a grid of thumbnails, newest first.
@@ -25,7 +27,8 @@
   let error = $state('');
   let thumbs = $state<Record<string, string>>({});
   let failed = $state<Record<string, true>>({});
-  let viewer = $state<{ item: GalleryItem; index: number; url: string | null; loading: boolean } | null>(null);
+  let viewer = $state<{ item: GalleryItem; index: number; url: string | null; type: string; loading: boolean } | null>(null);
+  let saved = $state('');
 
   const urls: string[] = [];
   const queue: (() => Promise<void>)[] = [];
@@ -95,11 +98,16 @@
   }
 
   async function open(item: GalleryItem, index = 0) {
-    viewer = { item, index, url: null, loading: item.files > 0 };
+    viewer = { item, index, url: null, type: '', loading: item.files > 0 };
+    saved = '';
     if (item.files === 0) return;
     try {
-      const url = keep(fileUrl(await api.galleryFile(item.job_id, index)));
-      if (viewer?.item.job_id === item.job_id && viewer.index === index) viewer.url = url;
+      const file = await api.galleryFile(item.job_id, index);
+      const url = keep(fileUrl(file));
+      if (viewer?.item.job_id === item.job_id && viewer.index === index) {
+        viewer.url = url;
+        viewer.type = file.content_type;
+      }
     } catch (e) {
       error = describe(e);
       viewer = null;
@@ -114,6 +122,20 @@
     if (next >= 0 && next < viewer.item.files) void open(viewer.item, next);
   }
 
+  /** Saves the shown file on the phone (the system save dialog). */
+  async function save() {
+    const v = viewer;
+    if (!v?.url) return;
+    const stems: Record<string, string> = { image: t('mobile.image.file'), music: t('jobs.songFile'), tts: t('mobile.gallery.voiceFile') };
+    saved = '';
+    try {
+      if (await api.saveFile(v.item.job_id, v.index, fileName(stems[v.item.kind] ?? '', v.item, { content_type: v.type }))) saved = t('jobs.saved');
+    } catch (e) {
+      // Shown in the viewer: the gallery's own error line is under it.
+      saved = describe(e);
+    }
+  }
+
   function when(secs: number): string {
     return new Date(secs * 1000).toLocaleString(getLocale(), { dateStyle: 'short', timeStyle: 'short' });
   }
@@ -123,7 +145,7 @@
   <div class="top">
     <h2>{t('mobile.tabs.gallery')}</h2>
     <button type="button" class="icon-btn" aria-label={t('mobile.gallery.refresh')} title={t('mobile.gallery.refresh')} onclick={load} disabled={loading}>
-      <RefreshCw size={18} aria-hidden="true" />
+      <ArrowClockwise size={18} aria-hidden="true" />
     </button>
   </div>
 
@@ -149,7 +171,7 @@
             {#if item.files > 1}<span class="count">+{item.files - 1}</span>{/if}
           {:else}
             <span class="frame text-tile">
-              {#if item.kind === 'tts'}<AudioLines size={20} aria-hidden="true" />{:else if item.kind === 'music'}<Music size={20} aria-hidden="true" />{:else}<FileText size={20} aria-hidden="true" />{/if}
+              {#if item.kind === 'tts'}<SpeakerHigh size={20} aria-hidden="true" />{:else if item.kind === 'music'}<MusicNotes size={20} aria-hidden="true" />{:else}<FileText size={20} aria-hidden="true" />{/if}
               <span class="excerpt">{item.text}</span>
             </span>
           {/if}
@@ -187,15 +209,19 @@
       {#if v.item.files > 1 && v.item.kind !== 'music'}
         <div class="pager">
           <button type="button" class="icon-btn" aria-label={t('mobile.gallery.prev')} onclick={() => step(-1)} disabled={v.index === 0}>
-            <ChevronLeft size={22} aria-hidden="true" />
+            <CaretLeft size={22} aria-hidden="true" />
           </button>
           <span class="small">{v.index + 1} / {v.item.files}</span>
           <button type="button" class="icon-btn" aria-label={t('mobile.gallery.next')} onclick={() => step(1)} disabled={v.index >= v.item.files - 1}>
-            <ChevronRight size={22} aria-hidden="true" />
+            <CaretRight size={22} aria-hidden="true" />
           </button>
         </div>
       {/if}
     </div>
+    {#if v.url}
+      <button type="button" class="btn" onclick={save}><DownloadSimple size={18} aria-hidden="true" />{t('mobile.save')}</button>
+      {#if saved}<p class="small" role="status">{saved}</p>{/if}
+    {/if}
     {#if v.item.text}<p class="prompt">{v.item.text}</p>{/if}
     <p class="small muted">{v.item.model}</p>
   </div>

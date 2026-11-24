@@ -1,6 +1,6 @@
 <script lang="ts">
-  import ScanLine from '@lucide/svelte/icons/scan-line';
-  import Smartphone from '@lucide/svelte/icons/smartphone';
+  import Scan from 'phosphor-svelte/lib/ScanIcon';
+  import DeviceMobile from 'phosphor-svelte/lib/DeviceMobileIcon';
   import { t } from '../lib/i18n/index.svelte';
   import { api, describe, inApp, type MobileStatus } from './api';
 
@@ -65,7 +65,7 @@
 </script>
 
 <section class="pair">
-  <Smartphone size={40} aria-hidden="true" />
+  <DeviceMobile size={40} aria-hidden="true" />
   <h1>{t('mobile.pair.title')}</h1>
 
   {#if code}
@@ -80,7 +80,7 @@
       <input type="text" bind:value={deviceName} maxlength="60" />
     </label>
     <button type="button" class="btn btn-primary big" onclick={scan} disabled={busy || !inApp}>
-      <ScanLine size={20} aria-hidden="true" />{t('mobile.pair.scan')}
+      <Scan size={20} aria-hidden="true" />{t('mobile.pair.scan')}
     </button>
     <details>
       <summary class="small">{t('mobile.pair.manual')}</summary>

@@ -80,7 +80,7 @@ export function pickFile(job: JobView, type?: string): JobView['files'][number] 
 const EXT: Record<string, string> = { 'image/png': 'png', 'audio/mpeg': 'mp3', 'audio/wav': 'wav' };
 
 /** File name suggested in the save dialog, e.g. `lokalomat-obraz-42.png`. */
-export function fileName(stem: string, job: JobView, file: { content_type: string }): string {
+export function fileName(stem: string, job: Pick<JobView, 'job_id'>, file: { content_type: string }): string {
   const safe = stem.replace(/[^A-Za-z0-9_-]/g, '') || 'wynik';
   return `lokalomat-${safe}-${job.job_id}.${EXT[file.content_type] ?? 'bin'}`;
 }

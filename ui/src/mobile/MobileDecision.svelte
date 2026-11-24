@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onDestroy, onMount } from 'svelte';
-  import Scale from '@lucide/svelte/icons/scale';
+  import Scales from 'phosphor-svelte/lib/ScalesIcon';
   import { getLocale, t } from '../lib/i18n/index.svelte';
   import { readLocal, writeLocal } from '../lib/storage';
   import { canAsk, cleanQuestions, labelsOf, MAX_STATE_CHARS, NO, starterQuestions, YES } from '../lib/decisions';
@@ -98,7 +98,7 @@
   <DecisionQuestions bind:questions />
   <p class="muted small">{t('workshop.decision.note')}</p>
   <button type="button" class="btn btn-primary" onclick={ask} disabled={working || !canAsk(text, questions)}>
-    <Scale size={18} aria-hidden="true" />{t('workshop.decision.ask')}
+    <Scales size={18} aria-hidden="true" />{t('workshop.decision.ask')}
   </button>
   {#if job}
     <JobProgress {job} onCancel={cancel} />

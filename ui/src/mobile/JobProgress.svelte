@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Square from '@lucide/svelte/icons/square';
+  import Stop from 'phosphor-svelte/lib/StopIcon';
   import { t } from '../lib/i18n/index.svelte';
   import { describeJob, finished, type JobView } from './api';
 
@@ -20,7 +20,7 @@
       <span class="small">{t(`jobs.status.${job.status}`)}{pct != null && job.status === 'running' ? ` · ${pct}%` : ''}</span>
       {#if onCancel}
         <button type="button" class="btn small" onclick={onCancel}>
-          <Square size={14} aria-hidden="true" />{t('mobile.jobs.stop')}
+          <Stop size={14} aria-hidden="true" />{t('mobile.jobs.stop')}
         </button>
       {/if}
     </div>
