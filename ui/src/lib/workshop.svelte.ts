@@ -22,6 +22,8 @@ export interface PanelView {
   top?: Snippet;
   /** Chips, notes and fields above the input row. */
   controls?: Snippet;
+  /** Fields under the prompt, beside the send button (the image mode's negative prompt). */
+  belowPrompt?: Snippet;
   /** Replaces the default text input row (the transcription drop button). */
   input?: Snippet;
   /** Something to show instead of the empty-screen examples. */

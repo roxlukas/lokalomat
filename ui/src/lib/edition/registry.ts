@@ -26,6 +26,8 @@ export interface WorkshopModeDef {
   id: string;
   /** Position among the tabs, small first. */
   order: number;
+  /** Icon on the mode tab (Phosphor, `phosphor-svelte/lib/*Icon`). */
+  icon?: AnyComponent;
   /** Shown only in Expert mode. */
   expert?: boolean;
   /** Has an example on the empty Workshop screen (`workshop.examples.<id>`). */
