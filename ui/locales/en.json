@@ -836,7 +836,11 @@
     "send": "Send",
     "save": "Save on phone",
     "image": {
-      "file": "image"
+      "file": "image",
+      "negative": "What to avoid",
+      "count": "How many images",
+      "steps": "Steps",
+      "cfg": "Prompt strength (CFG)"
     },
     "jobs": {
       "failed": "The computer could not finish this. Try again.",
@@ -866,7 +870,8 @@
     },
     "voice": {
       "language": "Language",
-      "languageAuto": "Model default"
+      "languageAuto": "Model default",
+      "speed": "Speed"
     },
     "gallery": {
       "empty": "No results on the computer yet.",
@@ -880,7 +885,10 @@
       "more": "Show more",
       "prev": "Previous",
       "next": "Next",
-      "voiceFile": "voice"
+      "voiceFile": "voice",
+      "reuse": "Use again",
+      "delete": "Delete",
+      "deleteConfirm": "Delete this result from the computer? This cannot be undone."
     },
     "pair": {
       "title": "Connect to your computer",
@@ -938,7 +946,11 @@
       "title": "Disconnect from {name}?",
       "body": "To use it again you will have to pair the phone again.",
       "confirm": "Disconnect"
-    }
+    },
+    "seed": "Seed",
+    "random": "random",
+    "auto": "auto",
+    "more": "More settings"
   },
   "decisions": {
     "type": "Question type",

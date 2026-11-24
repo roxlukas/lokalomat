@@ -99,6 +99,10 @@ pub trait Backend: Send + Sync + 'static {
     fn job(&self, device: &str, job_id: i64) -> Option<JobView>;
     /// Cancels a running job of `device`; `false` when it is not one or already ended.
     fn cancel_job(&self, device: &str, job_id: i64) -> bool;
+    /// The computer is in Expert mode (sent to the phone in `/v1/info`, ADR 0037).
+    fn expert(&self) -> bool {
+        false
+    }
 }
 
 /// More routes and modes added to the phone gateway (ADR 0035): the Pro
@@ -718,6 +722,7 @@ async fn info(State(s): State<Arc<Shared>>) -> Json<Info> {
             }
             modes
         },
+        expert: s.backend.expert(),
     })
 }
 

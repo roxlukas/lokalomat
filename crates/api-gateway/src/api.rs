@@ -49,6 +49,10 @@ pub struct Info {
     /// Modes the computer can run now: `chat`, `stt`, `tts`, `image`, `music`
     /// and, in Expert mode on the computer, `decision`.
     pub modes: Vec<String>,
+    /// The computer is in Expert mode: the phone shows the same extra settings
+    /// (ADR 0037). Older computers do not send it (= Basic).
+    #[serde(default)]
+    pub expert: bool,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -123,8 +127,8 @@ pub struct Transcription {
     pub job_id: Option<i64>,
 }
 
-/// `POST /v1/audio/speech` → `audio/wav`.
-#[derive(Debug, Clone, Serialize, Deserialize)]
+/// `POST /v1/audio/speech` → `audio/wav`; `POST /v1/jobs/speech` → a job (ADR 0037).
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 pub struct SpeechRequest {
     pub input: String,
     #[serde(default)]
@@ -133,10 +137,23 @@ pub struct SpeechRequest {
     pub language: Option<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub model: Option<String>,
+    /// Speaking rate 0.5–2 (Piper).
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub speed: Option<f32>,
+    /// Chatterbox (Expert): emotion intensity 0–2.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub exaggeration: Option<f32>,
+    /// Chatterbox (Expert): CFG weight 0–1.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub cfg_weight: Option<f32>,
+    /// Chatterbox (Expert): temperature 0.05–2.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub temperature: Option<f32>,
 }
 
-/// `POST /v1/images/generations` → `{ data: [{ b64_json }] }`.
-#[derive(Debug, Clone, Serialize, Deserialize)]
+/// `POST /v1/images/generations` → `{ data: [{ b64_json }] }`; `POST /v1/jobs/image` → a job.
+/// The fields after `model` are the Workshop's (ADR 0037); missing = its defaults.
+#[derive(Debug, Clone, Default, Serialize, Deserialize)]
 pub struct ImageRequest {
     pub prompt: String,
     /// `1:1`, `3:4`, `16:9`…
@@ -144,6 +161,19 @@ pub struct ImageRequest {
     pub aspect: Option<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub model: Option<String>,
+    /// What to avoid (Expert on the computer and the phone).
+    #[serde(default, skip_serializing_if = "String::is_empty")]
+    pub negative_prompt: String,
+    /// Images in one job, 1–4.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub count: Option<u32>,
+    /// The same seed and settings give the same image; `None` = random.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub seed: Option<u64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub steps: Option<u32>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub cfg_scale: Option<f32>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -175,6 +205,9 @@ pub struct MusicJobRequest {
     pub duration: Option<f32>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub model: Option<String>,
+    /// The same seed gives the same song (Expert, ADR 0037); `None` = random.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub seed: Option<u64>,
 }
 
 /// Kind of a decision question; the same JSON as `lokalsi_core::decisions`.
@@ -234,11 +267,11 @@ pub struct JobFile {
     pub content_type: String,
 }
 
-/// `POST /v1/jobs/{image,music,decision}` and `GET /v1/jobs/{id}`.
+/// `POST /v1/jobs/{image,music,speech,decision}` and `GET /v1/jobs/{id}`.
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct JobView {
     pub job_id: i64,
-    /// `image`, `music`, `decision`.
+    /// `image`, `music`, `tts`, `decision`.
     pub kind: String,
     /// `queued`, `preparing`, `loading_model`, `running`, `done`, `failed`, `cancelled`.
     pub status: String,
@@ -250,7 +283,7 @@ pub struct JobView {
     pub error: Option<String>,
     #[serde(default)]
     pub model: String,
-    /// Files of a finished image or song.
+    /// Files of a finished image, song or speech.
     #[serde(default)]
     pub files: Vec<JobFile>,
     /// Answers of a finished decision, in question order.
@@ -295,6 +328,9 @@ pub struct GalleryItem {
     /// Number of files (`GET /v1/gallery/{job_id}/files/{index}`; images
     /// also have `…/{index}/thumb`).
     pub files: usize,
+    /// The job's settings (as stored on the computer), for "use again" (ADR 0037).
+    #[serde(default, skip_serializing_if = "serde_json::Value::is_null")]
+    pub params: serde_json::Value,
 }
 
 #[cfg(test)]
