@@ -68,6 +68,8 @@ export interface ImageJob {
   seed?: number | null;
   steps?: number | null;
   cfg_scale?: number | null;
+  /** Long side in px; null = the model's own size. */
+  size?: number | null;
 }
 
 export interface MusicJob {

@@ -12,11 +12,13 @@
   /**
    * Image mode: the computer draws the pictures as a job (ADR 0027), so a
    * locked screen does not stop it. Count, and in Expert mode the negative
-   * prompt, seed, steps and CFG, as in the Workshop (ADR 0037).
+   * prompt, size, seed, steps and CFG, as in the Workshop (ADR 0037).
    */
   const SLOT = 'image';
   const ASPECTS = ['1:1', '3:4', '16:9'];
   const COUNTS = [1, 2, 4];
+  /** Long sides as in the Workshop; empty = the model's own (512 for SD 1.5, 768 for SD 2.1). */
+  const SIZES = [512, 640, 768, 896, 1024, 1280, 1536];
 
   let prompt = $state('');
   let aspect = $state('1:1');
@@ -25,6 +27,8 @@
   let seed = $state<number | null>(null);
   let steps = $state<number | null>(null);
   let cfg = $state<number | null>(null);
+  /** '' = Auto. */
+  let size = $state('');
   let more = $state(false);
   let model = $state('');
   let job = $state<JobView | null>(null);
@@ -51,8 +55,11 @@
     seed = num(p, 'seed');
     steps = num(p, 'steps');
     cfg = num(p, 'cfg_scale');
+    // Jobs keep width and height; a long side from the list comes back, anything else is Auto.
+    const long = Math.max(num(p, 'width') ?? 0, num(p, 'height') ?? 0);
+    size = SIZES.includes(long) ? String(long) : '';
     if (str(p, 'model')) model = str(p, 'model');
-    if (phone.expert && (negative || steps !== null || cfg !== null)) more = true;
+    if (phone.expert && (negative || steps !== null || cfg !== null || size)) more = true;
   });
 
   onMount(() => {
@@ -115,6 +122,7 @@
         seed: expert ? wholeOrNull(seed, 0, 4_294_967_295) : null,
         steps: expert ? wholeOrNull(steps, 1, 150) : null,
         cfg_scale: expert && cfg !== null && Number.isFinite(cfg) ? Math.min(30, Math.max(0, cfg)) : null,
+        size: expert && size ? Number(size) : null,
       });
       clearImages();
       job = started;
@@ -170,6 +178,15 @@
     <button type="button" class="link-btn small" aria-expanded={more} onclick={() => (more = !more)}>{t('mobile.more')}</button>
     {#if more}
       <div class="fields">
+        <label class="field">
+          <span class="small muted">{t('mobile.image.size')}</span>
+          <select bind:value={size}>
+            <option value="">{t('mobile.auto')}</option>
+            {#each SIZES as s (s)}
+              <option value={String(s)}>{s} px</option>
+            {/each}
+          </select>
+        </label>
         <label class="field">
           <span class="small muted">{t('mobile.seed')}</span>
           <input type="number" min="0" inputmode="numeric" bind:value={seed} placeholder={t('mobile.random')} />
@@ -232,7 +249,7 @@
 
   .fields {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--space-2);
   }
 
@@ -241,7 +258,8 @@
     gap: 4px;
   }
 
-  .field input {
+  .field input,
+  .field select {
     width: 100%;
     min-width: 0;
   }

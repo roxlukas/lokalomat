@@ -841,7 +841,8 @@
       "negative": "What to avoid",
       "count": "How many images",
       "steps": "Steps",
-      "cfg": "Prompt strength (CFG)"
+      "cfg": "Prompt strength (CFG)",
+      "size": "Size"
     },
     "jobs": {
       "failed": "The computer could not finish this. Try again.",
