@@ -21,6 +21,18 @@
             android:launchMode="singleTask"
             android:label="@string/main_activity_title"
             android:name=".MainActivity"
+            android:exported="true" />
+
+        <!-- Launcher entries: purple by default, gold once the phone is paired
+             with Lokalomat Pro. Exactly one is enabled at a time; the app
+             switches them (src/launcher.rs). -->
+        <activity-alias
+            android:name=".LauncherFree"
+            android:targetActivity=".MainActivity"
+            android:icon="@mipmap/ic_launcher"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:label="@string/main_activity_title"
+            android:enabled="true"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,7 +40,22 @@
                 <!-- AndroidTV support -->
                 <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
             </intent-filter>
-        </activity>
+        </activity-alias>
+        <activity-alias
+            android:name=".LauncherPro"
+            android:targetActivity=".MainActivity"
+            android:icon="@mipmap/ic_launcher_pro"
+            android:roundIcon="@mipmap/ic_launcher_pro_round"
+            android:label="@string/main_activity_title"
+            android:enabled="false"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+                <!-- AndroidTV support -->
+                <category android:name="android.intent.category.LEANBACK_LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
 
         <provider
           android:name="androidx.core.content.FileProvider"

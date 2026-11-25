@@ -127,6 +127,8 @@
   }
 
   function onVisibility() {
+    // The launcher icon follows the edition; switched in the background so it never interrupts work.
+    if (document.visibilityState === 'hidden') void api.launcherIcon(status?.paired === true && phone.pro).catch(() => {});
     if (!status?.paired || onPhone) return;
     if (document.visibilityState === 'visible') {
       void check();
@@ -152,6 +154,8 @@
 
   async function refreshComputers() {
     computers = await api.computers().catch(() => ({ active: null, list: [] }));
+    // No computer left: back to the free (purple) mark.
+    if (computers.list.length === 0) phone.pro = false;
   }
 
   function finishOnboarding() {

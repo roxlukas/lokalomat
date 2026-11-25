@@ -140,6 +140,8 @@ function call<T>(command: string, args?: Record<string, unknown>): Promise<T> {
 export const api = {
   status: () => call<MobileStatus>('status'),
   deviceName: () => call<string | null>('device_name'),
+  /** Gold launcher icon when the paired computer runs Pro, purple otherwise (Android). */
+  launcherIcon: (pro: boolean) => call<void>('launcher_icon', { pro }),
   pairBegin: (link: string, deviceName: string) =>
     call<{ code: string; computer_name: string }>('pair_begin', { link, deviceName }),
   pairWait: () => call<MobileStatus>('pair_wait'),

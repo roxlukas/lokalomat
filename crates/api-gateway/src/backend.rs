@@ -9,6 +9,7 @@ use std::path::PathBuf;
 use std::sync::Arc;
 
 use lokalsi_core::catalog::{Modality, ModelRef};
+use lokalsi_core::edition::Edition;
 use lokalsi_core::jobs::{Job, JobKind, JobStatus, Jobs};
 use lokalsi_engines::llama::{ChatMessage, ChatParams};
 use lokalsi_engines::modes::{ModeError, ModeRunner, ModelResolver};
@@ -29,24 +30,30 @@ pub struct ModesBackend {
     modes: Arc<ModeRunner>,
     resolver: Arc<dyn ModelResolver>,
     expert: ExpertFlag,
+    /// The edition the app runs (the desktop shell's extension knows it);
+    /// the phone shows the gold mark and launcher icon for Pro.
+    edition: Edition,
 }
 
 impl ModesBackend {
     /// A backend that offers every mode, decisions included (examples, tests).
     pub fn new(modes: Arc<ModeRunner>, resolver: Arc<dyn ModelResolver>) -> Arc<Self> {
-        Self::with_expert(modes, resolver, Box::new(|| true))
+        Self::with_expert(modes, resolver, Box::new(|| true), Edition::Free)
     }
 
     /// `expert`: decisions are offered to the phone only while it answers `true`.
+    /// `edition`: what `/v1/info` reports as `pro`.
     pub fn with_expert(
         modes: Arc<ModeRunner>,
         resolver: Arc<dyn ModelResolver>,
         expert: ExpertFlag,
+        edition: Edition,
     ) -> Arc<Self> {
         Arc::new(ModesBackend {
             modes,
             resolver,
             expert,
+            edition,
         })
     }
 
@@ -214,7 +221,7 @@ impl Backend for ModesBackend {
     }
 
     fn pro(&self) -> bool {
-        lokalsi_core::edition::Edition::current().is_pro()
+        self.edition.is_pro()
     }
 
     fn chat(
@@ -512,7 +519,12 @@ mod tests {
     }
 
     fn backend(dir: &Path, expert: bool) -> Arc<ModesBackend> {
-        ModesBackend::with_expert(runner(dir), Arc::new(Empty), Box::new(move || expert))
+        ModesBackend::with_expert(
+            runner(dir),
+            Arc::new(Empty),
+            Box::new(move || expert),
+            Edition::Free,
+        )
     }
 
     fn spam_question() -> DecisionJobRequest {
@@ -545,6 +557,19 @@ mod tests {
         };
         let e = expert.start_decision("phone", bad).unwrap_err();
         assert_eq!((e.status, e.code.as_str()), (400, "decision_invalid"));
+    }
+
+    #[tokio::test]
+    async fn pro_follows_the_edition_it_was_given() {
+        let dir = tempfile::tempdir().unwrap();
+        assert!(!Backend::pro(&*backend(dir.path(), false)));
+        let pro = ModesBackend::with_expert(
+            runner(dir.path()),
+            Arc::new(Empty),
+            Box::new(|| false),
+            Edition::Pro,
+        );
+        assert!(Backend::pro(&*pro));
     }
 
     #[tokio::test]
