@@ -841,7 +841,8 @@
       "negative": "Czego unikać",
       "count": "Ile obrazów",
       "steps": "Kroki",
-      "cfg": "Siła opisu (CFG)"
+      "cfg": "Siła opisu (CFG)",
+      "size": "Rozmiar"
     },
     "jobs": {
       "failed": "Komputer nie dokończył zadania. Spróbuj jeszcze raz.",
