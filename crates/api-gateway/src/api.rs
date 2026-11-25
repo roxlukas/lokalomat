@@ -53,6 +53,10 @@ pub struct Info {
     /// (ADR 0037). Older computers do not send it (= Basic).
     #[serde(default)]
     pub expert: bool,
+    /// The computer runs the Pro edition: the phone shows the purple mark.
+    /// Older computers do not send it (= free).
+    #[serde(default)]
+    pub pro: bool,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -347,5 +351,17 @@ mod tests {
         assert_eq!(split_model_id("no-variant"), None);
         assert_eq!(split_model_id(":v"), None);
         assert_eq!(split_model_id("m:"), None);
+    }
+
+    #[test]
+    fn info_from_an_older_computer_is_free() {
+        let info: super::Info =
+            serde_json::from_str(r#"{"computer_name":"PC","version":"1","modes":["chat"]}"#)
+                .unwrap();
+        assert!(!info.pro);
+        let pro: super::Info =
+            serde_json::from_str(r#"{"computer_name":"PC","version":"1","modes":[],"pro":true}"#)
+                .unwrap();
+        assert!(pro.pro);
     }
 }

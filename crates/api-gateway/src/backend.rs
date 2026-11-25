@@ -213,6 +213,10 @@ impl Backend for ModesBackend {
         (self.expert)()
     }
 
+    fn pro(&self) -> bool {
+        lokalsi_core::edition::Edition::current().is_pro()
+    }
+
     fn chat(
         &self,
         messages: Vec<Turn>,

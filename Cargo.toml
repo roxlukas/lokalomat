@@ -7,11 +7,13 @@ members = [
     "crates/api-gateway",
     "apps/desktop/src-tauri",
     "apps/mobile/src-tauri",
+    "crates/tauri-plugin-localllm",
+    "crates/phone-models",
     "tools/catalog-sync",
 ]
 
 [workspace.package]
-version = "0.2.5"
+version = "0.2.6"
 edition = "2024"
 license = "MIT"
 authors = ["Łukasz Poźniak, AI Transformation"]
@@ -22,6 +24,7 @@ publish = false
 lokalsi-core = { path = "crates/core" }
 lokalsi-engines = { path = "crates/engines" }
 lokalsi-hwprobe = { path = "crates/hwprobe" }
+lokalsi-phone-models = { path = "crates/phone-models" }
 lokalsi-api-gateway = { path = "crates/api-gateway", default-features = false }
 
 serde = { version = "1.0.229", features = ["derive"] }

@@ -1,0 +1,60 @@
+{
+  "version": 1,
+  "models": [
+    {
+      "id": "gemma-4-e2b",
+      "name": "Gemma 4 E2B",
+      "publisher": "Google",
+      "description_pl": "Mały i szybki model do rozmów na telefonie. Dobrze pisze po polsku.",
+      "description_en": "A small, fast model for chatting on the phone. Writes Polish well.",
+      "params_b": 2.0,
+      "languages": [
+        "pl",
+        "en",
+        "de",
+        "fr",
+        "es"
+      ],
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://www.apache.org/licenses/LICENSE-2.0"
+      },
+      "min_ram_mb": 5000,
+      "recommended": true,
+      "file": {
+        "repo": "litert-community/gemma-4-E2B-it-litert-lm",
+        "path": "gemma-4-E2B-it.litertlm",
+        "revision": "2e12bfd869b2962984f97a1f2a26807316d534cc",
+        "size": 2588147712,
+        "sha256": "181938105e0eefd105961417e8da75903eacda102c4fce9ce90f50b97139a63c"
+      }
+    },
+    {
+      "id": "gemma-4-e4b",
+      "name": "Gemma 4 E4B",
+      "publisher": "Google",
+      "description_pl": "Większy model, odpowiada lepiej, ale potrzebuje telefonu z dużą pamięcią.",
+      "description_en": "A bigger model that answers better but needs a phone with a lot of memory.",
+      "params_b": 4.0,
+      "languages": [
+        "pl",
+        "en",
+        "de",
+        "fr",
+        "es"
+      ],
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://www.apache.org/licenses/LICENSE-2.0"
+      },
+      "min_ram_mb": 10000,
+      "file": {
+        "repo": "litert-community/gemma-4-E4B-it-litert-lm",
+        "path": "gemma-4-E4B-it.litertlm",
+        "revision": "f254b5ba6e36f7d89cc7892e268e9877bc20f0a0",
+        "size": 3659530240,
+        "sha256": "0b2a8980ce155fd97673d8e820b4d29d9c7d99b8fa6806f425d969b145bd52e0"
+      }
+    }
+  ]
+}

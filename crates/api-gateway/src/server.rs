@@ -103,6 +103,10 @@ pub trait Backend: Send + Sync + 'static {
     fn expert(&self) -> bool {
         false
     }
+    /// The computer runs the Pro edition (sent to the phone in `/v1/info`).
+    fn pro(&self) -> bool {
+        false
+    }
 }
 
 /// More routes and modes added to the phone gateway (ADR 0035): the Pro
@@ -426,7 +430,12 @@ impl Gateway {
         match reply {
             Some(tx) => {
                 tracing::info!(codes_match, "pairing answered by the user");
-                tx.send(codes_match).is_ok()
+                let delivered = tx.send(codes_match).is_ok();
+                if !delivered {
+                    // Nobody is waiting any more (the phone is gone): do not leave the question open.
+                    self.shared.finish_pairing(PairingState::Cancelled);
+                }
+                delivered
             }
             None => false,
         }
@@ -600,6 +609,28 @@ async fn require_device(State(s): State<Arc<Shared>>, mut req: Request, next: Ne
 
 // --- pairing --------------------------------------------------------------------------
 
+/// Ends the confirmation on the computer when the phone's request is dropped.
+struct ConfirmGuard<'a> {
+    shared: &'a Shared,
+    token: String,
+    armed: bool,
+}
+
+impl Drop for ConfirmGuard<'_> {
+    fn drop(&mut self) {
+        if !self.armed {
+            return;
+        }
+        let ours = lock(&self.shared.pairing)
+            .as_ref()
+            .is_some_and(|p| p.token == self.token && matches!(p.stage, Stage::Confirm { .. }));
+        if ours {
+            tracing::info!("phone left during the pairing confirmation; pairing cancelled");
+            self.shared.finish_pairing(PairingState::Cancelled);
+        }
+    }
+}
+
 async fn pair(State(s): State<Arc<Shared>>, body: Bytes) -> Result<Json<PairResponse>, ApiError> {
     let req: PairRequest = serde_json::from_slice(&body)
         .map_err(|e| ApiError::new(400, "bad_request", e.to_string()))?;
@@ -610,7 +641,7 @@ async fn pair(State(s): State<Arc<Shared>>, body: Bytes) -> Result<Json<PairResp
         device_name
     };
 
-    let (rx, public_key, view) = {
+    let (rx, public_key, view, token) = {
         let mut g = lock(&s.pairing);
         let Some(p) = g.as_mut() else {
             return Err(ApiError::new(410, "pairing_expired", ""));
@@ -652,12 +683,20 @@ async fn pair(State(s): State<Arc<Shared>>, body: Bytes) -> Result<Json<PairResp
             since: Instant::now(),
             reply: Some(tx),
         };
-        (rx, public_key, s.view(p))
+        (rx, public_key, s.view(p), p.token.clone())
     };
     tracing::info!(device_name = %device_name, "phone answered the pairing; waiting for the user");
     s.events.pairing_changed(&view);
 
+    // The phone gave up (cancelled, lost the network): this request is dropped
+    // while it waits, and the question on the computer must go away with it.
+    let mut guard = ConfirmGuard {
+        shared: &s,
+        token,
+        armed: true,
+    };
     let answer = tokio::time::timeout(Duration::from_secs(CONFIRM_TTL_SECS), rx).await;
+    guard.armed = false;
     match answer {
         Ok(Ok(true)) => {}
         Ok(Ok(false)) | Ok(Err(_)) => {
@@ -723,6 +762,7 @@ async fn info(State(s): State<Arc<Shared>>) -> Json<Info> {
             modes
         },
         expert: s.backend.expert(),
+        pro: s.backend.pro(),
     })
 }
 

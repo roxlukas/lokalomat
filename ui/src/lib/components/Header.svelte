@@ -1,4 +1,6 @@
 <script lang="ts">
+  import BrandMark from './BrandMark.svelte';
+  import { edition } from '../edition.svelte';
   import Search from '@lucide/svelte/icons/search';
   import MemoryStick from '@lucide/svelte/icons/memory-stick';
   import ListChecks from '@lucide/svelte/icons/list-checks';
@@ -46,11 +48,7 @@
 
 <header class="header">
   <div class="brand">
-    <svg class="logo" viewBox="0 0 1024 1024" aria-hidden="true">
-      <rect x="64" y="64" width="896" height="896" rx="200" fill="currentColor" />
-      <path d="M352 272 V672 H672" fill="none" stroke="var(--surface)" stroke-width="96" stroke-linecap="round" stroke-linejoin="round" />
-      <circle cx="672" cy="352" r="72" fill="var(--accent-contrast)" />
-    </svg>
+    <BrandMark pro={edition.loaded && edition.isPro} />
     <span class="name">{t('app.name')}</span>
   </div>
 
@@ -147,11 +145,6 @@
     gap: var(--space-2);
     color: var(--accent);
     min-width: max-content;
-  }
-
-  .logo {
-    width: 24px;
-    height: 24px;
   }
 
   .name {

@@ -3,6 +3,7 @@
 //! pairing, TLS pinning and the API calls live in `lokalsi_api_gateway::client`.
 
 mod device;
+mod phone_llm;
 mod store;
 
 use std::sync::Mutex;
@@ -48,7 +49,12 @@ type Res<T> = Result<T, MobileError>;
 struct AppState {
     store: Store,
     pairing: tokio::sync::Mutex<Option<tokio::task::JoinHandle<Result<Credentials, ClientError>>>>,
+    /// The pairing `pair_wait` is waiting for: `pair_wait` takes the handle out of `pairing`,
+    /// so cancelling needs this to reach the running task.
+    pairing_abort: Mutex<Option<tokio::task::AbortHandle>>,
     creds: Mutex<Option<Credentials>>,
+    /// Where models for the phone itself are kept (`lokalsi-phone-models`).
+    phone_root: std::path::PathBuf,
 }
 
 impl AppState {
@@ -66,14 +72,32 @@ impl AppState {
 #[derive(Debug, Serialize)]
 pub struct Status {
     paired: bool,
+    /// The computer in use (its certificate fingerprint).
+    id: Option<String>,
     computer_name: Option<String>,
     address: Option<String>,
+}
+
+/// A paired computer for the settings list and the source dropdown.
+#[derive(Debug, Serialize)]
+pub struct Computer {
+    id: String,
+    name: String,
+    address: String,
+}
+
+#[derive(Debug, Serialize)]
+pub struct Computers {
+    /// The computer in use.
+    active: Option<String>,
+    list: Vec<Computer>,
 }
 
 fn status_of(state: &AppState) -> Status {
     let creds = state.creds.lock().unwrap_or_else(|p| p.into_inner());
     Status {
         paired: creds.is_some(),
+        id: creds.as_ref().map(|c| c.fingerprint.clone()),
         computer_name: creds.as_ref().map(|c| c.computer_name.clone()),
         address: creds.as_ref().map(|c| format!("{}:{}", c.host, c.port)),
     }
@@ -88,6 +112,45 @@ fn device_name() -> Option<String> {
 #[tauri::command]
 fn status(state: State<'_, AppState>) -> Status {
     status_of(&state)
+}
+
+/// Every paired computer and which one is in use.
+#[tauri::command]
+fn computers(state: State<'_, AppState>) -> Computers {
+    let saved = state.store.load();
+    Computers {
+        active: saved.active_credentials().map(|c| c.fingerprint),
+        list: saved
+            .computers
+            .iter()
+            .map(|c| Computer {
+                id: c.fingerprint.clone(),
+                name: c.computer_name.clone(),
+                address: format!("{}:{}", c.host, c.port),
+            })
+            .collect(),
+    }
+}
+
+/// Switches to another paired computer.
+#[tauri::command]
+fn computer_select(id: String, state: State<'_, AppState>) -> Res<Status> {
+    let creds = state
+        .store
+        .select(&id)
+        .map_err(|e| err("storage", e))?
+        .ok_or_else(|| err("not_paired", "unknown computer"))?;
+    *state.creds.lock().unwrap_or_else(|p| p.into_inner()) = Some(creds);
+    Ok(status_of(&state))
+}
+
+/// Forgets a computer on this phone ("Odłącz" on that computer revokes the key).
+#[tauri::command]
+fn computer_remove(id: String, state: State<'_, AppState>) -> Res<Status> {
+    let active = state.store.remove(&id).map_err(|e| err("storage", e))?;
+    *state.creds.lock().unwrap_or_else(|p| p.into_inner()) = active;
+    tracing::info!("a computer was forgotten");
+    Ok(status_of(&state))
 }
 
 #[derive(Debug, Serialize)]
@@ -115,6 +178,7 @@ async fn pair_begin(
         let identity = lokalsi_api_gateway::pairing::DeviceIdentity::from_seed(seed);
         client::pair(&payload, &identity, &name).await
     });
+    abort_pairing(&state);
     let mut slot = state.pairing.lock().await;
     if let Some(old) = slot.replace(task) {
         old.abort();
@@ -134,16 +198,35 @@ async fn pair_wait(state: State<'_, AppState>) -> Res<Status> {
         .await
         .take()
         .ok_or_else(|| err("no_pairing", "no pairing in progress"))?;
-    let creds = task
-        .await
-        .map_err(|_| err("cancelled", "pairing cancelled"))??;
+    *state
+        .pairing_abort
+        .lock()
+        .unwrap_or_else(|p| p.into_inner()) = Some(task.abort_handle());
+    let result = task.await;
+    *state
+        .pairing_abort
+        .lock()
+        .unwrap_or_else(|p| p.into_inner()) = None;
+    let creds = result.map_err(|_| err("cancelled", "pairing cancelled"))??;
     state
         .store
-        .set_credentials(Some(creds.clone()))
+        .add(creds.clone())
         .map_err(|e| err("storage", e))?;
     tracing::info!("paired with the computer");
     *state.creds.lock().unwrap_or_else(|p| p.into_inner()) = Some(creds);
     Ok(status_of(&state))
+}
+
+/// Stops the pairing that is waiting for the computer's answer, if any.
+fn abort_pairing(state: &AppState) {
+    if let Some(abort) = state
+        .pairing_abort
+        .lock()
+        .unwrap_or_else(|p| p.into_inner())
+        .take()
+    {
+        abort.abort();
+    }
 }
 
 #[tauri::command]
@@ -151,18 +234,8 @@ async fn pair_cancel(state: State<'_, AppState>) -> Res<()> {
     if let Some(t) = state.pairing.lock().await.take() {
         t.abort();
     }
+    abort_pairing(&state);
     Ok(())
-}
-
-/// Forgets the computer on this phone ("Odłącz" on the computer revokes the key).
-#[tauri::command]
-fn forget(state: State<'_, AppState>) -> Res<Status> {
-    state
-        .store
-        .set_credentials(None)
-        .map_err(|e| err("storage", e))?;
-    *state.creds.lock().unwrap_or_else(|p| p.into_inner()) = None;
-    Ok(status_of(&state))
 }
 
 #[tauri::command]
@@ -408,25 +481,37 @@ pub fn run() {
         .plugin(tauri_plugin_dialog::init());
     #[cfg(mobile)]
     let builder = builder.plugin(tauri_plugin_barcode_scanner::init());
+    #[cfg(target_os = "android")]
+    let builder = builder.plugin(tauri_plugin_localllm::init());
     let result = builder
         .setup(|app| {
             let dir = app.path().app_data_dir()?;
             let store = Store::new(&dir);
-            let creds = store.credentials();
+            let creds = store.active_credentials();
             app.manage(AppState {
                 store,
                 pairing: tokio::sync::Mutex::new(None),
+                pairing_abort: Mutex::new(None),
                 creds: Mutex::new(creds),
+                phone_root: dir.join("phone-models"),
             });
+            app.manage(phone_llm::Downloads::default());
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
+            phone_llm::phone_models,
+            phone_llm::phone_model_download,
+            phone_llm::phone_model_cancel,
+            phone_llm::phone_model_delete,
+            phone_llm::phone_model_path,
             device_name,
+            computers,
+            computer_select,
+            computer_remove,
             status,
             pair_begin,
             pair_wait,
             pair_cancel,
-            forget,
             info,
             chat,
             transcribe,

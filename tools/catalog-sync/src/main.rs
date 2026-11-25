@@ -20,6 +20,7 @@ use std::process::ExitCode;
 use clap::Parser;
 use lokalsi_core::catalog::{Catalog, estimate_memory_mb};
 use lokalsi_core::hf;
+use lokalsi_phone_models::catalog::PhoneCatalog;
 
 const MAX_HASHED_DOWNLOAD: u64 = 16 * 1024 * 1024;
 
@@ -66,8 +67,14 @@ async fn run(
     let text = std::fs::read_to_string(path)?;
     let mut catalog = Catalog::parse(&text)?;
 
+    let phone_path = path.with_file_name("phone-models.json");
+
     if check {
-        let missing = catalog.unsynced_files();
+        let mut missing = catalog.unsynced_files();
+        if phone_path.exists() {
+            let phone = PhoneCatalog::parse(&std::fs::read_to_string(&phone_path)?)?;
+            missing.extend(phone.unsynced().into_iter().map(|id| format!("phone/{id}")));
+        }
         if missing.is_empty() {
             println!("catalog is fully synced");
             return Ok(ExitCode::SUCCESS);
@@ -144,6 +151,19 @@ async fn run(
         path.display()
     );
 
+    if phone_path.exists() {
+        match sync_phone(&client, &phone_path, refresh, token, &mut revisions).await {
+            Ok(n) => println!(
+                "phone models: {n} file(s) updated → {}",
+                phone_path.display()
+            ),
+            Err(e) => {
+                eprintln!("  ! phone models: {e}");
+                failed += 1;
+            }
+        }
+    }
+
     let engines_dir = path.with_file_name("engines");
     match sync_engines(&client, &engines_dir).await {
         Ok(n) => println!(
@@ -206,6 +226,47 @@ async fn fetch(
         );
     }
     Ok((info.size, sha, revision))
+}
+
+/// Fills `size`, `sha256` and `revision` of `catalog/phone-models.json`.
+async fn sync_phone(
+    client: &hf::Client,
+    path: &std::path::Path,
+    refresh: bool,
+    token: Option<&str>,
+    revisions: &mut HashMap<String, String>,
+) -> Result<usize, Box<dyn std::error::Error>> {
+    let text = std::fs::read_to_string(path)?;
+    let mut catalog = PhoneCatalog::parse(&text)?;
+    let mut updated = 0;
+    for model in &mut catalog.models {
+        let file = &mut model.file;
+        if file.is_synced() && !refresh {
+            continue;
+        }
+        let (size, sha, rev) = fetch(
+            client,
+            revisions,
+            &file.repo,
+            &file.path,
+            refresh,
+            file.revision.as_deref(),
+            token,
+        )
+        .await?;
+        println!("  {}/{} → {size} B, {}…", file.repo, file.path, &sha[..12]);
+        file.size = size;
+        file.sha256 = sha;
+        file.revision = Some(rev);
+        updated += 1;
+    }
+    let json = serde_json::to_string_pretty(&catalog)?
+        + "
+";
+    if json != text {
+        std::fs::write(path, json)?;
+    }
+    Ok(updated)
 }
 
 /// Checks that every catalog `benchmark` mapping exists in the published results.

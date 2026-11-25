@@ -10,8 +10,23 @@ export type { DecisionAnswer, DecisionQuestion };
 
 export interface MobileStatus {
   paired: boolean;
+  /** The computer in use (its certificate fingerprint). */
+  id: string | null;
   computer_name: string | null;
   address: string | null;
+}
+
+/** A paired computer. */
+export interface Computer {
+  id: string;
+  name: string;
+  address: string;
+}
+
+export interface Computers {
+  /** The computer in use. */
+  active: string | null;
+  list: Computer[];
 }
 
 export interface Turn {
@@ -127,8 +142,10 @@ export const api = {
     call<{ code: string; computer_name: string }>('pair_begin', { link, deviceName }),
   pairWait: () => call<MobileStatus>('pair_wait'),
   pairCancel: () => call<void>('pair_cancel'),
-  forget: () => call<MobileStatus>('forget'),
-  info: () => call<{ computer_name: string; version: string; modes: string[]; expert?: boolean }>('info'),
+  computers: () => call<Computers>('computers'),
+  computerSelect: (id: string) => call<MobileStatus>('computer_select', { id }),
+  computerRemove: (id: string) => call<MobileStatus>('computer_remove', { id }),
+  info: () => call<{ computer_name: string; version: string; modes: string[]; expert?: boolean; pro?: boolean }>('info'),
   models: (mode: Mode) => call<ModelOption[]>('models', { mode }),
   chat: (messages: Turn[], model: string | null) => call<string>('chat', { messages, model }),
   transcribe: (audio: string, ext: string, language: string | null, model: string | null) =>
@@ -177,6 +194,17 @@ const KNOWN = [
   'text_too_long',
   'decision_invalid',
   'save_failed',
+  'download_network',
+  'download_status',
+  'download_io',
+  'download_space',
+  'download_checksum',
+  'download_running',
+  'model_unknown',
+  'model_not_installed',
+  'model_not_synced',
+  'local_failed',
+  'local_load_failed',
 ];
 
 const OFFLINE = ['unreachable', 'local_network', 'timeout', 'connection', 'tls'];

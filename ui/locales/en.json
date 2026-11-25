@@ -6,7 +6,8 @@
       "title": "Something went wrong in this view.",
       "body": "Your data is safe. Please try again.",
       "retry": "Try again"
-    }
+    },
+    "shortName": "Lokalomat"
   },
   "common": {
     "close": "Close",
@@ -891,20 +892,21 @@
       "deleteConfirm": "Delete this result from the computer? This cannot be undone."
     },
     "pair": {
-      "title": "Connect to your computer",
-      "body": "On the computer open Settings → Network and click “Connect phone”.",
       "defaultName": "My phone",
       "name": "Phone name",
       "scan": "Scan the QR code",
       "noCamera": "Without the camera I cannot scan. Paste the link instead.",
       "scanFailed": "The code could not be scanned.",
-      "manual": "Paste a link instead",
       "link": "Link from the computer",
       "connect": "Connect",
-      "compare": "Check that {computer} shows the same code:",
       "computer": "the computer",
       "codeLabel": "Code to compare",
-      "confirmOnComputer": "Confirm on the computer that the codes match."
+      "scanTitle": "Scan the code from your computer",
+      "where": "On the computer: Settings → Network → Connect phone",
+      "pasteShort": "Paste link",
+      "pasteTitle": "Paste the link",
+      "codeQuestion": "Is the same code on the computer?",
+      "waiting": "Waiting for confirmation"
     },
     "errors": {
       "unreachable": "I cannot see the computer. Check that you are on the same network.",
@@ -929,7 +931,18 @@
       "text_too_long": "The text is too long.",
       "decision_invalid": "Fill in the text and the questions.",
       "save_failed": "Could not save the file.",
-      "generic": "Something went wrong. Try again."
+      "generic": "Something went wrong. Try again.",
+      "download_network": "The download was interrupted. Try again.",
+      "download_status": "The server refused the download.",
+      "download_io": "Could not save the file.",
+      "download_space": "There is not enough free space on the phone.",
+      "download_checksum": "The file is damaged. Download it again.",
+      "download_running": "This model is already downloading.",
+      "model_unknown": "This model does not exist.",
+      "model_not_installed": "Download the model first.",
+      "model_not_synced": "This model is not available yet.",
+      "local_failed": "The model could not answer.",
+      "local_load_failed": "The model could not start. It may be too big for this phone."
     },
     "model": {
       "label": "Model",
@@ -950,7 +963,45 @@
     "seed": "Seed",
     "random": "random",
     "auto": "auto",
-    "more": "More settings"
+    "more": "More settings",
+    "source": {
+      "label": "Where the chat runs",
+      "local": "This phone"
+    },
+    "local": {
+      "chooseTitle": "Choose a model",
+      "chooseBody": "Download a model to chat on this phone. It stays on your phone.",
+      "recommended": "Recommended",
+      "low": "It may be too big for this phone.",
+      "wifi": "Big file. Best on Wi-Fi.",
+      "download": "Download ({size})",
+      "downloading": "Downloading… {percent}%",
+      "use": "Use",
+      "inUse": "In use",
+      "change": "Change the model",
+      "newChat": "New chat",
+      "stop": "Stop",
+      "loading": "Loading the model…",
+      "deleteFree": "Delete (frees {size})",
+      "deleteSure": "Tap again to delete",
+      "resume": "Continue ({size} left)",
+      "thinking": "The model is thinking…"
+    },
+    "welcome": {
+      "title": "How do you want to start?",
+      "phoneTitle": "Run on this phone",
+      "phoneBody": "Chat works without a computer or internet.",
+      "pairTitle": "Pair with a computer",
+      "pairBody": "Use the models from Lokalomat on your computer."
+    },
+    "settings": {
+      "title": "Settings",
+      "computers": "Computers",
+      "noComputers": "No paired computers.",
+      "addComputer": "Add a computer",
+      "models": "Models on this phone",
+      "manageModels": "Manage models"
+    }
   },
   "decisions": {
     "type": "Question type",
