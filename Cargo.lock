@@ -617,11 +617,12 @@ dependencies = [
 
 [[package]]
 name = "catalog-sync"
-version = "0.2.5"
+version = "0.2.6"
 dependencies = [
  "clap",
  "lokalsi-core",
  "lokalsi-engines",
+ "lokalsi-phone-models",
  "serde_json",
  "tokio",
 ]
@@ -2668,12 +2669,13 @@ checksum = "5d15f86d12da44cd8d4ec3c73984537eb7f4cadcb9776a575a0a8a05ca11005c"
 
 [[package]]
 name = "lokalomat-mobile"
-version = "0.2.5"
+version = "0.2.6"
 dependencies = [
  "base64 0.23.1",
  "jni 0.21.1",
  "keyring",
  "lokalsi-api-gateway",
+ "lokalsi-phone-models",
  "ndk-context",
  "serde",
  "serde_json",
@@ -2682,15 +2684,17 @@ dependencies = [
  "tauri-plugin-barcode-scanner",
  "tauri-plugin-dialog",
  "tauri-plugin-fs",
+ "tauri-plugin-localllm",
  "tempfile",
  "tokio",
+ "tokio-util",
  "tracing",
  "tracing-subscriber",
 ]
 
 [[package]]
 name = "lokalsi-api-gateway"
-version = "0.2.5"
+version = "0.2.6"
 dependencies = [
  "axum",
  "base64 0.23.1",
@@ -2719,7 +2723,7 @@ dependencies = [
 
 [[package]]
 name = "lokalsi-core"
-version = "0.2.5"
+version = "0.2.6"
 dependencies = [
  "dirs",
  "futures-util",
@@ -2745,7 +2749,7 @@ dependencies = [
 
 [[package]]
 name = "lokalsi-engines"
-version = "0.2.5"
+version = "0.2.6"
 dependencies = [
  "flate2",
  "futures-util",
@@ -2770,7 +2774,7 @@ dependencies = [
 
 [[package]]
 name = "lokalsi-hwprobe"
-version = "0.2.5"
+version = "0.2.6"
 dependencies = [
  "nvml-wrapper",
  "serde",
@@ -2778,6 +2782,26 @@ dependencies = [
  "sysinfo",
  "tracing",
  "windows-sys 0.61.2",
+]
+
+[[package]]
+name = "lokalsi-phone-models"
+version = "0.2.6"
+dependencies = [
+ "futures-util",
+ "hex",
+ "libc",
+ "reqwest",
+ "rustls",
+ "serde",
+ "serde_json",
+ "sha2 0.11.1",
+ "tempfile",
+ "thiserror 2.0.21",
+ "tokio",
+ "tokio-util",
+ "tracing",
+ "webpki-roots",
 ]
 
 [[package]]
@@ -4735,7 +4759,7 @@ checksum = "7da8b5736845d9f2fcb837ea5d9e2628564b3b043a70948a3f0b778838c5fb4f"
 
 [[package]]
 name = "studio-lokalsi"
-version = "0.2.5"
+version = "0.2.6"
 dependencies = [
  "lokalsi-api-gateway",
  "lokalsi-core",
@@ -5141,6 +5165,14 @@ dependencies = [
  "thiserror 2.0.21",
  "toml 1.2.1+spec-1.1.0",
  "url",
+]
+
+[[package]]
+name = "tauri-plugin-localllm"
+version = "0.2.6"
+dependencies = [
+ "tauri",
+ "tauri-plugin",
 ]
 
 [[package]]
@@ -6063,6 +6095,15 @@ name = "webpki-root-certs"
 version = "1.0.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "293198dcebfb821155b5092ab94b5a82ff180eddd7241df3bd6e66a4ffd1a585"
+dependencies = [
+ "rustls-pki-types",
+]
+
+[[package]]
+name = "webpki-roots"
+version = "1.0.12"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7265c9301c16a8711c992c2d8da90ee77ef54b1ed51482d6dfeb00dc756b1297"
 dependencies = [
  "rustls-pki-types",
 ]

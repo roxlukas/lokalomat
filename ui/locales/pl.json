@@ -6,7 +6,8 @@
       "title": "Coś poszło nie tak w tym widoku.",
       "body": "Twoje dane są bezpieczne. Spróbuj jeszcze raz.",
       "retry": "Spróbuj ponownie"
-    }
+    },
+    "shortName": "Lokalomat"
   },
   "common": {
     "close": "Zamknij",
@@ -891,20 +892,21 @@
       "deleteConfirm": "Usunąć ten wynik z komputera? Tego nie da się cofnąć."
     },
     "pair": {
-      "title": "Połącz z komputerem",
-      "body": "Na komputerze otwórz Ustawienia → Sieć i kliknij „Połącz telefon”.",
       "defaultName": "Mój telefon",
       "name": "Nazwa telefonu",
       "scan": "Zeskanuj kod QR",
       "noCamera": "Bez aparatu nie zeskanuję kodu. Wklej link ręcznie.",
       "scanFailed": "Nie udało się zeskanować kodu.",
-      "manual": "Wklej link zamiast skanowania",
       "link": "Link z komputera",
       "connect": "Połącz",
-      "compare": "Sprawdź, czy {computer} pokazuje ten sam kod:",
       "computer": "komputer",
       "codeLabel": "Kod do porównania",
-      "confirmOnComputer": "Potwierdź na komputerze, że kody są takie same."
+      "scanTitle": "Zeskanuj kod z komputera",
+      "where": "Na komputerze: Ustawienia → Sieć → Połącz telefon",
+      "pasteShort": "Wklej link",
+      "pasteTitle": "Wklej link",
+      "codeQuestion": "Taki sam kod jest na komputerze?",
+      "waiting": "Czekam na potwierdzenie"
     },
     "errors": {
       "unreachable": "Nie widzę komputera. Sprawdź, czy jesteście w tej samej sieci.",
@@ -929,7 +931,18 @@
       "text_too_long": "Tekst jest za długi.",
       "decision_invalid": "Uzupełnij tekst i pytania.",
       "save_failed": "Nie udało się zapisać pliku.",
-      "generic": "Coś poszło nie tak. Spróbuj jeszcze raz."
+      "generic": "Coś poszło nie tak. Spróbuj jeszcze raz.",
+      "download_network": "Pobieranie przerwane. Spróbuj ponownie.",
+      "download_status": "Serwer odmówił pobrania.",
+      "download_io": "Nie udało się zapisać pliku.",
+      "download_space": "W telefonie jest za mało miejsca.",
+      "download_checksum": "Plik jest uszkodzony. Pobierz go ponownie.",
+      "download_running": "Ten model już się pobiera.",
+      "model_unknown": "Nie ma takiego modelu.",
+      "model_not_installed": "Najpierw pobierz model.",
+      "model_not_synced": "Ten model nie jest jeszcze dostępny.",
+      "local_failed": "Model nie mógł odpowiedzieć.",
+      "local_load_failed": "Model nie wystartował. Może być za duży dla tego telefonu."
     },
     "model": {
       "label": "Model",
@@ -950,7 +963,45 @@
     "seed": "Ziarno",
     "random": "losowe",
     "auto": "auto",
-    "more": "Więcej ustawień"
+    "more": "Więcej ustawień",
+    "source": {
+      "label": "Gdzie działa czat",
+      "local": "Ten telefon"
+    },
+    "local": {
+      "chooseTitle": "Wybierz model",
+      "chooseBody": "Pobierz model, aby rozmawiać na telefonie. Zostaje na Twoim telefonie.",
+      "recommended": "Polecany",
+      "low": "Może być za duży dla tego telefonu.",
+      "wifi": "Duży plik. Najlepiej przez Wi-Fi.",
+      "download": "Pobierz ({size})",
+      "downloading": "Pobieranie… {percent}%",
+      "use": "Użyj",
+      "inUse": "W użyciu",
+      "change": "Zmień model",
+      "newChat": "Nowa rozmowa",
+      "stop": "Zatrzymaj",
+      "loading": "Wczytuję model…",
+      "deleteFree": "Usuń (zwolnisz {size})",
+      "deleteSure": "Dotknij ponownie, aby usunąć",
+      "resume": "Wznów (zostało {size})",
+      "thinking": "Model myśli…"
+    },
+    "welcome": {
+      "title": "Jak chcesz zacząć?",
+      "phoneTitle": "Uruchom na telefonie",
+      "phoneBody": "Czat działa bez komputera i bez internetu.",
+      "pairTitle": "Sparuj z komputerem",
+      "pairBody": "Użyj modeli z Lokalomat na komputerze."
+    },
+    "settings": {
+      "title": "Ustawienia",
+      "computers": "Komputery",
+      "noComputers": "Brak sparowanych komputerów.",
+      "addComputer": "Dodaj komputer",
+      "models": "Modele na telefonie",
+      "manageModels": "Zarządzaj modelami"
+    }
   },
   "decisions": {
     "type": "Rodzaj pytania",

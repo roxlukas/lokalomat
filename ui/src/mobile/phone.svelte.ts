@@ -11,9 +11,32 @@ export interface Reuse {
   params: Record<string, unknown>;
 }
 
+const PRO_KEY = 'lokalomat.phone.pro';
+
+function readPro(): boolean {
+  try {
+    return localStorage.getItem(PRO_KEY) === '1';
+  } catch {
+    return false;
+  }
+}
+
 class Phone {
   /** The computer is in Expert mode (`/v1/info`): show the same extra settings. */
   expert = $state(false);
+  /** The computer runs Pro: the purple mark. Remembered, so the mark does not flash green while the app waits for the computer. */
+  #pro = $state(readPro());
+  get pro(): boolean {
+    return this.#pro;
+  }
+  set pro(value: boolean) {
+    this.#pro = value;
+    try {
+      localStorage.setItem(PRO_KEY, value ? '1' : '0');
+    } catch {
+      /* storage can be blocked: the mark then follows the computer each time */
+    }
+  }
   /** Settings to put into a screen; the screen clears it once taken. */
   reuse = $state<Reuse | null>(null);
 

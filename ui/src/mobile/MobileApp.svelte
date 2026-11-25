@@ -9,22 +9,29 @@
   import Scales from 'phosphor-svelte/lib/ScalesIcon';
   import PaperPlaneRight from 'phosphor-svelte/lib/PaperPlaneRightIcon';
   import Stop from 'phosphor-svelte/lib/StopIcon';
-  import LinkBreak from 'phosphor-svelte/lib/LinkBreakIcon';
+  import Gear from 'phosphor-svelte/lib/GearSixIcon';
   import WifiHigh from 'phosphor-svelte/lib/WifiHighIcon';
   import WifiSlash from 'phosphor-svelte/lib/WifiSlashIcon';
   import Copy from 'phosphor-svelte/lib/CopyIcon';
+  import BrandMark from '../lib/components/BrandMark.svelte';
   import { t } from '../lib/i18n/index.svelte';
   import { renderMarkdown } from '../lib/markdown';
   import { clock, encodeWav, toMono } from '../lib/media';
-  import { api, describe, isOffline, toBase64, type MobileStatus, type Transcription, type Turn } from './api';
+  import { readLocal, writeLocal } from '../lib/storage';
+  import { api, describe, isOffline, toBase64, type Computers, type MobileStatus, type Transcription, type Turn } from './api';
   import MobileDecision from './MobileDecision.svelte';
   import MobileGallery from './MobileGallery.svelte';
+  import MobileLocalChat from './MobileLocalChat.svelte';
+  import MobileSettings from './MobileSettings.svelte';
+  import MobileWelcome from './MobileWelcome.svelte';
   import MobileImage from './MobileImage.svelte';
   import MobileMusic from './MobileMusic.svelte';
   import MobileVoice from './MobileVoice.svelte';
+  import { local } from './local';
   import { phone, type Reuse } from './phone.svelte';
   import ModelPicker from './ModelPicker.svelte';
   import PairScreen from './PairScreen.svelte';
+  import { source } from './source.svelte';
 
   const TABS = ['chat', 'record', 'voice', 'image', 'music', 'decision', 'gallery'] as const;
   type Tab = (typeof TABS)[number];
@@ -59,11 +66,26 @@
   const CHECK_EVERY_MS = 15_000;
   let online = $state<boolean | null>(null);
   let timer: ReturnType<typeof setInterval> | undefined;
-  let confirmForget = $state(false);
+  /** The pairing screen (settings, "Dodaj komputer", or the welcome screen). */
+  let pairing = $state(false);
+  let settings = $state(false);
+  /** Every paired computer; the dropdown and the settings list show them. */
+  let computers = $state<Computers>({ active: null, list: [] });
+  /** The first-start choice was made (or the phone was already paired). */
+  const ONBOARDED_KEY = 'lokalsi.mobile.onboarded';
+  let onboarded = $state(readLocal<boolean>(ONBOARDED_KEY, false));
+  let welcome = $derived(status !== null && !status.paired && source.localAvailable && !onboarded);
+
+  /** Where the chat runs now: this phone or the paired computer (ADR 0038). */
+  let where = $derived(source.current(status?.paired === true));
+  let onPhone = $derived(where === 'local');
 
   onMount(async () => {
-    status = await api.status().catch(() => ({ paired: false, computer_name: null, address: null }));
-    if (status.paired) void connect();
+    source.localAvailable = await local.available();
+    status = await api.status().catch(() => ({ paired: false, id: null, computer_name: null, address: null }));
+    await refreshComputers();
+    if (status.paired) finishOnboarding();
+    if (status.paired && where === 'computer') void connect();
     document.addEventListener('visibilitychange', onVisibility);
   });
 
@@ -83,6 +105,7 @@
       const info = await api.info();
       modes = info.modes;
       phone.expert = info.expert === true;
+      phone.pro = info.pro === true;
       if (!visible(tab)) tab = 'chat';
       if (online === false) error = '';
       online = true;
@@ -104,7 +127,7 @@
   }
 
   function onVisibility() {
-    if (!status?.paired) return;
+    if (!status?.paired || onPhone) return;
     if (document.visibilityState === 'visible') {
       void check();
       startChecks();
@@ -127,17 +150,67 @@
     }
   }
 
-  function paired(s: MobileStatus) {
+  async function refreshComputers() {
+    computers = await api.computers().catch(() => ({ active: null, list: [] }));
+  }
+
+  function finishOnboarding() {
+    onboarded = true;
+    writeLocal(ONBOARDED_KEY, true);
+  }
+
+  async function paired(s: MobileStatus) {
     status = s;
+    pairing = false;
+    finishOnboarding();
+    source.set('computer');
+    messages = [];
+    online = null;
+    await refreshComputers();
     void connect();
   }
 
-  async function forget() {
-    confirmForget = false;
-    stopChecks();
-    status = await api.forget();
+  /** The dropdown: "local" or the id of a paired computer. */
+  async function pickSource(e: Event) {
+    const value = (e.currentTarget as HTMLSelectElement).value;
+    error = '';
+    if (value === 'local') {
+      source.set('local');
+      // Nothing to ask the computer while the chat runs on the phone.
+      stopChecks();
+      return;
+    }
+    source.set('computer');
+    if (value !== status?.id) {
+      stopChecks();
+      messages = [];
+      online = null;
+      modes = [];
+      status = await api.computerSelect(value).catch(() => status);
+      await refreshComputers();
+    }
+    void connect();
+  }
+
+  /** A computer was forgotten in the settings: reload what depends on it. */
+  async function computersChanged() {
+    status = await api.status();
+    await refreshComputers();
     messages = [];
     online = null;
+    stopChecks();
+    if (!status.paired) {
+      if (source.localAvailable) source.set('local');
+    } else if (where === 'computer') {
+      void connect();
+    }
+  }
+
+  function openModels() {
+    settings = false;
+    source.set('local');
+    source.openModels = true;
+    stopChecks();
   }
 
   async function send() {
@@ -236,48 +309,77 @@
 
 {#if status === null}
   <p class="center muted">{t('mobile.loading')}</p>
-{:else if !status.paired}
+{:else if !status.paired && !source.localAvailable}
   <PairScreen onPaired={paired} />
+{:else if welcome}
+  <MobileWelcome
+    onPhone={() => (finishOnboarding(), source.set('local'))}
+    onComputer={() => (finishOnboarding(), (pairing = true))}
+  />
+  {#if pairing}
+    <PairScreen overlay onPaired={paired} onClose={() => (pairing = false)} />
+  {/if}
 {:else}
   <div class="app">
     <header>
       <div class="who">
-        <strong>{status.computer_name}</strong>
-        <span class="muted small">{status.address}</span>
+        <label class="source">
+          <span class="sr-only">{t('mobile.source.label')}</span>
+          <select value={onPhone ? 'local' : (status.id ?? '')} onchange={pickSource}>
+            {#if source.localAvailable}<option value="local">{t('mobile.source.local')}</option>{/if}
+            {#each computers.list as c (c.id)}<option value={c.id}>{c.name}</option>{/each}
+          </select>
+        </label>
+        {#if !onPhone && status.paired}
+          {#if online === false}
+            <span class="link offline small" role="status" title={t('mobile.link.offlineHint')}>
+              <WifiSlash size={16} aria-hidden="true" />{t('mobile.link.offline')}
+            </span>
+          {:else}
+            <span class="muted small address">{status.address}</span>
+          {/if}
+        {/if}
       </div>
       <div class="tools">
-        {#if online === false}
-          <span class="link offline" role="status" title={t('mobile.link.offlineHint')}>
-            <WifiSlash size={18} aria-hidden="true" />
-            <span class="small">{t('mobile.link.offline')}</span>
-          </span>
-        {:else if online}
+        {#if !onPhone && status.paired && online}
           <span class="link online" role="status" aria-label={t('mobile.link.online')} title={t('mobile.link.online')}>
             <WifiHigh size={18} aria-hidden="true" />
           </span>
         {/if}
-        <button type="button" class="icon-btn danger" aria-label={t('mobile.forget')} title={t('mobile.forget')} onclick={() => (confirmForget = true)}>
-          <LinkBreak size={18} aria-hidden="true" />
+        <button type="button" class="icon-btn" aria-label={t('mobile.settings.title')} title={t('mobile.settings.title')} onclick={() => (settings = true)}>
+          <Gear size={22} aria-hidden="true" />
         </button>
+      </div>
+      <div class="brand">
+        <BrandMark size={20} pro={phone.pro} />
+        <span>{t('app.shortName')}</span>
       </div>
     </header>
 
-    {#if confirmForget}
-      <div class="sheet-backdrop">
-        <div class="sheet" role="alertdialog" aria-modal="true" aria-labelledby="forget-title" aria-describedby="forget-body">
-          <h2 id="forget-title">{t('mobile.forgetConfirm.title', { name: status.computer_name ?? '' })}</h2>
-          <p id="forget-body" class="muted">{t('mobile.forgetConfirm.body')}</p>
-          <div class="sheet-actions">
-            <button type="button" class="btn" onclick={() => (confirmForget = false)}>{t('common.cancel')}</button>
-            <button type="button" class="btn btn-danger" onclick={forget}>{t('mobile.forgetConfirm.confirm')}</button>
-          </div>
-        </div>
-      </div>
+    {#if pairing}
+      <PairScreen overlay onPaired={paired} onClose={() => (pairing = false)} />
     {/if}
 
-    <main>
+    {#if settings}
+      <MobileSettings
+        {computers}
+        canUsePhone={source.localAvailable}
+        onClose={() => (settings = false)}
+        onAdd={() => ((settings = false), (pairing = true))}
+        onModels={openModels}
+        onChanged={computersChanged}
+      />
+    {/if}
+
+    <main class:solo={onPhone}>
+      {#if onPhone}
+        <MobileLocalChat />
+      {:else}
       {#if error}<p class="note note-error" role="alert">{error}</p>{/if}
-      {#if !available(tab)}
+      {#if online === false}
+        <!-- the modes are unknown while the computer cannot be reached: say that, not "no model" -->
+        <p class="note note-warn" role="status">{t('mobile.link.offlineHint')}</p>
+      {:else if online && !available(tab)}
         <p class="note note-info">{t('mobile.modeMissing')}</p>
       {/if}
 
@@ -293,7 +395,7 @@
           {#if busy}<p class="muted small">{t('mobile.working')}</p>{/if}
         </div>
         <form class="bar" onsubmit={(e) => (e.preventDefault(), void send())}>
-          <textarea rows="2" bind:value={input} placeholder={t('mobile.chat.placeholder')} aria-label={t('mobile.chat.placeholder')}></textarea>
+          <textarea rows="3" bind:value={input} placeholder={t('mobile.chat.placeholder')} aria-label={t('mobile.chat.placeholder')}></textarea>
           <button type="submit" class="btn btn-primary" disabled={busy || !input.trim()} aria-label={t('mobile.send')}>
             <PaperPlaneRight size={18} aria-hidden="true" />
           </button>
@@ -341,17 +443,20 @@
       {:else}
         <MobileGallery onReuse={reuse} canReuse={(kind) => available(REUSE_TAB[kind])} />
       {/if}
+      {/if}
     </main>
 
-    <nav aria-label={t('mobile.modes')}>
-      {#each tabs as id (id)}
-        {@const Icon = ICONS[id]}
-        <button type="button" class:active={tab === id} aria-current={tab === id ? 'page' : undefined} onclick={() => choose(id)}>
-          <Icon size={20} weight={tab === id ? 'fill' : 'regular'} aria-hidden="true" />
-          <span>{t(`mobile.tabs.${id}`)}</span>
-        </button>
-      {/each}
-    </nav>
+    {#if !onPhone && status.paired}
+      <nav aria-label={t('mobile.modes')}>
+        {#each tabs as id (id)}
+          {@const Icon = ICONS[id]}
+          <button type="button" class:active={tab === id} aria-current={tab === id ? 'page' : undefined} onclick={() => choose(id)}>
+            <Icon size={20} weight={tab === id ? 'fill' : 'regular'} aria-hidden="true" />
+            <span>{t(`mobile.tabs.${id}`)}</span>
+          </button>
+        {/each}
+      </nav>
+    {/if}
   </div>
 {/if}
 
@@ -386,6 +491,40 @@
 
   .who {
     display: grid;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-left: var(--space-3);
+    color: var(--accent);
+  }
+
+  .brand span {
+    color: var(--text);
+    font-family: var(--font-display);
+    font-size: var(--text-m, 1rem);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .address {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .link.offline {
+    justify-self: start;
+    margin-top: 2px;
+  }
+
+  .source select {
+    max-width: 100%;
+    font-weight: 600;
   }
 
   .tools {
@@ -412,56 +551,6 @@
     font-weight: 600;
   }
 
-  .icon-btn.danger {
-    color: var(--error);
-  }
-
-  .icon-btn.danger:hover {
-    background: var(--error-bg);
-    color: var(--error);
-  }
-
-  .sheet-backdrop {
-    position: fixed;
-    inset: 0;
-    z-index: 20;
-    display: flex;
-    align-items: flex-end;
-    background: color-mix(in srgb, var(--bg) 60%, transparent);
-  }
-
-  .sheet {
-    display: grid;
-    gap: var(--space-3);
-    width: 100%;
-    padding: var(--space-5) var(--space-4) max(var(--space-6), env(safe-area-inset-bottom, 0px));
-    border-top: 1px solid var(--border);
-    border-radius: var(--radius-l) var(--radius-l) 0 0;
-    background: var(--surface);
-  }
-
-  .sheet h2 {
-    font-size: var(--text-l);
-  }
-
-  .sheet-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: var(--space-2);
-  }
-
-  .btn-danger {
-    border-color: var(--error);
-    background: var(--error);
-    color: var(--bg);
-    font-weight: 700;
-  }
-
-  .btn-danger:hover:not(:disabled) {
-    background: var(--error);
-    filter: brightness(1.08);
-  }
-
   main {
     display: flex;
     flex-direction: column;
@@ -469,6 +558,11 @@
     min-height: 0;
     padding: var(--space-3) var(--space-4);
     overflow-y: auto;
+  }
+
+  /* No tab bar below on the phone chat: keep the input clear of the system bar. */
+  main.solo {
+    padding-bottom: max(var(--space-3), env(safe-area-inset-bottom, 0px));
   }
 
   .stream {

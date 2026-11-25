@@ -4,3 +4,16 @@
 body {
   padding-top: max(var(--space-8), env(safe-area-inset-top, 0px));
 }
+
+/* Pairing: the camera is drawn behind the (transparent) WebView. */
+html.pair-scan,
+html.pair-scan body,
+html.pair-scan #app {
+  background: transparent !important;
+}
+
+/* ...and the app itself stays out of the way: only the pairing screen is drawn. */
+html.pair-scan #app > :not(.screen):not(.app),
+html.pair-scan .app > :not(.screen) {
+  visibility: hidden;
+}

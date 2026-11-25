@@ -1,8 +1,8 @@
 {
   "$schema": "../gen/schemas/mobile-schema.json",
   "identifier": "mobile",
-  "description": "QR scanning on the phone",
+  "description": "QR scanning and the on-phone chat model",
   "windows": ["main"],
   "platforms": ["android", "iOS"],
-  "permissions": ["barcode-scanner:default"]
+  "permissions": ["barcode-scanner:default", "localllm:default"]
 }
