@@ -178,6 +178,9 @@ pub struct ImageRequest {
     pub steps: Option<u32>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub cfg_scale: Option<f32>,
+    /// Long side in pixels (256–2048); `None` = the model's own size.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub size: Option<u32>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
