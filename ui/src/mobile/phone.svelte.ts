@@ -24,7 +24,7 @@ function readPro(): boolean {
 class Phone {
   /** The computer is in Expert mode (`/v1/info`): show the same extra settings. */
   expert = $state(false);
-  /** The computer runs Pro: the purple mark. Remembered, so the mark does not flash green while the app waits for the computer. */
+  /** The computer runs Pro: the gold mark. Remembered, so the mark does not flash purple while the app waits for the computer. */
   #pro = $state(readPro());
   get pro(): boolean {
     return this.#pro;

@@ -3,6 +3,7 @@
 //! pairing, TLS pinning and the API calls live in `lokalsi_api_gateway::client`.
 
 mod device;
+mod launcher;
 mod phone_llm;
 mod store;
 
@@ -107,6 +108,12 @@ fn status_of(state: &AppState) -> Status {
 #[tauri::command]
 fn device_name() -> Option<String> {
     device::read()
+}
+
+/// Launcher icon: gold when the paired computer runs Lokalomat Pro, else purple.
+#[tauri::command]
+fn launcher_icon(pro: bool) {
+    launcher::set(pro);
 }
 
 #[tauri::command]
@@ -505,6 +512,7 @@ pub fn run() {
             phone_llm::phone_model_delete,
             phone_llm::phone_model_path,
             device_name,
+            launcher_icon,
             computers,
             computer_select,
             computer_remove,

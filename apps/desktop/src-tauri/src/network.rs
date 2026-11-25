@@ -111,6 +111,8 @@ pub async fn start_gateway(app: &AppHandle) {
         Arc::clone(&state.modes),
         Arc::clone(&state.resolver) as Arc<dyn lokalsi_engines::modes::ModelResolver>,
         Box::new(move || handle.state::<AppState>().settings().expert),
+        // Pro reports itself through its extension, not `Edition::current()`.
+        state.ext.edition(),
     );
     match Gateway::start(
         config,
