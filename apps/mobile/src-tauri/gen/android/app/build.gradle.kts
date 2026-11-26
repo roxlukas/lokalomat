@@ -14,6 +14,17 @@ val tauriProperties = Properties().apply {
     }
 }
 
+// Release signing for Google Play (ADR 0040): the upload key never enters the repo.
+// `keystore.properties` (path in LOKALOMAT_KEYSTORE_PROPERTIES, or next to this
+// Gradle project, git-ignored) names `storeFile`, `keyAlias` and `passwordFile`.
+val keystoreProperties = Properties().apply {
+    val path = System.getenv("LOKALOMAT_KEYSTORE_PROPERTIES")
+    val propFile = if (path.isNullOrBlank()) rootProject.file("keystore.properties") else file(path)
+    if (propFile.exists()) {
+        propFile.inputStream().use { load(it) }
+    }
+}
+
 android {
     compileSdk = 37
     namespace = "pl.lokalsi.mobile"
@@ -24,6 +35,17 @@ android {
         targetSdk = 37
         versionCode = tauriProperties.getProperty("tauri.android.versionCode", "1").toInt()
         versionName = tauriProperties.getProperty("tauri.android.versionName", "1.0")
+    }
+    signingConfigs {
+        if (keystoreProperties.containsKey("storeFile")) {
+            create("release") {
+                val password = file(keystoreProperties.getProperty("passwordFile")).readText().trim()
+                storeFile = file(keystoreProperties.getProperty("storeFile"))
+                storePassword = password
+                keyAlias = keystoreProperties.getProperty("keyAlias")
+                keyPassword = password
+            }
+        }
     }
     buildTypes {
         getByName("debug") {
@@ -39,6 +61,8 @@ android {
             }
         }
         getByName("release") {
+            // Without keystore.properties the release build stays unsigned.
+            signingConfigs.findByName("release")?.let { signingConfig = it }
             optimization {
                enable = true
             }
