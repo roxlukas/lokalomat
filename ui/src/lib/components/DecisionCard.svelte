@@ -87,9 +87,9 @@
         <Copy size={14} aria-hidden="true" />{t('decisions.copy')}
       </button>
       {#if confirmDelete}
-        <button type="button" class="btn small danger" onclick={() => jobs.remove([job.id])}>{t('jobs.confirmDelete')}</button>
+        <button type="button" class="btn small btn-danger" onclick={() => jobs.remove([job.id])}>{t('jobs.confirmDelete')}</button>
       {:else}
-        <button type="button" class="btn small" onclick={() => (confirmDelete = true)} aria-label={t('jobs.delete')}><Trash2 size={14} aria-hidden="true" /></button>
+        <button type="button" class="btn small danger" onclick={() => (confirmDelete = true)} aria-label={t('jobs.delete')}><Trash2 size={14} aria-hidden="true" /></button>
       {/if}
     </div>
     {#if note}<p class="muted small" role="status">{note}</p>{/if}

@@ -32,6 +32,8 @@
   let visibleModes = $derived(modes.filter((m) => settings.value.expert || !m.expert));
   let active = $derived(modes.find((m) => m.id === workshop.mode));
   let view = $derived(workshop.view);
+  /** The chat list belongs to the chat: the other modes get the full width. */
+  let chatMode = $derived(workshop.mode === 'chat');
 
   // Remember the last mode between visits.
   $effect(() => writeLocal(MODE_KEY, workshop.mode));
@@ -129,7 +131,7 @@
 <svelte:window onkeydown={onKeydown} />
 
 <div class="workshop">
-  {#if drawerOpen}<SessionDrawer />{/if}
+  {#if drawerOpen && chatMode}<SessionDrawer />{/if}
   <div class="main">
     <div class="stream" bind:this={streamEl} onscroll={onScroll}>
       {#if view?.hasOutput && view.output}
@@ -159,7 +161,7 @@
 
     <form class="command-bar" onsubmit={send}>
       <div class="bar-top">
-        <button
+        {#if chatMode}<button
           type="button"
           class="icon-btn"
           aria-pressed={drawerOpen}
@@ -168,7 +170,7 @@
           onclick={toggleDrawer}
         >
           <PanelLeft size={16} aria-hidden="true" />
-        </button>
+        </button>{/if}
         <div class="modes" role="radiogroup" aria-label={t('workshop.modes.label')}>
           {#each visibleModes as m, i (m.id)}
             <button

@@ -76,7 +76,7 @@
             </button>
             <span class="actions">
               {#if confirming === s.id}
-                <button type="button" class="btn tiny danger" onclick={() => act(() => chat.remove(s.id))}>{t('chat.sessions.confirmDelete')}</button>
+                <button type="button" class="btn tiny btn-danger" onclick={() => act(() => chat.remove(s.id))}>{t('chat.sessions.confirmDelete')}</button>
                 <button type="button" class="btn tiny" onclick={() => (confirming = null)}>{t('common.cancel')}</button>
               {:else}
                 <button type="button" class="icon-btn sm" title={s.pinned ? t('chat.sessions.unpin') : t('chat.sessions.pin')}
@@ -85,7 +85,7 @@
                 </button>
                 <button type="button" class="icon-btn sm" title={t('chat.sessions.rename')} aria-label={t('chat.sessions.rename')}
                   onclick={() => ((editing = s.id), (draft = s.title))}><Pencil size={14} aria-hidden="true" /></button>
-                <button type="button" class="icon-btn sm" title={t('chat.sessions.delete')} aria-label={t('chat.sessions.delete')}
+                <button type="button" class="icon-btn sm danger" title={t('chat.sessions.delete')} aria-label={t('chat.sessions.delete')}
                   onclick={() => (confirming = s.id)}><Trash2 size={14} aria-hidden="true" /></button>
               {/if}
             </span>
@@ -208,11 +208,6 @@
     min-height: 24px;
     padding: 0 var(--space-2);
     font-size: var(--text-xs);
-  }
-
-  .btn.danger {
-    border-color: var(--error);
-    color: var(--error);
   }
 
   .rename {

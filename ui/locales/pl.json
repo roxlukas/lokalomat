@@ -980,7 +980,6 @@
       "use": "Użyj",
       "inUse": "W użyciu",
       "change": "Zmień model",
-      "newChat": "Nowa rozmowa",
       "stop": "Zatrzymaj",
       "loading": "Wczytuję model…",
       "deleteFree": "Usuń (zwolnisz {size})",
@@ -1002,6 +1001,16 @@
       "addComputer": "Dodaj komputer",
       "models": "Modele na telefonie",
       "manageModels": "Zarządzaj modelami"
+    },
+    "chats": {
+      "open": "Twoje czaty",
+      "title": "Czaty",
+      "new": "Nowy czat",
+      "empty": "Tu pojawią się Twoje czaty.",
+      "clear": "Wyczyść czat",
+      "clearSure": "Wyczyścić?",
+      "delete": "Usuń czat",
+      "deleteSure": "Usunąć?"
     }
   },
   "decisions": {

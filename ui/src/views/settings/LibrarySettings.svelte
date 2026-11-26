@@ -164,7 +164,7 @@
       <div class="inline">
         <input id="hf-token" type="password" autocomplete="off" spellcheck="false" placeholder="hf_…" bind:value={token} />
         <button type="submit" class="btn" disabled={!token.trim()}>{t('settings.downloads.tokenSave')}</button>
-        {#if tokenSet}<button type="button" class="btn" onclick={removeToken}>{t('settings.downloads.tokenRemove')}</button>{/if}
+        {#if tokenSet}<button type="button" class="btn danger" onclick={removeToken}>{t('settings.downloads.tokenRemove')}</button>{/if}
       </div>
     </form>
   {/if}

@@ -18,7 +18,9 @@
   import { renderMarkdown } from '../lib/markdown';
   import { clock, encodeWav, toMono } from '../lib/media';
   import { readLocal, writeLocal } from '../lib/storage';
-  import { api, describe, isOffline, toBase64, type Computers, type MobileStatus, type Transcription, type Turn } from './api';
+  import { api, describe, isOffline, toBase64, type Computers, type MobileStatus, type Transcription } from './api';
+  import { chats } from './chats.svelte';
+  import MobileChatBar from './MobileChatBar.svelte';
   import MobileDecision from './MobileDecision.svelte';
   import MobileGallery from './MobileGallery.svelte';
   import MobileLocalChat from './MobileLocalChat.svelte';
@@ -49,8 +51,7 @@
   let error = $state('');
   let busy = $state(false);
 
-  // chat
-  let messages = $state<Turn[]>([]);
+  // chat (the list of chats is kept on the phone: chats.svelte.ts)
   let input = $state('');
   // record
   let recorder: MediaRecorder | null = null;
@@ -168,7 +169,7 @@
     pairing = false;
     finishOnboarding();
     source.set('computer');
-    messages = [];
+    chats.startNew();
     online = null;
     await refreshComputers();
     void connect();
@@ -187,7 +188,7 @@
     source.set('computer');
     if (value !== status?.id) {
       stopChecks();
-      messages = [];
+      chats.startNew();
       online = null;
       modes = [];
       status = await api.computerSelect(value).catch(() => status);
@@ -200,7 +201,7 @@
   async function computersChanged() {
     status = await api.status();
     await refreshComputers();
-    messages = [];
+    chats.startNew();
     online = null;
     stopChecks();
     if (!status.paired) {
@@ -221,10 +222,15 @@
     const text = input.trim();
     if (!text) return;
     input = '';
-    messages = [...messages, { role: 'user', content: text }];
+    chats.messages = [...chats.messages, { role: 'user', content: text }];
+    chats.save();
+    const id = chats.currentId;
     await run(async () => {
-      const answer = await api.chat(messages, chatModel || null);
-      messages = [...messages, { role: 'assistant', content: answer }];
+      const answer = await api.chat(chats.messages, chatModel || null);
+      // The user may have opened another chat meanwhile: the reply belongs to this one.
+      if (chats.currentId !== id) return;
+      chats.messages = [...chats.messages, { role: 'assistant', content: answer }];
+      chats.save();
     });
   }
 
@@ -388,9 +394,9 @@
       {/if}
 
       {#if tab === 'chat'}
-        <ModelPicker mode="chat" bind:value={chatModel} />
+        <MobileChatBar {busy}><ModelPicker mode="chat" bind:value={chatModel} /></MobileChatBar>
         <div class="stream" aria-live="polite">
-          {#each messages as m, i (i)}
+          {#each chats.messages as m, i (i)}
             <div class="msg {m.role}">
               <!-- eslint-disable-next-line svelte/no-at-html-tags -- sanitised by renderMarkdown (DOMPurify) -->
               {#if m.role === 'assistant'}{@html renderMarkdown(m.content)}{:else}{m.content}{/if}

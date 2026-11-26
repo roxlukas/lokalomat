@@ -1,6 +1,5 @@
 <script lang="ts">
   import { onDestroy, onMount } from 'svelte';
-  import ArrowCounterClockwise from 'phosphor-svelte/lib/ArrowCounterClockwiseIcon';
   import Check from 'phosphor-svelte/lib/CheckIcon';
   import Cpu from 'phosphor-svelte/lib/CpuIcon';
   import DownloadSimple from 'phosphor-svelte/lib/DownloadSimpleIcon';
@@ -10,7 +9,9 @@
   import { getLocale, t } from '../lib/i18n/index.svelte';
   import { renderMarkdown } from '../lib/markdown';
   import { readLocal, writeLocal } from '../lib/storage';
-  import { describe, type Turn } from './api';
+  import { describe } from './api';
+  import { chats } from './chats.svelte';
+  import MobileChatBar from './MobileChatBar.svelte';
   import { source } from './source.svelte';
   import Spinner from './Spinner.svelte';
   import { ThinkFilter } from './think';
@@ -23,7 +24,6 @@
   let chosen = $state(readLocal<string>(CHOSEN_KEY, ''));
   let loadedId = '';
   let managing = $state(false);
-  let messages = $state<Turn[]>([]);
   let input = $state('');
   let error = $state('');
   /** What the app is doing while the reply is not there yet. */
@@ -118,9 +118,10 @@
     error = '';
     input = '';
     busy = true;
-    const history = [...messages];
-    messages = [...messages, { role: 'user', content: text }, { role: 'assistant', content: '' }];
-    const answer = messages.length - 1;
+    const history = $state.snapshot(chats.messages);
+    chats.messages = [...chats.messages, { role: 'user', content: text }, { role: 'assistant', content: '' }];
+    chats.save();
+    const answer = chats.messages.length - 1;
     try {
       if (loadedId !== current.id) {
         phase = 'loading';
@@ -132,7 +133,7 @@
       // Reasoning (`<think>…</think>`) stays hidden; the spinner shows meanwhile.
       const filter = new ThinkFilter(current.thinks ?? false);
       const show = (piece: string) => {
-        const bubble = messages[answer];
+        const bubble = chats.messages[answer];
         if (bubble && piece) bubble.content += piece;
       };
       const { cancelled } = await local.generate(
@@ -151,7 +152,8 @@
       phase = 'idle';
       busy = false;
       // A reply that never started leaves an empty bubble: drop it.
-      if (!messages[answer]?.content) messages = messages.slice(0, answer);
+      if (!chats.messages[answer]?.content) chats.messages = chats.messages.slice(0, answer);
+      chats.save();
     }
   }
 
@@ -159,10 +161,6 @@
     void local.cancel().catch(() => undefined);
   }
 
-  function reset() {
-    messages = [];
-    error = '';
-  }
 </script>
 
 {#if managing || !current}
@@ -189,7 +187,7 @@
           {:else}
             <button type="button" class="btn btn-primary big" onclick={() => use(m)}>{t('mobile.local.use')}</button>
           {/if}
-          <button type="button" class="btn big" class:sure={confirmDelete === m.id} onclick={() => void remove(m)}>
+          <button type="button" class="btn big {confirmDelete === m.id ? 'btn-danger' : 'danger'}" onclick={() => void remove(m)}>
             <Trash size={20} aria-hidden="true" />{confirmDelete === m.id ? t('mobile.local.deleteSure') : t('mobile.local.deleteFree', { size: gigabytes(m.size) })}
           </button>
         {:else}
@@ -205,19 +203,14 @@
     {/if}
   </section>
 {:else}
-  <div class="top">
+  <MobileChatBar {busy}>
     <button type="button" class="btn model big" onclick={() => (managing = true)} title={t('mobile.local.change')}>
       <Cpu size={18} aria-hidden="true" />{current.name}
     </button>
-    {#if messages.length}
-      <button type="button" class="icon-btn" aria-label={t('mobile.local.newChat')} title={t('mobile.local.newChat')} onclick={reset} disabled={busy}>
-        <ArrowCounterClockwise size={18} aria-hidden="true" />
-      </button>
-    {/if}
-  </div>
+  </MobileChatBar>
   {#if error}<p class="note note-error" role="alert">{error}</p>{/if}
   <div class="stream" aria-live="polite">
-    {#each messages as m, i (i)}
+    {#each chats.messages as m, i (i)}
       <!-- an empty reply is shown as the status line below, not as an empty bubble -->
       {#if m.role !== 'assistant' || m.content}
         <div class="msg {m.role}">
@@ -278,8 +271,7 @@
   }
 
   .head,
-  .row,
-  .top {
+  .row {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -293,16 +285,8 @@
     font-size: var(--text-m, 1rem);
   }
 
-  .top .big {
-    width: auto;
-    flex: 1;
+  .model.big {
     justify-content: flex-start;
-  }
-
-  .sure {
-    border-color: var(--error);
-    color: var(--error);
-    font-weight: 700;
   }
 
   .inuse {
@@ -312,11 +296,6 @@
     min-height: 52px;
     color: var(--ok);
     font-weight: 600;
-  }
-
-  .top :global(.icon-btn) {
-    min-width: 52px;
-    min-height: 52px;
   }
 
   .bar :global(.btn) {
