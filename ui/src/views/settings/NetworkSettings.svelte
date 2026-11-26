@@ -208,9 +208,9 @@
             <span class="muted small">{t('network.pairedAt', { date: when(d.paired_at) })} · {t('network.lastSeen', { date: when(d.last_seen) })}</span>
           </div>
           {#if confirmUnpair === d.id}
-            <button type="button" class="btn small danger" disabled={busy} onclick={() => unpair(d.id)}>{t('network.unpairConfirm')}</button>
+            <button type="button" class="btn small btn-danger" disabled={busy} onclick={() => unpair(d.id)}>{t('network.unpairConfirm')}</button>
           {:else}
-            <button type="button" class="btn small" onclick={() => (confirmUnpair = d.id)}>
+            <button type="button" class="btn small danger" onclick={() => (confirmUnpair = d.id)}>
               <Unlink size={14} aria-hidden="true" />{t('network.unpair')}
             </button>
           {/if}

@@ -204,6 +204,33 @@ button:disabled {
   color: var(--text);
 }
 
+/* Delete, remove and clear are red everywhere: outlined (.btn.danger,
+   .icon-btn.danger) or filled for the final "yes, delete" (.btn-danger). */
+.btn.danger,
+.icon-btn.danger {
+  border-color: var(--error);
+  color: var(--error);
+}
+
+.btn.danger:hover:not(:disabled),
+.icon-btn.danger:hover:not(:disabled) {
+  border-color: var(--error);
+  background: var(--error-bg);
+  color: var(--error);
+}
+
+.btn-danger,
+.btn-danger:hover:not(:disabled) {
+  border-color: var(--error);
+  background: var(--error);
+  color: var(--bg);
+  font-weight: 700;
+}
+
+.btn-danger:hover:not(:disabled) {
+  filter: brightness(1.08);
+}
+
 .note {
   padding: var(--space-3) var(--space-4);
   border-radius: var(--radius-m);
@@ -213,7 +240,8 @@ button:disabled {
 
 .note-warn {
   background: var(--warn-bg);
-  border-color: color-mix(in srgb, var(--warn) 35%, transparent);
+  border-color: color-mix(in srgb, var(--warn) 60%, transparent);
+  border-left: 4px solid var(--warn);
 }
 
 .note-info {

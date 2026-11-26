@@ -110,14 +110,14 @@
       </button>
     {/if}
     {#if confirming === v.id}
-      <button type="button" class="btn small danger" disabled={busy} onclick={() => remove(v)}>
+      <button type="button" class="btn small btn-danger" disabled={busy} onclick={() => remove(v)}>
         {t('models.row.confirmDelete')}
       </button>
       <button type="button" class="btn small" onclick={() => (confirming = null)}>{t('common.cancel')}</button>
     {:else}
       <button
         type="button"
-        class="icon-btn"
+        class="icon-btn danger"
         aria-label={t('models.row.deleteVariant', { variant: `${model.name} ${v.label}` })}
         title={t('models.row.delete')}
         onclick={() => (confirming = v.id)}
@@ -377,11 +377,6 @@
     min-height: 30px;
     padding: 0 var(--space-3);
     font-size: var(--text-s);
-  }
-
-  .btn.danger {
-    border-color: var(--error);
-    color: var(--error);
   }
 
   .btn.accent {

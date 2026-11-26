@@ -425,17 +425,6 @@
     gap: var(--space-2);
   }
 
-  .danger {
-    color: var(--error);
-  }
-
-  .btn-danger {
-    border-color: var(--error);
-    background: var(--error);
-    color: var(--bg);
-    font-weight: 700;
-  }
-
   .confirm {
     display: grid;
     gap: var(--space-2);

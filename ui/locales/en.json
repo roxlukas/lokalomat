@@ -980,7 +980,6 @@
       "use": "Use",
       "inUse": "In use",
       "change": "Change the model",
-      "newChat": "New chat",
       "stop": "Stop",
       "loading": "Loading the model…",
       "deleteFree": "Delete (frees {size})",
@@ -1002,6 +1001,16 @@
       "addComputer": "Add a computer",
       "models": "Models on this phone",
       "manageModels": "Manage models"
+    },
+    "chats": {
+      "open": "Your chats",
+      "title": "Chats",
+      "new": "New chat",
+      "empty": "Your chats will show up here.",
+      "clear": "Clear chat",
+      "clearSure": "Clear?",
+      "delete": "Delete chat",
+      "deleteSure": "Delete?"
     }
   },
   "decisions": {

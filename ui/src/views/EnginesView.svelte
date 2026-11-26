@@ -126,10 +126,10 @@
               {/if}
             {/if}
             {#if confirmUninstall === e.id}
-              <button type="button" class="btn danger" onclick={() => act(async () => { await ipc.uninstallEngine(e.id); confirmUninstall = null; })}>{t('engines.confirmUninstall')}</button>
+              <button type="button" class="btn btn-danger" onclick={() => act(async () => { await ipc.uninstallEngine(e.id); confirmUninstall = null; })}>{t('engines.confirmUninstall')}</button>
               <button type="button" class="btn" onclick={() => (confirmUninstall = null)}>{t('common.cancel')}</button>
             {:else}
-              <button type="button" class="btn" onclick={() => (confirmUninstall = e.id)}><Trash2 size={16} aria-hidden="true" />{t('engines.uninstall')}</button>
+              <button type="button" class="btn danger" onclick={() => (confirmUninstall = e.id)}><Trash2 size={16} aria-hidden="true" />{t('engines.uninstall')}</button>
             {/if}
           {/if}
           <button type="button" class="btn" onclick={() => toggleLogs(e)} aria-expanded={logs[e.id] != null} disabled={!inTauri}>
@@ -137,7 +137,7 @@
           </button>
         </div>
         {#if !e.installed && e.builds.length === 0}
-          <p class="note note-info">{t('engines.unavailable')}</p>
+          <p class="note note-warn">{t('engines.unavailable')}</p>
         {/if}
         {#if !e.installed && e.builds[0]}
           <p class="muted small">{t('engines.installHint', { size: formatBytes(e.builds.find((b) => b.id === chosenBuild(e))?.size ?? 0, getLocale()) })}</p>
@@ -282,11 +282,6 @@
   .btn.small {
     min-height: 30px;
     font-size: var(--text-s);
-  }
-
-  .btn.danger {
-    border-color: var(--error);
-    color: var(--error);
   }
 
   .log {

@@ -167,7 +167,7 @@
     {#if finished.length}
       <div class="done-head">
         <h3>{t('downloads.sectionDone')}</h3>
-        <button type="button" class="link" onclick={() => act(() => ipc.clearFinishedDownloads())}>{t('downloads.clear')}</button>
+        <button type="button" class="link danger" onclick={() => act(() => ipc.clearFinishedDownloads())}>{t('downloads.clear')}</button>
       </div>
       <ul class="items done">
         {#each finished as item (item.id)}
@@ -310,5 +310,9 @@
     color: var(--focus);
     font-size: var(--text-s);
     text-decoration: underline;
+  }
+
+  .link.danger {
+    color: var(--error);
   }
 </style>

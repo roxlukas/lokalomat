@@ -168,10 +168,6 @@
     min-height: 48px;
   }
 
-  .icon-btn.danger {
-    color: var(--error);
-  }
-
   .sheet-backdrop {
     position: fixed;
     inset: 0;
@@ -199,12 +195,5 @@
     display: flex;
     justify-content: flex-end;
     gap: var(--space-2);
-  }
-
-  .btn-danger {
-    border-color: var(--error);
-    background: var(--error);
-    color: var(--bg);
-    font-weight: 700;
   }
 </style>

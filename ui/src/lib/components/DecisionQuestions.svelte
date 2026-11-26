@@ -67,7 +67,7 @@
           {/each}
         </div>
         {#if !single && questions.length > 1}
-          <button type="button" class="icon-btn" aria-label={t('decisions.removeQuestion')} title={t('decisions.removeQuestion')}
+          <button type="button" class="icon-btn danger" aria-label={t('decisions.removeQuestion')} title={t('decisions.removeQuestion')}
             onclick={() => (questions = questions.filter((_, k) => k !== i))}><X size={14} aria-hidden="true" /></button>
         {/if}
       </div>
@@ -85,7 +85,7 @@
                 aria-label={q.type === 'score' ? t('decisions.levelN', { n: j + 1 }) : t('decisions.optionN', { n: j + 1 })}
                 placeholder={q.type === 'score' ? (j === 0 ? t('decisions.lowest') : j === items.length - 1 ? t('decisions.highest') : '') : ''} />
               {#if items.length > 2}
-                <button type="button" class="icon-btn" aria-label={t('decisions.removeItem')} onclick={() => removeItem(i, j)}><X size={12} aria-hidden="true" /></button>
+                <button type="button" class="icon-btn danger" aria-label={t('decisions.removeItem')} onclick={() => removeItem(i, j)}><X size={12} aria-hidden="true" /></button>
               {/if}
             </li>
           {/each}

@@ -230,9 +230,9 @@
               <Copy size={14} aria-hidden="true" />{copied === `key:${k.id}` ? t('jobs.copied') : t('server.copy')}
             </button>
             {#if confirmRevoke === k.id}
-              <button type="button" class="btn small danger" onclick={() => act(() => ipc.revokeApiKey(k.id)).then(() => (confirmRevoke = null))}>{t('server.confirmRevoke')}</button>
+              <button type="button" class="btn small btn-danger" onclick={() => act(() => ipc.revokeApiKey(k.id)).then(() => (confirmRevoke = null))}>{t('server.confirmRevoke')}</button>
             {:else}
-              <button type="button" class="btn small" aria-label={t('server.revoke')} title={t('server.revoke')} onclick={() => (confirmRevoke = k.id)}>
+              <button type="button" class="btn small danger" aria-label={t('server.revoke')} title={t('server.revoke')} onclick={() => (confirmRevoke = k.id)}>
                 <Trash2 size={14} aria-hidden="true" />
               </button>
             {/if}

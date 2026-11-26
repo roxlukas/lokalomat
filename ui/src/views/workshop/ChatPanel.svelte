@@ -98,7 +98,7 @@
     </p>
   {/if}
   {#if options.length === 0}
-    <p class="note note-info setup">
+    <p class="note note-warn setup">
       {t('chat.needModel')}
       <button type="button" class="link" onclick={() => router.goModels('llm')}>{t('chat.goModels')}</button>
     </p>
