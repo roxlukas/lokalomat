@@ -8,8 +8,6 @@
 
 <footer class="status">
   <a class="credit" href={SITE} target="_blank" rel="noopener" onclick={(e) => openExternal(e, SITE)} aria-label={t('footer.linkLabel')}>
-    <span class="author">{t('footer.author')}</span>
-    <span class="sep" aria-hidden="true">·</span>
     <span class="site">{t('footer.site')}</span>
     <ExternalLink size={11} aria-hidden="true" />
   </a>
@@ -43,11 +41,4 @@
     text-decoration: underline;
   }
 
-  .author {
-    font-weight: 600;
-  }
-
-  .sep {
-    color: var(--text-faint);
-  }
 </style>
