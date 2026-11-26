@@ -160,9 +160,9 @@
 <div class="panel">
   {#if error}<p class="note note-error" role="alert">{error}</p>{/if}
   <ModelPicker mode="image" bind:value={model} />
-  <textarea rows="3" bind:value={prompt} placeholder={t('workshop.image.placeholder')} aria-label={t('workshop.image.placeholder')}></textarea>
+  <textarea rows="5" bind:value={prompt} placeholder={t('workshop.image.placeholder')} aria-label={t('workshop.image.placeholder')}></textarea>
   {#if phone.expert}
-    <textarea rows="2" bind:value={negative} placeholder={t('mobile.image.negative')} aria-label={t('mobile.image.negative')}></textarea>
+    <textarea rows="4" bind:value={negative} placeholder={t('mobile.image.negative')} aria-label={t('mobile.image.negative')}></textarea>
   {/if}
   <div class="chips" role="radiogroup" aria-label={t('workshop.image.aspect')}>
     {#each ASPECTS as a (a)}

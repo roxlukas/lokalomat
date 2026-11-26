@@ -18,6 +18,8 @@ export interface PhoneModel {
   size: number;
   min_ram_mb: number;
   recommended: boolean;
+  /** The reply starts with hidden reasoning in `<think>…</think>` (see `think.ts`). */
+  thinks?: boolean;
   /** `low` = less memory than the model needs; null when the phone's RAM is unknown. */
   fit: 'ok' | 'low' | null;
   installed: boolean;

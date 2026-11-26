@@ -147,7 +147,7 @@
 <div class="panel">
   {#if error}<p class="note note-error" role="alert">{error}</p>{/if}
   <ModelPicker mode="music" bind:value={model} />
-  <textarea rows="2" bind:value={caption} maxlength={MAX_CAPTION} placeholder={t('workshop.music.placeholder')} aria-label={t('workshop.music.placeholder')}></textarea>
+  <textarea rows="4" bind:value={caption} maxlength={MAX_CAPTION} placeholder={t('workshop.music.placeholder')} aria-label={t('workshop.music.placeholder')}></textarea>
   <label class="field">
     <span class="small muted">{t('workshop.music.lyrics')}</span>
     <textarea rows="5" bind:value={lyrics} maxlength={MAX_LYRICS} placeholder={t('workshop.music.lyricsPlaceholder')}></textarea>

@@ -241,3 +241,11 @@ button:disabled {
     scroll-behavior: auto !important;
   }
 }
+
+/* Math in model answers (KaTeX, ui/src/lib/markdown.ts): a wide formula scrolls
+   sideways instead of widening the message. */
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-block: 2px;
+}

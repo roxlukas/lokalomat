@@ -201,7 +201,7 @@
           <div class="prompts">
             <textarea
               id="workshop-input"
-              rows="2"
+              rows={view.promptRows ?? 4}
               bind:value={workshop.prompt}
               onkeydown={onInputKey}
               placeholder={view.placeholder}

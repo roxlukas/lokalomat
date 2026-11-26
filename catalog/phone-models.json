@@ -55,6 +55,59 @@
         "size": 3659530240,
         "sha256": "0b2a8980ce155fd97673d8e820b4d29d9c7d99b8fa6806f425d969b145bd52e0"
       }
+    },
+    {
+      "id": "qwen2.5-1.5b",
+      "name": "Qwen2.5 1.5B",
+      "publisher": "Alibaba",
+      "description_pl": "Mały model na słabsze telefony. Po polsku pisze gorzej niż Gemma.",
+      "description_en": "A small model for weaker phones. Writes Polish worse than Gemma.",
+      "params_b": 1.5,
+      "languages": [
+        "en",
+        "zh",
+        "pl",
+        "de",
+        "fr",
+        "es"
+      ],
+      "license": {
+        "name": "Apache-2.0",
+        "url": "https://www.apache.org/licenses/LICENSE-2.0"
+      },
+      "min_ram_mb": 4000,
+      "file": {
+        "repo": "litert-community/Qwen2.5-1.5B-Instruct",
+        "path": "Qwen2.5-1.5B-Instruct_multi-prefill-seq_q8_ekv4096.litertlm",
+        "revision": "60257f9f1d00ca1f24cc5ce3b829b4139be1ca2b",
+        "size": 1597922856,
+        "sha256": "c4a9b7289365ab80fe599b844b77ad253eb3c53fb0e5d963d699146a6f01255e"
+      }
+    },
+    {
+      "id": "deepseek-r1-distill-qwen-1.5b",
+      "name": "DeepSeek R1 Distill Qwen 1.5B",
+      "publisher": "DeepSeek",
+      "description_pl": "Mały model, który najpierw myśli, potem odpowiada. Najlepiej po angielsku.",
+      "description_en": "A small model that thinks before it answers. Works best in English.",
+      "params_b": 1.5,
+      "languages": [
+        "en",
+        "zh"
+      ],
+      "license": {
+        "name": "MIT",
+        "url": "https://opensource.org/license/mit"
+      },
+      "min_ram_mb": 4000,
+      "thinks": true,
+      "file": {
+        "repo": "litert-community/DeepSeek-R1-Distill-Qwen-1.5B",
+        "path": "DeepSeek-R1-Distill-Qwen-1.5B_multi-prefill-seq_q8_ekv4096.litertlm",
+        "revision": "1e4af2ff557cbb7b7ff12ff4b0a7a1fac1f126a5",
+        "size": 1833451520,
+        "sha256": "69b35f01759eed765641ab4af589bbe98131fd2825662a086d9037409b8c1295"
+      }
     }
   ]
 }
