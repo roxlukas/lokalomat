@@ -27,6 +27,7 @@ what to do when it fails: [docs/quality-gate.md](docs/quality-gate.md).
 - `npm run tauri dev` – run the desktop app (starts Vite on :5173)
 - `npm run dev:ui` – UI only in a browser (IPC falls back to localStorage + `ui/src/lib/mock.ts`)
 - Android client (M5, ADR 0020): `apps/mobile`, UI entry `ui/mobile.html`. Build: set `JAVA_HOME` (Android Studio `jbr`), `ANDROID_HOME`, `NDK_HOME` (NDK 29), then in `apps/mobile`: `..\..
+- Google Play bundle (ADR 0040): in `apps/mobile` with `LOKALOMAT_KEYSTORE_PROPERTIES=<key folder>/keystore.properties`: `npm run tauri android build -- --aab --target aarch64` (signed with the upload key; without the properties file it stays unsigned).
 ode_modules\.bin	auri android build --debug --apk --target aarch64` (npm in PowerShell drops the flags).
 - `cargo run --release -p lokalsi-engines --example kv_compact -- <dir> <model.gguf> <estimate MB>` – load a model with the plan for a small card (`BUDGET_MB`, default 7680 = 8 GB) and check the compact KV cache (ADR 0021).
 - `cargo run --release -p lokalsi-engines --example gpu_offload -- <dir> <model.gguf> <estimate MB>` – GPU offload (`-ngl`) and the model's sampling defaults on real hardware: GPU memory grows with the layers, temperature 0 repeats (ADR 0036; `ENGINES`, `SEED_DB`, `BUDGET_MB`, `TOKENS`).
@@ -52,4 +53,4 @@ ode_modules\.bin	auri android build --debug --apk --target aarch64` (npm in Powe
 - New DB schema → append a migration to `MIGRATIONS` in `crates/core/src/db.rs`; never edit released entries (ADR 0003).
 - M1+ commands return `CmdError { code, message }`; the UI translates `code` via `errors.*` (`ui/src/lib/feedback.ts`).
 - Product name (ADR 0019): "Lokalomat AI Studio", short "Lokalomat" in UI texts; technical ids (`lokalsi-*`, app home `Studio Lokalsi`, keyring service) keep the old name.
-- Next free ADR number: 0040 (0039 phone chat list and red/yellow UI; 0038 chat on the phone itself; 0037 phone parity part 2 – gateway settings; 0036 model parameters and send key; 0035 free/Pro editions; 0023 used by the media converters branch; 0027 by phone parity; 0028 by M5c agents part 3).
+- Next free ADR number: 0041 (0040 Google Play release: upload key, AAB, "Zgłoś"; 0039 phone chat list and red/yellow UI; 0038 chat on the phone itself; 0037 phone parity part 2 – gateway settings; 0036 model parameters and send key; 0035 free/Pro editions; 0023 used by the media converters branch; 0027 by phone parity; 0028 by M5c agents part 3).

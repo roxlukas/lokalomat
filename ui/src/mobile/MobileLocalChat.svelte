@@ -13,6 +13,7 @@
   import { chats } from './chats.svelte';
   import MobileChatBar from './MobileChatBar.svelte';
   import { source } from './source.svelte';
+  import ReportAnswer from './ReportAnswer.svelte';
   import Spinner from './Spinner.svelte';
   import { ThinkFilter } from './think';
   import { gigabytes, local, percent, type PhoneModel, type PhoneModels, type Progress } from './local';
@@ -217,6 +218,9 @@
           <!-- eslint-disable-next-line svelte/no-at-html-tags -- sanitised by renderMarkdown (DOMPurify) -->
           {#if m.role === 'assistant'}{@html renderMarkdown(m.content)}{:else}{m.content}{/if}
         </div>
+        {#if m.role === 'assistant' && !(busy && i === chats.messages.length - 1)}
+          <ReportAnswer answer={m.content} model={current.name} where="phone" />
+        {/if}
       {/if}
     {/each}
     {#if phase === 'loading' || phase === 'thinking'}

@@ -1011,6 +1011,11 @@
       "clearSure": "Clear?",
       "delete": "Delete chat",
       "deleteSure": "Delete?"
+    },
+    "report": {
+      "label": "Report",
+      "hint": "Report a wrong or offensive answer.",
+      "reason": "What is wrong with this answer?"
     }
   },
   "decisions": {

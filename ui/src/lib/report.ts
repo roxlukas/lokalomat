@@ -43,3 +43,37 @@ export function reportMailto(i: ReportInput): { url: string; truncated: boolean 
   }
   return { url, truncated: true };
 }
+
+/** "Zgłoś" on an AI answer (Google Play's AI-generated content policy, ADR 0040). */
+export interface AnswerReport {
+  answer: string;
+  /** The model that wrote it, when known. */
+  model?: string;
+  /** "phone" or the computer's name. */
+  where: string;
+  version?: string;
+}
+
+export function answerReportSubject(version?: string): string {
+  return `[Lokalomat${version ? ` ${version}` : ''}] AI answer report`;
+}
+
+export function answerReportBody(r: AnswerReport, reasonLine: string): string {
+  const meta = [`Where: ${r.where}`, r.model ? `Model: ${r.model}` : '', r.version ? `Lokalomat ${r.version}` : ''].filter(Boolean);
+  return [reasonLine, '', '', '--', ...meta, '--', r.answer.trim()].join('\n');
+}
+
+/** The mailto link of an answer report; a long answer is shortened from its end. */
+export function answerReportMailto(r: AnswerReport, reasonLine: string): { url: string; truncated: boolean } {
+  const subject = answerReportSubject(r.version);
+  const build = (answer: string) =>
+    `mailto:${REPORT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(answerReportBody({ ...r, answer }, reasonLine))}`;
+  let answer = r.answer.trim();
+  let url = build(answer);
+  if (url.length <= MAX_MAILTO_LENGTH) return { url, truncated: false };
+  while (url.length > MAX_MAILTO_LENGTH && answer.length > 0) {
+    answer = answer.slice(0, Math.max(0, answer.length - Math.ceil((url.length - MAX_MAILTO_LENGTH) / 3) - 1));
+    url = build(`${answer}…`);
+  }
+  return { url: build(`${answer}…`), truncated: true };
+}

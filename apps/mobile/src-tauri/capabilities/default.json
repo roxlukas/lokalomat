@@ -1,7 +1,10 @@
 {
   "$schema": "../gen/schemas/desktop-schema.json",
   "identifier": "default",
-  "description": "Permissions for the phone client window",
+  "description": "Permissions for the phone client window; opener for the mailto: of \"Zgłoś\"",
   "windows": ["main"],
-  "permissions": ["core:default"]
+  "permissions": [
+    "core:default",
+    { "identifier": "opener:allow-open-url", "allow": [{ "url": "mailto:*" }] }
+  ]
 }

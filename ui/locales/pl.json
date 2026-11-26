@@ -1011,6 +1011,11 @@
       "clearSure": "Wyczyścić?",
       "delete": "Usuń czat",
       "deleteSure": "Usunąć?"
+    },
+    "report": {
+      "label": "Zgłoś",
+      "hint": "Zgłoś złą lub obraźliwą odpowiedź.",
+      "reason": "Co jest nie tak z tą odpowiedzią?"
     }
   },
   "decisions": {

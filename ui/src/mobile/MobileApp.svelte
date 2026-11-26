@@ -33,6 +33,7 @@
   import { phone, type Reuse } from './phone.svelte';
   import ModelPicker from './ModelPicker.svelte';
   import PairScreen from './PairScreen.svelte';
+  import ReportAnswer from './ReportAnswer.svelte';
   import { source } from './source.svelte';
 
   const TABS = ['chat', 'record', 'voice', 'image', 'music', 'decision', 'gallery'] as const;
@@ -401,6 +402,7 @@
               <!-- eslint-disable-next-line svelte/no-at-html-tags -- sanitised by renderMarkdown (DOMPurify) -->
               {#if m.role === 'assistant'}{@html renderMarkdown(m.content)}{:else}{m.content}{/if}
             </div>
+            {#if m.role === 'assistant'}<ReportAnswer answer={m.content} where={status.computer_name ?? 'computer'} />{/if}
           {/each}
           {#if busy}<p class="muted small">{t('mobile.working')}</p>{/if}
         </div>
