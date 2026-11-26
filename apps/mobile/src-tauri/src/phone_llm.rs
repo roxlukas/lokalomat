@@ -45,6 +45,7 @@ pub struct PhoneModelView {
     size: u64,
     min_ram_mb: u64,
     recommended: bool,
+    thinks: bool,
     fit: Option<Fit>,
     installed: bool,
     /// Bytes of an interrupted download (0 = none).
@@ -97,6 +98,7 @@ pub fn phone_models(state: State<'_, AppState>, downloads: State<'_, Downloads>)
             license: m.license,
             min_ram_mb: m.min_ram_mb,
             recommended: m.recommended,
+            thinks: m.thinks,
         })
         .collect();
     PhoneModels { ram_mb, models }

@@ -399,7 +399,7 @@
           {#if busy}<p class="muted small">{t('mobile.working')}</p>{/if}
         </div>
         <form class="bar" onsubmit={(e) => (e.preventDefault(), void send())}>
-          <textarea rows="3" bind:value={input} placeholder={t('mobile.chat.placeholder')} aria-label={t('mobile.chat.placeholder')}></textarea>
+          <textarea rows="4" bind:value={input} placeholder={t('mobile.chat.placeholder')} aria-label={t('mobile.chat.placeholder')}></textarea>
           <button type="submit" class="btn btn-primary" disabled={busy || !input.trim()} aria-label={t('mobile.send')}>
             <PaperPlaneRight size={18} aria-hidden="true" />
           </button>

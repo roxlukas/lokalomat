@@ -13,6 +13,7 @@
   import { describe, type Turn } from './api';
   import { source } from './source.svelte';
   import Spinner from './Spinner.svelte';
+  import { ThinkFilter } from './think';
   import { gigabytes, local, percent, type PhoneModel, type PhoneModels, type Progress } from './local';
 
   /** Chat with a model that runs on the phone itself (ADR 0038): no computer, no network. */
@@ -128,16 +129,22 @@
         loadedId = current.id;
       }
       phase = 'thinking';
-      await local.generate(
+      // Reasoning (`<think>…</think>`) stays hidden; the spinner shows meanwhile.
+      const filter = new ThinkFilter(current.thinks ?? false);
+      const show = (piece: string) => {
+        const bubble = messages[answer];
+        if (bubble && piece) bubble.content += piece;
+      };
+      const { cancelled } = await local.generate(
         text,
         history,
         (piece) => {
-          phase = 'writing';
-          const bubble = messages[answer];
-          if (bubble) bubble.content += piece;
+          show(filter.push(piece));
+          phase = filter.thinking ? 'thinking' : 'writing';
         },
         () => (phase = 'thinking'),
       );
+      if (!cancelled) show(filter.finish());
     } catch (e) {
       error = describe(e);
     } finally {
@@ -226,7 +233,7 @@
     {/if}
   </div>
   <form class="bar" onsubmit={(e) => (e.preventDefault(), void send())}>
-    <textarea rows="3" bind:value={input} placeholder={t('mobile.chat.placeholder')} aria-label={t('mobile.chat.placeholder')}></textarea>
+    <textarea rows="4" bind:value={input} placeholder={t('mobile.chat.placeholder')} aria-label={t('mobile.chat.placeholder')}></textarea>
     {#if busy && phase !== 'loading'}
       <button type="button" class="btn" onclick={stop} aria-label={t('mobile.local.stop')} title={t('mobile.local.stop')}>
         <Stop size={18} aria-hidden="true" />

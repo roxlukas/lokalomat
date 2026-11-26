@@ -34,6 +34,8 @@ export interface PanelView {
   send(): void | Promise<void>;
   readonly placeholder: string;
   readonly maxlength?: number;
+  /** Lines of the prompt field (default 4; the image prompt is taller). */
+  readonly promptRows?: number;
   readonly submitLabel: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   readonly submitIcon: Component<any>;

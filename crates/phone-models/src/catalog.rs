@@ -97,6 +97,11 @@ pub struct PhoneModel {
     pub min_ram_mb: u64,
     #[serde(default, skip_serializing_if = "std::ops::Not::not")]
     pub recommended: bool,
+    /// The model reasons before it answers and starts its reply inside
+    /// `<think>…</think>` (the opening tag may be part of the prompt template).
+    /// The phone chat hides that part.
+    #[serde(default, skip_serializing_if = "std::ops::Not::not")]
+    pub thinks: bool,
     pub file: PhoneFile,
 }
 
