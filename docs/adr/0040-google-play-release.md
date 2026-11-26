@@ -37,7 +37,10 @@ AI output from inside the app (AI-Generated Content policy).
 
 - The release build runs R8 minification for the first time. The on-phone chat
   (LiteRT-LM plugin, Kotlin) must be tested on a release build before upload;
-  missing keep rules would show up there.
+  missing keep rules would show up there. The first release build crashed at
+  startup: R8 full mode (AGP 9) drops the default constructor kept by bare
+  `-keep class` rules of Room, ML Kit/Firebase and WorkManager. `proguard-rules.pro`
+  now keeps those constructors explicitly.
 - In the release build, plain HTTP (`usesCleartextTraffic`) is off. The phone talks
   to the computer from Rust (not through the Android network stack), so this
   should not matter. Check it in the same test.
