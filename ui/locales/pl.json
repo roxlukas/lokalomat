@@ -645,9 +645,8 @@
     "skipWizard": "Pomiń kreator"
   },
   "footer": {
-    "author": "Łukasz Poźniak",
     "site": "AI Transformation",
-    "linkLabel": "Łukasz Poźniak, AI Transformation – strona autora"
+    "linkLabel": "AI Transformation – strona autora"
   },
   "chat": {
     "you": "Ty",
