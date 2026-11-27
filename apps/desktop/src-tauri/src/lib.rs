@@ -11,6 +11,7 @@ mod network;
 pub mod resolve;
 pub mod server;
 mod updates;
+pub mod vcrt;
 
 pub use ext::{ExtContext, Extension, ExtensionFactory, NoExtension};
 
@@ -189,6 +190,9 @@ fn free_handler() -> impl Fn(tauri::ipc::Invoke) -> bool + Send + Sync + 'static
 /// its context and the Pro extension.
 pub fn run_with(context: tauri::Context<tauri::Wry>, factory: Option<ExtensionFactory>) {
     let home = paths::app_home();
+    // First, while only this thread runs: the C++ runtime engines need on
+    // Windows (ADR 0043).
+    let vc_runtime = vcrt::prepare(&home);
     let settings_path = paths::settings_path(&home);
     let loaded = settings::load(&settings_path);
     let env_mode = std::env::var(logging::ENV_LOG_MODE).ok();
@@ -206,6 +210,7 @@ pub fn run_with(context: tauri::Context<tauri::Wry>, factory: Option<ExtensionFa
         }
     };
     logging::install_panic_hook();
+    vcrt::log(&vc_runtime);
     logging::set_log_prompts(loaded.settings.log_prompts);
 
     let sys = lokalsi_hwprobe::basic_info();
