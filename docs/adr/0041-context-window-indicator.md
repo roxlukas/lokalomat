@@ -7,7 +7,7 @@
 
 The owner asked for a small ring under the chat input that shows how much of the
 model's context window the conversation uses and how much the text being typed
-will add (PRD §15 item 23). A similar indicator in another product (Firmaris)
+will add (PRD §15 item 23). A similar indicator in another product
 had known weak points: the numbers were lost when a conversation was reopened,
 the window size came from an environment variable rather than the loaded model,
 and the model's answer was not counted although it joins the next prompt.
