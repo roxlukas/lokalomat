@@ -230,6 +230,10 @@ const MIGRATIONS: &[&str] = &[
         PRIMARY KEY (model_id, variant_id)
     );
     "#,
+    // Context window use of an answer, for the ring under the chat input (ADR 0041)
+    r#"
+    ALTER TABLE messages ADD COLUMN context TEXT;
+    "#,
 ];
 
 #[derive(Debug, thiserror::Error)]

@@ -358,6 +358,8 @@ pub struct ChatOutcome {
     pub reasoning: String,
     pub tokens: Option<i64>,
     pub tokens_per_second: Option<f64>,
+    /// Tokens of the whole prompt (cached ones included), ADR 0041.
+    pub prompt_tokens: Option<i64>,
     pub cancelled: bool,
     /// Tools the model wants to call before it can answer.
     pub tool_calls: Vec<ToolCall>,
@@ -449,6 +451,7 @@ pub struct Delta {
     pub done: bool,
     pub tokens: Option<i64>,
     pub tokens_per_second: Option<f64>,
+    pub prompt_tokens: Option<i64>,
     /// `(index, id, name fragment, arguments fragment)` – streamed in pieces.
     pub tool_calls: Vec<(usize, Option<String>, String, String)>,
     pub finish_reason: Option<String>,
@@ -477,6 +480,13 @@ pub fn parse_event(data: &str) -> Option<Delta> {
             .as_i64()
             .or_else(|| v["usage"]["completion_tokens"].as_i64()),
         tokens_per_second: v["timings"]["predicted_per_second"].as_f64(),
+        // `usage` counts the whole prompt; `timings.prompt_n` only the part
+        // not served from the KV cache, so the cache is added back.
+        prompt_tokens: v["usage"]["prompt_tokens"].as_i64().or_else(|| {
+            v["timings"]["prompt_n"]
+                .as_i64()
+                .map(|n| n + v["timings"]["cache_n"].as_i64().unwrap_or(0))
+        }),
         finish_reason: choice["finish_reason"].as_str().map(str::to_owned),
         tool_calls: delta["tool_calls"]
             .as_array()
@@ -660,6 +670,9 @@ pub async fn stream_chat_at(
             if delta.tokens_per_second.is_some() {
                 out.tokens_per_second = delta.tokens_per_second;
             }
+            if delta.prompt_tokens.is_some() {
+                out.prompt_tokens = delta.prompt_tokens;
+            }
             if delta.finish_reason.is_some() {
                 out.finish_reason = delta.finish_reason;
             }
@@ -707,6 +720,12 @@ mod tests {
         assert_eq!(t.finish_reason.as_deref(), Some("stop"));
         assert!(parse_event(" [DONE]").unwrap().done);
         assert!(parse_event("not json").is_none());
+        let u =
+            parse_event(r#"{"choices":[],"usage":{"prompt_tokens":1200,"completion_tokens":30}}"#)
+                .unwrap();
+        assert_eq!((u.prompt_tokens, u.tokens), (Some(1200), Some(30)));
+        let c = parse_event(r#"{"choices":[],"timings":{"prompt_n":200,"cache_n":1000}}"#).unwrap();
+        assert_eq!(c.prompt_tokens, Some(1200), "cached tokens count too");
     }
 
     #[test]

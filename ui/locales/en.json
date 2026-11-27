@@ -676,6 +676,20 @@
     "defaultModel": "Default model",
     "needModel": "Download a chat model to start.",
     "goModels": "Go to Models",
+    "context": {
+      "label": "Chat memory",
+      "summary": "The chat uses {percent} of the model's memory.",
+      "pending": "What you are typing adds about {tokens} tokens.",
+      "full": "Memory is almost full. Start a new chat.",
+      "numbers": "{used} / {size} tokens ({percent})",
+      "estimate": "The breakdown is an estimate.",
+      "parts": {
+        "messages": "Messages",
+        "system": "System prompt",
+        "tools": "Tools",
+        "free": "Free"
+      }
+    },
     "errors": {
       "engine_missing": "Getting chat ready. Try again in a moment.",
       "engine_start_failed": "Could not start the model.",

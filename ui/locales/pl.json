@@ -676,6 +676,20 @@
     "defaultModel": "Model domyślny",
     "needModel": "Pobierz model czatu, żeby zacząć.",
     "goModels": "Przejdź do Modeli",
+    "context": {
+      "label": "Pamięć rozmowy",
+      "summary": "Rozmowa zajmuje {percent} pamięci modelu.",
+      "pending": "To, co piszesz, doda ok. {tokens} tokenów.",
+      "full": "Pamięć jest prawie pełna. Zacznij nową rozmowę.",
+      "numbers": "{used} / {size} tokenów ({percent})",
+      "estimate": "Podział jest szacunkowy.",
+      "parts": {
+        "messages": "Wiadomości",
+        "system": "Instrukcja systemowa",
+        "tools": "Narzędzia",
+        "free": "Wolne"
+      }
+    },
     "errors": {
       "engine_missing": "Przygotowuję czat. Spróbuj za chwilę.",
       "engine_start_failed": "Nie udało się uruchomić modelu.",
