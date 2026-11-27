@@ -11,11 +11,9 @@
   import { hardware, models } from '../../lib/stores.svelte';
   import { formatMb } from '../../lib/format';
   import { describeError } from '../../lib/feedback';
+  import { CONTEXT_MAX, contextChoice, contextChoices, contextOption } from '../../lib/contextSizes';
 
   let { change }: { change: (patch: Partial<AppSettings>) => Promise<void> } = $props();
-
-  /** Fixed context windows offered in Expert mode (tokens). */
-  const CONTEXT_SIZES = [4096, 8192, 16384, 32768, 65536, 131072];
 
   let status = $state<{ text: string; kind: 'ok' | 'error' } | null>(null);
   let tokenSet = $state(false);
@@ -138,13 +136,14 @@
   </div>
   <div class="field">
     <label for="ctx">{t('settings.hardware.context')}</label>
-    <select id="ctx" value={settings.value.context_size === null ? 'auto' : String(settings.value.context_size)}
-      onchange={(e) => change({ context_size: e.currentTarget.value === 'auto' ? null : Number(e.currentTarget.value) })}
-      aria-describedby="ctx-hint">
+    <select id="ctx" value={contextOption(settings.value.context_size)}
+      onchange={(e) => change({ context_size: contextChoice(e.currentTarget.value) })}
+      aria-describedby="ctx-hint" title={t('settings.hardware.contextMaxTip')}>
       <option value="auto">{t('settings.hardware.contextAuto')}</option>
-      {#each CONTEXT_SIZES as size (size)}
+      {#each contextChoices(settings.value.context_size) as size (size)}
         <option value={String(size)}>{t('settings.hardware.contextTokens', { count: size / 1024 })}</option>
       {/each}
+      <option value={String(CONTEXT_MAX)}>{t('settings.hardware.contextMax')}</option>
     </select>
     <span id="ctx-hint" class="muted small">{t('settings.hardware.contextHint')}</span>
   </div>

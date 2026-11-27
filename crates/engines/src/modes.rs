@@ -23,7 +23,8 @@ use tokio_util::sync::CancellationToken;
 use crate::llama::{ChatMessage, ChatParams};
 use crate::queue::{DecisionRequest, JobQueue};
 use crate::service::{
-    EngineService, LoadRequest, MAX_SERVER_CTX, Upstream, ctx_plan, ctx_plan_up_to, error_codes,
+    EngineService, LoadRequest, MAX_SERVER_CTX, Upstream, chosen_ctx, ctx_plan, ctx_plan_up_to,
+    error_codes,
 };
 
 /// A failure with a code the UI translates (`jobs.errors.*` / `errors.*`).
@@ -96,8 +97,13 @@ pub trait ModelResolver: Send + Sync + 'static {
     fn installed(&self, _modality: Modality) -> Vec<Resolved> {
         Vec::new()
     }
-    /// Context window chosen in the settings (`None` = automatic).
+    /// Context window chosen in the settings (`None` = automatic,
+    /// [`crate::service::CTX_MAX`] = the model's own maximum).
     fn context_size(&self) -> Option<u32> {
+        None
+    }
+    /// Context window chosen for the local server, like [`Self::context_size`].
+    fn server_context_size(&self) -> Option<u32> {
         None
     }
     /// GPU memory budget in MB, used for the automatic context window.
@@ -328,6 +334,7 @@ impl ModeRunner {
             .main_file()
             .ok_or_else(|| ModeError::new("no_model", "variant without a model file"))?;
         let plan = ctx_plan(self.resolver.budget_mb(), r.variant.memory_estimate_mb);
+        let ctx_size = chosen_ctx(self.resolver.context_size(), &path);
         Ok(LoadRequest {
             model_id: r.model.id.clone(),
             variant_id: r.variant.id.clone(),
@@ -335,7 +342,7 @@ impl ModeRunner {
             path,
             memory_estimate_mb: r.variant.memory_estimate_mb,
             supports_tools: r.model.features.iter().any(|f| f == "tools"),
-            ctx_size: self.resolver.context_size(),
+            ctx_size,
             ctx_limit: plan.ctx_limit,
             kv_compact: plan.kv_compact,
         })
@@ -343,7 +350,7 @@ impl ModeRunner {
 
     /// [`Self::load_request`] for the local server (ADR 0025/0028): agents get
     /// the largest window that fits, up to [`MAX_SERVER_CTX`], unless the
-    /// settings fix one.
+    /// server's own setting fixes one (ADR 0042).
     pub fn server_load_request(&self, model: Option<&ModelRef>) -> Result<LoadRequest, ModeError> {
         let mut load = self.load_request(model)?;
         let plan = ctx_plan_up_to(
@@ -353,7 +360,8 @@ impl ModeRunner {
         );
         load.ctx_limit = plan.ctx_limit;
         load.kv_compact = plan.kv_compact;
-        load.ctx_size = load.ctx_size.or(Some(plan.ctx_limit));
+        load.ctx_size =
+            chosen_ctx(self.resolver.server_context_size(), &load.path).or(Some(plan.ctx_limit));
         Ok(load)
     }
 

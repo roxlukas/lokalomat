@@ -273,6 +273,8 @@
       "context": "Pamięć rozmowy (okno kontekstu)",
       "contextAuto": "Automatycznie (zalecane)",
       "contextTokens": "{count} tys. tokenów",
+      "contextMax": "Maksimum modelu",
+      "contextMaxTip": "Maksimum to okno, z którym model był trenowany. Zajmuje dużo pamięci.",
       "contextHint": "Większe okno zajmuje więcej pamięci karty graficznej. Auto dobiera je do Twojej karty.",
       "keepLlm": "Trzymaj model czatu w pamięci",
       "keepLlmHint": "Czat odpowie od razu, ale obrazy mogą powstawać wolniej."
@@ -1130,7 +1132,10 @@
     },
     "tabs": {
       "server": "Serwer"
-    }
+    },
+    "context": "Pamięć rozmowy dla agentów",
+    "contextAuto": "Automatycznie (do 64 tys.)",
+    "contextHint": "Agenci z wieloma narzędziami potrzebują większego okna."
   },
   "pro": {
     "banner": {

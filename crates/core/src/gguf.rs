@@ -1,5 +1,7 @@
 //! Minimal GGUF metadata reader: the number of transformer blocks
-//! (`<arch>.block_count`) for the GPU offload slider (ADR 0036).
+//! (`<arch>.block_count`) for the GPU offload slider (ADR 0036) and the
+//! trained context window (`<arch>.context_length`) for the "Max" context
+//! choice (ADR 0042).
 //!
 //! Reads the header and key/value pairs only, never the tensors; values that
 //! are not needed are skipped. Supports GGUF v2 and v3 (64-bit counts).
@@ -106,6 +108,17 @@ fn integer<R: Read + Seek>(r: &mut BufReader<R>, t: u32) -> io::Result<Option<u6
 /// Number of transformer blocks of the model in `path`, `None` when the file
 /// does not say (or is GGUF v1). Errors only for unreadable or corrupt files.
 pub fn block_count(path: &Path) -> io::Result<Option<u32>> {
+    arch_value(path, ".block_count")
+}
+
+/// Context window the model in `path` was trained for, `None` when the file
+/// does not say (or is GGUF v1). Errors only for unreadable or corrupt files.
+pub fn context_length(path: &Path) -> io::Result<Option<u32>> {
+    arch_value(path, ".context_length")
+}
+
+/// Integer `<general.architecture><suffix>` of the model in `path`.
+fn arch_value(path: &Path, suffix: &str) -> io::Result<Option<u32>> {
     let mut r = BufReader::new(File::open(path)?);
     let mut magic = [0u8; 4];
     r.read_exact(&mut magic)?;
@@ -122,21 +135,21 @@ pub fn block_count(path: &Path) -> io::Result<Option<u32>> {
         return Err(bad("too many metadata entries"));
     }
     let mut arch: Option<String> = None;
-    let mut counts: HashMap<String, u64> = HashMap::new();
+    let mut values: HashMap<String, u64> = HashMap::new();
     for _ in 0..kv_count {
         let key = string(&mut r)?;
         let t = u32_le(&mut r)?;
         if key == "general.architecture" && t == T_STRING {
             arch = Some(string(&mut r)?);
-        } else if let Some(prefix) = key.strip_suffix(".block_count") {
+        } else if let Some(prefix) = key.strip_suffix(suffix) {
             if let Some(v) = integer(&mut r, t)? {
-                counts.insert(prefix.to_owned(), v);
+                values.insert(prefix.to_owned(), v);
             }
         } else {
             skip(&mut r, t)?;
         }
         if let Some(a) = &arch
-            && let Some(&n) = counts.get(a)
+            && let Some(&n) = values.get(a)
         {
             return Ok(u32::try_from(n).ok());
         }
@@ -194,6 +207,24 @@ mod tests {
         s(&mut b, "qwen3");
         let (_dir, path) = write(&b);
         assert_eq!(block_count(&path).unwrap(), Some(36));
+        assert_eq!(context_length(&path).unwrap(), None);
+    }
+
+    #[test]
+    fn reads_context_length() {
+        let mut b = header(3);
+        s(&mut b, "general.architecture");
+        b.extend(T_STRING.to_le_bytes());
+        s(&mut b, "llama");
+        s(&mut b, "llama.block_count");
+        b.extend(T_U32.to_le_bytes());
+        b.extend(32u32.to_le_bytes());
+        s(&mut b, "llama.context_length");
+        b.extend(T_U64.to_le_bytes());
+        b.extend(131_072u64.to_le_bytes());
+        let (_dir, path) = write(&b);
+        assert_eq!(context_length(&path).unwrap(), Some(131_072));
+        assert_eq!(block_count(&path).unwrap(), Some(32));
     }
 
     #[test]
@@ -220,7 +251,8 @@ mod tests {
     fn real_file() {
         let path = std::env::var("GGUF_PATH").expect("set GGUF_PATH");
         let n = block_count(Path::new(&path)).unwrap();
-        println!("block_count = {n:?}");
+        let ctx = context_length(Path::new(&path)).unwrap();
+        println!("block_count = {n:?}, context_length = {ctx:?}");
         assert!(n.is_some_and(|n| n > 0));
     }
 }
