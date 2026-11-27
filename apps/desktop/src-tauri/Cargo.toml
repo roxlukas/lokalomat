@@ -27,3 +27,9 @@ lokalsi-engines.workspace = true
 lokalsi-api-gateway = { workspace = true, features = ["server"] }
 tokio-util.workspace = true
 tokio.workspace = true
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { version = "0.61", features = ["Win32_System_Diagnostics_Debug"] }
+
+[dev-dependencies]
+tempfile.workspace = true
