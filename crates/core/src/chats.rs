@@ -105,9 +105,53 @@ pub struct Message {
     pub finished_at: Option<i64>,
     /// Tool calls made while answering (JSON array, see `lokalsi-engines`).
     pub tool_calls: serde_json::Value,
+    /// How much of the context window this answer used (ADR 0041).
+    #[serde(default)]
+    pub context: Option<ContextUsage>,
 }
 
-const MESSAGE_COLUMNS: &str = "id, session_id, role, content, reasoning, model_id, variant_id, status, error, tokens, tokens_per_second, created_at, finished_at, tool_calls";
+/// Context window use after an answer (ADR 0041). Token counts come from the
+/// engine; the split into parts is an estimate in proportion to characters.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
+pub struct ContextUsage {
+    /// Prompt of the last model call in the turn.
+    pub prompt_tokens: i64,
+    /// Tokens of the answer; the next prompt contains them too.
+    pub completion_tokens: i64,
+    /// Window the loaded model was started with.
+    pub ctx_size: i64,
+    /// Parts of `prompt_tokens`; `messages` is the remainder so they add up.
+    pub messages: i64,
+    pub system: i64,
+    pub tools: i64,
+}
+
+impl ContextUsage {
+    /// Tokens the next turn starts with.
+    pub fn used(&self) -> i64 {
+        self.prompt_tokens + self.completion_tokens
+    }
+}
+
+/// Splits `prompt_tokens` into messages, system prompt and tool definitions in
+/// proportion to their characters. `system_chars` is 0 without a system message.
+pub fn context_breakdown(
+    prompt_tokens: i64,
+    system_chars: usize,
+    messages_chars: usize,
+    tools_chars: usize,
+) -> (i64, i64, i64) {
+    let total = (system_chars + messages_chars + tools_chars) as f64;
+    if prompt_tokens <= 0 || total <= 0.0 {
+        return (prompt_tokens.max(0), 0, 0);
+    }
+    let share = |chars: usize| (prompt_tokens as f64 * chars as f64 / total).round() as i64;
+    let system = share(system_chars);
+    let tools = share(tools_chars);
+    ((prompt_tokens - system - tools).max(0), system, tools)
+}
+
+const MESSAGE_COLUMNS: &str = "id, session_id, role, content, reasoning, model_id, variant_id, status, error, tokens, tokens_per_second, created_at, finished_at, tool_calls, context";
 
 fn row_to_message(r: &rusqlite::Row<'_>) -> rusqlite::Result<Message> {
     Ok(Message {
@@ -126,6 +170,9 @@ fn row_to_message(r: &rusqlite::Row<'_>) -> rusqlite::Result<Message> {
         finished_at: r.get(12)?,
         tool_calls: serde_json::from_str(&r.get::<_, String>(13)?)
             .unwrap_or_else(|_| serde_json::json!([])),
+        context: r
+            .get::<_, Option<String>>(14)?
+            .and_then(|c| serde_json::from_str(&c).ok()),
     })
 }
 
@@ -308,6 +355,17 @@ impl<'a> Chats<'a> {
         Ok(())
     }
 
+    /// Saves the context window use of an answer (ADR 0041).
+    pub fn save_context(&self, id: i64, usage: &ContextUsage) -> Result<(), DbError> {
+        // Plain integers: serialising cannot fail.
+        let json = serde_json::to_string(usage).unwrap_or_default();
+        self.db.conn().execute(
+            "UPDATE messages SET context = ?2 WHERE id = ?1",
+            params![id, json],
+        )?;
+        Ok(())
+    }
+
     pub fn save_tool_calls(&self, id: i64, calls: &serde_json::Value) -> Result<(), DbError> {
         self.db.conn().execute(
             "UPDATE messages SET tool_calls = ?2 WHERE id = ?1",
@@ -371,10 +429,21 @@ mod tests {
         chats
             .set_status(reply.id, MessageStatus::Done, None)
             .unwrap();
+        let usage = ContextUsage {
+            prompt_tokens: 900,
+            completion_tokens: 12,
+            ctx_size: 8192,
+            messages: 600,
+            system: 100,
+            tools: 200,
+        };
+        chats.save_context(reply.id, &usage).unwrap();
 
         let msgs = chats.messages(a.id).unwrap();
         assert_eq!(msgs.len(), 2);
         assert_eq!(msgs[1].content, "Odpowiedź");
+        assert_eq!(msgs[1].context, Some(usage));
+        assert_eq!(msgs[0].context, None);
         assert!(msgs[1].finished_at.is_some());
 
         chats.pin_session(b.id, true).unwrap();
@@ -393,6 +462,18 @@ mod tests {
 
         chats.delete_session(a.id).unwrap();
         assert!(chats.messages(a.id).unwrap().is_empty());
+    }
+
+    #[test]
+    fn breakdown_parts_add_up() {
+        let (messages, system, tools) = context_breakdown(1000, 100, 700, 200);
+        assert_eq!((system, tools), (100, 200));
+        assert_eq!(messages + system + tools, 1000);
+        // Rounding never breaks the sum.
+        let (m, s, t) = context_breakdown(7, 1, 1, 1);
+        assert_eq!(m + s + t, 7);
+        assert_eq!(context_breakdown(50, 0, 0, 0), (50, 0, 0));
+        assert_eq!(context_breakdown(0, 10, 10, 10), (0, 0, 0));
     }
 
     #[test]

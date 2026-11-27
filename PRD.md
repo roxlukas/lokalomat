@@ -533,6 +533,7 @@ Lokalne API: w M5 powstaje minimalny `crates/api-gateway` – tylko to, czego po
     - Pobieranie z wyborem formatu: HTML, Markdown, PDF albo DOCX.
     - Model dostaje narzędzia do artefaktów: utwórz; czytaj (limit + offset, wyszukiwanie jak grep); zmieniaj fragmenty (zamiana tekstu jak w sed) – bez przepisywania całości, żeby oszczędzać okno kontekstu.
     - Wersje artefaktu zapisywane przy każdej zmianie, z możliwością powrotu.
+    - Wnioski z podobnego wdrożenia (2026-11): wersje tylko dopisywane (nagłówek + wersje); model widzi identyfikator z prefiksem (`art_…`), nigdy gołą liczbę; zmiana fragmentu wymaga, żeby szukany tekst wystąpił dokładnie raz, a treść bierzemy z bazy, nie z pamięci modelu; rozmowę i właściciela podaje aplikacja, nie model; wynik narzędzia ma osobny kanał dla aplikacji (zdarzenie „artefakt”, znacznik zapisany w odpowiedzi, żeby karta przetrwała ponowne otwarcie rozmowy); pliki dołączane przez użytkownika mogą być artefaktami tego samego rodzaju.
 
 17. **Transkrypcja plików audio i wideo** – obsługiwane pliki: WAV, AAC, MP3, M4A, M4V, MP4, MKV (stan M3: wszystkie poza M4V; dźwięk z wideo wyciągany bez zewnętrznych programów). Wynik ze znacznikami czasu (SRT, VTT, tekst z czasami) albo bez (czysty tekst) – wybór przy eksporcie i kopiowaniu.
 
@@ -546,4 +547,6 @@ Lokalne API: w M5 powstaje minimalny `crates/api-gateway` – tylko to, czego po
 
 22. **Muzyka (przed 1.0, od właściciela produktu, 2026-11-16)** – nowy tryb: piosenki z wokalem, także po polsku, jak w Suno, ale lokalnie. Model domyślny ACE-Step 1.5 (MIT); modele z licencją niekomercyjną (YuE2, MusicGen) nie trafiają do katalogu (ADR 0022). Realizacja w etapie M5d.
 
-Kolejność etapów po uzupełnieniach: M2b → M3 → M4 → M5 → M5b (modele decyzyjne) → M5c (serwer + agenci) → M5d (muzyka, 22) → M6 (wydanie 1.0) → API i serwer MCP dla agentów (punkt 15) → biblioteka Ollamy → artefakty w czacie (16) → transkrypcja audio/wideo (17) → modele wideo (18) → zdjęcia w czacie (19) → wbudowane narzędzia (20) → rozmowa o dokumentach (21).
+23. **Wskaźnik okna kontekstu (od właściciela produktu, 2026-11-27)** – małe kółko pod polem wpisywania w czacie pokazuje, ile pamięci modelu zajmuje rozmowa, i osobnym łukiem, ile zajmie to, co użytkownik właśnie wpisał (szacunek). Kolor żółty od 80%, czerwony od 90% z podpowiedzią, żeby zacząć nową rozmowę. Liczby z silnika (`usage.prompt_tokens` ostatniej rundy plus długość odpowiedzi), rozmiar okna z faktycznie załadowanego modelu; zapisane przy wiadomości, więc kółko pokazuje stan także po ponownym otwarciu rozmowy. W trybie Expert podział: wiadomości, instrukcja systemowa, narzędzia, wolne miejsce (ADR 0041).
+
+Kolejność etapów po uzupełnieniach: M2b → M3 → M4 → M5 → M5b (modele decyzyjne) → M5c (serwer + agenci) → M5d (muzyka, 22) → M6 (wydanie 1.0) → API i serwer MCP dla agentów (punkt 15) → biblioteka Ollamy → artefakty w czacie (16) → transkrypcja audio/wideo (17) → modele wideo (18) → zdjęcia w czacie (19) → wbudowane narzędzia (20) → rozmowa o dokumentach (21). Wskaźnik okna kontekstu (23) od razu, poza kolejnością.

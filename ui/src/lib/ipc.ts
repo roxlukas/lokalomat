@@ -336,6 +336,9 @@ export interface LoadedModel {
   name: string;
   memory_estimate_mb: number;
   since: number;
+  /** Context window the server was started with. */
+  ctx?: number;
+  kv_compact?: boolean;
 }
 
 export interface EngineStatus {
@@ -386,6 +389,17 @@ export interface Message {
   created_at: number;
   finished_at: number | null;
   tool_calls: ToolCallRecord[];
+  /** Context window use of an answer (ADR 0041); older messages have none. */
+  context?: ContextUsage | null;
+}
+
+export interface ContextUsage {
+  prompt_tokens: number;
+  completion_tokens: number;
+  ctx_size: number;
+  messages: number;
+  system: number;
+  tools: number;
 }
 
 export type ToolCallStatus = 'pending' | 'running' | 'done' | 'error' | 'denied';

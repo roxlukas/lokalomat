@@ -2,12 +2,15 @@
   import { onMount } from 'svelte';
   import Send from '@lucide/svelte/icons/send';
   import ChatMessage from '../../lib/components/ChatMessage.svelte';
+  import ContextRing from '../../lib/components/ContextRing.svelte';
   import SlotHost from '../../lib/components/SlotHost.svelte';
   import { chat, chatModelOptions, engines } from '../../lib/chat.svelte';
   import { describeError } from '../../lib/feedback';
   import { t } from '../../lib/i18n/index.svelte';
   import { router } from '../../lib/router.svelte';
   import { models } from '../../lib/stores.svelte';
+  import { settings } from '../../lib/settings.svelte';
+  import { estimateTokens, latestUsage, ringState } from '../../lib/contextRing';
   import { workshop } from '../../lib/workshop.svelte';
 
   /** The chat mode: messages in the output area, model choice in the top bar. */
@@ -17,6 +20,10 @@
   );
   // Plug and play: a missing engine installs itself, chat only needs a model.
   let engineInstall = $derived(engines.llama?.state === 'installing' ? engines.llama.install_progress : null);
+  // Context window use (ADR 0041): the newest answer, else the loaded model's window.
+  let ring = $derived(
+    ringState(latestUsage(chat.messages), engines.llama?.loaded?.ctx ?? null, estimateTokens(workshop.prompt)),
+  );
   let canSend = $derived(options.length > 0 && workshop.prompt.trim().length > 0 && !chat.active);
 
   async function send() {
@@ -58,6 +65,7 @@
         return t('workshop.send');
       },
       submitIcon: Send,
+      belowPrompt,
       get stop() {
         const active = chat.active;
         return active ? { label: t('chat.stop'), run: () => chat.cancel(active.id) } : undefined;
@@ -73,6 +81,12 @@
       <ChatMessage message={m} onCancel={(id) => chat.cancel(id)} />
     {/each}
   </div>
+{/snippet}
+
+{#snippet belowPrompt()}
+  {#if ring}
+    <div class="ctx-row"><ContextRing {ring} expert={settings.value.expert} /></div>
+  {/if}
 {/snippet}
 
 {#snippet top()}
@@ -104,3 +118,11 @@
     </p>
   {/if}
 {/snippet}
+
+<style>
+  .ctx-row {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: var(--space-1);
+  }
+</style>

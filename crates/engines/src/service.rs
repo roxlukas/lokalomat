@@ -11,7 +11,7 @@ use std::path::{Path, PathBuf};
 use std::sync::{Arc, Mutex, MutexGuard};
 use std::time::{Duration, Instant};
 
-use lokalsi_core::chats::{Chats, Message, MessageStatus, Role};
+use lokalsi_core::chats::{Chats, ContextUsage, Message, MessageStatus, Role};
 use lokalsi_core::db::{Db, DbError, now_secs};
 use lokalsi_core::model_params::ModelSettings;
 use lokalsi_hwprobe::{ESTIMATE_CTX_TOKENS, kv_per_1k_mb};
@@ -1186,6 +1186,8 @@ impl EngineService {
         let mut reasoning = String::new();
         let mut records: Vec<ToolCallRecord> = Vec::new();
         let mut last: Option<llama::ChatOutcome> = None;
+        // Characters of (system, messages, tools) sent in the latest round.
+        let mut shape = (0, 0, 0);
 
         for round in 0..=MAX_TOOL_ROUNDS {
             let endpoint = self
@@ -1213,6 +1215,7 @@ impl EngineService {
             } else {
                 &[]
             };
+            shape = prompt_shape(&convo, offered);
             let result = stream_with(
                 &self.http,
                 &endpoint,
@@ -1379,6 +1382,34 @@ impl EngineService {
             out.tokens,
             out.tokens_per_second,
         );
+        let ctx_size = self.lock().loaded.as_ref().map(|l| l.ctx);
+        if let (Some(prompt_tokens), Some(ctx_size)) = (out.prompt_tokens, ctx_size) {
+            let (system_chars, messages_chars, tools_chars) = shape;
+            let (messages, system, tools) = lokalsi_core::chats::context_breakdown(
+                prompt_tokens,
+                system_chars,
+                messages_chars,
+                tools_chars,
+            );
+            let usage = ContextUsage {
+                prompt_tokens,
+                completion_tokens: answer_tokens(out.tokens, &out.content, &out.reasoning),
+                ctx_size: i64::from(ctx_size),
+                messages,
+                system,
+                tools,
+            };
+            tracing::debug!(
+                message_id,
+                prompt_tokens,
+                used = usage.used(),
+                ctx_size,
+                "context window use"
+            );
+            if let Err(e) = chats.save_context(message_id, &usage) {
+                tracing::warn!(error = %e, message_id, "cannot save context window use");
+            }
+        }
         tracing::info!(
             message_id,
             tokens = ?out.tokens,
@@ -1649,6 +1680,41 @@ impl EngineService {
 }
 /// `stream_chat` against a server identified by `(base_url, token)`, keeping
 /// the partial output when the stream breaks.
+/// Tokens of the answer that the next prompt will contain: the reasoning is
+/// not sent back, so its share (by characters) is left out (ADR 0041).
+fn answer_tokens(tokens: Option<i64>, content: &str, reasoning: &str) -> i64 {
+    let tokens = tokens.unwrap_or(0);
+    let (c, r) = (content.chars().count(), reasoning.chars().count());
+    if c + r == 0 {
+        return 0;
+    }
+    (tokens as f64 * c as f64 / (c + r) as f64).round() as i64
+}
+
+/// Characters of the system message, the other messages and the tool
+/// definitions of one request, for the context breakdown (ADR 0041).
+fn prompt_shape(convo: &[ChatMessage], tools: &[serde_json::Value]) -> (usize, usize, usize) {
+    let len = |m: &ChatMessage| {
+        m.content.as_deref().map_or(0, |c| c.chars().count())
+            + m.tool_calls
+                .as_ref()
+                .map_or(0, |t| t.to_string().chars().count())
+    };
+    let (system, rest) = match convo.split_first() {
+        Some((first, rest)) if first.role == "system" => (len(first), rest),
+        _ => (0, convo),
+    };
+    let tools = if tools.is_empty() {
+        0
+    } else {
+        serde_json::Value::Array(tools.to_vec())
+            .to_string()
+            .chars()
+            .count()
+    };
+    (system, rest.iter().map(len).sum(), tools)
+}
+
 async fn stream_with(
     http: &reqwest::Client,
     (base, token): &(String, String),
@@ -1685,6 +1751,15 @@ fn gpu_share_mb(estimate_mb: u64, on_gpu: u32, total: Option<u32>) -> u64 {
 
 #[cfg(test)]
 mod tests {
+
+    #[test]
+    fn answer_tokens_leave_reasoning_out() {
+        assert_eq!(answer_tokens(Some(100), "abc", ""), 100);
+        assert_eq!(answer_tokens(Some(100), "a", "bcd"), 25);
+        assert_eq!(answer_tokens(Some(100), "", ""), 0);
+        assert_eq!(answer_tokens(None, "abc", "d"), 0);
+    }
+
     use super::*;
 
     #[test]

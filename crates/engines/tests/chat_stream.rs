@@ -46,7 +46,7 @@ async fn fake_server(tokens: usize, die_after: Option<usize>) -> (String, Arc<At
             }
             tokio::time::sleep(Duration::from_millis(50)).await;
         }
-        let end = "data: {\"choices\":[{\"delta\":{},\"finish_reason\":\"stop\"}],\"timings\":{\"predicted_n\":3,\"predicted_per_second\":60.0}}\n\ndata: [DONE]\n\n";
+        let end = "data: {\"choices\":[{\"delta\":{},\"finish_reason\":\"stop\"}],\"timings\":{\"predicted_n\":3,\"predicted_per_second\":60.0}}\n\ndata: {\"choices\":[],\"usage\":{\"prompt_tokens\":120,\"completion_tokens\":3}}\n\ndata: [DONE]\n\n";
         let _ = socket.write_all(end.as_bytes()).await;
     });
     (base, closed)
@@ -77,6 +77,11 @@ async fn streams_a_full_answer() {
     assert_eq!(seen, out.content);
     assert_eq!(out.tokens, Some(3));
     assert_eq!(out.tokens_per_second, Some(60.0));
+    assert_eq!(
+        out.prompt_tokens,
+        Some(120),
+        "usage chunk after the last delta"
+    );
     assert!(!out.cancelled);
 }
 
