@@ -63,7 +63,8 @@ pub struct AppSettings {
     pub unified_memory_percent: u8,
     /// Expert mode shows advanced options; Basic (default) hides them (PRD §15).
     pub expert: bool,
-    /// Context window in tokens; `None` = automatic (fits free GPU memory).
+    /// Context window in tokens; `None` = automatic (fits free GPU memory),
+    /// `Some(0)` = the model's own maximum (ADR 0042).
     pub context_size: Option<u32>,
     /// Keep the chat model loaded when other modes need GPU memory (ADR 0015).
     pub keep_llm_loaded: bool,
@@ -78,6 +79,9 @@ pub struct AppSettings {
     pub server_port: u16,
     /// Listen on every network interface (0.0.0.0) instead of 127.0.0.1 only.
     pub server_lan: bool,
+    /// Context window of the server's model, like `context_size` (ADR 0042);
+    /// `None` = the largest that fits, up to 64k.
+    pub server_context_size: Option<u32>,
     /// Check GitHub for a new version at startup (PRD §10: switchable; ADR 0029).
     pub update_check: bool,
     /// Which key sends a chat prompt (ADR 0036).
@@ -103,6 +107,7 @@ impl Default for AppSettings {
             server_enabled: false,
             server_port: DEFAULT_SERVER_PORT,
             server_lan: false,
+            server_context_size: None,
             update_check: true,
             send_key: SendKey::default(),
         }
@@ -185,6 +190,7 @@ mod tests {
             server_enabled: true,
             server_port: 50_001,
             server_lan: true,
+            server_context_size: Some(0),
             update_check: false,
             send_key: SendKey::Enter,
         };

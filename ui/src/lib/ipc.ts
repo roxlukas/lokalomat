@@ -25,7 +25,7 @@ export interface AppSettings {
   unified_memory_percent: number;
   /** Expert mode: show advanced options (Basic hides them). */
   expert: boolean;
-  /** Context window in tokens; null = automatic (fits free GPU memory). */
+  /** Context window in tokens; null = automatic (fits free GPU memory), 0 = the model's maximum. */
   context_size: number | null;
   /** Keep the chat model loaded when images or transcription need memory. */
   keep_llm_loaded: boolean;
@@ -36,6 +36,8 @@ export interface AppSettings {
   server_enabled: boolean;
   server_port: number;
   server_lan: boolean;
+  /** Context window of the server's model, like `context_size` (ADR 0042). */
+  server_context_size: number | null;
   /** Check for a new version at startup (ADR 0029). */
   update_check: boolean;
   /** Which key sends a chat prompt (ADR 0036). */
@@ -887,6 +889,7 @@ export const DEFAULT_SETTINGS: AppSettings = {
   server_enabled: false,
   server_port: 47822,
   server_lan: false,
+  server_context_size: null,
   update_check: true,
   send_key: 'ctrl_enter',
 };

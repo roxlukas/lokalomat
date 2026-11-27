@@ -72,6 +72,31 @@ pub const MAX_TOOLS_CTX: u32 = 32768;
 pub const MAX_SERVER_CTX: u32 = 65536;
 /// Smallest context window ever started.
 pub const MIN_CTX: u32 = 2048;
+/// Context choice "Max" in the settings (ADR 0042): the window the model was
+/// trained for, read from its GGUF file.
+pub const CTX_MAX: u32 = 0;
+/// "Max" for a model whose file does not say how long its window is.
+pub const CTX_MAX_FALLBACK: u32 = 131_072;
+
+/// Turns the context choice from the settings into tokens: `None` stays
+/// automatic, [`CTX_MAX`] becomes the trained window of the model in `path`.
+pub fn chosen_ctx(choice: Option<u32>, path: &Path) -> Option<u32> {
+    match choice {
+        Some(CTX_MAX) => {
+            let trained = lokalsi_core::gguf::context_length(path)
+                .inspect_err(
+                    |e| tracing::warn!(error = %e, "cannot read the model's context length"),
+                )
+                .ok()
+                .flatten()
+                .filter(|&n| n >= MIN_CTX)
+                .unwrap_or(CTX_MAX_FALLBACK);
+            tracing::debug!(trained, "context choice Max");
+            Some(trained)
+        }
+        other => other,
+    }
+}
 /// GPU memory kept free next to the model and its context.
 const CTX_RESERVE_MB: u64 = 512;
 
@@ -1761,6 +1786,49 @@ mod tests {
     }
 
     use super::*;
+
+    #[test]
+    fn context_choice_max_reads_the_model_file() {
+        let dir = tempfile::tempdir().unwrap();
+        let missing = dir.path().join("none.gguf");
+        assert_eq!(
+            chosen_ctx(None, &missing),
+            None,
+            "automatic stays automatic"
+        );
+        assert_eq!(chosen_ctx(Some(16384), &missing), Some(16384));
+        assert_eq!(
+            chosen_ctx(Some(CTX_MAX), &missing),
+            Some(CTX_MAX_FALLBACK),
+            "unreadable file"
+        );
+
+        let mut b = b"GGUF".to_vec();
+        b.extend(3u32.to_le_bytes());
+        b.extend(0u64.to_le_bytes());
+        b.extend(2u64.to_le_bytes());
+        for (key, value) in [
+            ("general.architecture", None),
+            ("qwen3.context_length", Some(40_960u32)),
+        ] {
+            b.extend((key.len() as u64).to_le_bytes());
+            b.extend(key.as_bytes());
+            match value {
+                None => {
+                    b.extend(8u32.to_le_bytes());
+                    b.extend(5u64.to_le_bytes());
+                    b.extend(b"qwen3");
+                }
+                Some(n) => {
+                    b.extend(4u32.to_le_bytes());
+                    b.extend(n.to_le_bytes());
+                }
+            }
+        }
+        let model = dir.path().join("m.gguf");
+        std::fs::write(&model, b).unwrap();
+        assert_eq!(chosen_ctx(Some(CTX_MAX), &model), Some(40_960));
+    }
 
     #[test]
     fn gpu_share_scales_with_offloaded_layers() {

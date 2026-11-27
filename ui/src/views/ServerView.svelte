@@ -11,6 +11,7 @@
   import ViewHost from '../lib/components/ViewHost.svelte';
   import { registeredServerTabs } from '../lib/edition/registry';
   import { readLocal, writeLocal } from '../lib/storage';
+  import { CONTEXT_MAX, contextChoice, contextChoices, contextOption } from '../lib/contextSizes';
 
   /** Serwer (Expert, PRD §15 point 9, ADR 0025): the local OpenAI-compatible API for agents. */
   const SNIPPETS = ['curl', 'python', 'env'] as const;
@@ -88,6 +89,14 @@
 
   function setLan(lan: boolean) {
     change({ lan });
+  }
+
+  /** Saves the server's context window from fresh settings (see `change`). */
+  function setContext(option: string) {
+    void act(async () => {
+      await settings.load();
+      await settings.update({ server_context_size: contextChoice(option) });
+    });
   }
 
   function savePort() {
@@ -191,6 +200,18 @@
       <span class="muted small">{t('server.port')}</span>
       <input type="number" min="1024" max="65535" bind:value={port} onchange={savePort} disabled={!inTauri} />
     </label>
+    <div class="field">
+      <label for="srv-ctx">{t('server.context')}</label>
+      <select id="srv-ctx" value={contextOption(settings.value.server_context_size)} disabled={busy}
+        onchange={(e) => setContext(e.currentTarget.value)} aria-describedby="srv-ctx-hint" title={t('settings.hardware.contextMaxTip')}>
+        <option value="auto">{t('server.contextAuto')}</option>
+        {#each contextChoices(settings.value.server_context_size) as size (size)}
+          <option value={String(size)}>{t('settings.hardware.contextTokens', { count: size / 1024 })}</option>
+        {/each}
+        <option value={String(CONTEXT_MAX)}>{t('settings.hardware.contextMax')}</option>
+      </select>
+      <span id="srv-ctx-hint" class="muted small">{t('server.contextHint')}</span>
+    </div>
   </section>
 
   <section aria-labelledby="srv-keys">
@@ -356,6 +377,12 @@
     flex-wrap: wrap;
     align-items: center;
     gap: var(--space-2);
+  }
+
+  .field {
+    display: grid;
+    gap: var(--space-1);
+    justify-items: start;
   }
 
   .inline input[type='number'] {

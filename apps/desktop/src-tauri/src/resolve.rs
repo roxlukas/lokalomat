@@ -193,6 +193,10 @@ impl ModelResolver for DesktopResolver {
         self.state().and_then(|s| s.settings().context_size)
     }
 
+    fn server_context_size(&self) -> Option<u32> {
+        self.state().and_then(|s| s.settings().server_context_size)
+    }
+
     fn budget_mb(&self) -> Option<u64> {
         self.state()
             .and_then(|s| crate::models::budget_of(&s).map(|b| b.main_mb))

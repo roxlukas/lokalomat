@@ -268,11 +268,13 @@ fn resolve_model(state: &AppState, requested: Option<(String, String)>) -> Res<L
     // Automatic windows grow only as far as free GPU memory allows; tight
     // cards get the compact KV cache (ADR 0021).
     let plan = lokalsi_engines::service::ctx_plan(budget_mb, variant.memory_estimate_mb);
+    let path = PathBuf::from(&local.local_path);
+    let ctx_size = lokalsi_engines::service::chosen_ctx(ctx_size, &path);
     Ok(LoadRequest {
         model_id: model.id.clone(),
         variant_id: variant.id.clone(),
         name: format!("{} {}", model.name, variant.label),
-        path: PathBuf::from(&local.local_path),
+        path,
         memory_estimate_mb: variant.memory_estimate_mb,
         supports_tools: model.features.iter().any(|f| f == "tools"),
         ctx_size,

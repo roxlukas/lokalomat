@@ -273,6 +273,8 @@
       "context": "Chat memory (context window)",
       "contextAuto": "Automatic (recommended)",
       "contextTokens": "{count}k tokens",
+      "contextMax": "Model maximum",
+      "contextMaxTip": "Maximum is the window the model was trained with. It uses a lot of memory.",
       "contextHint": "A larger window uses more graphics card memory. Auto fits it to your card.",
       "keepLlm": "Keep the chat model in memory",
       "keepLlmHint": "Chat answers at once, but images may take longer."
@@ -1130,7 +1132,10 @@
     },
     "tabs": {
       "server": "Server"
-    }
+    },
+    "context": "Chat memory for agents",
+    "contextAuto": "Automatic (up to 64k)",
+    "contextHint": "Agents with many tools need a larger window."
   },
   "pro": {
     "banner": {
